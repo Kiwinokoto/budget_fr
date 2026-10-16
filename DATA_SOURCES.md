@@ -121,6 +121,24 @@ Insee, [Comptes par catégories de ménage](https://www.insee.fr/fr/statistiques
 - Le ratio secondaire proposé par l'interface est un **% des dépenses publiques totales S13 de la même année**, **pas % du PIB**, ni un taux d'intérêt de la dette. Les euros historiques sont courants, 2025 provisoire.
 - Constatation conceptuelle : le primaire ainsi défini **réintègre les intérêts payés seulement**. Les intérêts reçus ne sont pas soustraits. Il ne s'agit ni de solde primaire structurel ni d'un indicateur direct de trajectoire de dette.
 
+## Dette nette, passifs financiers et ajustement stock-flux (Insee 3.103–3.105)
+
+Sources : Insee, comptes nationaux annuels base 2020, publication du 28 août 2026, tableaux officiels https://www.insee.fr/fr/statistiques/8988843. Les trois fichiers XLSX ne sont pas commités.
+
+| Tableau | Classeur XLSX | SHA-256 auditée | Années | CSV dérivé |
+|---|---|---|---|---|
+| 3.103 | https://www.insee.fr/fr/statistiques/fichier/8988843/t_3103_fr.xlsx | 4990cee1dddc3a8d68349f2c3e1918272a67ff777cf1b8e517a9ff2d26fdd804 | 1995–2025 | data/dette_nette_apu_1995_2025.csv |
+| 3.104 | https://www.insee.fr/fr/statistiques/fichier/8988843/t_3104_fr.xlsx | b3f8fcb59c927c67fe753b79ad6292f01e488f5c66a9f2ea02f766a7306ffc19 | 1995–2025 | data/dette_passifs_maastricht_1995_2025.csv |
+| 3.105 | https://www.insee.fr/fr/statistiques/fichier/8988843/t_3105_fr.xlsx | 964ccff6ff8ca50d00b8031b337bfcf94fa7e92056946d73e3a1594d36745234 | 2009–2025 | data/dette_deficit_variation_2009_2025.csv |
+
+**3.103 : dette nette, STOCK de fin d'année.** Dette Maastricht diminuée d'actifs exigibles détenus sur d'autres secteurs (dont dépôts, crédits, titres) dans la convention Insee ; les actifs soustraits sont évalués à la valeur de marché. Les « autres actifs liquides » F511/F52 (actions cotées et parts de fonds) figurent dans une ligne **distincte**, à ne PAS soustraire à nouveau. La dette nette peut être négative pour un sous-secteur. 31 années × 6 périmètres S13/S1311/S13111/S13112/S1313/S1314. Montants en milliards d'euros courants arrondis à 0,1 ; taux officiel en % du PIB arrondi à 4 décimales (2025 : 3 242,7 Md€ ; 108,4132 %).
+
+**3.104 : passage des passifs à Maastricht, STOCK.** Total passifs de comptabilité nationale TP − différence de champ (1) − consolidation (2) − ajustement en valeur nominale (3) = dette brute nominale de Maastricht. En 2025, S13 : 3 911,4 − 441,7 − 211,5 − (−201,9) = 3 460,1 Md€. Attention à la valorisation des instruments et à la consolidation, pas équivalent au patrimoine public net. Les trois sous-postes publiés de (3) ne reconstituent pas exactement leur total en 2014–2021 (résidu jusqu'à 2,9 Md€) ; valuation_breakdown_gap_bn_eur est un **calcul dérivé et signalé**, pas une ligne Insee. S1314 2025 de 3.104 = 293,1 Md€ ; celui de 3.102 = 292,6 Md€ : ne pas forcer l'égalité de séries ni additionner les sous-secteurs comme ventilation parfaitement réconciliée.
+
+**3.105 : passage du déficit à la variation annuelle de dette, FLUX.** Convention source déficit positif, puis acquisitions d'actifs (1), autres passifs (2), changements de volume (3), autres comptes (4), écart statistique (5). En 2025 : 151,6 − 14,2 + 7,9 + 5,8 + 4,5 − 1,6 = **154,0 Md€ de variation** et non d'encours. Contrôle indépendant : la différence des encours S13 du 3.104 et la variation publiée 3.105 divergent de −0,6 Md€ en 2014 ; les autres écarts (2009–2025) sont au plus de 0,3 Md€. Cet écart connu est conservé et documenté.
+
+Reproduction hors ligne : python3 scripts/import_debt_bridges.py --xlsx-dir /chemin/xlsx, bibliothèque Python standard uniquement, empreintes obligatoires et échec en cas de source modifiée. Tests : libellés et années, identités internes, ancrages de 2025, valeurs signées, résidus connus, comparaison stock/flux. Les trois tableaux ont des définitions et des durées différentes ; ne pas les additionner, et ne pas les confondre avec les détenteurs de la dette, l'AFT ou les intérêts D41.
+
 ## Sources identifiées, non intégrées
 
 - [Insee, comptes APU détaillés](https://www.insee.fr/fr/statistiques/8988845), tableaux **autres que 3.201** ; vérifier périmètres, catégories et durées des séries.

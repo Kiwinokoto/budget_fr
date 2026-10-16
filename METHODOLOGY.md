@@ -145,3 +145,13 @@ Le **solde primaire D41** est **calculé** : `B9NF + D41 payés`. Il s'agit de *
 La cohérence est contrôlée au niveau des quatre décimales (Md€) : `recettes − dépenses = B9NF` à l'arrondi près ; l'importateur refuse un changement silencieux de SHA-256, libellé ou année. Les taux affichés en mode normalisé divisent chaque solde par les **dépenses totales S13** de la même année. Ils ne sont **ni en % du PIB ni des taux de refinancement**. Les valeurs courantes de 1959 à 2025 ne sont pas déflatées. Le solde primaire n'est **pas corrigé du cycle** : il ne remplace ni le solde structurel ni la comparaison des besoins de financement futurs.
 
 Pour 2025, le classeur Insee 3.201 du 28 août 2026 donne B9NF = `−151,5920` Md€, D41 = `65,7209` Md€ et D41G = `64,6519` Md€ : primaire D41 = `−85,8711` Md€, variante = `−86,9401` Md€. Un autre article Insee datant de **mai 2026** annonçait `−152,5` Md€ ; ne pas panacher des révisions de comptes de dates différentes. Le primaire est un indicateur de la position budgétaire **hors intérêts versés**, pas une preuve que les dépenses sans intérêts sont « inutiles », ni une prévision mécanique de baisse de la dette.
+
+## Trois mesures complémentaires de la dette : tableaux Insee 3.103–3.105
+
+3.103 décrit un **stock de dette nette** : ce n'est pas le patrimoine public net total. Les autres actifs liquides de la source sont présentés en complément et ne doivent pas être déduits une seconde fois. Des contributions nettes de sous-secteur peuvent être négatives.
+
+3.104 décrit un **rapprochement de stocks** : passifs financiers en comptabilité nationale, ajustements de champ, consolidation et valorisation, puis dette Maastricht nominale. Le signe des ajustements varie. Le résidu des sous-lignes de valorisation en 2014–2021 est signalé, sans inventer une cause. En 2025, la contribution sécurité sociale de 3.104 (293,1 Md€) diffère de celle de 3.102 (292,6 Md€).
+
+3.105 est un **rapprochement de flux** : déficit public compté positif dans ce tableau, opérations financières et réévaluations, variation annuelle de la dette. Ce n'est ni l'encours ni la charge d'intérêts. La comparaison avec la variation des stocks annuels du 3.104 révèle un écart de −0,6 Md€ en 2014, préservé et testé.
+
+Ne jamais mélanger dette brute, dette nette, passifs financiers en valeur de marché, patrimoine net, échéances initiales/résiduelles, stocks et flux. Les séries sont celles des comptes nationaux base 2020 publiés le 28 août 2026, données 2025 provisoires.

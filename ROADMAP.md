@@ -126,6 +126,22 @@
 - **Recette Chromium réel locale et sur le site publié** à **390 et 768 px** : affichage −85,9 Md€ de primaire D41 en 2025, −86,9 Md€ en D41G, solde total −151,6 Md€, exercice 1980 (+3,8 Md€ variante D41G), bascule % dépenses, courbes et ligne zéro ; HTTP 200, aucun débordement horizontal ni erreur JS.
 - **Déploiement réversible** : `/opt/budget-fr/backup/20261016T165732-primary-before-6655e063f1572085adace4f5d9252b5df77b3fc3/` (site complet et commit antérieur), cinq fichiers publiés `index.html`, `solde-primaire.html`, CSV, sources et méthodologie identiques aux sources GitHub par HTTPS ; autres pages et CSV inchangés. Aucun conteneur ou proxy redémarré. Verrou AgentCtl de déploiement automatiquement libéré et verrou Git de la PR libéré après fusion.
 
+## Dette publique 3.103–3.105, puis histoire longue : passation du 16 octobre 2026
+
+- **Nouvelle branche** : dev/debt-net-liabilities-stockflow-20261016, indépendante de la PR #25 toujours ouverte (3.102). Trois CSV distincts, importateur SHA-256 strict, tests d'identité interne et ancrages 2025, sans changement de page ni déploiement.
+- **Anomalies à conserver** : (a) 3.104/S1314 2025 293,1 Md€ alors que 3.102/S1314 292,6 ; (b) sous-lignes de valorisation du 3.104 insuffisantes pour recomposer le total entre 2014 et 2021, résidu calculé jusqu'à 2,9 Md€ ; (c) différence −0,6 Md€ pour 2014 entre 3.105 variation annuelle et variation calculée des encours 3.104. Ne pas corriger les séries pour les faire coïncider ; demander explication à l'Insee avant visualisation fusionnée.
+
+**Backlog historique différé, avant 1960.** Transcription d'un entretien de Thomas Piketty fournie par Kevin le 16 octobre 2026 : proposition de comparer dette publique, patrimoine privé, patrimoine public, patrimoine national et mesures fiscales de l'après-guerre. Les valeurs avancées par l'interview (environ 300→600 % de PIB pour les patrimoines privés, dette de guerre, rendements d'impôts exceptionnels) sont des déclarations à recouper, pas des données validées. Garder séparées données, simulations, prises de position et politique publique.
+
+Sources candidates à auditer une fois l'atlas contemporain stabilisé :
+- Banque de France, Dufrénot et Triki (2012), série historique dette depuis 1890 : https://publications.banque-france.fr/publications-economiques-et-financieres-documents-de-travail/la-dette-publique-et-ses-determinants-depuis-1890-leconometrie-en-soutien-des-faits-historiques
+- Federal Reserve Bank of Chicago, Velde (2024), dette de la France 1800–1914 : https://www.chicagofed.org/publications/economic-perspectives/2024/2
+- FMI, Historical Public Debt Database, https://www.imf.org/external/datamapper/datasets/DEBT
+- Banque de France, patrimoine et comptes financiers depuis 1977 : https://www.banque-france.fr/fr/publications-et-statistiques/publications/quatre-decennies-de-patrimoine-et-dendettement-en-france
+- Éventuellement WID / travaux de Piketty pour patrimoine privé/public, à évaluer comme source distincte.
+
+**Critères avant une extension pré-1960 :** vérifier périmètres (État/APU), frontières, finances de guerre, dette perpétuelle ou négociable, définitions du PIB et du patrimoine, devises, inflation, ruptures, trous, révisions et quantification de l'incertitude. Prévoir un module historique autonome et des courbes non reliées artificiellement aux séries Maastricht contemporaines. Priorité immédiate inchangée : finaliser les données actuelles, puis construire l'explorateur de dette.
+
 ## Suite prioritaire
 
 1. Valider le rendu sur un vrai navigateur mobile et l'accessibilité ; les captures desktop sont encourageantes mais ne valident pas le mobile.
