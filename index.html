@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>budget_fr — Finances publiques françaises</title>
+<style>
+:root{font-family:system-ui,-apple-system,sans-serif;color:#e8ecf5;background:#111827}*{box-sizing:border-box}body{max-width:1060px;margin:auto;padding:36px 20px}h1{font-size:clamp(2rem,4vw,3.5rem);margin:10px 0}p{line-height:1.6;color:#bdc9da}.eyebrow{color:#a6b5f9;text-transform:uppercase;letter-spacing:.14em;font-size:.8rem}.panel{background:#1c2638;border:1px solid #344057;border-radius:16px;padding:20px;margin:24px 0}.controls{display:flex;gap:20px;flex-wrap:wrap;align-items:center}.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}.metric{padding:18px;background:#141e2e;border-radius:12px}.metric strong{display:block;font-size:2rem;margin-top:7px}.metric small{color:#bdc9da}input{accent-color:#9db0ff;flex:1;min-width:200px}svg{width:100%;height:auto;display:block}.legend{display:flex;gap:22px;flex-wrap:wrap;font-size:.85rem;color:#d8ddec}.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:7px}.foot{font-size:.88rem}a{color:#b4c4ff}@media(max-width:640px){.metrics{grid-template-columns:1fr}body{padding:22px 14px}}
+</style></head><body>
+<div class="eyebrow">Atlas des finances publiques · Prototype documenté</div>
+<h1>Où va l'argent public&nbsp;?</h1>
+<p>Recettes, dépenses et solde des <strong>administrations publiques consolidées</strong>, en points de PIB. Première série disponible : 1995–2025. L'objectif 1980–2025 reste à compléter.</p>
+<section class="panel"><div class="controls"><label for="year">Année : <strong id="year-label">2025</strong></label><input id="year" aria-label="Sélectionner une année" type="range" min="1995" max="2025" value="2025"></div>
+<div class="metrics"><div class="metric"><small>Recettes / PIB</small><strong id="revenue">—</strong></div><div class="metric"><small>Dépenses / PIB</small><strong id="expenditure">—</strong></div><div class="metric"><small>Solde / PIB</small><strong id="balance">—</strong></div></div></section>
+<section class="panel"><h2>Évolution annuelle</h2><div class="legend"><span><i class="dot" style="background:#6fddbc"></i>Recettes</span><span><i class="dot" style="background:#eab879"></i>Dépenses</span></div><svg id="chart" viewBox="0 0 900 370" role="img" aria-label="Courbes historiques des recettes et dépenses de 1995 à 2025"></svg><p class="foot">Points de PIB · données annuelles publiées, pas de correction d'inflation nécessaire pour ce ratio.</p></section>
+<p class="foot">Source : <a href="https://www.insee.fr/fr/statistiques/8997691">Insee Première n°2106</a>, tableau 1995–2025, base 2020. Transcription initiale contrôlée par tests de cohérence (mais pas encore par un import automatisé). Les chiffres peuvent être révisés. <a href="METHODOLOGY.md">Méthode</a> · <a href="DATA_SOURCES.md">Sources</a>.</p>
+<script>
+(async()=>{
+const resp=await fetch('data/apu_1995_2025_pct_pib.csv');if(!resp.ok)throw Error('CSV indisponible');
+const lines=(await resp.text()).trim().split(/\r?\n/);
+const rows=lines.slice(1).map(line=>{const [year,revenue,expenditure,balance]=line.split(',').map(Number);return{year,revenue,expenditure,balance}});
+const slider=document.getElementById('year'), chart=document.getElementById('chart');
+const fmt=n=>n.toLocaleString('fr-FR',{minimumFractionDigits:1,maximumFractionDigits:1})+' %';
+const X=i=>60+i*790/(rows.length-1),Y=v=>315-(v-45)*12;
+const path=key=>rows.map((r,i)=>(i?'L':'M')+X(i).toFixed(1)+' '+Y(r[key]).toFixed(1)).join(' ');
+const grid=[45,50,55,60,65].map(v=>'<line x1="60" x2="860" y1="'+Y(v)+'" y2="'+Y(v)+'" stroke="#455167"/><text x="45" y="'+(Y(v)+5)+'" font-size="13" fill="#c5d2e5" text-anchor="end">'+v+'</text>').join('');
+function update(){const year=Number(slider.value),i=rows.findIndex(r=>r.year===year),r=rows[i];if(!r)return;document.getElementById('year-label').textContent=year;for(const key of ['revenue','expenditure','balance'])document.getElementById(key).textContent=fmt(r[key]);chart.innerHTML=grid+'<path d="'+path('revenue')+'" stroke="#6fddbc" fill="none" stroke-width="3"/><path d="'+path('expenditure')+'" stroke="#eab879" fill="none" stroke-width="3"/><line x1="'+X(i)+'" y1="65" x2="'+X(i)+'" y2="320" stroke="#dbe4ff" stroke-dasharray="4 6"/><text x="60" y="347" fill="#bdc9da" font-size="14">1995</text><text x="860" y="347" fill="#bdc9da" font-size="14" text-anchor="end">2025</text>'; }
+slider.addEventListener('input',update);update();
+})().catch(err=>{document.querySelector('.panel').insertAdjacentText('beforeend',' Erreur de chargement : '+err.message+'. Servir le dossier via python3 -m http.server 8000.');});
+</script></body></html>
