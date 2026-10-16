@@ -114,6 +114,15 @@
 - **Vérification post-déploiement** : deux HTML servis octet par octet identiques à GitHub ; pages et CSV historiques inchangés. Chromium **cache désactivé** : les six pages HTTP 200 aux deux largeurs (390, 768 px), aucun défilement horizontal ni erreur JS, états de données tous résolus (12/12). Ne pas confondre test responsive automatisé et revue graphique humaine.
 - **Sauvegarde rollback** : `/opt/budget-fr/backup/20261016T164013-loading-before-062f91201a52518665398311938c1a775b99e50c/`. Aucun conteneur ni service voisin redémarré, coordination AgentCtl respectée.
 
+## Solde primaire public 1959–2025 — lot en cours
+
+- **Objectif** : distinguer le solde public total B9NF du **solde primaire dérivé** par réintégration des intérêts versés ; lecture historique à périmètre S13 constant, pas le seul budget de l'État.
+- **Source auditée** : Insee 3.201 (août 2026, SHA-256 épinglée déjà contrôlée), années **1959–2025**, lignes recettes 58, dépenses 27, B9NF 66, D41 12 et D41G 13. Les valeurs ne sont pas recopiées depuis l'article antérieur de mai 2026 ; **−151,5920 Md€** de solde total en 2025 dans cette version.
+- **Dérivation** : `B9NF + D41` (méthode de référence) et `B9NF + D41G` (variante de correction SIFIM), intérêts **payés** uniquement, non net des intérêts reçus, non solde structurel. Pas de ratio de PIB sans source explicite et homogène.
+- **Livrables** : script Python standard `scripts/import_primary_balance.py`, `data/solde_primaire_apu_1959_2025_bn_eur.csv` (67 années), graphique `solde-primaire.html` avec année choisie, variantes comptables et Md€ courants ou % des dépenses totales S13 ; lien depuis accueil et la documentation.
+- **Garde-fous** : solde primaire **calculé** et non publié tel quel ; statut provisoire 2025, source et révision indiquées ; pas de causalité inférée entre solde primaire et variation du stock de dette.
+- **À consigner après les tests** : PR, SHA applicatif, contrôle graphique responsive et navigateur, état du déploiement public, sauvegarde, verrous AgentCtl.
+
 ## Suite prioritaire
 
 1. Valider le rendu sur un vrai navigateur mobile et l'accessibilité ; les captures desktop sont encourageantes mais ne valident pas le mobile.

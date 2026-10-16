@@ -31,6 +31,15 @@ git diff -- data/apu_1960_2025_pct_pib.csv
 
 L'importateur vérifie la **SHA-256** du XLSX et refuse une mise à jour silencieuse. En cas de révision de la source, auditer les changements avant d'utiliser explicitement l'option --allow-source-change.
 
+## Solde primaire calculé : finances publiques hors charge des intérêts (1959–2025)
+
+**[Explorer le solde primaire annuel](solde-primaire.html)** : comparer, année par année, le solde public total **B9NF** et le solde primaire **dérivé** en réintégrant les intérêts versés. Les deux séries sont de même périmètre et issues du même [tableau Insee 3.201 (août 2026)](https://www.insee.fr/fr/statistiques/8988845), secteur S13 consolidé, années 1959–2025.
+
+- Calcul de référence : **solde primaire D41 = B9NF + intérêts D41**. Variante en affichage : **B9NF + D41G**, intérêts avant correction SIFIM, sans modifier le solde total. Il s'agit de **deux conventions alternatives**, pas de deux charges cumulables.
+- En 2025, dans la version d'août : **−151,5920 Md€** (B9NF) + **65,7209 Md€** (D41) = **−85,8711 Md€** (solde primaire) ; variante D41G **−86,9401 Md€**. Les données d'une publication antérieure (mai) peuvent être différentes.
+- Affichages : **Md€ courants** ou **% des dépenses totales du même classeur**, **pas % du PIB**. Les données ne sont pas déflatées, et le solde primaire n'est pas corrigé du cycle économique.
+- Données versionnées dans `data/solde_primaire_apu_1959_2025_bn_eur.csv`, calcul reproductible depuis le même fichier source officiel épinglé par empreinte : `python3 scripts/import_primary_balance.py` (ou `--xlsx /chemin/t_3201_fr.xlsx`). Aucun fichier source Excel n'est commité.
+
 ## Intérêts de la dette publique et dépenses S13 (1959–2025)
 
 **[Explorer la charge annuelle d'intérêts](interets.html)** : deux mesures officielles de charges d'intérêts des administrations publiques consolidées, en milliards d'euros courants et en part de la dépense publique totale : D41 et D41G (hors correction au titre des services d'intermédiation financière indirectement mesurés, SIFIM). **Ce sont des conventions alternatives, jamais deux dépenses à sommer**, ni le stock de dette de Maastricht.

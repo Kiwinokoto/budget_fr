@@ -109,6 +109,18 @@ Insee, [Comptes par catégories de ménage](https://www.insee.fr/fr/statistiques
 - D41/D41G ne sont pas deux charges additionnables ; la correction au titre des SIFIM peut modifier l'ordre relatif des deux séries selon l'année. Ne jamais appeler D41G « dette nette ».
 - Le ratio d'intérêts sur les dépenses ne mesure ni le taux d'intérêt effectif de la dette ni le coût futur de son refinancement.
 
+## Solde primaire : calcul dérivé du tableau Insee 3.201 (1959–2025)
+
+- **Même fichier officiel audité que la page des intérêts**, [Insee 3.201, 28 août 2026](https://www.insee.fr/fr/statistiques/8988845), base 2020, source : https://www.insee.fr/fr/statistiques/fichier/8988845/t_3201_fr.xlsx
+- Empreinte SHA-256 déjà auditée : `487d4299a5bac8d616000952fd012a0eb6d251a3586508165fc37d64a73a397a`.
+- Un seul classeur : ligne **3** = années 1959–2025, **12** = intérêts D41 payés, **13** = intérêts D41G avant correction SIFIM, **27** = dépenses totales S13, **58** = recettes totales S13, **66** = capacité (+) ou besoin (−) de financement **B9NF**. Vérification de cohérence année par année : `recettes totales – dépenses totales = B9NF` (tolérance de l'arrondi officiel au 0,0001 Md€).
+- **Formule dérivée, non publiée comme colonne primaire** : `primary_d41_bn_eur = balance_b9_bn_eur + interest_d41_bn_eur`. Variante : `primary_d41g_bn_eur = balance_b9_bn_eur + interest_d41g_bn_eur` ; seule la définition des intérêts change, le B9NF restant fixe.
+- CSV : `data/solde_primaire_apu_1959_2025_bn_eur.csv`, 67 années sans trou, six indicateurs dérivés ou repris plus année. Importateur reproductible : `scripts/import_primary_balance.py`, Python standard, SHA-256 épinglée, valide années, libellés de source, équation B9 et exactitude des arrondis. Les deux intérêts et les dépenses totales sont **identiques** aux colonnes déjà publiées de `data/interets_apu_1959_2025_bn_eur.csv`.
+- 2025 : recettes `1562.5197` Md€, dépenses `1714.1117` Md€, B9NF `−151.5920` Md€, D41 `65.7209` Md€, D41G `64.6519` Md€, primaire D41 `−85.8711` Md€, primaire D41G `−86.9401` Md€.
+- **Attention aux millésimes :** les analyses de mai 2026 peuvent citer un déficit public `−152,5` Md€ en 2025. Ce chiffre **n'est pas celui du tableau 3.201 d'août** ; il ne doit pas être mêlé aux intérêts du millésime plus récent.
+- Le ratio secondaire proposé par l'interface est un **% des dépenses publiques totales S13 de la même année**, **pas % du PIB**, ni un taux d'intérêt de la dette. Les euros historiques sont courants, 2025 provisoire.
+- Constatation conceptuelle : le primaire ainsi défini **réintègre les intérêts payés seulement**. Les intérêts reçus ne sont pas soustraits. Il ne s'agit ni de solde primaire structurel ni d'un indicateur direct de trajectoire de dette.
+
 ## Sources identifiées, non intégrées
 
 - [Insee, comptes APU détaillés](https://www.insee.fr/fr/statistiques/8988845), tableaux **autres que 3.201** ; vérifier périmètres, catégories et durées des séries.
