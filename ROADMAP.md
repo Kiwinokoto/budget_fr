@@ -156,6 +156,13 @@ Sources candidates à auditer une fois l'atlas contemporain stabilisé :
 - **Recette réelle** du dernier commit de PR #27 avant fusion : navigateur Chromium via Puppeteer, viewport 390/768/1365 px, sélections 1995/2014/2020/2021/2025 et secteurs S13/S1311/S1314, chiffres, graphiques, changement d'unités, clavier, erreurs de chargement suivies de réessai ; **23 vérifications fonctionnelles réussies**. Aucun débordement horizontal ni exception JavaScript observé. Labels et rôles de contrôles et graphiques vérifiés ; lecteur d'écran et audit de contraste instrumenté non effectués.
 - **Validation hors production :** 44 tests Python et 27 tests Node réussis avant ce complément documentaire ; pas de CI GitHub signalée. Prochaine étape après fusion : recette manuelle finale de publication et déploiement uniquement sur demande explicite.
 
+## Recette accessibilité Work — correctifs ciblés du 16 octobre 2026
+
+- **Audit fourni** : revue navigateur de dette.html sur main b8923d0 (recette Work, Chromium 154, 500/390/768/1365 px ; pas de lecteur d'écran réel). Verdict Work : publication déconseillée avant correction de deux obstacles majeurs : graphiques illisibles sur petits écrans, absence d'alternative annuelle complète.
+- **Lot de correction** dev/debt-accessibility-20261016 : graphiques SVG de largeur minimale 900 px dans un conteneur horizontalement défilable et atteignable au clavier (indices de navigation, axes avec unités) ; un tableau HTML natif déroulable de **31 années × 9 colonnes**, valeurs Insee d'origine, cinq instruments, reste calculé identifié, dette brute/nette. S1314/F2N reste « Non renseigné », reste « Non calculable » si composante non renseignée ; pas de zéro fabriqué. SVG liés à des résumés de tendance textuels ; états de sélection annoncés via live region ; focus déplacé vers le sélecteur après récupération d'erreur.
+- **Validation réalisée** : 44 tests Python, 30 tests JavaScript et 21 vérifications fonctionnelles Chromium sur 390/500/768/1365 px (défilement au clavier, absence de débordement de page, tableau 31 années, données manquantes, unités, changement de sélection, reprise d'erreur et focus). La capture 500 px a été inspectée. Contre-recette lecteur d'écran réel encore à faire. Tests de lecteur d'écran réel (NVDA/Orca/VoiceOver), zoom navigateur natif à 200/400 % et audit RGAA complet **non réalisés** ; ne pas présenter le correctif comme une certification de conformité.
+- **Sans déploiement** ; ne fusionner qu'après validation et revue. Une nouvelle recette de publication avec lecteurs d'écran reste possible ultérieurement.
+
 ## Suite prioritaire
 
 1. Valider le rendu sur un vrai navigateur mobile et l'accessibilité ; les captures desktop sont encourageantes mais ne valident pas le mobile.
