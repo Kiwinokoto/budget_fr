@@ -48,8 +48,9 @@ class TestImporter(unittest.TestCase):
                 return '<c r="%s" t="inlineStr"><is><t>%s</t></is></c>' % (ref, val)
             return '<c r="%s"><v>%s</v></c>' % (ref, val)
         def row(n, label, v1, v2):
-            return '<row r="%s">%s%s%s</row>' % (
-                n, c("A%d"%n,label), c("B%d"%n,v1), c("C%d"%n,v2))
+            return '<row r="%s">%s%s%s%s</row>' % (
+                n, c("A%d"%n,label), c("B%d"%n,v1), c("C%d"%n,v2),
+                '<c r="D4" t="inlineStr"><is><t></t></is></c>' if n == 4 else '')
         xml = ('<worksheet xmlns="%s"><sheetData>' % ns +
             row(4, "Dépense et recette", "1980", "1981") +
             row(5, "Dépenses", 48, 50) +

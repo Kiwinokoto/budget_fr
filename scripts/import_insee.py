@@ -74,7 +74,7 @@ def extract_rows(blob, expected_years=range(1960, 2026)):
         raise ValueError("Unexpected workbook header")
     year_columns = []
     for col, label in sorted(grid[4].items()):
-        if col == 0:
+        if col == 0 or not str(label).strip():
             continue
         match = re.match(r"^(\d{4})(?:\s|$)", str(label))
         if not match:
