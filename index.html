@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>budget_fr — Finances publiques françaises 1960–2025</title>
+<style>
+:root{font-family:system-ui,-apple-system,sans-serif;color:#e8ecf5;background:#111827}*{box-sizing:border-box}
+body{max-width:1060px;margin:auto;padding:36px 20px}h1{font-size:clamp(2rem,4vw,3.5rem);margin:10px 0}
+p{line-height:1.6;color:#bdc9da}.eyebrow{color:#a6b5f9;text-transform:uppercase;letter-spacing:.14em;font-size:.8rem}
+.panel{background:#1c2638;border:1px solid #344057;border-radius:16px;padding:20px;margin:24px 0}
+.controls{display:flex;gap:20px;flex-wrap:wrap;align-items:center}.metrics{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-top:20px}
+.metric{padding:14px;background:#141e2e;border-radius:12px}.metric strong{display:block;font-size:1.65rem;margin-top:7px}.metric small{color:#bdc9da}
+input{accent-color:#9db0ff;flex:1;min-width:200px}svg{width:100%;height:auto;display:block}
+.legend{display:flex;gap:22px;flex-wrap:wrap;font-size:.85rem;color:#d8ddec}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:7px}.foot{font-size:.88rem}a{color:#b4c4ff}
+@media(max-width:760px){.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){body{padding:22px 14px}.metrics{grid-template-columns:1fr}}
+</style></head><body>
+<div class="eyebrow">Atlas des finances publiques · Prototype documenté</div>
+<h1>Où va l'argent public&nbsp;?</h1>
+<p>Recettes, dépenses, solde et dette des <strong>administrations publiques consolidées</strong>, de 1960 à 2025, en % du PIB. La période 1980–2025 est entièrement couverte pour les grands agrégats.</p>
+<section class="panel"><div class="controls"><label for="year">Année : <strong id="year-label">2025</strong></label><input id="year" aria-label="Sélectionner une année" type="range" min="1960" max="2025" value="2025"></div>
+<div class="metrics">
+<div class="metric"><small>Recettes / PIB</small><strong id="revenue">—</strong></div>
+<div class="metric"><small>Dépenses / PIB</small><strong id="expenditure">—</strong></div>
+<div class="metric"><small>Solde / PIB</small><strong id="balance">—</strong></div>
+<div class="metric"><small>Dette brute / PIB</small><strong id="gross-debt">—</strong></div>
+<div class="metric"><small>Dette nette / PIB</small><strong id="net-debt">—</strong></div>
+</div><p class="foot">Dette brute disponible depuis 1978 ; dette nette depuis 1995. « — » indique une donnée indisponible.</p></section>
+<section class="panel"><h2>Recettes et dépenses</h2><div class="legend"><span><i class="dot" style="background:#6fddbc"></i>Recettes</span><span><i class="dot" style="background:#eab879"></i>Dépenses</span></div>
+<svg id="chart" viewBox="0 0 900 370" role="img" aria-label="Évolution des recettes et dépenses publiques de 1960 à 2025"></svg></section>
+<section class="panel"><h2>Dette publique</h2><div class="legend"><span><i class="dot" style="background:#a7b5ff"></i>Dette brute</span><span><i class="dot" style="background:#d8a7e7"></i>Dette nette</span></div>
+<svg id="debt-chart" viewBox="0 0 900 370" role="img" aria-label="Dette publique brute depuis 1978 et dette nette depuis 1995"></svg>
+<p class="foot">Dette au sens de Maastricht ; la dette nette soustrait certains actifs financiers exigibles, pas tout le patrimoine public.</p></section>
+<p class="foot">Source : <a href="https://www.insee.fr/fr/statistiques/2381414">Insee, Dépenses et recettes publiques, 28 août 2026</a> (base 2020). Import vérifié depuis le XLSX d'origine. Année 2024 semi-définitive et 2025 provisoire ; révisions possibles. <a href="METHODOLOGY.md">Méthode</a> · <a href="DATA_SOURCES.md">Sources</a>.</p>
+<script>
+(async()=>{
+const response=await fetch('data/apu_1960_2025_pct_pib.csv');
+if(!response.ok)throw Error('CSV indisponible');
+const lines=(await response.text()).trim().split(/\r?\n/);
+const fields=lines.shift().split(',');
+const rows=lines.map(line=>{
+ const columns=line.split(',');
+ const item={};
+ fields.forEach((key,i)=>{item[key]=columns[i]===''?null:Number(columns[i]);});
+ return item;
+});
+const slider=document.getElementById('year');
+const format=n=>n===null?'—':n.toLocaleString('fr-FR',{minimumFractionDigits:1,maximumFractionDigits:1})+' %';
+const X=i=>60+i*790/(rows.length-1);
+function draw(id,series,low,high,ticks){
+ const svg=document.getElementById(id);
+ const Y=v=>315-(v-low)*250/(high-low);
+ const grid=ticks.map(v=>'<line x1="60" x2="860" y1="'+Y(v)+'" y2="'+Y(v)+'" stroke="#455167"/><text x="45" y="'+(Y(v)+5)+'" font-size="13" fill="#c5d2e5" text-anchor="end">'+v+'</text>').join('');
+ const paths=series.map(s=>{
+  let started=false;
+  const path=rows.map((r,i)=>{
+   const v=r[s.key];
+   if(v===null){started=false;return '';}
+   const op=started?'L':'M';started=true;
+   return op+X(i).toFixed(1)+' '+Y(v).toFixed(1);
+  }).filter(Boolean).join(' ');
+  return '<path d="'+path+'" stroke="'+s.color+'" fill="none" stroke-width="3"/>';
+ }).join('');
+ svg.innerHTML=grid+paths+
+ '<text x="60" y="347" fill="#bdc9da" font-size="14">1960</text>'+
+ '<text x="860" y="347" fill="#bdc9da" font-size="14" text-anchor="end">2025</text>';
+}
+draw('chart',[{key:'revenue_pct_gdp',color:'#6fddbc'},{key:'expenditure_pct_gdp',color:'#eab879'}],30,65,[30,40,50,60]);
+draw('debt-chart',[{key:'gross_debt_pct_gdp',color:'#a7b5ff'},{key:'net_debt_pct_gdp',color:'#d8a7e7'}],0,130,[0,30,60,90,120]);
+function selectYear(){
+ const r=rows.find(r=>r.year===Number(slider.value));
+ if(!r)return;
+ document.getElementById('year-label').textContent=r.year;
+ for(const [id,key] of [
+  ['revenue','revenue_pct_gdp'],['expenditure','expenditure_pct_gdp'],
+  ['balance','balance_pct_gdp'],['gross-debt','gross_debt_pct_gdp'],
+  ['net-debt','net_debt_pct_gdp']])
+   document.getElementById(id).textContent=format(r[key]);
+}
+slider.addEventListener('input',selectYear);
+selectYear();
+})().catch(err=>{
+ document.querySelector('.panel').insertAdjacentText('beforeend',
+ 'Erreur de chargement : '+err.message+'. Lancer python3 -m http.server 8000.');
+});
+</script></body></html>
