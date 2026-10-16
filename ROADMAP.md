@@ -69,6 +69,15 @@
 - **Retour arrière** : copie précédente `/opt/budget-fr/backup/20261016T153535-incidence-before-8e490b18cf0a20d6c323f52281e518a37024800f/`. Aucun redémarrage de service et verrous AgentCtl libérés après publication.
 - **Limites** : validation visuelle mobile réelle toujours à faire ; aucune série actuelle de **TVA seule** et de taux d'effort des déciles n'est attestée pour 2023 ou 2025.
 
+## Source DG Trésor TVA seule (septembre 2025) — passe du 16 octobre 2026
+
+- Étude identifiée et lue : Trésor-Éco n°371, graphique 4 et texte d'accompagnement, pages 5–6, publiée le 25/09/2025.
+- Résultats textuels certains : **−0,7 % de pouvoir d'achat simulé pour Q1**, **−0,4 % pour Q5**, **−0,5 % en moyenne**, et **12 % / 31 %** des recettes marginales réparties sur Q1 / Q5.
+- Préserver trois différences : **quintiles et non déciles**, **effet marginal d'une hausse et non taux de TVA déjà supporté**, **publication 2025 fondée sur BDF 2017, ERFS 2022 et comptes nationaux 2021–2022**.
+- Section ajoutée à \`tva-incidence.html\`, sans chiffres fictifs pour Q2–Q4, test de non-régression, sources et méthodologie mises à jour.
+- La prochaine étude à rechercher reste un fichier de TVA actuelle seule par décile/quintile, relatif au revenu **et** à la consommation. BDF 2017 publie les dépenses par catégorie, pas directement le montant de TVA payée par groupe.
+- Validation, PR, commit applicatif, déploiement et sauvegarde à consigner après vérification réelle.
+
 ## Suite prioritaire
 
 1. Valider le rendu sur un vrai navigateur mobile et l'accessibilité ; les captures desktop sont encourageantes mais ne valident pas le mobile.

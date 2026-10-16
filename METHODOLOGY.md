@@ -103,3 +103,12 @@ Le classeur [Insee CND.101](https://www.insee.fr/fr/statistiques/8574663), publi
 Nous affichons seulement les milliards d'euros attribués aux groupes et la proportion de la somme distribuée **dans la même année et la même source**. Aucun ratio de niveau de vie n'est calculé, aucun chiffre isolé pour la TVA n'est dérivé. Les revenus disponibles nets du secteur S14 figurent dans le classeur mais concernent un sous-secteur et ne sont pas un dénominateur automatiquement compatible avec les taxes sur les produits attribuées à l'ensemble S1.
 
 Les données sont expérimentales, recalées sur la comptabilité nationale et fondées sur des hypothèses d'allocation par consommation. Les montants ne mesurent ni l'incidence économique finale de la taxe ni la charge réellement acquittée par décile en 2025. Les données BDF 2001 et CND 2020–2023 doivent rester **visuellement et statistiquement séparées**.
+
+
+### Simulation de réforme DG Trésor (publication septembre 2025)
+
+Le [Trésor-Éco 371](https://www.tresor.economie.gouv.fr/Articles/2025/09/25/analyse-de-la-composition-des-recettes-de-tva) simule le choc d'une **hausse uniforme d'un point de pourcentage de tous les taux de TVA** : les taux et paniers de consommation sont distingués par niveau de vie, avec une hypothèse de répercussion intégrale au prix et **à comportements inchangés**. Les chiffres de pouvoir d'achat sont des **variations statiques hypothétiques**, pas les taux d'effort de la TVA courante. Ils proviennent de l'enquête BDF 2017, de l'ERFS 2022 et des comptes nationaux 2021–2022 ; la publication est datée **septembre 2025**.
+
+Seules sont visibles sur le site les valeurs explicitement données dans le texte : **Q1 −0,7 %, Q5 −0,4 %, tous ménages −0,5 %**, puis **Q1 12 % et Q5 31 % des recettes supplémentaires** de la hausse simulée. Les Q2 à Q4 sont visibles graphiquement dans la publication, mais sans valeurs tabulées exactes ; ils ne sont donc **pas reconstruits numériquement**. Le texte explique que l'indexation future du Smic et des prestations amortirait l'effet statique ; elle n'est pas comprise dans l'estimation affichée. L'étude chiffre également le rendement net théorique du point de TVA 2025, qui est **un autre objet statistique**.
+
+Ne pas comparer directement les effets en % sur le **pouvoir d'achat simulé** de l'étude 2025 aux taux agrégés TVA/revenu des ménages du jeu BDF 2001, ni aux montants distribués CND 2020–2023. Les groupes sont des **quintiles**, non des déciles ; les périodes, hypothèses et dénominateurs diffèrent.
