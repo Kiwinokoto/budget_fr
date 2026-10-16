@@ -140,3 +140,12 @@
 Ruptures comptables, révisions du millésime, séries partielles, faux rapprochements de périmètres, transfert doublement compté, confusion entre fiabilité de la publication et qualité politique ou efficacité de la dépense.
 
 Passation : GitHub reste la source canonique ; ne pas laisser de fichiers importants dans une copie locale. Tester puis vérifier branche, HEAD, lease et état propre avant de conclure.
+
+## Dette publique : premier import Insee 3.102 (16 octobre 2026)
+
+- **Branche de travail** : `dev/debt-maastricht-instruments-1995-2025`, proposition destinée à une PR sur `main` ; aucun déploiement automatique demandé.
+- **Terminé** : audit et import reproductible du fichier officiel Insee 3.102, version du 28 août 2026, SHA-256 épinglée, **1995–2025**, six périmètres et sept codes, **186 observations année×secteur**. CSV dérivé validé depuis le XLSX.
+- **Point scientifique** : S1314/F2N est non renseigné pour les 31 années (cellules vides conservées, non remplacées par des zéros). Les sous-totaux centraux et les titres F31/F32 ne sont jamais recomptés.
+- **Contrôles** : tests Python et JavaScript de non-régression exécutés avant commit ; `git diff --check` ; fichier exporté identique octet à octet à la reproduction depuis l'XLSX officiel. Aucun graphique n'est publié dans ce lot.
+- **Suite** : (1) audit complet de 3.101 pour 1978–1994 sans extrapolation ; (2) imports séparés 3.103–3.105 avec équations de réconciliation ; (3) validation des cellules françaises Eurostat par détenteur/maturité ; (4) conception du nouvel explorateur de dette puis recette responsive et déploiement contrôlé, après PR appropriée.
+- **Restriction** : ne pas assimiler dette Maastricht de S13, dette négociable de l'État, dette nette, passifs financiers hors Maastricht ou durée résiduelle. Les années 2024–2025 sont sujettes à révision.
