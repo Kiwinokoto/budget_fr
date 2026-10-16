@@ -2,16 +2,16 @@
 
 ## Situation au 16 octobre 2026
 
-- Dépôt public : Kiwinokoto/budget_fr. PR #1–#15 fusionnées sur `main` le 16 octobre 2026 ; dernier commit applicatif (Trésor TVA 2025) **`2dd13d08762e8b658264a174f9de24a0199b9a65`**. La documentation de passation ultérieure peut faire avancer `main` sans redéploiement.
+- Dépôt public : Kiwinokoto/budget_fr. PR #1–#17 fusionnées sur `main` le 16 octobre 2026 ; dernier commit applicatif (TVA seule estimée Ines 2014) **`e97999e3168b808938c385f22a60d886394981b0`**. La documentation de passation ultérieure peut faire avancer `main` sans redéploiement.
 - Coordination AgentCtl : projet budget-fr, ressource repo:Kiwinokoto/budget_fr ; verrou à prendre avant toute mutation et libérer en fin de passe.
 - Base Insee initiale 1995–2025 recopiée à la main **remplacée** par les chiffres du classeur officiel d'août 2026.
 - Données 1960–2025 : recettes, dépenses, solde, variantes hors éléments imputés ; dette brute depuis 1978 et nette depuis 1995. Fichier original conservé à la source, pas dans Git.
 - Importateur en Python standard, empreinte SHA-256 de la source, validation des libellés, années et solde ; tests couvrant les absences de valeurs.
 - Application statique avec curseur temporel et graphiques de recettes/dépenses et dette.
-- Site public en ligne : **https://budget-fr.kiwinokoto.fr** sur le VPS personnel, via `/opt/budget-fr`, conteneur `budget-fr-web`, réseau Docker `traefik_network`, routeur Traefik dédié et certificat Let's Encrypt. Déploiement figé sur `2dd13d08762e8b658264a174f9de24a0199b9a65` (`/opt/budget-fr/.deployed_commit`). Aucune base de données, aucune automatisation ou modification des services voisins.
-- Vérifications en production : HTTPS HTTP 200 sans `-k`, documents et CSV HTTP 200, trois CSV servis identiques octet par octet à GitHub (66, 30 et 31 années), **14 tests Python OK**, certificat valide, conteneur démarré, volume statique monté en lecture seule. Revue visuelle navigateur desktop/mobile **encore à faire**.
+- Site public en ligne : **https://budget-fr.kiwinokoto.fr** sur le VPS personnel, via `/opt/budget-fr`, conteneur `budget-fr-web`, réseau Docker `traefik_network`, routeur Traefik dédié et certificat Let's Encrypt. Déploiement figé sur `e97999e3168b808938c385f22a60d886394981b0` (`/opt/budget-fr/.deployed_commit`). Aucune base de données, aucune automatisation ou modification des services voisins.
+- Vérifications en production : HTTPS HTTP 200 sans `-k`, documents et CSV HTTP 200, trois CSV servis identiques octet par octet à GitHub (66, 30 et 31 années), **23 tests Python et 14 tests Node OK pour la version actuelle**, certificat valide, conteneur démarré, volume statique monté en lecture seule. Revue visuelle navigateur desktop/mobile **encore à faire**.
 
-- **Historique des axes** : `607dbd8b4fd60c92b47832c701ce9c122f949891` (PR #7), inclus dans les versions applicatives suivantes. L'application servie est désormais `8e490b1` ; les commits de documentation ultérieurs ne déclenchent pas de déploiement.
+- **Historique des axes** : `607dbd8b4fd60c92b47832c701ce9c122f949891` (PR #7), inclus dans les versions applicatives suivantes. L'application servie est désormais `e97999e` ; les commits de documentation ultérieurs ne déclenchent pas de déploiement.
 
 ## Lot COFOG livré sur `main` et sur le site public
 
@@ -88,7 +88,9 @@
 - **Source de modèle récent identifiée :** Ines module de taxation indirecte (BDF 2017 pseudo-appariée) ; microdonnées BDF 2017 plus détaillées soumises à accès CASD/Quételet, et ERFS nécessaires au modèle. Les tableaux publics de dépense 2017 ne permettent pas de publier de TVA seule par décile à eux seuls.
 - **Blocage scientifique explicite :** pas encore de tableau distributif contemporain 2023–2025 de la TVA seule, rapportée aux revenus et à la consommation, sur le même champ.
 - Pour une estimation récente : demander les statistiques agrégées Drees/Insee ou étudier un accès encadré aux microdonnées et au module Ines ; ne pas publier une approximation comme donnée observée.
-- Validation GitHub / tests / déploiement / rollback à consigner après opération.
+- **Livré en production** : PR #17 fusionnée, version `e97999e3168b808938c385f22a60d886394981b0` sur https://budget-fr.kiwinokoto.fr/tva-incidence.html. CSV `data/tva_part_deciles_ines_2014.csv` publié.
+- **Validation :** 23 tests Python + 14 tests Node réussis ; JS des cinq pages vérifié, ancien CSV CND reproduit octet par octet à partir de sa source officielle. Les cinq fichiers publics mis à jour sont identiques octet par octet au commit GitHub, pages et CSV historiques inchangés.
+- **Sauvegarde réversible :** `/opt/budget-fr/backup/20261016T160348-drees-before-e97999e3168b808938c385f22a60d886394981b0/`. Aucun redémarrage de service, verrous AgentCtl relâchés après opérations. Revue graphique mobile **encore non effectuée**.
 
 ## Suite prioritaire
 
@@ -96,7 +98,7 @@
 2. Documenter et mesurer les écarts entre les publications Insee de mai et août 2026.
 3. ~~Rechercher des séries détaillées COFOG 1995–2024~~ : **premier niveau COFOG S13 intégré** (mars 2026, dix catégories, euros courants). Prochaine étape : explorer sous-fonctions, harmoniser les millésimes et déceler les reclassements.
 4. ~~Identifier les principales recettes par impôt~~ : premier lot de prélèvements obligatoires 1995–2025 intégré avec contrôle des doubles comptes, TVA, IRPP, IS, CSG/CRDS et cotisations. Poursuivre : revenus non fiscaux, dette, intérêts, solde primaire et patrimoine.
-5. **TVA et justice fiscale :** enquêter sur la disponibilité de la TVA seule réellement estimée et rapportée au revenu/consommation dans une enquête récente, puis étendre aux taux réduits et à la redistribution élargie. Maintenir strictement les distinctions 2001 / 2016 simulée / 2020–2023 taxes sur produits. Ensuite formaliser la traçabilité budgétaire.
+5. **TVA et justice fiscale :** enquêter sur la disponibilité de la TVA seule réellement estimée et rapportée au revenu/consommation dans une enquête récente, puis étendre aux taux réduits et à la redistribution élargie. Maintenir strictement les distinctions 2001 estimée / Ines 2014 TVA seule / 2016 choc simulé / 2020–2023 taxes sur produits / simulation 2025. Ensuite formaliser la traçabilité budgétaire.
 6. Faire une vraie revue visuelle et une vérification responsive, puis envisager un déploiement automatisé uniquement si cela devient utile (actuellement manuel et volontaire).
 
 ## Risques
