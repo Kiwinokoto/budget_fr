@@ -19,12 +19,20 @@
 - Livraison publique validée : https://budget-fr.kiwinokoto.fr/fonctions.html, HTTP 200 sans exception TLS, HTML et CSV servis identiques à l'artefact GitHub ; import COFOG officiel reproductible à l'octet. Sauvegarde du site précédent : `/opt/budget-fr/backup/20261016T124632-0504e5c70314939cb2d0f0537a953a6fc81b1c71/site/`. La revue visuelle réelle desktop/mobile reste à faire.
 - État de coordination : le déploiement statique a été effectué sous verrou `deploy:vps-personal/budget-fr` et libéré automatiquement ; pas de modification Docker/Traefik.
 
+## Lot recettes fiscales développé sur `dev/recettes-fiscales-1995-2025`
+
+- Classeur Insee 3.217 téléchargé et audité (SHA-256 épinglée), 31 exercices de 1995 à 2025.
+- Séparation stricte entre catégories additionnables, ajustements négatifs et sous-postes D51.
+- Nouvelle page statique `recettes.html`, lien sur l'accueil, tests de cohérence et importateur Python indépendant.
+- Source 3.216 couvrant 1959–2025 repérée mais **pas importée** ; attention à l'inclusion des organismes européens et aux transferts.
+- Prochaine passation : consigner le HEAD, l'état exact du déploiement, les tests, les éventuelles limitations du navigateur et les verrous libérés.
+
 ## Suite prioritaire
 
 1. Valider le rendu dans un navigateur, ergonomie mobile et accessibilité (pas encore revue en détail).
 2. Documenter et mesurer les écarts entre les publications Insee de mai et août 2026.
 3. ~~Rechercher des séries détaillées COFOG 1995–2024~~ : **premier niveau COFOG S13 intégré** (mars 2026, dix catégories, euros courants). Prochaine étape : explorer sous-fonctions, harmoniser les millésimes et déceler les reclassements.
-4. Étudier les séries de recettes par impôt, dette, intérêts, solde primaire et patrimoine.
+4. ~~Identifier les principales recettes par impôt~~ : premier lot de prélèvements obligatoires 1995–2025 intégré avec contrôle des doubles comptes, TVA, IRPP, IS, CSG/CRDS et cotisations. Poursuivre : revenus non fiscaux, dette, intérêts, solde primaire et patrimoine.
 5. Formaliser l'échelle de transparence/traçabilité par poste et sa méthodologie ; tester l'incidence fiscale.
 6. Faire une vraie revue visuelle et une vérification responsive, puis envisager un déploiement automatisé uniquement si cela devient utile (actuellement manuel et volontaire).
 

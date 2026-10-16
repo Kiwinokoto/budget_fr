@@ -14,13 +14,13 @@ Le site est entièrement statique, sans backend, base de données, compte utilis
 ## Organisation sur le VPS
 
 - `/opt/budget-fr/compose.yml` : copie versionnée de ce fichier.
-- `/opt/budget-fr/site/` : uniquement `index.html`, `fonctions.html`, `data/*.csv`, `DATA_SOURCES.md`, `METHODOLOGY.md`. Pas de scripts, fichiers .env, clés ou répertoires .git dans le document root.
+- `/opt/budget-fr/site/` : uniquement `index.html`, `fonctions.html`, `recettes.html`, `data/*.csv`, `DATA_SOURCES.md`, `METHODOLOGY.md`. Pas de scripts, fichiers .env, clés ou répertoires .git dans le document root.
 - `/opt/budget-fr/.deployed_commit` : SHA exact publié après validation.
 - `/opt/budget-fr/backup/` : copie locale du site et du Compose précédents lors d'une mise à jour (si présents).
 
 Préparer les fichiers de site depuis un clone GitHub **en lecture seule**, figé sur un commit de `main`. Ne jamais utiliser un worktree de développement partagé pour servir le public.
 
-Avant activation : comparer le SHA du checkout avec le SHA approuvé, contrôler le CSV macroéconomique (1960–2025) et CSV COFOG (1995–2024), lancer les tests Python. Puis vérifier `docker compose -f /opt/budget-fr/compose.yml config -q`.
+Avant activation : comparer le SHA du checkout avec le SHA approuvé, contrôler le CSV macroéconomique (1960–2025) et CSV COFOG (1995–2024) et prélèvements (1995–2025), lancer les tests Python. Puis vérifier `docker compose -f /opt/budget-fr/compose.yml config -q`.
 
 Activer uniquement le nouveau service : `docker compose -f /opt/budget-fr/compose.yml up -d web`.
 
@@ -29,7 +29,7 @@ Activer uniquement le nouveau service : `docker compose -f /opt/budget-fr/compos
 1. `docker inspect budget-fr-web` : conteneur démarré, volume de site en lecture seule, réseau `traefik_network`.
 2. `curl -fsS https://budget-fr.kiwinokoto.fr/` : réponse HTML valide, sans `-k` (certificat vérifié).
 3. `curl -fsS https://budget-fr.kiwinokoto.fr/data/apu_1960_2025_pct_pib.csv` : en-tête CSV et 66 années ; `/data/cofog_1995_2024_bn_eur.csv` : en-tête et 30 années, sommes contrôlées.
-4. `curl -I https://budget-fr.kiwinokoto.fr/fonctions.html` et `/METHODOLOGY.md` et liens de source : pas de 404.
+4. `curl -I https://budget-fr.kiwinokoto.fr/fonctions.html` et `/recettes.html`, `/METHODOLOGY.md` et liens de source : pas de 404.
 5. Si possible, contrôler réellement l'interface sur navigateur desktop/mobile.
 
 Ne marquer le déploiement réussi qu'après ces contrôles. Si ACME/HTTPS n'est pas encore prêt, diagnostiquer DNS/Traefik sans modifier les certificats ou configurations d'autres services.
