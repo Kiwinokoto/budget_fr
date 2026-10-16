@@ -158,3 +158,7 @@ Reproduction hors ligne : python3 scripts/import_debt_bridges.py --xlsx-dir /che
 - **Contrôles de reproduction** : SHA obligatoire, titres/année/codes/emplacements et montants finis/non négatifs vérifiés ; somme des instruments et des quatre sous-secteurs, sous-total S1311, sous-total F31+F32, ancrage S13 fin 2025 **3 460,1 Md€**. Tolérance **0,25 Md€** pour sous-totaux à quatre composantes arrondies séparément à 0,1 Md€, **0,50 Md€** pour quatre sous-secteurs.
 - **Livrables** : `scripts/import_debt_instruments.py`, `data/dette_maastricht_instruments_1995_2025_bn_eur.csv`, `tests/test_debt_instruments.py`. Reproduction : `python3 scripts/import_debt_instruments.py --xlsx /chemin/t_3102_fr.xlsx`. XLSX non commité. L'option `--allow-source-change` sert uniquement à auditer un nouveau millésime ; ne pas publier sans revoir les écarts.
 - **Limites** : le CSV ne contient ni détenteurs, ni durée résiduelle, ni valeur de marché. Ne pas fusionner avec les jeux Eurostat, Banque de France ou AFT sans réconciliation de périmètre, de millésime et de méthode.
+
+## Audit croisé Eurostat EDP / Insee, octobre 2026
+
+Le suivi détaillé des révisions 2025, des divergences 3.102/3.104, de la différence stock-flux 2014 et des sous-lignes de valorisation figure dans [DEBT_RECONCILIATION.md](DEBT_RECONCILIATION.md). Eurostat avril/juin 2026 est antérieur au millésime Insee août 2026 ; aucun rapprochement n'a été imposé entre définitions ou millésimes.
