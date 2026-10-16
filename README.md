@@ -59,9 +59,11 @@ Attention : les prélèvements obligatoires ne constituent pas toutes les recett
 
 **Graduations temporelles :** tous les 5 ans sur ordinateur et tous les 10 ans en affichage compact, année finale toujours affichée ; curseur signalé par un repère vertical discret. [Tests des axes](tests/year_axes.test.cjs) : `node --test tests/year_axes.test.cjs`.
 
+**Justice fiscale (cadrage en cours) :** [TVA, incidence et limites des données](TVA_JUSTICE_SOURCES.md). Aucune série de TVA par décile n'est encore présentée comme une observation récente.
+
 Documentation : [sources](DATA_SOURCES.md), [méthodologie](METHODOLOGY.md), [passation et roadmap](ROADMAP.md).
 
-**Site public : https://budget-fr.kiwinokoto.fr** (première publication vérifiée le 16 octobre 2026). Déploiement statique isolé sur le VPS personnel, derrière Traefik et Let's Encrypt. Version applicative effectivement servie après la finition des axes : `607dbd8b4fd60c92b47832c701ce9c122f949891` (incluant https://budget-fr.kiwinokoto.fr/recettes.html et https://budget-fr.kiwinokoto.fr/fonctions.html). Les changements de documentation ultérieurs sur `main` ne sont pas déployés automatiquement ; voir [la procédure d'exploitation](deploy/README.md).
+**Site public : https://budget-fr.kiwinokoto.fr** (première publication vérifiée le 16 octobre 2026). Déploiement statique isolé sur le VPS personnel, derrière Traefik et Let's Encrypt. Version applicative effectivement servie après le correctif des unités : `2501217d2bba01c729d65d4724ff69d39d44d5f7` (incluant https://budget-fr.kiwinokoto.fr/recettes.html et https://budget-fr.kiwinokoto.fr/fonctions.html). Les changements de documentation ultérieurs sur `main` ne sont pas déployés automatiquement ; voir [la procédure d'exploitation](deploy/README.md).
 
 Ce dépôt public ne contient aucune donnée personnelle ni confidentielle. Les données originales de l'Insee restent sous leurs propres conditions de réutilisation. Les séries peuvent être révisées.
 
