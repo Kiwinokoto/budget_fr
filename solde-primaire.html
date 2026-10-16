@@ -134,10 +134,11 @@ body.loading-data .metrics,body.loading-data #primary-chart{display:none}
   const steps=5;
   for(let i=0;i<=steps;i++){
    const v=lower+(upper-lower)*i/steps,y=Y(v);
-   const isZero=Math.abs(v)<0.000001;
-   svg.append(tag('line',{x1:64,x2:843,y1:y,y2:y,stroke:isZero?'#a6b5d3':'#435570','stroke-width':isZero?2:1}));
+   svg.append(tag('line',{x1:64,x2:843,y1:y,y2:y,stroke:'#435570','stroke-width':1}));
    svg.append(tag('text',{x:56,y:y+4,'text-anchor':'end',fill:'#c7d1e2','font-size':12},unit==='bn'?Math.round(v)+' Md€':v.toLocaleString('fr-FR',{maximumFractionDigits:1})+' %'));
   }
+  // Always render the zero baseline, even when dynamic tick values skip 0.
+  svg.append(tag('line',{x1:64,x2:843,y1:Y(0),y2:Y(0),stroke:'#a6b5d3','stroke-width':2}));
   const series=[
    {key:'balance_b9_bn_eur',color:'#e9b478'},
    {key:primaryKey,color:'#80cfbe'}

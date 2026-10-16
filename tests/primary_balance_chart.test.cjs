@@ -19,7 +19,7 @@ test('primary explorer explicitly distinguishes annual balance and debt concepts
  assert.match(page,/Milliards d'euros courants/);
  assert.match(page,/% des dépenses publiques/);
  assert.match(page,/pas sur le PIB/);
- assert.match(page,/ligne zéro visible|Math\.abs\(v\)<0\.000001/);
+ assert.match(page,/y1:Y\(0\),y2:Y\(0\),stroke:'#a6b5d3'/);
  assert.match(page,/un solde primaire structurel/);
  assert.match(page,/2025 est provisoire/);
  assert.match(index,/href="\/solde-primaire.html"/);
