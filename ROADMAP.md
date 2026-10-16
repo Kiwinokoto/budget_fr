@@ -142,6 +142,13 @@ Sources candidates à auditer une fois l'atlas contemporain stabilisé :
 
 **Critères avant une extension pré-1960 :** vérifier périmètres (État/APU), frontières, finances de guerre, dette perpétuelle ou négociable, définitions du PIB et du patrimoine, devises, inflation, ruptures, trous, révisions et quantification de l'incertitude. Prévoir un module historique autonome et des courbes non reliées artificiellement aux séries Maastricht contemporaines. Priorité immédiate inchangée : finaliser les données actuelles, puis construire l'explorateur de dette.
 
+## Explorateur de composition de dette — 16 octobre 2026
+
+- PR #25 et #26 fusionnées sur main (SHA 6eb4c61b1e7458b21ad44d210bd0901537024a3e), sans déploiement. Nouvelle branche dev/debt-explorer-1995-2025.
+- Page interactive dette.html, navigation d'accueil, graphiques de composition en parts de dette ou Md€ courants, sélection année 1995–2025 et sous-secteur, dette brute/nette et tableau déficit/variation depuis 2009 (total APU seulement). Scripts et CSV Insee déjà épinglés par les PR précédentes.
+- Divergences source toujours présentes : 3.102 vs 3.104 pour S1314 en 2025 (292,6 vs 293,1 Md€), résidus des sous-lignes de valorisation du 3.104 en 2014–2021, écart de 0,6 Md€ sur la variation 2014. Une discordance de millésime/actualisation partielle est une hypothèse non confirmée ; notes Insee 3.104/3.105 consultées.
+- Suite : contrôler EDP/Eurostat, recette visuelle et accessibilité, puis déploiement manuel sur validation ; longue histoire avant 1960 toujours différée.
+
 ## Suite prioritaire
 
 1. Valider le rendu sur un vrai navigateur mobile et l'accessibilité ; les captures desktop sont encourageantes mais ne valident pas le mobile.

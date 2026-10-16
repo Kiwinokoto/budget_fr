@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>De quoi est faite la dette publique ? (1995–2025) · budget_fr</title>
+<style>
+:root{color-scheme:dark;background:#111827;color:#ecf2fa;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--blue:#a3b9ff;--green:#72c9b9;--gold:#efc18d;--pink:#e9a5b6;--violet:#c5aaff;--muted:#bfcde1}
+*{box-sizing:border-box}
+body{max-width:1120px;margin:auto;padding:28px 20px 64px}
+a{color:#bacbff}a:hover,a:focus-visible{color:#fff}
+h1{font-size:clamp(2rem,4vw,3.2rem);margin:8px 0 12px;line-height:1.13}
+h2{font-size:clamp(1.2rem,2.5vw,1.5rem);margin:0 0 12px}
+h3{font-size:1.04rem;margin:16px 0 9px}
+p{line-height:1.6;color:#c6d3e5}
+.eyebrow{color:#adbdff;letter-spacing:.12em;text-transform:uppercase;font-size:.79rem;margin-top:24px}
+.panel{background:#1d293b;border:1px solid #405069;border-radius:16px;padding:23px;margin:23px 0}
+.intro{max-width:880px}
+.controls{display:flex;gap:18px;align-items:end;flex-wrap:wrap}
+.controls>label{display:grid;gap:7px;color:#d3dfef;font-size:.88rem}
+.controls select{width:min(100%,310px);min-height:44px;background:#111c2d;border:1px solid #798dad;color:#f5f7fd;border-radius:8px;padding:9px 12px;font:inherit;font-size:1rem}
+.controls .year-control{flex:1;min-width:190px}
+.controls input[type=range]{width:100%;min-height:35px;accent-color:#b0bbff}
+.controls strong{font-size:1.1rem;color:#fff;font-variant-numeric:tabular-nums}
+.metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:19px 0 15px}
+.metric{border-radius:11px;background:#121f31;padding:17px}
+.metric small{display:block;color:#b9c8dc}
+.metric strong{display:block;font-size:clamp(1.18rem,2.7vw,1.85rem);margin:7px 0 4px;font-variant-numeric:tabular-nums}
+.metric span{font-size:.78rem;color:#cbd6e6}
+.fine{font-size:.88rem;color:#c3d2e5}
+.strong{font-weight:650;color:#f1f4fc}
+.pill{display:inline-block;font-size:.79rem;padding:3px 8px;border:1px solid #697d99;border-radius:100px;color:#d4e1f3}
+.warning{padding:13px 16px;border-left:3px solid #eac18b;background:#2d3545;color:#f4e3cd}
+.warning p{margin:0;color:inherit}
+.legend{display:flex;gap:13px 18px;flex-wrap:wrap;color:#d3e0f0;font-size:.85rem;margin:12px 0}
+.dot{width:10px;height:10px;display:inline-block;margin-right:6px;border-radius:3px}
+.c-deposit{background:#c5aaff;fill:#c5aaff}.c-shortsec{background:#a3b9ff;fill:#a3b9ff}.c-longsec{background:#72c9b9;fill:#72c9b9}.c-shortloan{background:#efc18d;fill:#efc18d}.c-longloan{background:#e9a5b6;fill:#e9a5b6}.c-unclassified{background:#708096;fill:#708096}
+svg{display:block;width:100%;height:auto;overflow:visible}
+svg text{fill:#c9d7e8;font:14px system-ui,sans-serif}
+svg .axis{stroke:#70819a;stroke-width:1}
+svg .grid{stroke:#4c607a;stroke-width:1;stroke-dasharray:3 7}
+svg .selected{stroke:#fff;stroke-width:2;fill:none}
+fieldset{border:1px solid #61718b;border-radius:9px;padding:10px 12px;margin:14px 0}
+legend{padding:0 5px;font-size:.9rem}
+fieldset label{display:inline-flex;gap:7px;align-items:center;margin:4px 18px 4px 0;cursor:pointer}
+input{accent-color:#a3b9ff}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+th,td{padding:10px 8px;border-bottom:1px solid #44526a;text-align:left}
+th:last-child,td:last-child{text-align:right}
+th{color:#e2ecf7;font-size:.86rem}
+td{color:#e1e9f4}
+.total-row{font-weight:700}
+.scroll{overflow-x:auto}
+#status button{border:1px solid #a8bce6;border-radius:8px;background:#30496e;color:#fff;font:inherit;padding:8px 13px;margin-left:7px;cursor:pointer}
+#status{min-height:24px}
+[hidden]{display:none !important}
+body.loading-data #data-area{display:none}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.fraction{margin:6px 0;color:#cbd6ea}
+.num{font-variant-numeric:tabular-nums}
+@media(max-width:700px){body{padding:19px 12px}.panel{padding:15px}.metrics{grid-template-columns:1fr}.split{grid-template-columns:1fr}.controls select{width:100%}.controls>label{width:100%}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto !important}}
+</style>
+</head>
+<body class="loading-data">
+<nav><a href="/">← Retour à l’atlas</a> · <a href="/solde-primaire.html">Solde primaire</a> · <a href="/interets.html">Intérêts</a></nav>
+<div class="eyebrow">Atlas · Structure des engagements publics</div>
+<h1>De quoi est faite la dette publique française&nbsp;?</h1>
+<p class="intro">Explorer les <strong>encours de dette de Maastricht</strong>, de 1995 à 2025, par administration et par instrument. Les chiffres concernent les administrations publiques (APU), pas seulement les emprunts négociables de l’État. L’outil distingue les montants de dette des flux annuels et des autres passifs financiers.</p>
+<p class="fine">Source : <a href="https://www.insee.fr/fr/statistiques/8988843">Insee, tableaux 3.102 à 3.105</a>, comptes nationaux base 2020, publication du 28 août 2026. Fin d’année, milliards d’euros courants ; 2025 provisoire.</p>
+<section class="panel" aria-labelledby="explorer-title">
+<h2 id="explorer-title">Explorer une année et une administration</h2>
+<p id="status" role="status" aria-live="polite">Chargement des données…</p>
+<div id="data-area" hidden>
+<div class="controls">
+<label for="sector">Administration
+<select id="sector">
+<option value="S13">Ensemble des administrations (S13)</option>
+<option value="S13111">État</option>
+<option value="S13112">Organismes centraux (ODAC)</option>
+<option value="S1313">Administrations locales</option>
+<option value="S1314">Sécurité sociale</option>
+<option value="S1311">Administrations centrales (État + ODAC)</option>
+</select></label>
+<label class="year-control" for="year">Année <strong id="selected-year">2025</strong>
+<input id="year" type="range" min="1995" max="2025" value="2025" step="1" aria-label="Sélectionner l'année entre 1995 et 2025"></label>
+</div>
+<div class="metrics">
+<div class="metric"><small>Dette brute Maastricht</small><strong id="gross">—</strong><span>Encours nominal consolidé</span></div>
+<div class="metric"><small>Titres de dette</small><strong id="securities">—</strong><span id="securities-share">—</span></div>
+<div class="metric"><small>Dette nette Insee</small><strong id="net">—</strong><span>Encours, non patrimoine public net</span></div>
+</div>
+<p class="fine" id="sector-note"></p>
+</div>
+</section>
+<section id="charts" hidden>
+<div class="panel">
+<h2>Composition de la dette</h2>
+<p>Décomposition sans double compte : titres courts + titres longs, crédits courts + crédits longs et dépôts. Les deux catégories de titres sont des sous-postes des titres négociables.</p>
+<div class="legend" aria-label="Légende des instruments">
+<span><i class="dot c-deposit"></i>Dépôts</span><span><i class="dot c-shortsec"></i>Titres courts</span><span><i class="dot c-longsec"></i>Titres longs</span><span><i class="dot c-shortloan"></i>Crédits courts</span><span><i class="dot c-longloan"></i>Crédits longs</span><span><i class="dot c-unclassified"></i>Reste non attribué, calcul</span>
+</div>
+<fieldset><legend>Échelle de l’évolution</legend>
+<label><input type="radio" name="history-unit" value="share" checked> Parts du total (%)</label>
+<label><input type="radio" name="history-unit" value="amount"> Milliards d’euros courants</label>
+</fieldset>
+<svg id="history" viewBox="0 0 940 370" role="img" aria-label="Composition annuelle de la dette par instrument, entre 1995 et 2025"></svg>
+<p class="fine" id="history-note">Les titres courts et longs sont classés selon leur durée initiale à l’émission, et non leur durée résiduelle.</p>
+<h3 id="table-year-title">Répartition en 2025</h3>
+<div class="scroll"><table>
+<thead><tr><th scope="col">Instrument</th><th scope="col">Md€</th></tr></thead>
+<tbody id="components-body"></tbody>
+</table></div>
+<p id="missing-note" class="fine"></p>
+</div>
+<div class="panel">
+<h2>Dette brute et dette nette : deux courbes, des définitions différentes</h2>
+<p>La dette nette Insee est la dette Maastricht diminuée de certains actifs exigibles. Elle <strong>n’inclut pas une déduction supplémentaire</strong> des actions cotées et parts de fonds, renseignées séparément par l’Insee. Ce graphique n’est pas un bilan patrimonial de l’État.</p>
+<div class="legend"><span><i class="dot c-shortsec"></i>Dette brute Maastricht</span><span><i class="dot c-longsec"></i>Dette nette</span></div>
+<svg id="stock-history" viewBox="0 0 940 330" role="img" aria-label="Dette brute et dette nette annuelles en milliards d’euros courants"></svg>
+<p class="fine">Milliards d’euros courants : la progression des montants ne corrige pas l’inflation ni la croissance économique.</p>
+</div>
+<div class="panel">
+<h2>Pourquoi le déficit ne suffit-il pas à expliquer la dette&nbsp;?</h2>
+<p>Le tableau 3.105 explique la <strong>variation annuelle de l’encours S13</strong> de 2009 à 2025. Le déficit annuel est une première composante ; les acquisitions d’actifs et plusieurs autres opérations peuvent augmenter ou diminuer l’endettement. Les signes sont ceux du tableau Insee.</p>
+<div id="flow-data">
+<p class="strong" id="flow-year-label"></p>
+<div class="scroll"><table>
+<thead><tr><th scope="col">Composante du passage déficit → dette (APU S13)</th><th scope="col">Md€</th></tr></thead>
+<tbody id="flow-body"></tbody>
+</table></div>
+<p id="flow-check" class="fine"></p>
+</div>
+<p id="flow-missing" class="warning" hidden>Le tableau 3.105 commence en 2009. Aucune ventilation du passage déficit–variation de dette n’est publiée ici pour l’année choisie. Les données n’ont pas été extrapolées.</p>
+</div>
+<div class="panel">
+<h2>Comment les passifs financiers deviennent-ils une dette Maastricht&nbsp;?</h2>
+<p>Le tableau 3.104 rapproche un passif financier en valeur de marché <strong>non consolidé</strong> avec une dette Maastricht <strong>nominale et consolidée</strong>. Les termes retranchés peuvent être négatifs.</p>
+<p id="bridge-summary" class="strong num"></p>
+<p id="bridge-warning" class="warning" hidden></p>
+<p class="fine">Cet ajustement n’explique ni le déficit annuel ni la répartition finale de la charge économique entre les contribuables et les détenteurs de titres.</p>
+</div>
+<section class="panel">
+<h2>Limites et qualité des sources</h2>
+<p>Les tableaux sont issus d’une même page Insee, mais certaines valeurs ne sont pas complètement réconciliées. La série 3.102 est utilisée pour la composition, 3.103 pour la dette nette, 3.104 pour le passage entre passifs et Maastricht, 3.105 pour les variations annuelles.</p>
+<ul>
+<li><strong>Fin 2025 :</strong> contribution Sécurité sociale publiée à 292,6 Md€ au tableau 3.102, mais à 293,1 Md€ au 3.104. Les valeurs ne sont pas substituées entre les tableaux.</li>
+<li><strong>2014–2021 :</strong> les sous-lignes de valorisation du 3.104 ne reconstituent pas exactement leur total (résidu calculé jusqu’à 2,9 Md€).</li>
+<li><strong>2014 :</strong> différence de −0,6 Md€ entre variation 3.105 et différence des encours 3.104. La cause n’est pas établie ; il ne s’agit pas d’une correction automatique.</li>
+</ul>
+<p>Les statistiques ne renseignent ici ni la nationalité ni le bénéficiaire économique final des détenteurs, ni l’échéance résiduelle. L’<a href="/DATA_SOURCES.md">audit des sources</a> et la <a href="/METHODOLOGY.md">méthodologie</a> détaillent les définitions, empreintes et limites.</p>
+</section>
+</section>
+<script>
+'use strict';
+const FILES = Object.freeze({
+  instruments:'/data/dette_maastricht_instruments_1995_2025_bn_eur.csv',
+  net:'/data/dette_nette_apu_1995_2025.csv',
+  bridge:'/data/dette_passifs_maastricht_1995_2025.csv',
+  flow:'/data/dette_deficit_variation_2009_2025.csv'
+});
+const COLORS=['#c5aaff','#a3b9ff','#72c9b9','#efc18d','#e9a5b6','#708096'];
+const PARTS=[
+  ['deposits_bn_eur','Dépôts'],
+  ['short_securities_bn_eur','Titres courts'],
+  ['long_securities_bn_eur','Titres longs'],
+  ['short_loans_bn_eur','Crédits courts'],
+  ['long_loans_bn_eur','Crédits longs']
+];
+const YEAR_START=1995, YEAR_END=2025;
+const datasets={};
+const yearInput=document.getElementById('year');
+const sectorInput=document.getElementById('sector');
+const fmt=new Intl.NumberFormat('fr-FR',{minimumFractionDigits:1,maximumFractionDigits:1});
+const svgNS='http://www.w3.org/2000/svg';
+const yearLabel=document.getElementById('selected-year');
+const status=document.getElementById('status');
+function euro(x){return x===null?'Non renseigné':fmt.format(x)+' Md€'}
+function numeric(row,key){const v=row[key];return v===''?null:Number(v)}
+function text(id,value){document.getElementById(id).textContent=value}
+function svgNode(tag,attributes,content){
+  const n=document.createElementNS(svgNS,tag);
+  for(const [key,value] of Object.entries(attributes||{})) n.setAttribute(key,String(value));
+  if(content!==undefined) n.textContent=content;
+  return n;
+}
+function add(parent,tag,attrs,content){const n=svgNode(tag,attrs,content);parent.appendChild(n);return n}
+function clear(el){while(el.firstChild)el.removeChild(el.firstChild)}
+function parseCsv(source,expectedHeaders,expectedRows){
+  const lines=source.trim().split(/\r?\n/),heads=lines.shift().split(',');
+  if(heads.join(',')!==expectedHeaders.join(',')||lines.length!==expectedRows)throw Error('Structure CSV inattendue');
+  const rows=lines.map(line=>{
+    const vals=line.split(',');
+    if(vals.length!==heads.length)throw Error('Colonne CSV manquante');
+    const r=Object.fromEntries(heads.map((h,i)=>[h,vals[i]]));
+    if(!/^\d{4}$/.test(r.year))throw Error('Année invalide');
+    for(const [key,value] of Object.entries(r)){
+      if(key==='year'||key==='sector')continue;
+      if(value!==''&&!Number.isFinite(Number(value)))throw Error('Valeur non numérique '+key);
+    }
+    return r;
+  });
+  return rows;
+}
+function indexRows(rows,kind){
+  const map=new Map();
+  for(const row of rows){
+    const year=Number(row.year),key=kind==='flow'?String(year):year+':'+row.sector;
+    if(map.has(key))throw Error('Doublon dans les données '+kind);
+    if(year<YEAR_START||year>YEAR_END)throw Error('Année hors plage');
+    if(kind!=='flow'&&!['S13','S1311','S13111','S13112','S1313','S1314'].includes(row.sector))throw Error('Secteur inconnu');
+    map.set(key,row);
+  }
+  return map;
+}
+async function load(){
+  status.textContent='Chargement des données…';
+  document.body.classList.add('loading-data');
+  document.getElementById('data-area').hidden=true;
+  document.getElementById('charts').hidden=true;
+  try{
+    const responses=await Promise.all(Object.values(FILES).map(url=>fetch(url,{cache:'no-store'})));
+    if(responses.some(r=>!r.ok))throw Error('Réponse HTTP invalide');
+    const sources=await Promise.all(responses.map(r=>r.text()));
+    const schemas=[
+      ['year','sector','deposits_bn_eur','securities_bn_eur','short_securities_bn_eur','long_securities_bn_eur','short_loans_bn_eur','long_loans_bn_eur','maastricht_bn_eur'],
+      ['year','sector','net_debt_bn_eur','net_debt_pct_gdp','other_liquid_assets_bn_eur'],
+      ['year','sector','total_liabilities_bn_eur','scope_excluded_bn_eur','payables_derivatives_bn_eur','guarantee_deposits_bn_eur','intrasector_consolidation_bn_eur','consolidated_deposits_bn_eur','consolidated_securities_bn_eur','consolidated_loans_bn_eur','nominal_value_adjustment_bn_eur','accrued_deposit_interest_bn_eur','bond_valuation_adjustment_bn_eur','accrued_loan_interest_bn_eur','maastricht_bn_eur','valuation_breakdown_gap_bn_eur'],
+      ['year','deficit_bn_eur','financial_assets_acquisition_bn_eur','asset_deposits_bn_eur','asset_securities_bn_eur','asset_loans_bn_eur','asset_equity_bn_eur','asset_derivatives_bn_eur','asset_insurance_bn_eur','other_financial_liabilities_bn_eur','accrued_interest_liabilities_bn_eur','other_liabilities_bn_eur','debt_volume_changes_bn_eur','reclassifications_bn_eur','fx_valuation_bn_eur','buyback_gain_loss_bn_eur','accounts_payable_receivable_bn_eur','statistical_discrepancy_bn_eur','debt_change_bn_eur']
+    ];
+    const keys=Object.keys(FILES);
+    keys.forEach((key,i)=>datasets[key]=indexRows(parseCsv(sources[i],schemas[i],i===3?17:186),key));
+    if(numeric(datasets.instruments.get('2025:S13'),'maastricht_bn_eur')!==3460.1 ||
+       numeric(datasets.net.get('2025:S13'),'net_debt_bn_eur')!==3242.7 ||
+       numeric(datasets.flow.get('2025'),'debt_change_bn_eur')!==154.0)throw Error('Ancrage Insee 2025 inattendu');
+    document.body.classList.remove('loading-data');
+    status.textContent='';
+    document.getElementById('data-area').hidden=false;
+    document.getElementById('charts').hidden=false;
+    render();
+  }catch(error){
+    document.body.classList.remove('loading-data');
+    status.textContent='Impossible de charger ou de valider les données officielles. ';
+    const retry=document.createElement('button');
+    retry.type='button';retry.textContent='Réessayer';retry.addEventListener('click',load);status.appendChild(retry);
+  }
+}
+function rowOf(kind,year,sector){return datasets[kind].get(kind==='flow'?String(year):year+':'+sector)}
+function parts(row){
+  const values=PARTS.map(([key])=>numeric(row,key));
+  const total=numeric(row,'maastricht_bn_eur');
+  const known=values.reduce((sum,value)=>sum+(value===null?0:value),0);
+  return {values,total,remainder:Math.max(0,total-known)};
+}
+function grid(svg,yValues,min,max,w,h,l,t){
+  for(const n of yValues){
+    const y=t+(max-n)/(max-min)*h;
+    add(svg,'line',{x1:l,y1:y,x2:l+w,y2:y,class:'grid'});
+    add(svg,'text',{x:l-10,y:y+5,'text-anchor':'end'},fmt.format(n));
+  }
+  add(svg,'line',{x1:l,y1:t+h,x2:l+w,y2:t+h,class:'axis'});
+}
+function yearMarks(svg,l,w,y,small){
+  const ticks=small?[1995,2005,2015,2025]:[1995,2000,2005,2010,2015,2020,2025];
+  for(const year of ticks){
+    const x=l+(year-YEAR_START+.5)/(YEAR_END-YEAR_START+1)*w;
+    add(svg,'text',{x,y,'text-anchor':'middle'},String(year));
+  }
+}
+const compactQuery=window.matchMedia('(max-width: 660px)');
+function drawHistory(sector,year){
+  const svg=document.getElementById('history');clear(svg);
+  const l=75,t=14,w=834,h=285;
+  const mode=document.querySelector('input[name="history-unit"]:checked').value;
+  const rows=Array.from({length:31},(_,i)=>rowOf('instruments',YEAR_START+i,sector));
+  const max=mode==='share'?100:Math.ceil(Math.max(...rows.map(r=>numeric(r,'maastricht_bn_eur')))/500)*500;
+  grid(svg,[0,.25,.5,.75,1].map(x=>x*max),0,max,w,h,l,t);
+  const bw=w/31;
+  rows.forEach((row,i)=>{
+    const data=parts(row), values=[...data.values.map(v=>v===null?0:v),data.remainder];
+    let bottom=t+h;
+    const group=add(svg,'g',{});
+    const yearActual=YEAR_START+i;
+    add(group,'title',{},yearActual+' : '+euro(data.total));
+    values.forEach((value,k)=>{
+      const amount=mode==='share'?value/data.total*100:value;
+      const height=amount/max*h;
+      if(height>0)add(group,'rect',{x:l+i*bw+2,y:bottom-height,width:Math.max(3,bw-4),height,fill:COLORS[k]});
+      bottom-=height;
+    });
+    if(yearActual===year)add(svg,'rect',{x:l+i*bw+1,y:t,width:bw-2,height:h,class:'selected'});
+  });
+  yearMarks(svg,l,w,t+h+27,compactQuery.matches);
+  text('history-note',mode==='share'
+    ?'Parts en % de l’encours de dette du même secteur et de la même année. Les petits écarts d’arrondi ou postes non renseignés restent non attribués.'
+    :'Montants en milliards d’euros courants (non corrigés de l’inflation). Les postes non renseignés restent distincts.');
+}
+function drawStock(sector,year){
+  const svg=document.getElementById('stock-history');clear(svg);
+  const l=77,t=16,w=826,h=251;
+  const gross=[],net=[];
+  for(let y=YEAR_START;y<=YEAR_END;y++){
+    gross.push(numeric(rowOf('instruments',y,sector),'maastricht_bn_eur'));
+    net.push(numeric(rowOf('net',y,sector),'net_debt_bn_eur'));
+  }
+  const low=Math.min(0,...net),high=Math.ceil(Math.max(...gross,0)/500)*500||500;
+  const bottom=Math.floor(low/500)*500,span=high-bottom;
+  const yPos=v=>t+(high-v)/span*h;
+  const levels=[0,.25,.5,.75,1].map(f=>bottom+f*span);
+  for(const val of levels){
+    const yy=yPos(val);
+    add(svg,'line',{x1:l,y1:yy,x2:l+w,y2:yy,class:'grid'});
+    add(svg,'text',{x:l-12,y:yy+5,'text-anchor':'end'},fmt.format(val));
+  }
+  const X=i=>l+(i/(YEAR_END-YEAR_START))*w;
+  for(const [data,color] of [[gross,COLORS[1]],[net,COLORS[2]]]){
+    add(svg,'polyline',{points:data.map((v,i)=>X(i)+','+yPos(v)).join(' '),
+      fill:'none',stroke:color,'stroke-width':3,'stroke-linecap':'round','stroke-linejoin':'round'});
+    add(svg,'circle',{cx:X(year-YEAR_START),cy:yPos(data[year-YEAR_START]),r:6,fill:color,stroke:'#1d293b','stroke-width':2});
+  }
+  yearMarks(svg,l-12,w+24,t+h+29,compactQuery.matches);
+  add(svg,'text',{x:l,y:12},'Md€');
+}
+function fillCell(row,name,value,strong){
+  const tr=document.createElement('tr');if(strong)tr.className='total-row';
+  const th=document.createElement('th');th.scope='row';th.textContent=name;
+  const td=document.createElement('td');td.textContent=value;
+  tr.append(th,td);row.appendChild(tr);
+}
+function renderComponents(row,year,sector){
+  const body=document.getElementById('components-body');clear(body);
+  PARTS.forEach(([key,label])=>fillCell(body,label,euro(numeric(row,key)),false));
+  const p=parts(row);
+  if(p.remainder>.05)fillCell(body,'Écart non attribué (calcul)',euro(p.remainder),false);
+  fillCell(body,'Dette Maastricht',euro(p.total),true);
+  text('table-year-title','Répartition en '+year);
+  text('missing-note',sector==='S1314'
+    ?'La ligne « dépôts » des administrations de sécurité sociale est vide dans la source 3.102 sur toute la période : « non renseigné » ne signifie pas zéro.'
+    :'Les totaux peuvent différer de quelques dixièmes des sommes affichées à cause des arrondis de publication.');
+}
+function renderFlow(year,sector){
+  const has=year>=2009;
+  document.getElementById('flow-data').hidden=!has;
+  document.getElementById('flow-missing').hidden=has;
+  if(!has)return;
+  const f=rowOf('flow',year);
+  const entries=[
+    ['Déficit public (+)',numeric(f,'deficit_bn_eur')],
+    ['Acquisitions nettes d’actifs (1)',numeric(f,'financial_assets_acquisition_bn_eur')],
+    ['Autres passifs financiers (2)',numeric(f,'other_financial_liabilities_bn_eur')],
+    ['Changements de volume (3)',numeric(f,'debt_volume_changes_bn_eur')],
+    ['Autres comptes (4)',numeric(f,'accounts_payable_receivable_bn_eur')],
+    ['Écart statistique B9nf − B9f (5)',numeric(f,'statistical_discrepancy_bn_eur')]
+  ];
+  const body=document.getElementById('flow-body');clear(body);
+  for(const [name,value] of entries)fillCell(body,name,(value>=0?'+':'−')+fmt.format(Math.abs(value))+' Md€',false);
+  fillCell(body,'Variation annuelle de dette Maastricht',euro(numeric(f,'debt_change_bn_eur')),true);
+  text('flow-year-label','En '+year+' · Ensemble des administrations publiques (S13)');
+  const scope=sector==='S13'?'':' Attention : ce pont annuel porte sur l’ensemble des APU, pas sur le secteur sélectionné.';
+  const mismatch=year===2014?' Les encours publiés dans le 3.104 diffèrent de ce flux de −0,6 Md€ pour 2014.':'';
+  text('flow-check','Vérification : la somme des six termes correspond à '+euro(numeric(f,'debt_change_bn_eur'))+'.'+scope+mismatch);
+}
+function renderBridge(year,sector){
+  const row=rowOf('bridge',year,sector);
+  const liability=numeric(row,'total_liabilities_bn_eur'),
+    scope=numeric(row,'scope_excluded_bn_eur'),
+    consolidate=numeric(row,'intrasector_consolidation_bn_eur'),
+    value=numeric(row,'nominal_value_adjustment_bn_eur'),
+    total=numeric(row,'maastricht_bn_eur');
+  text('bridge-summary',euro(liability)+' − ('+euro(scope)+') − ('+euro(consolidate)+') − ('+
+       euro(value)+') = '+euro(total)+' selon le tableau 3.104 pour '+year+'.');
+  const notes=[];
+  if(year>=2014&&year<=2021&&Math.abs(numeric(row,'valuation_breakdown_gap_bn_eur'))>.15)
+    notes.push('Le résidu des trois sous-lignes de valorisation est de '+euro(numeric(row,'valuation_breakdown_gap_bn_eur'))+' (calcul), non expliqué par la notice.');
+  const official=numeric(rowOf('instruments',year,sector),'maastricht_bn_eur');
+  if(Math.abs(official-total)>.31)
+    notes.push('Le total/contribution du 3.104 ('+euro(total)+') diffère du 3.102 ('+euro(official)+'). Cette discordance entre tableaux reste à éclaircir.');
+  const warning=document.getElementById('bridge-warning');
+  warning.hidden=notes.length===0;warning.textContent=notes.join(' ');
+}
+function render(){
+  if(!datasets.instruments)return;
+  const year=Number(yearInput.value),sector=sectorInput.value;
+  const row=rowOf('instruments',year,sector),net=rowOf('net',year,sector);
+  yearLabel.textContent=String(year);
+  text('gross',euro(numeric(row,'maastricht_bn_eur')));
+  text('securities',euro(numeric(row,'securities_bn_eur')));
+  const share=100*numeric(row,'securities_bn_eur')/numeric(row,'maastricht_bn_eur');
+  text('securities-share',fmt.format(share)+' % de la dette brute');
+  text('net',euro(numeric(net,'net_debt_bn_eur')));
+  text('sector-note',sector==='S13'
+    ?'Les montants S13 sont consolidés : les créances entre administrations publiques ne sont pas comptées deux fois.'
+    :'Ces montants sont des contributions à la dette consolidée de l’ensemble des APU. Le sous-total « Administrations centrales » inclut l’État et les ODAC ; il ne s’ajoute pas à eux.');
+  renderComponents(row,year,sector);
+  drawHistory(sector,year);
+  drawStock(sector,year);
+  renderFlow(year,sector);
+  renderBridge(year,sector);
+}
+yearInput.addEventListener('input',render);
+sectorInput.addEventListener('change',render);
+document.querySelectorAll('input[name="history-unit"]').forEach(input=>input.addEventListener('change',render));
+if(compactQuery.addEventListener)compactQuery.addEventListener('change',render);
+load();
+</script>
+</body>
+</html>
