@@ -2,21 +2,22 @@
 
 ## Situation au 16 octobre 2026
 
-- Dépôt public : Kiwinokoto/budget_fr. PR #1 fusionnée sur `main` le 16 octobre 2026 (squash `0504e5c70314939cb2d0f0537a953a6fc81b1c71`). Branche de documentation `dev/deployment-handoff` pour cette mise à jour ; vérifier le HEAD GitHub avant toute suite.
+- Dépôt public : Kiwinokoto/budget_fr. PR #1 et #2 puis **PR #3 COFOG** fusionnées sur `main` le 16 octobre 2026 ; commit applicatif COFOG **`2057b7e3eb0e2424cb37f95ce85fadbf54bd30fe`**. La documentation de passation ultérieure peut faire avancer `main` sans redéploiement.
 - Coordination AgentCtl : projet budget-fr, ressource repo:Kiwinokoto/budget_fr ; verrou à prendre avant toute mutation et libérer en fin de passe.
 - Base Insee initiale 1995–2025 recopiée à la main **remplacée** par les chiffres du classeur officiel d'août 2026.
 - Données 1960–2025 : recettes, dépenses, solde, variantes hors éléments imputés ; dette brute depuis 1978 et nette depuis 1995. Fichier original conservé à la source, pas dans Git.
 - Importateur en Python standard, empreinte SHA-256 de la source, validation des libellés, années et solde ; tests couvrant les absences de valeurs.
 - Application statique avec curseur temporel et graphiques de recettes/dépenses et dette.
-- Site public en ligne : **https://budget-fr.kiwinokoto.fr** sur le VPS personnel, via `/opt/budget-fr`, conteneur `budget-fr-web`, réseau Docker `traefik_network`, routeur Traefik dédié et certificat Let's Encrypt. Déploiement figé sur `0504e5c70314939cb2d0f0537a953a6fc81b1c71` (`/opt/budget-fr/.deployed_commit`). Aucune base de données, aucune automatisation ou modification des services voisins.
-- Vérifications en production : HTTPS HTTP 200 sans `-k`, documents et CSV HTTP 200, CSV servi identique octet par octet à GitHub (66 années), six tests Python OK, certificat valide, conteneur démarré, volume statique monté en lecture seule. Revue visuelle navigateur desktop/mobile **encore à faire**.
+- Site public en ligne : **https://budget-fr.kiwinokoto.fr** sur le VPS personnel, via `/opt/budget-fr`, conteneur `budget-fr-web`, réseau Docker `traefik_network`, routeur Traefik dédié et certificat Let's Encrypt. Déploiement figé sur `2057b7e3eb0e2424cb37f95ce85fadbf54bd30fe` (`/opt/budget-fr/.deployed_commit`). Aucune base de données, aucune automatisation ou modification des services voisins.
+- Vérifications en production : HTTPS HTTP 200 sans `-k`, documents et CSV HTTP 200, deux CSV servis identiques octet par octet à GitHub (66 et 30 années), **dix tests Python OK**, certificat valide, conteneur démarré, volume statique monté en lecture seule. Revue visuelle navigateur desktop/mobile **encore à faire**.
 
-## Lot COFOG préparé sur `dev/cofog-1995-2024`
+## Lot COFOG livré sur `main` et sur le site public
 
 - Fichier Insee 3.301 inspecté, dix rubriques (GF01–GF10), 1995–2024 ; somme réconciliée avec le total à l'arrondi près.
 - Importateur reproductible `scripts/import_cofog.py`, tests de couverture, cohérence comptable, année et empreinte source.
 - Page `fonctions.html` et lien depuis `index.html` : répartition, année, parts et tendance. Deux séries statistiques distinctes ; pas d'amalgame entre euros et % PIB.
-- À la fin de cette passe : vérifier sur GitHub le commit exact, le déploiement réel et les tests avant de considérer ce chantier clos.
+- Livraison publique validée : https://budget-fr.kiwinokoto.fr/fonctions.html, HTTP 200 sans exception TLS, HTML et CSV servis identiques à l'artefact GitHub ; import COFOG officiel reproductible à l'octet. Sauvegarde du site précédent : `/opt/budget-fr/backup/20261016T124632-0504e5c70314939cb2d0f0537a953a6fc81b1c71/site/`. La revue visuelle réelle desktop/mobile reste à faire.
+- État de coordination : le déploiement statique a été effectué sous verrou `deploy:vps-personal/budget-fr` et libéré automatiquement ; pas de modification Docker/Traefik.
 
 ## Suite prioritaire
 
