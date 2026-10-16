@@ -63,6 +63,12 @@ Attention : les prélèvements obligatoires ne constituent pas toutes les recett
 
 **Important :** ni TVA acquittée par décile, ni données distributives observées en 2025, ni indice composite de justice fiscale. Source originale : [Insee Analyses 43](https://www.insee.fr/fr/statistiques/3713290) ; valeurs officiellement publiées retranscrites à une décimale et testées. Voir [méthode](METHODOLOGY.md) et [traçabilité](DATA_SOURCES.md).
 
+## TVA seule : étude distributive récente, publiée en 2025
+
+[L'étude DG Trésor, Trésor-Éco n°371 (septembre 2025)](https://www.tresor.economie.gouv.fr/Articles/2025/09/25/analyse-de-la-composition-des-recettes-de-tva) a été intégrée à [l'explorateur de TVA](tva-incidence.html). Son graphique 4 décrit les conséquences **statiques hypothétiques** d'une hausse d'un point de pourcentage **de tous les taux** : Q1 −0,7 % de pouvoir d'achat, Q5 −0,4 %, ensemble −0,5 %. Q1 représente 12 % et Q5 31 % des **recettes supplémentaires** d'une telle hausse. Les Q2–Q4 ne sont pas extrapolés numériquement.
+
+Publication 2025, mais données sous-jacentes BDF 2017, ERFS 2022 et comptabilité nationale 2021–2022. **Ce n'est toujours pas la TVA effectivement payée par décile en 2025**, et ces variations de pouvoir d'achat ne sont pas comparables numériquement aux taux TVA/revenu de 2001.
+
 ## Fiscalité indirecte : taux d'effort et comptes distribués
 
 **[Comparer TVA/revenu, TVA/consommation et taxes sur les produits](tva-incidence.html)** : deux jeux de données **méthodologiquement distincts**.
@@ -76,7 +82,7 @@ Attention : les prélèvements obligatoires ne constituent pas toutes les recett
 
 Documentation : [sources](DATA_SOURCES.md), [méthodologie](METHODOLOGY.md), [passation et roadmap](ROADMAP.md).
 
-**Site public : https://budget-fr.kiwinokoto.fr** (première publication vérifiée le 16 octobre 2026). Déploiement statique isolé sur le VPS personnel, derrière Traefik et Let's Encrypt. Version applicative effectivement servie après la vue TVA BDF/CND : `8e490b18cf0a20d6c323f52281e518a37024800f` (incluant https://budget-fr.kiwinokoto.fr/recettes.html et https://budget-fr.kiwinokoto.fr/fonctions.html). Les changements de documentation ultérieurs sur `main` ne sont pas déployés automatiquement ; voir [la procédure d'exploitation](deploy/README.md).
+**Site public : https://budget-fr.kiwinokoto.fr** (première publication vérifiée le 16 octobre 2026). Déploiement statique isolé sur le VPS personnel, derrière Traefik et Let's Encrypt. Version applicative effectivement servie après l'analyse Trésor-Éco 2025 : `2dd13d08762e8b658264a174f9de24a0199b9a65` (incluant https://budget-fr.kiwinokoto.fr/recettes.html et https://budget-fr.kiwinokoto.fr/fonctions.html). Les changements de documentation ultérieurs sur `main` ne sont pas déployés automatiquement ; voir [la procédure d'exploitation](deploy/README.md).
 
 Ce dépôt public ne contient aucune donnée personnelle ni confidentielle. Les données originales de l'Insee restent sous leurs propres conditions de réutilisation. Les séries peuvent être révisées.
 
