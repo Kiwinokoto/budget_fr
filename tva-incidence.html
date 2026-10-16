@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TVA observée et taxes sur les produits · budget_fr</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#101827;color:#f1f5fc}
+*{box-sizing:border-box}body{max-width:1060px;margin:auto;padding:28px 20px 58px}
+a{color:#bfcdff}a:hover{color:white}h1{font-size:clamp(2rem,4vw,3.05rem);margin:7px 0 12px}h2{margin:0 0 11px;font-size:1.4rem}
+p{line-height:1.6;color:#c8d2e3}.eyebrow{font-size:.81rem;color:#a9bcff;letter-spacing:.12em;text-transform:uppercase;margin:25px 0 5px}
+.panel{background:#1d293c;border:1px solid #37445d;border-radius:17px;padding:22px;margin:24px 0}
+.notes{font-size:.89rem;color:#c5d0e2}.warning{border-left:3px solid #dab37b;padding:12px 15px;background:#2a3245;color:#e8eef9}
+.controls{display:flex;flex-wrap:wrap;gap:11px 20px;align-items:center;margin:16px 0}
+label{cursor:pointer;font-size:.94rem}input{accent-color:#9cafea}
+select{background:#111d30;color:#fff;border:1px solid #677c9b;border-radius:8px;padding:8px 12px;font:inherit}
+.rows{display:grid;gap:4px;margin-top:17px}
+.bar-row{border:1px solid transparent;border-radius:10px;background:transparent;color:inherit;display:grid;grid-template-columns:116px minmax(105px,1fr) 100px;gap:13px;padding:9px;align-items:center;text-align:left;cursor:pointer;font:inherit;width:100%}
+.bar-row:hover,.bar-row:focus-visible,.bar-row[aria-pressed=true]{background:#283a51;outline:none}
+.bar-row[aria-pressed=true]{border-color:#88a3c8}
+.bar-name{font-size:.9rem;font-weight:570}.bar-track{height:16px;border-radius:5px;background:#111b2d;overflow:hidden}.bar-fill{display:block;height:100%;border-radius:5px;background:#85cdbf}
+.bar-val{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;font-size:.89rem}
+.highlight{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:19px}
+.highlight div{background:#122035;border-radius:11px;padding:15px}
+.highlight small{display:block;color:#bdcce0}
+.highlight strong{display:block;margin-top:6px;font-size:1.25rem;font-variant-numeric:tabular-nums}
+.year-heading{font-size:1.1rem;font-weight:680;margin:6px 0 0}
+@media(max-width:690px){body{padding:20px 12px}.panel{padding:15px}.bar-row{grid-template-columns:68px minmax(80px,1fr) 89px;gap:8px;padding:8px 5px}.bar-name,.bar-val{font-size:.78rem}.bar-track{height:12px}.highlight{grid-template-columns:1fr}}
+</style></head><body>
+<nav><a href="/tva-justice.html">← Revenir à la simulation TVA</a> · <a href="/recettes.html">Recettes publiques</a></nav>
+<div class="eyebrow">Atlas · Fiscalité indirecte · Comparaisons contextualisées</div>
+<h1>TVA : le choix du dénominateur change l’histoire</h1>
+<p>Deux jeux de données officiels, présentés <strong>séparément</strong> : une estimation de la TVA des ménages basée sur leurs consommations en <strong>2001</strong>, et une répartition plus récente (2020–2023) de l’ensemble des <strong>taxes sur les produits</strong>. Ces dernières incluent la TVA, mais pas uniquement.</p>
+
+<section class="panel" aria-labelledby="head-vat">
+<h2 id="head-vat">TVA estimée par décile — enquête 2001</h2>
+<p>Étude de Nicolas Ruiz et Alain Trannoy, publiée dans <em>Économie et Statistique</em> en 2008, à partir de l'enquête Budget de famille 2001. Les déciles classent les ménages selon leur niveau de vie.</p>
+<div class="controls" role="group" aria-label="Mesure de la TVA en 2001">
+<label><input type="radio" name="vat-measure" value="vat_pct_gross_disposable_income" checked> Part du revenu</label>
+<label><input type="radio" name="vat-measure" value="vat_pct_consumption"> Part de la consommation</label>
+<label><input type="radio" name="vat-measure" value="vat_eur_per_household"> Montant par ménage</label>
+</div>
+<p class="notes" id="vat-description">TVA estimée / revenu disponible brut agrégé du décile (en %). Ce ratio n'est pas la moyenne des taux individuels.</p>
+<div id="vat-chart" class="rows" aria-label="TVA par décile"></div>
+<div class="highlight">
+<div><small>Décile sélectionné</small><strong id="vat-current">—</strong></div>
+<div><small>TVA / revenu disponible brut</small><strong id="vat-income">—</strong></div>
+<div><small>TVA / consommation</small><strong id="vat-consumption">—</strong></div>
+</div>
+<p class="notes" id="vat-euros">—</p>
+<p class="warning">Ces valeurs sont des <strong>estimations issues de l’enquête de 2001</strong>, avec un modèle de taxation des consommations. Elles ne sont pas des relevés administratifs individuels ni des montants actualisés en 2025. Les euros ne sont pas corrigés de l’inflation.</p>
+</section>
+
+<section class="panel" aria-labelledby="head-products">
+<h2 id="head-products">Taxes sur les produits — comptes distribués 2020–2023</h2>
+<p>Les comptes nationaux distribués de l’Insee, publiés en avril 2026, répartissent <strong>TVA, TICPE, accises, DMTO et autres taxes sur les produits</strong> entre vingt groupes de niveau de vie usuel (V1 à V20). Ce n'est pas une ventilation de la TVA seule.</p>
+<div class="controls">
+<label for="product-year">Année</label>
+<select id="product-year" aria-label="Année des comptes distribués">
+<option value="2020">2020</option><option value="2021">2021</option>
+<option value="2022">2022</option><option value="2023" selected>2023</option>
+</select>
+</div>
+<div class="year-heading" id="product-title">Répartition 2023</div>
+<p class="notes">Montants en milliards d’euros courants attribués statistiquement aux groupes, représentés en valeurs positives pour faciliter la lecture. Chaque vingtième correspond à 5 % des personnes, et non à 5 % des ménages.</p>
+<div class="rows" id="product-chart" aria-label="Taxes sur les produits par vingtième"></div>
+<div class="highlight">
+<div><small>Vingtième sélectionné</small><strong id="product-group">—</strong></div>
+<div><small>Montant attribué</small><strong id="product-amount">—</strong></div>
+<div><small>Part des taxes distribuées</small><strong id="product-share">—</strong></div>
+</div>
+<p class="notes">Les totaux publiés peuvent différer de 0,1 Md€ de la somme des vingt groupes, du fait des arrondis au dixième. Les montants ne sont ni un taux d'effort rapporté au revenu ni une estimation isolée de TVA.</p>
+</section>
+
+<section class="panel">
+<h2>Comment lire ces résultats ?</h2>
+<p>En 2001, la TVA représentait dans cette étude une part beaucoup plus forte du <strong>revenu disponible brut</strong> des ménages du premier décile que de celui du dernier. Mais en divisant par la <strong>consommation</strong>, les taux apparents étaient proches. C’est notamment lié au fait que la part du revenu consacrée à l’épargne varie fortement selon le niveau de vie.</p>
+<p>La répartition plus récente des taxes sur les produits informe sur la <strong>distribution de montants comptables</strong>, pas directement sur leur incidence redistributive. Pour évaluer l'effet global, il faut également prendre en compte les prestations, les services publics, les comportements de consommation et le revenu sur le cycle de vie.</p>
+<p class="warning">Ne pas superposer les séries de 2001 et 2020–2023 sur un même axe : leurs périodes, champs, méthodes et catégories diffèrent. Aucune valeur « TVA 2023 par décile » n'a été créée ou extrapolée.</p>
+</section>
+
+<p class="notes">Sources : <a href="https://www.insee.fr/fr/statistiques/fichier/1376872/es413b.pdf">Ruiz &amp; Trannoy (2008), Économie et Statistique n°413, tableaux 3, 4 et 6 (données 2001)</a> ; <a href="https://www.insee.fr/fr/statistiques/8574663">Insee, CND.101 (2020–2023), publication avril 2026</a>. <a href="/METHODOLOGY.md">Méthodologie</a> · <a href="/TVA_JUSTICE_SOURCES.md">Cadrage scientifique</a>.</p>
+<script>
+(async()=>{
+ const [vatResponse,productResponse]=await Promise.all([
+  fetch('/data/tva_effort_bdf_2001.csv'),fetch('/data/taxes_produits_cnd_2020_2023.csv')
+ ]);
+ if(!vatResponse.ok||!productResponse.ok)throw Error('Sources chiffrées indisponibles');
+ function readCsv(csv){
+  const [head,...lines]=csv.trim().split(/\r?\n/),keys=head.split(',');
+  return lines.map(line=>Object.fromEntries(line.split(',').map((value,i)=>[keys[i],Number(value)])));
+ }
+ const vat=readCsv(await vatResponse.text()),product=readCsv(await productResponse.text());
+ if(vat.length!==10||vat.some((r,i)=>r.decile!==i+1)||product.length!==80)throw Error('Couverture des données incohérente');
+ let metric='vat_pct_gross_disposable_income',decile=1,year=2023,vingtile=1;
+ const pct=n=>n.toLocaleString('fr-FR',{minimumFractionDigits:1,maximumFractionDigits:2})+' %';
+ const money=n=>n.toLocaleString('fr-FR',{minimumFractionDigits:0,maximumFractionDigits:0})+' €';
+ const bn=n=>n.toLocaleString('fr-FR',{minimumFractionDigits:1,maximumFractionDigits:1})+' Md€';
+ function row(container,label,value,max,color,selected,activate){
+  const button=document.createElement('button');button.type='button';button.className='bar-row';
+  button.setAttribute('aria-pressed',String(selected));
+  button.setAttribute('aria-label',label+', '+value.label);
+  const name=document.createElement('span');name.className='bar-name';name.textContent=label;
+  const track=document.createElement('span');track.className='bar-track';
+  const fill=document.createElement('span');fill.className='bar-fill';fill.style.background=color;
+  fill.style.width=(value.raw/max*100)+'%';track.append(fill);
+  const result=document.createElement('span');result.className='bar-val';result.textContent=value.label;
+  button.append(name,track,result);button.addEventListener('click',activate);
+  container.append(button);
+ }
+ function drawVat(){
+  const element=document.getElementById('vat-chart');element.replaceChildren();
+  const highest=Math.max(...vat.map(r=>r[metric]));
+  vat.forEach(r=>row(element,'D'+r.decile,{raw:r[metric],label:metric==='vat_eur_per_household'?money(r[metric]):pct(r[metric])},
+   highest,'#86cbb8',r.decile===decile,()=>{decile=r.decile;drawVat();}));
+  const record=vat[decile-1];
+  document.getElementById('vat-current').textContent='D'+decile;
+  document.getElementById('vat-income').textContent=pct(record.vat_pct_gross_disposable_income);
+  document.getElementById('vat-consumption').textContent=pct(record.vat_pct_consumption);
+  document.getElementById('vat-euros').textContent='TVA estimée : '+money(record.vat_eur_per_household)+' par ménage et par an, en euros de 2001.';
+  document.getElementById('vat-description').textContent=metric==='vat_pct_gross_disposable_income'
+  ?'TVA estimée / revenu disponible brut agrégé du décile (en %). Ce ratio n’est pas la moyenne des taux individuels.'
+  :metric==='vat_pct_consumption'
+  ?'TVA estimée / dépense totale de consommation du décile (en %). Ce n’est pas un taux légal de TVA.'
+  :'TVA estimée par ménage du décile, en euros de 2001 non corrigés de l’inflation.';
+ }
+ function drawProducts(){
+  const entries=product.filter(r=>r.year===year);
+  if(entries.length!==20||entries.some((r,i)=>r.vingtile!==i+1))throw Error('Année incomplète');
+  const total=entries.reduce((s,r)=>s+r.product_taxes_bn_eur,0);
+  const highest=Math.max(...entries.map(r=>r.product_taxes_bn_eur));
+  const element=document.getElementById('product-chart');element.replaceChildren();
+  for(const r of entries){
+   row(element,'V'+r.vingtile,{raw:r.product_taxes_bn_eur,label:bn(r.product_taxes_bn_eur)},
+    highest,'#b0a6e5',vingtile===r.vingtile,()=>{vingtile=r.vingtile;drawProducts();});
+  }
+  const record=entries[vingtile-1];
+  document.getElementById('product-title').textContent='Répartition '+year+' · '+bn(total)+' (somme des groupes arrondis)';
+  document.getElementById('product-group').textContent='V'+vingtile;
+  document.getElementById('product-amount').textContent=bn(record.product_taxes_bn_eur);
+  document.getElementById('product-share').textContent=pct(100*record.product_taxes_bn_eur/total);
+ }
+ document.querySelectorAll('input[name=vat-measure]').forEach(input=>
+  input.addEventListener('change',()=>{if(input.checked){metric=input.value;drawVat();}}));
+ document.getElementById('product-year').addEventListener('change',event=>{
+  year=Number(event.target.value);vingtile=1;drawProducts();
+ });
+ drawVat();drawProducts();
+})().catch(error=>{
+ document.getElementById('vat-chart').textContent='Impossible de charger les données : '+error.message;
+ document.getElementById('product-chart').textContent='Données indisponibles';
+});
+</script></body></html>

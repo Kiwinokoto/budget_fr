@@ -57,6 +57,14 @@
 - **Déploiement statique réversible**, copie antérieure sauvegardée : `/opt/budget-fr/backup/20261016T151614-tva-before-51e51f228aa96ec74c678f70d7a8ac98b79d6e73/`. Aucun redémarrage de service ni modification des jeux de données historiques.
 - **Prochaines étapes :** revue mobile/navigateur réel, puis identification d'une source observée et récente de TVA par groupes de revenu et de consommation (non assimilable à notre simulation de 2016).
 
+## Fiscalité indirecte : deux lectures complémentaires (passe suivante)
+
+- Dataset TVA estimée **2001** : Ruiz & Trannoy, BDF, tableaux 3/4/6, dix déciles, euros par ménage et ratios au revenu disponible brut ou à la consommation.
+- Dataset **2020–2023** : Insee CND.101, taxes sur les produits (TVA, TICPE, accises, DMTO, etc.) **et non TVA seule**, vingt groupes V1–V20, milliards d’euros courants. Source XLSX épinglée SHA-256, importateur avec vérification des totaux.
+- Page `tva-incidence.html` interactive : bascule de dénominateur pour 2001, sélection de millésime pour taxes sur produits, détails des groupes. Liens depuis accueil, recettes et simulation 2019.
+- **Garde-fou :** comparaison qualitative seulement ; aucune interpolation vers 2025, aucun mélange des catégories ou des millésimes ; données CND expérimentales.
+- À compléter après tests : branche/PR, commit exact, publication HTTPS, sauvegarde, vérification AgentCtl et revue visuelle réelle mobile encore ouverte.
+
 ## Suite prioritaire
 
 1. Valider le rendu sur un vrai navigateur mobile et l'accessibilité ; les captures desktop sont encourageantes mais ne valident pas le mobile.

@@ -47,6 +47,28 @@
 - **Provenance :** transcription manuelle limitée aux dix colonnes de décile de la figure 2, sans valeurs fabriquées et sans extrapolation à 2025 ; CSV dérivé `data/tva_choc_deciles_insee_2019.csv`, tests `tests/test_tva_scenario.py`.
 - **Limites :** valeurs publiées arrondies au dixième ; elles peuvent ne pas s'additionner exactement. La série n'est pas fusionnée avec la série de recettes TVA 1995–2025 de la comptabilité nationale. Aucun « taux d'injustice » n'est calculé.
 
+## Cinquième source — TVA estimée dans l'enquête Budget de famille 2001
+
+Nicolas Ruiz et Alain Trannoy, « Le caractère régressif des taxes indirectes : les enseignements d’un modèle de microsimulation », *Économie et Statistique* n°413 (2008), Insee, [PDF officiel](https://www.insee.fr/fr/statistiques/fichier/1376872/es413b.pdf), **page 27**, tableaux **3, 4, 6**.
+- Année étudiée : **2001** ; enquête Budget de famille 2001, modèle de taxation des postes de consommation, ensemble des ménages, regroupement selon déciles de niveau de vie.
+- Table 3 : TVA estimée moyenne **en euros par ménage** (1 308 € pour D1, 3 588 € pour D10), euros courants de 2001.
+- Table 4 : TVA totale / **revenu disponible brut agrégé** du décile (11,52 % pour D1, 5,92 % pour D10). Taux agrégé des déciles, pas moyenne non pondérée des ratios individuels.
+- Table 6 : TVA estimée / **dépense totale de consommation** (10,5 % pour D1, 11,6 % pour D10), taux apparent, pas taux légal.
+- CSV : `data/tva_effort_bdf_2001.csv` ; transcription des dix lignes et des seules colonnes utilisées, valeurs originales non actualisées.
+- Ces chiffres reposent sur une **estimation fiscale à partir de consommation enquêtée**, pas des montants réels individuels observés dans des déclarations TVA.
+
+## Sixième source — comptes nationaux distribués, taxes sur les produits 2020–2023
+
+Insee, [Comptes par catégories de ménage](https://www.insee.fr/fr/statistiques/8574663), CND.101, publié le 16 avril 2026, [XLSX source](https://www.insee.fr/fr/statistiques/fichier/8574663/T_CND_101.xlsx).
+- SHA-256 du XLSX téléchargé et inspecté : `8e4d2ec005e9351f7105c796ac2e0ae8afc1f53b70b165d04f9387ed8cf838ef`.
+- Onglets `CND_2020` à `CND_2023`, ligne 16 exactement intitulée **« Taxes sur les produits (TVA, TICPE, acises, DMTO, etc.) »**, colonnes B–U pour les vingt groupes V1–V20, V pour le total national.
+- Champ : France, comptes nationaux distribués **S1** (économie nationale), base 2020. Groupes définis par vingtème de niveau de vie usuel de personnes (5 % des individus par groupe). Valeurs en milliards d'euros courants.
+- Dans la source les prélèvements ont un signe négatif ; le CSV `data/taxes_produits_cnd_2020_2023.csv` en retient le **montant positif**. Import reproductible en Python standard : `scripts/import_cnd_product_taxes.py`, empreinte SHA-256 épinglée.
+- Somme des vingt groupes comparée au total national de la même source à une tolérance de 0,5 Md€ (arrondis au dixième ; écart 0,1 Md€ en 2022).
+- **Ce poste n'est pas une TVA par vingtième** : il inclut TICPE, accises, DMTO et autres impôts sur les produits. Les répartitions résultent des hypothèses des comptes distribués, non de déclarations personnelles de TVA.
+- Ne pas construire un ratio de taxes sur produits / revenu disponible S14 sans expliciter les différences d'univers comptable, ni rapprocher directement ces valeurs du CSV de TVA nationale d'un autre millésime.
+- Les comptes publiés 2020–2023 sont des **statistiques expérimentales** soumises à révisions et hypothèses de répartition, et **ne constituent pas une mesure de fiscalité individuelle constatée en 2025**.
+
 ## Sources identifiées, non intégrées
 
 - [Insee, comptes APU détaillés](https://www.insee.fr/fr/statistiques/8988845), tableaux 3.201 et suivants ; vérifier périmètres, catégories et durées des séries.
