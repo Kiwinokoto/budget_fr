@@ -32,7 +32,11 @@ svg{display:block;width:100%;height:auto}.source{border-top:1px solid #3b485f;pa
 .warning{border-left:3px solid #b49ce8;padding:10px 14px;background:#26324a;font-size:.9rem;color:#dbe4f4}
 @media(max-width:680px){body{padding:20px 12px}.panel{padding:15px;margin:16px 0}.metrics{grid-template-columns:1fr 1fr}.nested{grid-template-columns:1fr 1fr}.item{grid-template-columns:minmax(0,1fr) minmax(75px,.7fr);gap:8px}.item-name{font-size:.82rem}.track{grid-column:1/-1;grid-row:2;height:10px}.value{grid-column:2;grid-row:1;font-size:.82rem}}
 @media(max-width:450px){.metrics{grid-template-columns:1fr}.nested{grid-template-columns:1fr}}
-</style></head><body>
+body.loading-data .metrics,body.loading-data .rows,body.loading-data .adjustments,body.loading-data .nested,body.loading-data #trend{display:none}
+[hidden]{display:none !important}
+#load-status{font-size:.95rem;color:#dce7fa}
+#load-status button{background:#344968;border:1px solid #8aa4d4;border-radius:8px;padding:7px 12px;color:#fff;cursor:pointer;font:inherit}
+</style></head><body class="loading-data">
 <nav><a href="/">← Retour aux finances publiques</a></nav>
 <div class="eyebrow">Atlas · Origine des prélèvements</div>
 <h1>D’où viennent les recettes publiques ?</h1>
@@ -40,6 +44,7 @@ svg{display:block;width:100%;height:auto}.source{border-top:1px solid #3b485f;pa
 <p><a href="/tva-justice.html"><strong>TVA et justice fiscale : explorer une simulation par décile →</strong></a> · scénario Insee publié en 2019, non comparable directement aux montants de 2025.</p>
 <p><a href="/tva-incidence.html"><strong>TVA : revenu ou consommation ?</strong></a> · estimation selon les déciles en 2001 et taxes sur les produits 2020–2023 (séries distinctes).</p>
 <section class="panel">
+<p id="load-status" role="status" aria-live="polite">Chargement des données…</p>
 <div class="controls"><label for="year">Année <span id="year-label">2025</span></label><input id="year" type="range" min="1995" max="2025" value="2025" aria-label="Choisir une année entre 1995 et 2025"></div>
 <div class="metrics">
 <div class="metric"><small>Prélèvements obligatoires</small><strong id="total">—</strong></div>
@@ -158,5 +163,12 @@ slider.addEventListener('input',refresh);
 compactQuery.addEventListener('change',draw);
 document.querySelectorAll('input[name=mode]').forEach(input=>input.addEventListener('change',()=>{if(input.checked){mode=input.value;refresh();}}));
 refresh();
-})().catch(error=>{document.getElementById('total').textContent='Erreur de chargement : '+error.message;});
+document.body.classList.remove('loading-data');
+document.getElementById('load-status').hidden=true;
+})().catch(error=>{
+ const status=document.getElementById('load-status');
+ status.textContent='Impossible de charger les données : '+error.message+' ';
+ const retry=document.createElement('button');retry.type='button';retry.textContent='Réessayer';
+ retry.addEventListener('click',()=>window.location.reload());status.append(retry);
+});
 </script></body></html>
