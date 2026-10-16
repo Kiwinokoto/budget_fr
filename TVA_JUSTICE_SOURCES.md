@@ -20,8 +20,18 @@
 - Vérifier qu'il est méthodologiquement licite de rapprocher un graphique distributif et le montant national de TVA 1995–2025 déjà affiché : dates, enquêtes, champs et classification peuvent différer.
 - Tester des analyses alternatives, y compris effets des taux réduits, remboursements, redistribution des prestations et variations temporelles.
 
+## Premier tableau distributif réellement validé : une simulation, pas une observation
+
+Le [tableau 2 d'Insee Analyses n°43 (2019)](https://www.insee.fr/fr/statistiques/3713290) publie les contributions aux effets d'une hausse de TVA de trois points, **pour les dix déciles**. Notre fichier `data/tva_choc_deciles_insee_2019.csv` en retranscrit les valeurs, et la page `tva-justice.html` les présente sans les faire passer pour une mesure récente d'incidence.
+
+- **D1 :** prélèvements indirects −2,8 points, effet total −1,4 % de niveau de vie corrigé.
+- **D10 :** prélèvements indirects −1,0 point, effet total −0,5 %.
+- L'étude porte sur une population et une législation de **2016**, publiée en **2019**. Le scénario est **contrefactuel** et les chiffres ne décrivent pas la TVA payée en 2025.
+
+La première vue distributive est donc disponible, mais la recherche d'une série empirique et actuelle sur la **TVA payée par groupe de revenu ou de consommation** reste ouverte.
+
 ## Première livraison analytique retenue
 
-Un panneau comparatif **uniquement avec des chiffres distributifs officiellement publiés et vérifiés**, légendé en termes de simulation / observation, puis une note d'incertitude. Pas de « score global de toxicité », pas d'attribution causale à partir de simples recettes nationales. **Blocage actuel : absence d'un fichier distributif détaillé validé** ; inventaire et extraction restent à faire.
+Un panneau comparatif **uniquement avec des chiffres distributifs officiellement publiés et vérifiés**, légendé en termes de simulation / observation, puis une note d'incertitude. Pas de « score global de toxicité », pas d'attribution causale à partir de simples recettes nationales. **Blocage actuel pour une véritable incidence observée : absence de fichier récent de TVA acquittée par décile authentifié.** La simulation Insee 2019 est désormais retranscrite et testée.
 
 Cette note n'établit aucun résultat quantitatif nouveau : elle distingue les éléments déjà démontrés et les données nécessaires pour poursuivre.

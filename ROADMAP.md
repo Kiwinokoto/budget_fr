@@ -46,6 +46,14 @@
 - Sauvegarde ciblée : `/opt/budget-fr/backup/20261016T142013-yunits-before-2501217d2bba01c729d65d4724ff69d39d44d5f7/`. Aucun redémarrage de conteneur ; le déploiement s'est fait sous verrou AgentCtl, ensuite libéré.
 - **Limitations restantes :** revue responsive réelle non faite, absence de série distributive TVA récente authentifiée.
 
+## Lot TVA : simulation distributive Insee (octobre 2026)
+
+- Première vue quantitative à partir de la figure 2 d'Insee Analyses n°43 (2019) : dix déciles, relèvement simulé de trois points du taux normal de TVA, législation et champ de référence 2016.
+- Nouveaux fichiers : `tva-justice.html`, `data/tva_choc_deciles_insee_2019.csv`, `tests/test_tva_scenario.py`. Liens dans l'accueil et la page recettes ; sources, méthodologie et cadrage scientifique actualisés.
+- **Invariant :** simulation historique / effet marginal ≠ TVA observée / effort relatif réel ; pas de conversion en valeurs 2025 ni fusion des jeux de données.
+- Revue visuelle navigateur mobile encore à réaliser ; intégration d'une distribution réellement observée reste une étape de recherche.
+- État du Git et du VPS, tests exacts, sauvegarde et verrou à compléter après validation et déploiement.
+
 ## Suite prioritaire
 
 1. Valider le rendu sur un vrai navigateur mobile et l'accessibilité ; les captures desktop sont encourageantes mais ne valident pas le mobile.

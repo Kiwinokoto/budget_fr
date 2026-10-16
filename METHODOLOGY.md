@@ -73,3 +73,17 @@ Dans le CSV, les deux dernières corrections ont un signe **négatif**. Les coti
 - Aucune classification « juste / injuste » ni conclusion sur la régressivité n'est permise à partir des seules parts fiscales. L'incidence dépend du revenu, de la consommation, de l'horizon temporel et des transferts publics.
 
 La série des prélèvements inclut les prélèvements reçus par les administrations françaises et certains organismes européens ; elle ne doit donc pas être additionnée aux recettes du budget de l'État seul. Les ruptures et changements de prélèvement (CSG, CRDS, crédits d'impôts) doivent être signalés dans toute lecture historique.
+
+## Première exploration distributive — simulation d'une hausse de TVA
+
+[Insee Analyses 43 (2019), figure 2](https://www.insee.fr/fr/statistiques/3713290) est une **simulation ex ante** fondée sur la législation 2016 et le modèle de microsimulation Ines. Le scénario relève de trois points le taux normal de TVA. La publication estime les effets différés, notamment l'indexation de certains revenus et prestations, sur une période de trois ans.
+
+Le CSV `data/tva_choc_deciles_insee_2019.csv` retranscrit les **dix déciles de personnes** du tableau 2, dans l'ordre, avec six composantes publiées : revenus avant redistribution, prélèvements directs, prélèvements indirects, prestations, dépenses de loyer, effet total. Ces chiffres sont arrondis au dixième par l'Insee.
+
+Les colonnes de contribution sont en **points de pourcentage** de variation du niveau de vie corrigé ; l'effet total est en **% de variation**. Le « niveau de vie corrigé » de l'étude est le revenu disponible corrigé de la TVA et des dépenses de loyer, ramené aux unités de consommation. Les valeurs des composantes ne sont pas des impôts payés en pourcentage du revenu observé. La somme des composantes peut différer du total publié de 0,1 point à cause des arrondis.
+
+**Ne jamais interpréter** le chiffre `indirect_tax_pp` comme le taux de TVA subi par un décile ou comme sa part de revenu consacrée à la TVA en 2025. On visualise ici l'effet simulé d'une **hausse** de TVA (législation 2016, publié 2019), pas le niveau de TVA existant ni une chronique historique.
+
+Champ : personnes de France métropolitaine vivant en ménage ordinaire, dont les revenus sont positifs ou nuls et dont la personne de référence n'est pas étudiante. Les déciles sont de niveau de vie usuel. Les hypothèses de transmission aux prix et d'indexation sont décrites dans l'étude source.
+
+Pour une comparaison réellement actuelle de **TVA payée / revenu disponible** ou **TVA payée / consommation**, il reste à trouver et valider une table distributive appropriée. Aucune extrapolation à partir du montant national de TVA n'a été effectuée.
