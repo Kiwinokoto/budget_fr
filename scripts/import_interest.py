@@ -37,7 +37,7 @@ def column(index):
     return result
 
 
-def parse_rows(blob):
+def parse_rows(blob, extra_rows=()):
     with zipfile.ZipFile(io.BytesIO(blob)) as book:
         shared = []
         if "xl/sharedStrings.xml" in book.namelist():
@@ -50,7 +50,7 @@ def parse_rows(blob):
         rows = {}
         for row in page.findall(".//" + NS + "sheetData/" + NS + "row"):
             idx = int(row.get("r"))
-            if idx not in (3, 12, 13, 27):
+            if idx not in (3, 12, 13, 27, *extra_rows):
                 continue
             cells = {}
             for cell in row.findall(NS + "c"):
@@ -69,7 +69,7 @@ def parse_rows(blob):
                     raise ValueError("Malformed cell address")
                 cells[ref.group()] = raw
             rows[idx] = cells
-    if set(rows) != {3, 12, 13, 27}:
+    if set(rows) != {3, 12, 13, 27, *extra_rows}:
         raise ValueError("Source table rows have changed")
     for row, label in FIELDS:
         if rows[row].get("B", "").strip() != label:
