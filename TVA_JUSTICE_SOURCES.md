@@ -35,3 +35,11 @@ La première vue distributive est donc disponible, mais la recherche d'une séri
 Un panneau comparatif **uniquement avec des chiffres distributifs officiellement publiés et vérifiés**, légendé en termes de simulation / observation, puis une note d'incertitude. Pas de « score global de toxicité », pas d'attribution causale à partir de simples recettes nationales. **Blocage actuel pour une véritable incidence observée : absence de fichier récent de TVA acquittée par décile authentifié.** La simulation Insee 2019 est désormais retranscrite et testée.
 
 Cette note n'établit aucun résultat quantitatif nouveau : elle distingue les éléments déjà démontrés et les données nécessaires pour poursuivre.
+
+## Distinction confirmée : TVA évaluée en 2001 vs taxes sur les produits 2020–2023
+
+La page [`tva-incidence.html`](tva-incidence.html) documente deux sources chiffrées complémentaires, sans les confondre :
+- [Ruiz & Trannoy (2008)](https://www.insee.fr/fr/statistiques/fichier/1376872/es413b.pdf) : enquête **2001**, TVA estimée par décile en euros/ ménage, TVA/revenu disponible brut et TVA/consommation ; la divergence entre les deux dénominateurs est directement testable.
+- [Insee CND.101 (2026)](https://www.insee.fr/fr/statistiques/8574663) : statistiques expérimentales pour **2020–2023**, taxes sur les produits par **vingtième de niveau de vie**. Catégorie plus large que la TVA. Aucun taux d'effort de TVA récente n'est calculé.
+
+**Inconnue restante :** une ventilation récente et vérifiée de la seule TVA, rapportée au revenu et à la consommation selon les mêmes groupes, n'a pas encore été trouvée. Éviter la reconstruction par prorata de taxes sur les produits ou de recettes nationales.

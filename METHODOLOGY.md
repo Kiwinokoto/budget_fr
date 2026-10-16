@@ -87,3 +87,19 @@ Les colonnes de contribution sont en **points de pourcentage** de variation du n
 Champ : personnes de France métropolitaine vivant en ménage ordinaire, dont les revenus sont positifs ou nuls et dont la personne de référence n'est pas étudiante. Les déciles sont de niveau de vie usuel. Les hypothèses de transmission aux prix et d'indexation sont décrites dans l'étude source.
 
 Pour une comparaison réellement actuelle de **TVA payée / revenu disponible** ou **TVA payée / consommation**, il reste à trouver et valider une table distributive appropriée. Aucune extrapolation à partir du montant national de TVA n'a été effectuée.
+
+## Deux approches distinctes de la fiscalité indirecte (sans interpolation)
+
+### Estimations BDF 2001 pour la TVA
+
+[Ruiz et Trannoy (2008)](https://www.insee.fr/fr/statistiques/fichier/1376872/es413b.pdf) utilisent l'enquête Budget de Famille 2001 et un modèle de taxation par biens et services. Nous retranscrivons les tableaux 3, 4 et 6 du document publié pour les dix déciles de ménages : TVA en euros **courants 2001 par ménage**, TVA divisée par **revenu disponible brut agrégé du décile**, TVA divisée par **consommation totale** du décile. En particulier, les taux d'effort sont des ratios agrégés, non les moyennes de taux individuels. Ces trois indicateurs ne sont pas interchangeables.
+
+Le résultat D1 = 11,52 % du revenu disponible brut contre D10 = 5,92 % correspond à des **estimations 2001**, pas à des prélèvements fiscaux administratifs d'individus ni à un taux 2025. D1 = 10,5 % de la consommation contre D10 = 11,6 % compare un autre dénominateur ; ce sont des **taux apparents** avec un panier de consommations propre à chaque groupe.
+
+### Comptes nationaux distribués 2020–2023
+
+Le classeur [Insee CND.101](https://www.insee.fr/fr/statistiques/8574663), publié le 16 avril 2026, fournit la ligne « Taxes sur les produits (TVA, TICPE, acises, DMTO, etc.) », distribuée entre vingt groupes de niveau de vie, pour les années **2020, 2021, 2022 et 2023**. Le signe négatif de prélèvement dans la publication est transformé en **montant positif** dans notre fichier dérivé. Ce choix de présentation n'altère pas le montant mais interdit de sommer à nouveau ces valeurs comme recettes fiscales distinctes.
+
+Nous affichons seulement les milliards d'euros attribués aux groupes et la proportion de la somme distribuée **dans la même année et la même source**. Aucun ratio de niveau de vie n'est calculé, aucun chiffre isolé pour la TVA n'est dérivé. Les revenus disponibles nets du secteur S14 figurent dans le classeur mais concernent un sous-secteur et ne sont pas un dénominateur automatiquement compatible avec les taxes sur les produits attribuées à l'ensemble S1.
+
+Les données sont expérimentales, recalées sur la comptabilité nationale et fondées sur des hypothèses d'allocation par consommation. Les montants ne mesurent ni l'incidence économique finale de la taxe ni la charge réellement acquittée par décile en 2025. Les données BDF 2001 et CND 2020–2023 doivent rester **visuellement et statistiquement séparées**.

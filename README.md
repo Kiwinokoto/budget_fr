@@ -63,6 +63,13 @@ Attention : les prélèvements obligatoires ne constituent pas toutes les recett
 
 **Important :** ni TVA acquittée par décile, ni données distributives observées en 2025, ni indice composite de justice fiscale. Source originale : [Insee Analyses 43](https://www.insee.fr/fr/statistiques/3713290) ; valeurs officiellement publiées retranscrites à une décimale et testées. Voir [méthode](METHODOLOGY.md) et [traçabilité](DATA_SOURCES.md).
 
+## Fiscalité indirecte : taux d'effort et comptes distribués
+
+**[Comparer TVA/revenu, TVA/consommation et taxes sur les produits](tva-incidence.html)** : deux jeux de données **méthodologiquement distincts**.
+- **Enquête Budget de famille 2001** : estimations de TVA par décile issues de Ruiz et Trannoy (2008), tableau 3 (euros par ménage), tableau 4 (TVA en % du revenu disponible brut) et tableau 6 (TVA en % de la consommation). **Ni mesure directe auprès de la DGFiP ni série 2025**.
+- **Comptes nationaux distribués 2020–2023** : taxes sur les produits (TVA, TICPE, accises, DMTO, etc.) par vingtième de niveau de vie usuel, Insee CND.101, publication 2026. **Ce n'est pas la TVA seule**. Import reproductible : `python3 scripts/import_cnd_product_taxes.py`.
+- Jamais superposer ces données de périodes, périmètres et unités différentes sur un axe commun ; afficher les unités et la provenance à chaque étape.
+
 **Graduations temporelles :** tous les 5 ans sur ordinateur et tous les 10 ans en affichage compact, année finale toujours affichée ; curseur signalé par un repère vertical discret. [Tests des axes](tests/year_axes.test.cjs) : `node --test tests/year_axes.test.cjs`.
 
 **Justice fiscale (cadrage en cours) :** [TVA, incidence et limites des données](TVA_JUSTICE_SOURCES.md). Aucune série de TVA par décile n'est encore présentée comme une observation récente.
