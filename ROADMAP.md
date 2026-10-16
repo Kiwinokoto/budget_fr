@@ -27,6 +27,12 @@
 - Source 3.216 couvrant 1959–2025 repérée mais **pas importée** ; attention à l'inclusion des organismes européens et aux transferts.
 - **Production validée** : https://budget-fr.kiwinokoto.fr/recettes.html (HTTPS et certificat valides), CSV servi conforme octet par octet au fichier GitHub, 14 tests réussis, import sur source originale conforme, JS vérifié syntaxiquement. Commit déployé `eaa87fae4ba3a57aab8374592d01530eadd70628`. Ancienne version sauvegardée dans `/opt/budget-fr/backup/20261016T130106-2057b7e3eb0e2424cb37f95ce85fadbf54bd30fe/`. Le site n'est pas redéployé automatiquement ; une revue visuelle desktop/mobile reste à faire.
 
+## Finition des axes temporels — passe du 16 octobre 2026
+
+- Réglage ciblé en cours sur `dev/axes-cinq-ans` : graduations de 5 ans sur desktop, 10 ans sur mobile, année terminale toujours affichée (dont 2024 COFOG).
+- Repère vertical discret de l'année sélectionnée sur les quatre courbes (recettes/dépenses, dette, fonctions, prélèvements).
+- Aucun changement de valeurs ou de millésime des trois jeux de données. Validation et déploiement à consigner dans la passation après test.
+
 ## Suite prioritaire
 
 1. Valider le rendu dans un navigateur, ergonomie mobile et accessibilité (pas encore revue en détail).

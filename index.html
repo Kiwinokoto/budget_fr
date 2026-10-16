@@ -48,6 +48,18 @@ const rows=lines.map(line=>{
 const slider=document.getElementById('year');
 const format=n=>n===null?'—':n.toLocaleString('fr-FR',{minimumFractionDigits:1,maximumFractionDigits:1})+' %';
 const X=i=>60+i*790/(rows.length-1);
+function yearTicks(start,end,compact){
+ const step=compact?10:5;
+ const years=[];
+ for(let year=start;year<=end;year+=step)years.push(year);
+ if(years[years.length-1]!==end){
+  // Leave enough space between the last mobile ticks and the final year.
+  if(compact && end-years[years.length-1]<7)years.pop();
+  years.push(end);
+ }
+ return years;
+}
+const compactQuery=window.matchMedia('(max-width: 700px)');
 function draw(id,series,low,high,ticks){
  const svg=document.getElementById(id);
  const Y=v=>315-(v-low)*250/(high-low);
@@ -62,12 +74,16 @@ function draw(id,series,low,high,ticks){
   }).filter(Boolean).join(' ');
   return '<path d="'+path+'" stroke="'+s.color+'" fill="none" stroke-width="3"/>';
  }).join('');
- svg.innerHTML=grid+paths+
- '<text x="60" y="347" fill="#bdc9da" font-size="14">1960</text>'+
- '<text x="860" y="347" fill="#bdc9da" font-size="14" text-anchor="end">2025</text>';
+ const selected=Number(slider.value)-1960;
+ const guide='<line x1="'+X(selected)+'" x2="'+X(selected)+'" y1="65" y2="315" stroke="#dbe4ff" stroke-dasharray="3 7" opacity=".52"/>';
+ const markers=series.filter(s=>rows[selected][s.key]!==null).map(s=>
+  '<circle cx="'+X(selected)+'" cy="'+Y(rows[selected][s.key])+'" r="5" fill="'+s.color+'" stroke="#fff" stroke-width="1.4"/>'
+ ).join('');
+ const years=yearTicks(1960,2025,compactQuery.matches);
+ const labels=years.map((year,i)=>'<text x="'+X(year-1960)+'" y="347" fill="#bdc9da" font-size="12" text-anchor="'+(i===0?'start':i===years.length-1?'end':'middle')+'">'+year+'</text>').join('');
+ const tickMarks=years.map(year=>'<line x1="'+X(year-1960)+'" x2="'+X(year-1960)+'" y1="315" y2="321" stroke="#65758d"/>').join('');
+ svg.innerHTML=grid+paths+guide+markers+tickMarks+labels;
 }
-draw('chart',[{key:'revenue_pct_gdp',color:'#6fddbc'},{key:'expenditure_pct_gdp',color:'#eab879'}],30,65,[30,40,50,60]);
-draw('debt-chart',[{key:'gross_debt_pct_gdp',color:'#a7b5ff'},{key:'net_debt_pct_gdp',color:'#d8a7e7'}],0,130,[0,30,60,90,120]);
 function selectYear(){
  const r=rows.find(r=>r.year===Number(slider.value));
  if(!r)return;
@@ -77,8 +93,11 @@ function selectYear(){
   ['balance','balance_pct_gdp'],['gross-debt','gross_debt_pct_gdp'],
   ['net-debt','net_debt_pct_gdp']])
    document.getElementById(id).textContent=format(r[key]);
+ draw('chart',[{key:'revenue_pct_gdp',color:'#6fddbc'},{key:'expenditure_pct_gdp',color:'#eab879'}],30,65,[30,40,50,60]);
+ draw('debt-chart',[{key:'gross_debt_pct_gdp',color:'#a7b5ff'},{key:'net_debt_pct_gdp',color:'#d8a7e7'}],0,130,[0,30,60,90,120]);
 }
 slider.addEventListener('input',selectYear);
+compactQuery.addEventListener('change',selectYear);
 selectYear();
 })().catch(err=>{
  document.querySelector('.panel').insertAdjacentText('beforeend',
