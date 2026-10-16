@@ -92,12 +92,22 @@
 - **Validation :** 23 tests Python + 14 tests Node réussis ; JS des cinq pages vérifié, ancien CSV CND reproduit octet par octet à partir de sa source officielle. Les cinq fichiers publics mis à jour sont identiques octet par octet au commit GitHub, pages et CSV historiques inchangés.
 - **Sauvegarde réversible :** `/opt/budget-fr/backup/20261016T160348-drees-before-e97999e3168b808938c385f22a60d886394981b0/`. Aucun redémarrage de service, verrous AgentCtl relâchés après opérations. Revue graphique mobile **encore non effectuée**.
 
+## Coût annuel de la dette publique — lot intérêts 1959–2025
+
+- Source Insee **3.201 du 28 août 2026**, S13 consolidé, 1959–2025. Deux définitions d'intérêts D41 et D41G hors correction SIFIM, plus total des dépenses dans **le même millésime**.
+- `scripts/import_interest.py` reproductible, SHA-256 originale vérifiée ; `data/interets_apu_1959_2025_bn_eur.csv` 67 années, unités **milliards d'euros courants**.
+- `interets.html` : sélection de l'année, courbes des deux conventions, bascule montants / parts de la dépense publique, explications du décalage 2025 65,7/64,7 et distinction **charge d'intérêts (flux)** / **dette Maastricht (stock)**.
+- Nav ajoutée sur l'accueil ; méthodologie, sources et tests étendus ; ne pas inférer un taux apparent d'intérêt à partir de séries non homogènes.
+- **Drees / modèle Ines** : une demande de tableaux récents agrégés de TVA par décile a été envoyée le **16 octobre 2026** par e-mail privé. Réponse en attente ; **ne pas publier l'adresse de l'expéditeur ni le contenu de l'échange sans accord**. Le travail sur les comptes publics continue en parallèle.
+- **Audit visuel navigateur** : prompt préparé pour un contrôle black-box des cinq pages existantes par Work. Aucun résultat de cet audit n'est encore disponible ; **pas de mutation Git par l'auditeur**.
+- À finaliser après tests : PR et SHA applicatif fusionné, preuve du déploiement réel, sauvegarde/restauration et statut des verrous.
+
 ## Suite prioritaire
 
 1. Valider le rendu sur un vrai navigateur mobile et l'accessibilité ; les captures desktop sont encourageantes mais ne valident pas le mobile.
 2. Documenter et mesurer les écarts entre les publications Insee de mai et août 2026.
 3. ~~Rechercher des séries détaillées COFOG 1995–2024~~ : **premier niveau COFOG S13 intégré** (mars 2026, dix catégories, euros courants). Prochaine étape : explorer sous-fonctions, harmoniser les millésimes et déceler les reclassements.
-4. ~~Identifier les principales recettes par impôt~~ : premier lot de prélèvements obligatoires 1995–2025 intégré avec contrôle des doubles comptes, TVA, IRPP, IS, CSG/CRDS et cotisations. Poursuivre : revenus non fiscaux, dette, intérêts, solde primaire et patrimoine.
+4. ~~Identifier les principales recettes par impôt~~ : premier lot de prélèvements obligatoires 1995–2025 intégré avec contrôle des doubles comptes, TVA, IRPP, IS, CSG/CRDS et cotisations. Poursuivre : revenus non fiscaux, dette (dont intérêts annuels en cours d'intégration), solde primaire et patrimoine.
 5. **TVA et justice fiscale :** enquêter sur la disponibilité de la TVA seule réellement estimée et rapportée au revenu/consommation dans une enquête récente, puis étendre aux taux réduits et à la redistribution élargie. Maintenir strictement les distinctions 2001 estimée / Ines 2014 TVA seule / 2016 choc simulé / 2020–2023 taxes sur produits / simulation 2025. Ensuite formaliser la traçabilité budgétaire.
 6. Faire une vraie revue visuelle et une vérification responsive, puis envisager un déploiement automatisé uniquement si cela devient utile (actuellement manuel et volontaire).
 

@@ -96,9 +96,22 @@ Insee, [Comptes par catégories de ménage](https://www.insee.fr/fr/statistiques
 - [CASD, enquête BDF 2017](https://www.casd.eu/source/enquete-budget-de-famille/) : accès à un jeu détaillé **sur autorisation** ; version moins détaillée via **Quételet-Progedo**, à vérifier avant toute utilisation. La base ERFS qui alimente Ines fait également l'objet de dispositifs de diffusion adaptés à la confidentialité.
 - Conséquence : pas de résultat chiffré « TVA payée en 2025 par décile » sans disposer soit d'un **tableau agrégé officiellement produit** soit de **microdonnées accessibles légalement**, d'un modèle de taxation validé et de ressources pour analyser ses hypothèses.
 
+## Source ajoutée — Charge d'intérêts des administrations publiques S13 (1959–2025)
+
+- **[Insee, tableau 3.201 « Dépenses et recettes des administrations publiques »](https://www.insee.fr/fr/statistiques/8988845)**, base 2020, mis à jour le **28 août 2026**.
+- Fichier exact : https://www.insee.fr/fr/statistiques/fichier/8988845/t_3201_fr.xlsx
+- SHA-256 inspectée : `487d4299a5bac8d616000952fd012a0eb6d251a3586508165fc37d64a73a397a`.
+- Feuille `t_3201`, ligne 3 = années **1959–2025**, ligne 12 = **Intérêts (D41)**, ligne 13 = **Intérêts hors correction au titre des SIFIM (D41G)**, ligne 27 = **Total des dépenses**. Champ = **S13, administrations publiques consolidées**, et non l'État seul.
+- Unités : **milliards d'euros courants**, y compris les observations avant l'introduction de l'euro (conversion rétrospective de la série Insee). Valeurs publiées dans le XLSX à quatre décimales, affichées à une décimale. Année 2025 provisoire.
+- Données dérivées `data/interets_apu_1959_2025_bn_eur.csv`, importateur standard `scripts/import_interest.py`, source XLSX originale **non** commitée. Validation stricte des libellés, années, empreinte, valeurs et cohérence par rapport à la dépense totale.
+- Pour la comparaison sur la page, `part_d'interets_D41G = D41G / total_dépenses_S13 × 100`, **calculé à partir du même classeur et du même millésime**. Cette part n'est pas une fraction du PIB ni un taux appliqué à l'encours de dette de Maastricht.
+- En 2025 : D41 = `65.7209` Md€, D41G = `64.6519` Md€, dépenses totales = `1714.1117` Md€. Le montant synthétique Insee de **64,7 Md€** utilise D41G.
+- D41/D41G ne sont pas deux charges additionnables ; la correction au titre des SIFIM peut modifier l'ordre relatif des deux séries selon l'année. Ne jamais appeler D41G « dette nette ».
+- Le ratio d'intérêts sur les dépenses ne mesure ni le taux d'intérêt effectif de la dette ni le coût futur de son refinancement.
+
 ## Sources identifiées, non intégrées
 
-- [Insee, comptes APU détaillés](https://www.insee.fr/fr/statistiques/8988845), tableaux 3.201 et suivants ; vérifier périmètres, catégories et durées des séries.
+- [Insee, comptes APU détaillés](https://www.insee.fr/fr/statistiques/8988845), tableaux **autres que 3.201** ; vérifier périmètres, catégories et durées des séries.
 - [Insee Première n° 2106 (mai 2026)](https://www.insee.fr/fr/statistiques/8997691) : publication antérieure ; certains chiffres ont été révisés et ne doivent pas être mélangés au millésime d'août.
 - Eurostat, OCDE, DGFiP, AFT, budget.gouv.fr, Cour des comptes : sources candidates pour les fonctions, impôts, intérêts, investissements et traçabilité.
 
