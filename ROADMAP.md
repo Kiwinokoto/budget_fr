@@ -2,14 +2,16 @@
 
 ## Situation au 16 octobre 2026
 
-- Dépôt public : Kiwinokoto/budget_fr. PR #1–#5 fusionnées sur `main` le 16 octobre 2026 ; commit applicatif recettes **`eaa87fae4ba3a57aab8374592d01530eadd70628`**. La documentation de passation ultérieure peut faire avancer `main` sans redéploiement.
+- Dépôt public : Kiwinokoto/budget_fr. PR #1–#7 fusionnées sur `main` le 16 octobre 2026 ; dernier commit applicatif (graduations) **`607dbd8b4fd60c92b47832c701ce9c122f949891`**. La documentation de passation ultérieure peut faire avancer `main` sans redéploiement.
 - Coordination AgentCtl : projet budget-fr, ressource repo:Kiwinokoto/budget_fr ; verrou à prendre avant toute mutation et libérer en fin de passe.
 - Base Insee initiale 1995–2025 recopiée à la main **remplacée** par les chiffres du classeur officiel d'août 2026.
 - Données 1960–2025 : recettes, dépenses, solde, variantes hors éléments imputés ; dette brute depuis 1978 et nette depuis 1995. Fichier original conservé à la source, pas dans Git.
 - Importateur en Python standard, empreinte SHA-256 de la source, validation des libellés, années et solde ; tests couvrant les absences de valeurs.
 - Application statique avec curseur temporel et graphiques de recettes/dépenses et dette.
-- Site public en ligne : **https://budget-fr.kiwinokoto.fr** sur le VPS personnel, via `/opt/budget-fr`, conteneur `budget-fr-web`, réseau Docker `traefik_network`, routeur Traefik dédié et certificat Let's Encrypt. Déploiement figé sur `eaa87fae4ba3a57aab8374592d01530eadd70628` (`/opt/budget-fr/.deployed_commit`). Aucune base de données, aucune automatisation ou modification des services voisins.
+- Site public en ligne : **https://budget-fr.kiwinokoto.fr** sur le VPS personnel, via `/opt/budget-fr`, conteneur `budget-fr-web`, réseau Docker `traefik_network`, routeur Traefik dédié et certificat Let's Encrypt. Déploiement figé sur `607dbd8b4fd60c92b47832c701ce9c122f949891` (`/opt/budget-fr/.deployed_commit`). Aucune base de données, aucune automatisation ou modification des services voisins.
 - Vérifications en production : HTTPS HTTP 200 sans `-k`, documents et CSV HTTP 200, trois CSV servis identiques octet par octet à GitHub (66, 30 et 31 années), **14 tests Python OK**, certificat valide, conteneur démarré, volume statique monté en lecture seule. Revue visuelle navigateur desktop/mobile **encore à faire**.
+
+- **Version applicative publique actuelle (axes 5 ans)** : `607dbd8b4fd60c92b47832c701ce9c122f949891`, après PR #7, distincte des versions précédentes conservées dans l'historique. `main` peut évoluer ensuite par commits documentaires non déployés.
 
 ## Lot COFOG livré sur `main` et sur le site public
 
@@ -29,9 +31,11 @@
 
 ## Finition des axes temporels — passe du 16 octobre 2026
 
-- Réglage ciblé en cours sur `dev/axes-cinq-ans` : graduations de 5 ans sur desktop, 10 ans sur mobile, année terminale toujours affichée (dont 2024 COFOG).
-- Repère vertical discret de l'année sélectionnée sur les quatre courbes (recettes/dépenses, dette, fonctions, prélèvements).
-- Aucun changement de valeurs ou de millésime des trois jeux de données. Validation et déploiement à consigner dans la passation après test.
+- **Livré via PR #7**, commit applicatif `607dbd8b4fd60c92b47832c701ce9c122f949891` et déployé en production à ce même SHA.
+- Graduations de 5 ans sur grand écran, 10 ans en affichage compact (rupture à 700 px), avec dernière année conservée (2024 COFOG).
+- Repère vertical discret de l'année sélectionnée et points des séries disponibles sur les quatre courbes (recettes/dépenses, dette, fonctions, prélèvements).
+- Validation : 14 tests Python, 3 tests Node de graduations, syntaxe des 3 scripts JavaScript ; **17/17 réussis**. Les trois HTML publics sont identiques octet par octet au commit versionné via HTTPS, les CSV inchangés.
+- Sauvegarde réversible : `/opt/budget-fr/backup/20261016T134059-axes-before-607dbd8b4fd60c92b47832c701ce9c122f949891/`. Aucun redémarrage Docker ou Traefik. Les captures fournies décrivent l'ancien rendu desktop ; **revue visuelle des nouvelles graduations en navigateur mobile encore à faire**.
 
 ## Suite prioritaire
 
