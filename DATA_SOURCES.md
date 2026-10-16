@@ -128,3 +128,15 @@ Insee, [Comptes par catégories de ménage](https://www.insee.fr/fr/statistiques
 - Eurostat, OCDE, DGFiP, AFT, budget.gouv.fr, Cour des comptes : sources candidates pour les fonctions, impôts, intérêts, investissements et traçabilité.
 
 **Important :** une fiche de source ne prouve ni disponibilité d'une décomposition exhaustive, ni possibilité de rapprochement entre années ou nomenclatures. Vérifier chaque série sur le fichier d'origine.
+
+## Dette Maastricht par instrument et administration — Insee 3.102 (1995–2025)
+
+- **Producteur : Insee**, comptes nationaux annuels base 2020, publication du **28 août 2026**, tableau **3.102**, [page officielle](https://www.insee.fr/fr/statistiques/8988843).
+- **Classeur original** : https://www.insee.fr/fr/statistiques/fichier/8988843/t_3102_fr.xlsx ; empreinte SHA-256 auditée : `6c8beca5fb0ac72754887d8a871a83eda6f8523ca6c903c1bc898f8cfe749b49`.
+- **Champ** : France entière, dette brute **nominale consolidée de Maastricht** en fin d'année, **milliards d'euros courants**, 1995–2025 (2025 provisoire). Ceci ne représente pas uniquement la dette négociable de l'État.
+- **Séries** : S13 (total APU), S1311 (centrales), S13111 (État), S13112 (ODAC), S1313 (locales), S1314 (sécurité sociale). **Ne jamais additionner S1311 à ses composantes S13111/S13112.**
+- **Instruments** : F2N (dépôts), F31_32 (titres courts et longs), F31 (titres courts, inclus dans F31_32), F32 (titres longs, inclus dans F31_32), F41 (crédits courts), F42 (crédits longs), GD (total). Courte/longue échéance = **maturité initiale à l'émission**, et non durée restante. **F31 et F32 ne sont pas à ajouter une seconde fois à F31_32.**
+- **Manquants vérifiés** : le classeur laisse **S1314/F2N vide en 1995–2025**. Notre CSV le laisse vide également ; ce n'est pas un zéro observé. Pour le seul contrôle de réconciliation GD, le poste non renseigné n'est pas additionné ; la cohérence numérique des autres postes est vérifiée.
+- **Contrôles de reproduction** : SHA obligatoire, titres/année/codes/emplacements et montants finis/non négatifs vérifiés ; somme des instruments et des quatre sous-secteurs, sous-total S1311, sous-total F31+F32, ancrage S13 fin 2025 **3 460,1 Md€**. Tolérance **0,25 Md€** pour sous-totaux à quatre composantes arrondies séparément à 0,1 Md€, **0,50 Md€** pour quatre sous-secteurs.
+- **Livrables** : `scripts/import_debt_instruments.py`, `data/dette_maastricht_instruments_1995_2025_bn_eur.csv`, `tests/test_debt_instruments.py`. Reproduction : `python3 scripts/import_debt_instruments.py --xlsx /chemin/t_3102_fr.xlsx`. XLSX non commité. L'option `--allow-source-change` sert uniquement à auditer un nouveau millésime ; ne pas publier sans revoir les écarts.
+- **Limites** : le CSV ne contient ni détenteurs, ni durée résiduelle, ni valeur de marché. Ne pas fusionner avec les jeux Eurostat, Banque de France ou AFT sans réconciliation de périmètre, de millésime et de méthode.
