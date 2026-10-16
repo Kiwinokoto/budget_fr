@@ -2,16 +2,16 @@
 
 ## Situation au 16 octobre 2026
 
-- Dépôt public : Kiwinokoto/budget_fr. PR #1–#11 fusionnées sur `main` le 16 octobre 2026 ; dernier commit applicatif (simulation TVA) **`51e51f228aa96ec74c678f70d7a8ac98b79d6e73`**. La documentation de passation ultérieure peut faire avancer `main` sans redéploiement.
+- Dépôt public : Kiwinokoto/budget_fr. PR #1–#13 fusionnées sur `main` le 16 octobre 2026 ; dernier commit applicatif (TVA BDF 2001 et produits CND 2020–2023) **`8e490b18cf0a20d6c323f52281e518a37024800f`**. La documentation de passation ultérieure peut faire avancer `main` sans redéploiement.
 - Coordination AgentCtl : projet budget-fr, ressource repo:Kiwinokoto/budget_fr ; verrou à prendre avant toute mutation et libérer en fin de passe.
 - Base Insee initiale 1995–2025 recopiée à la main **remplacée** par les chiffres du classeur officiel d'août 2026.
 - Données 1960–2025 : recettes, dépenses, solde, variantes hors éléments imputés ; dette brute depuis 1978 et nette depuis 1995. Fichier original conservé à la source, pas dans Git.
 - Importateur en Python standard, empreinte SHA-256 de la source, validation des libellés, années et solde ; tests couvrant les absences de valeurs.
 - Application statique avec curseur temporel et graphiques de recettes/dépenses et dette.
-- Site public en ligne : **https://budget-fr.kiwinokoto.fr** sur le VPS personnel, via `/opt/budget-fr`, conteneur `budget-fr-web`, réseau Docker `traefik_network`, routeur Traefik dédié et certificat Let's Encrypt. Déploiement figé sur `51e51f228aa96ec74c678f70d7a8ac98b79d6e73` (`/opt/budget-fr/.deployed_commit`). Aucune base de données, aucune automatisation ou modification des services voisins.
+- Site public en ligne : **https://budget-fr.kiwinokoto.fr** sur le VPS personnel, via `/opt/budget-fr`, conteneur `budget-fr-web`, réseau Docker `traefik_network`, routeur Traefik dédié et certificat Let's Encrypt. Déploiement figé sur `8e490b18cf0a20d6c323f52281e518a37024800f` (`/opt/budget-fr/.deployed_commit`). Aucune base de données, aucune automatisation ou modification des services voisins.
 - Vérifications en production : HTTPS HTTP 200 sans `-k`, documents et CSV HTTP 200, trois CSV servis identiques octet par octet à GitHub (66, 30 et 31 années), **14 tests Python OK**, certificat valide, conteneur démarré, volume statique monté en lecture seule. Revue visuelle navigateur desktop/mobile **encore à faire**.
 
-- **Version applicative publique actuelle (axes 5 ans)** : `607dbd8b4fd60c92b47832c701ce9c122f949891`, après PR #7, distincte des versions précédentes conservées dans l'historique. `main` peut évoluer ensuite par commits documentaires non déployés.
+- **Historique des axes** : `607dbd8b4fd60c92b47832c701ce9c122f949891` (PR #7), inclus dans les versions applicatives suivantes. L'application servie est désormais `8e490b1` ; les commits de documentation ultérieurs ne déclenchent pas de déploiement.
 
 ## Lot COFOG livré sur `main` et sur le site public
 
@@ -63,7 +63,11 @@
 - Dataset **2020–2023** : Insee CND.101, taxes sur les produits (TVA, TICPE, accises, DMTO, etc.) **et non TVA seule**, vingt groupes V1–V20, milliards d’euros courants. Source XLSX épinglée SHA-256, importateur avec vérification des totaux.
 - Page `tva-incidence.html` interactive : bascule de dénominateur pour 2001, sélection de millésime pour taxes sur produits, détails des groupes. Liens depuis accueil, recettes et simulation 2019.
 - **Garde-fou :** comparaison qualitative seulement ; aucune interpolation vers 2025, aucun mélange des catégories ou des millésimes ; données CND expérimentales.
-- À compléter après tests : branche/PR, commit exact, publication HTTPS, sauvegarde, vérification AgentCtl et revue visuelle réelle mobile encore ouverte.
+- **Livré et déployé** : PR #13, commit `8e490b18cf0a20d6c323f52281e518a37024800f`. Nouvelle page https://budget-fr.kiwinokoto.fr/tva-incidence.html, navigations et deux nouveaux CSV en production.
+- **Tests vérifiés** : 22 Python + 10 Node (32 réussis), syntaxe JavaScript de cinq pages, CSV CND.101 reproduit **octet par octet** depuis l'XLSX original ; clone Git propre.
+- **Contrôles HTTPS** : index, recettes, simulation, nouvelle page et deux CSV correspondant octet par octet au commit ; les quatre CSV/pages déjà publiés n'ont pas changé.
+- **Retour arrière** : copie précédente `/opt/budget-fr/backup/20261016T153535-incidence-before-8e490b18cf0a20d6c323f52281e518a37024800f/`. Aucun redémarrage de service et verrous AgentCtl libérés après publication.
+- **Limites** : validation visuelle mobile réelle toujours à faire ; aucune série actuelle de **TVA seule** et de taux d'effort des déciles n'est attestée pour 2023 ou 2025.
 
 ## Suite prioritaire
 
@@ -71,7 +75,7 @@
 2. Documenter et mesurer les écarts entre les publications Insee de mai et août 2026.
 3. ~~Rechercher des séries détaillées COFOG 1995–2024~~ : **premier niveau COFOG S13 intégré** (mars 2026, dix catégories, euros courants). Prochaine étape : explorer sous-fonctions, harmoniser les millésimes et déceler les reclassements.
 4. ~~Identifier les principales recettes par impôt~~ : premier lot de prélèvements obligatoires 1995–2025 intégré avec contrôle des doubles comptes, TVA, IRPP, IS, CSG/CRDS et cotisations. Poursuivre : revenus non fiscaux, dette, intérêts, solde primaire et patrimoine.
-5. **TVA et justice fiscale :** poursuivre l'inventaire des tableaux effectivement exploitables par groupe de niveau de vie, et publier seulement des comparaisons avec années, dénominateurs et incertitudes. Ensuite formaliser la traçabilité budgétaire.
+5. **TVA et justice fiscale :** enquêter sur la disponibilité de la TVA seule réellement estimée et rapportée au revenu/consommation dans une enquête récente, puis étendre aux taux réduits et à la redistribution élargie. Maintenir strictement les distinctions 2001 / 2016 simulée / 2020–2023 taxes sur produits. Ensuite formaliser la traçabilité budgétaire.
 6. Faire une vraie revue visuelle et une vérification responsive, puis envisager un déploiement automatisé uniquement si cela devient utile (actuellement manuel et volontaire).
 
 ## Risques
