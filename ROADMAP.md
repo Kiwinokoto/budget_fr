@@ -2,13 +2,13 @@
 
 ## Situation au 16 octobre 2026
 
-- Dépôt public : Kiwinokoto/budget_fr. PR #1–#13 fusionnées sur `main` le 16 octobre 2026 ; dernier commit applicatif (TVA BDF 2001 et produits CND 2020–2023) **`8e490b18cf0a20d6c323f52281e518a37024800f`**. La documentation de passation ultérieure peut faire avancer `main` sans redéploiement.
+- Dépôt public : Kiwinokoto/budget_fr. PR #1–#15 fusionnées sur `main` le 16 octobre 2026 ; dernier commit applicatif (Trésor TVA 2025) **`2dd13d08762e8b658264a174f9de24a0199b9a65`**. La documentation de passation ultérieure peut faire avancer `main` sans redéploiement.
 - Coordination AgentCtl : projet budget-fr, ressource repo:Kiwinokoto/budget_fr ; verrou à prendre avant toute mutation et libérer en fin de passe.
 - Base Insee initiale 1995–2025 recopiée à la main **remplacée** par les chiffres du classeur officiel d'août 2026.
 - Données 1960–2025 : recettes, dépenses, solde, variantes hors éléments imputés ; dette brute depuis 1978 et nette depuis 1995. Fichier original conservé à la source, pas dans Git.
 - Importateur en Python standard, empreinte SHA-256 de la source, validation des libellés, années et solde ; tests couvrant les absences de valeurs.
 - Application statique avec curseur temporel et graphiques de recettes/dépenses et dette.
-- Site public en ligne : **https://budget-fr.kiwinokoto.fr** sur le VPS personnel, via `/opt/budget-fr`, conteneur `budget-fr-web`, réseau Docker `traefik_network`, routeur Traefik dédié et certificat Let's Encrypt. Déploiement figé sur `8e490b18cf0a20d6c323f52281e518a37024800f` (`/opt/budget-fr/.deployed_commit`). Aucune base de données, aucune automatisation ou modification des services voisins.
+- Site public en ligne : **https://budget-fr.kiwinokoto.fr** sur le VPS personnel, via `/opt/budget-fr`, conteneur `budget-fr-web`, réseau Docker `traefik_network`, routeur Traefik dédié et certificat Let's Encrypt. Déploiement figé sur `2dd13d08762e8b658264a174f9de24a0199b9a65` (`/opt/budget-fr/.deployed_commit`). Aucune base de données, aucune automatisation ou modification des services voisins.
 - Vérifications en production : HTTPS HTTP 200 sans `-k`, documents et CSV HTTP 200, trois CSV servis identiques octet par octet à GitHub (66, 30 et 31 années), **14 tests Python OK**, certificat valide, conteneur démarré, volume statique monté en lecture seule. Revue visuelle navigateur desktop/mobile **encore à faire**.
 
 - **Historique des axes** : `607dbd8b4fd60c92b47832c701ce9c122f949891` (PR #7), inclus dans les versions applicatives suivantes. L'application servie est désormais `8e490b1` ; les commits de documentation ultérieurs ne déclenchent pas de déploiement.
@@ -76,7 +76,10 @@
 - Préserver trois différences : **quintiles et non déciles**, **effet marginal d'une hausse et non taux de TVA déjà supporté**, **publication 2025 fondée sur BDF 2017, ERFS 2022 et comptes nationaux 2021–2022**.
 - Section ajoutée à \`tva-incidence.html\`, sans chiffres fictifs pour Q2–Q4, test de non-régression, sources et méthodologie mises à jour.
 - La prochaine étude à rechercher reste un fichier de TVA actuelle seule par décile/quintile, relatif au revenu **et** à la consommation. BDF 2017 publie les dépenses par catégorie, pas directement le montant de TVA payée par groupe.
-- Validation, PR, commit applicatif, déploiement et sauvegarde à consigner après vérification réelle.
+- **Livré et déployé** : PR #15 fusionnée, version servie `2dd13d08762e8b658264a174f9de24a0199b9a65`, section publiée sur https://budget-fr.kiwinokoto.fr/tva-incidence.html. **22 tests Python + 12 tests Node** réussis, cinq scripts JavaScript validés et CSV CND.101 toujours reproductible octet par octet.
+- **Production vérifiée** : les fichiers `tva-incidence.html`, `TVA_JUSTICE_SOURCES.md`, `DATA_SOURCES.md` et `METHODOLOGY.md` correspondent au commit sur HTTPS ; anciens HTML et CSV inchangés.
+- **Sauvegarde** : `/opt/budget-fr/backup/20261016T154732-tresor-before-2dd13d08762e8b658264a174f9de24a0199b9a65/` ; déploiement statique isolé sous verrou, sans modification des autres services.
+- **Inconnue persistante** : aucune série annuelle récente de la TVA seule effectivement estimée par niveau de vie et consommation ; revue responsive graphique mobile non effectuée.
 
 ## Suite prioritaire
 
