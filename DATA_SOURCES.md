@@ -1,24 +1,22 @@
-# Audit initial des sources — 2026-10-16
+# Sources des données — audit du 16 octobre 2026
 
-## Vérifié
+## Source réellement inspectée et utilisée
 
-| Source | Série / étendue | Périmètre et statut | Usage |
-|---|---|---|---|
-| [Insee 2381414](https://www.insee.fr/fr/statistiques/2381414) | Recettes, dépenses, déficit, dette (1960–2025 annoncées), publication 28/08/2026 | Administrations publiques consolidées, comptabilité nationale base 2020 | Référence cible historique ; téléchargement XLSX et parsing à valider |
-| [Insee Première 2106](https://www.insee.fr/fr/statistiques/8997691) | Tableau publié 1995–2025 | Recettes, dépenses, solde en points de PIB | **Source exacte du premier CSV** ; relevé manuel à contrôler par extraction automatisée ultérieure |
-| [Insee COFOG](https://www.insee.fr/fr/statistiques/8574707) | Fonctions des dépenses 1995–2024 | Administrations publiques, sous-secteurs ; État séparé depuis 2009 | Futur détail fonctionnel, non encore importé |
-| [Insee 2381404](https://www.insee.fr/fr/statistiques/2381404) | Dépenses par administration, 2025 | Transferts inter-administrations consolidés au total | Contrôle du périmètre et risque de double compte |
-| [Insee Première 2093](https://www.insee.fr/fr/statistiques/8735252) | Dépenses par fonction 2014–2024 | COFOG | Documentation et rapprochement |
-| [Insee premiers résultats de mars](https://www.insee.fr/fr/statistiques/8956575) | Premières estimations de 2025 | **Millésime provisoire antérieur**, parfois différent des données d'août | Ne pas mélanger avec les données d'août |
+**Insee, Dépenses et recettes publiques**, publié le 28 août 2026 :
+- Page officielle : https://www.insee.fr/fr/statistiques/2381414
+- XLSX : https://www.insee.fr/fr/statistiques/fichier/2381414/econ-fin-pub-rec-dep.xlsx
+- SHA-256 vérifié du fichier téléchargé : 46f401c599cf076956a7b4732d877d57d7f1daea719f7f72397be1dd2f370126
+- Feuille « Données » ; années ligne 4, dépenses ligne 5, dépenses hors éléments imputés ligne 6, recettes ligne 7, recettes hors éléments imputés ligne 8, solde de Maastricht ligne 9, dette brute ligne 10, dette nette ligne 11.
+- Champ : France, administrations publiques consolidées ; comptes nationaux annuels base 2020 ; % du PIB.
+- Recettes, dépenses et solde 1960–2025 ; dette brute 1978–2025 ; dette nette 1995–2025.
+- 2024 est semi-définitif (sd), 2025 provisoire (p). Les cellules « nd » du classeur sont retranscrites comme absentes, non égales à zéro.
+- Traitement : scripts/import_insee.py ; fichier dérivé : data/apu_1960_2025_pct_pib.csv. L'original XLSX n'est pas commité.
+- Attribution à l'Insee et lien conservés. Toute réutilisation des données demeure soumise aux conditions applicables de l'Insee.
 
-## À auditer avant ingestion
+## Sources identifiées, non intégrées
 
-Eurostat, OCDE, DGFiP, AFT, budget.gouv.fr, Cour des comptes, DREES et études d'incidence fiscale. Ne pas présumer que leur licence, format, couverture, périodicité ou nomenclature permettent une fusion immédiate.
+- [Insee, comptes APU détaillés](https://www.insee.fr/fr/statistiques/8988845), tableaux 3.201 et suivants ; vérifier périmètres, catégories et durées des séries.
+- [Insee Première n° 2106 (mai 2026)](https://www.insee.fr/fr/statistiques/8997691) : publication antérieure ; certains chiffres ont été révisés et ne doivent pas être mélangés au millésime d'août.
+- Insee COFOG, Eurostat, OCDE, DGFiP, AFT, budget.gouv.fr, Cour des comptes : sources candidates pour les fonctions, impôts, intérêts, investissements et traçabilité.
 
-## Limitations connues
-
-- **Objectif 1980–2025 ; première livraison chiffrée 1995–2025 seulement.** Les années 1980–1994 seront intégrées après vérification du classeur Insee source.
-- Tableau 1995–2025 transcrit depuis l'article Insee : les écarts de 0,1 point entre `recettes - dépenses` et solde peuvent venir des arrondis des taux publiés.
-- Pas de décomposition TVA/IR/IS ni de « score de toxicité » dans ce lot.
-- Les données sont exprimées en **% du PIB**, non en euros, non en budget de l'État seul.
-- Pas encore de validation des droits de redistribution du classeur XLSX ; seules de petites valeurs statistiques tirées du tableau public sont reproduites, avec attribution.
+**Important :** une fiche de source ne prouve ni disponibilité d'une décomposition exhaustive, ni possibilité de rapprochement entre années ou nomenclatures. Vérifier chaque série sur le fichier d'origine.

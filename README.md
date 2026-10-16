@@ -1,28 +1,38 @@
 # budget_fr
 
-Atlas historique et critique des finances publiques françaises — **prototype open source expérimental**.
+Atlas historique et critique des finances publiques françaises — prototype expérimental.
 
-## Premier démonstrateur
+## Démonstrateur (sans dépendance)
 
-Courbes interactives des recettes, dépenses et du solde **des administrations publiques consolidées**, 1995–2025, en % du PIB. Données Insee, tableau publié en 2026, pas de données inventées pour 1980–1994.
+Recettes, dépenses et solde des administrations publiques consolidées de **1960 à 2025** ; dette brute de **1978 à 2025**, dette nette de **1995 à 2025**, le tout en **% du PIB**. La période demandée 1980–2025 est couverte, avec les limites propres à chaque série.
 
-Lancement local, sans dépendances :
+Pour consulter localement :
 
-```bash
+~~~bash
 python3 -m http.server 8000
-# ouvrir http://localhost:8000
-```
+# http://localhost:8000
+~~~
 
-Tests :
+Pour tester :
 
-```bash
+~~~bash
 python3 -m unittest discover -s tests -v
-```
+python3 -m compileall -q scripts tests
+~~~
 
-Documentation : [sources](DATA_SOURCES.md), [méthode](METHODOLOGY.md), [roadmap et passation](ROADMAP.md).
+Pour reproduire le CSV depuis la version officielle du fichier Insee (28 août 2026) :
 
-**Ne pas confondre** finances publiques consolidées et budget de l'État, solde et dette, données prévisionnelles et données exécutées, comptabilité observée et jugement d'efficacité.
+~~~bash
+python3 scripts/import_insee.py
+# ou hors ligne :
+python3 scripts/import_insee.py --xlsx /chemin/econ-fin-pub-rec-dep.xlsx
+git diff -- data/apu_1960_2025_pct_pib.csv
+~~~
 
-**Objectif** : couvrir 1980–2025 après validation de la série officielle complète ; étendre à 1960 si la comparabilité le permet. L'analyse de la justice fiscale, de la traçabilité et du patrimoine viendra ensuite, avec définitions testables.
+L'importateur vérifie la **SHA-256** du XLSX et refuse une mise à jour silencieuse. En cas de révision de la source, auditer les changements avant d'utiliser explicitement l'option --allow-source-change.
 
-Aucun déploiement public réalisé. Ce dépôt ne redistribue pas de fichier source protégé ou à accès restreint.
+Documentation : [sources](DATA_SOURCES.md), [méthodologie](METHODOLOGY.md), [passation et roadmap](ROADMAP.md).
+
+Ce dépôt public ne contient aucune donnée personnelle ni confidentielle. Aucun déploiement public n'a été effectué. Les données originales de l'Insee restent sous leurs propres conditions de réutilisation. Les séries peuvent être révisées.
+
+**Ne pas confondre** finances publiques consolidées et budget de l'État seul, déficit et dette, chiffres exécutés et budget voté. Aucune analyse de « toxicité » n'est encore proposée.

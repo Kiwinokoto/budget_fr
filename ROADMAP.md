@@ -1,22 +1,26 @@
-# Feuille de route et passation
+# Roadmap et passation
 
-## État au 2026-10-16
+## Situation au 16 octobre 2026
 
-- Dépôt public initialisé ; chantier sur `dev/initial-data`.
-- AgentCtl : projet `budget-fr`, scope exact `repo:Kiwinokoto/budget_fr`.
-- Premier lot : tableau Insee 1995–2025, visualiseur statique sans dépendance, test d'intégrité.
-- **Objectif historique 1980–2025 non encore atteint** ; aucune série fiscale détaillée importée.
-- Aucun hébergement public ou déploiement effectué.
+- Dépôt public : Kiwinokoto/budget_fr. Branche dev/initial-data ; PR #1 en brouillon vers main. Vérifier le HEAD réel avant de poursuivre.
+- Coordination AgentCtl : projet budget-fr, ressource repo:Kiwinokoto/budget_fr ; verrou à prendre avant toute mutation et libérer en fin de passe.
+- Base Insee initiale 1995–2025 recopiée à la main **remplacée** par les chiffres du classeur officiel d'août 2026.
+- Données 1960–2025 : recettes, dépenses, solde, variantes hors éléments imputés ; dette brute depuis 1978 et nette depuis 1995. Fichier original conservé à la source, pas dans Git.
+- Importateur en Python standard, empreinte SHA-256 de la source, validation des libellés, années et solde ; tests couvrant les absences de valeurs.
+- Application statique avec curseur temporel et graphiques de recettes/dépenses et dette.
+- Aucun déploiement effectué, aucune base de données ou nouveau service VPS créé.
 
-## Étapes suivantes
+## Suite prioritaire
 
-1. Télécharger et analyser **le XLSX officiel Insee 2381414** ; documenter colonnes, période et millésime ; ajouter 1980–1994 à partir des valeurs réellement vérifiées.
-2. Mettre en place un import reproductible (source archivée avec sa licence, empreinte SHA-256, schéma, contrôle de révisions) plutôt qu'une transcription manuelle.
-3. Ajouter COFOG 1995–2024 avec la bonne classification et les sous-secteurs ; prévenir les doubles comptes.
-4. Ajouter dette brute/nette, solde primaire, recettes fiscales détaillées lorsqu'elles sont comparables.
-5. Concevoir un registre de provenance et un audit de transparence ; tester les définitions d'incidence fiscale.
-6. Envisager une publication après tests, validation documentaire et décision explicite.
+1. Valider le rendu dans un navigateur, ergonomie mobile et accessibilité (pas encore revue en détail).
+2. Documenter et mesurer les écarts entre les publications Insee de mai et août 2026.
+3. Rechercher des séries détaillées COFOG 1995–2024 ; contrôler la classification avant ingestion.
+4. Étudier les séries de recettes par impôt, dette, intérêts, solde primaire et patrimoine.
+5. Formaliser l'échelle de transparence/traçabilité par poste et sa méthodologie ; tester l'incidence fiscale.
+6. Après revue de la PR et contrôles adaptés, décider si fusion et déploiement sont utiles.
 
-## Risques ouverts
+## Risques
 
-Changements de base, arrondis, révisions, classifications, périmètres, champ des bénéficiaires, licence de redistribution, confusion entre qualité de publication et irrégularités.
+Ruptures comptables, révisions du millésime, séries partielles, faux rapprochements de périmètres, transfert doublement compté, confusion entre fiabilité de la publication et qualité politique ou efficacité de la dépense.
+
+Passation : GitHub reste la source canonique ; ne pas laisser de fichiers importants dans une copie locale. Tester puis vérifier branche, HEAD, lease et état propre avant de conclure.
