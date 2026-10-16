@@ -99,9 +99,17 @@ Publication 2025, mais données sous-jacentes BDF 2017, ERFS 2022 et comptabilit
 
 **Justice fiscale (cadrage en cours) :** [TVA, incidence et limites des données](TVA_JUSTICE_SOURCES.md). Aucune série de TVA par décile n'est encore présentée comme une observation récente.
 
+## États de chargement et recette navigateur
+
+Sur les vues **Recettes** et **TVA / niveau de vie**, « Chargement des données… » est distinct de « — » (valeur manquante). En cas d'échec de téléchargement CSV, un message d'erreur propose **Réessayer**. Correction issue de la recette Work du 16 octobre 2026.
+
+- Work : cinq pages en navigateur à **1 363 px** ; aucun problème majeur confirmé, un défaut mineur corrigé.
+- Contrôle responsive complémentaire en Chromium headless : **six pages**, à **390 et 768 px**, sans débordement horizontal ni erreur JavaScript ; 12 chargements publics réussis après correctif, plus 4 scénarios simulant un réseau lent ou indisponible.
+- **Limite** : une revue esthétique manuelle sur un vrai appareil mobile n'a pas encore été effectuée.
+
 Documentation : [sources](DATA_SOURCES.md), [méthodologie](METHODOLOGY.md), [passation et roadmap](ROADMAP.md).
 
-**Site public : https://budget-fr.kiwinokoto.fr** (première publication vérifiée le 16 octobre 2026). Déploiement statique isolé sur le VPS personnel, derrière Traefik et Let's Encrypt. Version applicative effectivement servie après l'explorateur d'intérêts : `4679431cab4179292690c577573f5c56b64ac520` (incluant https://budget-fr.kiwinokoto.fr/recettes.html et https://budget-fr.kiwinokoto.fr/fonctions.html). Les changements de documentation ultérieurs sur `main` ne sont pas déployés automatiquement ; voir [la procédure d'exploitation](deploy/README.md).
+**Site public : https://budget-fr.kiwinokoto.fr** (première publication vérifiée le 16 octobre 2026). Déploiement statique isolé sur le VPS personnel, derrière Traefik et Let's Encrypt. Version applicative effectivement servie après le correctif de chargement des données : `062f91201a52518665398311938c1a775b99e50c` (incluant https://budget-fr.kiwinokoto.fr/recettes.html et https://budget-fr.kiwinokoto.fr/fonctions.html). Les changements de documentation ultérieurs sur `main` ne sont pas déployés automatiquement ; voir [la procédure d'exploitation](deploy/README.md).
 
 Ce dépôt public ne contient aucune donnée personnelle ni confidentielle. Les données originales de l'Insee restent sous leurs propres conditions de réutilisation. Les séries peuvent être révisées.
 
