@@ -39,3 +39,17 @@ Les colonnes indisponibles sont vides, jamais remplacées par zéro ; leur séri
 ## Ce qu'on ne peut PAS inférer
 
 Ces agrégats ne suffisent pas à analyser le poids de la TVA, les ventes du patrimoine public, la destination finale des dépenses ou une éventuelle « toxicité ». Ces questions exigent d'autres sources, des nomenclatures compatibles et une méthode explicitant les hypothèses concurrentes.
+
+## COFOG : dépenses publiques par fonction, 1995–2024
+
+Source : [Insee tableau 3.301](https://www.insee.fr/fr/statistiques/8574707), fichier `T_3301.xlsx`, publication 27 mars 2026, comptes nationaux base 2020, secteur consolidé **S13**. Import contrôlé avec `scripts/import_cofog.py`, empreinte SHA-256 du XLSX `ce36c71eafebdcbd941ef5cb74f10e79734fa4e1cc0dc1e97d84e321412c5ce5`.
+
+Fichier `data/cofog_1995_2024_bn_eur.csv` : lignes annuelles, `total_bn_eur` puis `gf01` à `gf10`. **Unité milliards d'euros courants**. Les dix catégories de premier niveau sont **mutuellement exclusives** et constituent la totalité des dépenses COFOG S13 au niveau d'arrondi de la source (tolérance 0,015 Md€). Elles ne sont pas ajoutées au total une seconde fois.
+
+Dans la page, le pourcentage par fonction est `montant_de_la_fonction / total_COFOG_de_la_même_année × 100`, et **non** un pourcentage du PIB. Cette part est comparable d'une année à l'autre sous réserve des révisions et ruptures de classification. Les montants en euros courants **ne mesurent pas la croissance réelle** : l'inflation n'est pas neutralisée.
+
+**Attention aux millésimes** : les agrégats macroéconomiques proviennent d'août 2026, la répartition COFOG de mars 2026. Le total 2024 de ces deux publications peut différer. Ne pas utiliser le total COFOG comme ventilation exacte du total macroéconomique d'août 2026 sans harmoniser les versions.
+
+Selon l'Insee, une modification de nomenclature des collectivités locales entraîne en 2024 un transfert apparent entre « Logements et équipements collectifs » et « Affaires économiques ». Il est explicitement déconseillé d'attribuer cet écart à une décision budgétaire réelle sans retraitement. Les intérêts de la dette sont classés dans les services publics généraux et non comme onzième catégorie à additionner.
+
+Lien direct vers la [description des dix fonctions COFOG](https://www.insee.fr/fr/statistiques/8574707).

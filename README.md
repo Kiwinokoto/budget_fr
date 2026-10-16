@@ -31,6 +31,19 @@ git diff -- data/apu_1960_2025_pct_pib.csv
 
 L'importateur vérifie la **SHA-256** du XLSX et refuse une mise à jour silencieuse. En cas de révision de la source, auditer les changements avant d'utiliser explicitement l'option --allow-source-change.
 
+## Dépenses par fonction (COFOG)
+
+**[Explorer les dépenses par fonction](fonctions.html)** : dix grandes catégories de dépenses consolidées (protection sociale, santé, enseignement, défense, etc.), séries Insee 3.301 **1995–2024**, en **milliards d’euros courants**. Sélection de l’année, part des dépenses totales, montants et évolution relative des catégories.
+
+Reproduction avec la source officielle du 27 mars 2026 :
+
+~~~bash
+python3 scripts/import_cofog.py
+# ou hors ligne : python3 scripts/import_cofog.py --xlsx /chemin/T_3301.xlsx
+~~~
+
+**Attention :** les montants COFOG ne sont pas des pourcentages du PIB ; ils ne sont pas corrigés de l'inflation et ne doivent pas être additionnés aux agrégats d'un autre millésime statistique. 2025 non disponible dans cette source.
+
 Documentation : [sources](DATA_SOURCES.md), [méthodologie](METHODOLOGY.md), [passation et roadmap](ROADMAP.md).
 
 **Site public : https://budget-fr.kiwinokoto.fr** (première publication vérifiée le 16 octobre 2026). Déploiement statique isolé sur le VPS personnel, derrière Traefik et Let's Encrypt. Version effectivement servie à cette date : `0504e5c70314939cb2d0f0537a953a6fc81b1c71`. Les changements de documentation ultérieurs sur `main` ne sont pas déployés automatiquement ; voir [la procédure d'exploitation](deploy/README.md).

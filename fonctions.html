@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dépenses par fonction 1995–2024 · budget_fr</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#111827;color:#f1f5fc}
+*{box-sizing:border-box}
+body{max-width:1050px;margin:auto;padding:28px 20px 50px}
+a{color:#bdccff}a:hover{color:#fff}
+.back{font-size:.93rem}.eyebrow{font-size:.8rem;letter-spacing:.13em;text-transform:uppercase;color:#a6b5f9;margin:26px 0 6px}
+h1{font-size:clamp(2rem,4vw,3.2rem);margin:5px 0 12px}
+p{line-height:1.6;color:#c4cedf}
+.panel{background:#1d293c;border:1px solid #37445d;border-radius:18px;padding:22px;margin:24px 0}
+.controls{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+input[type=range]{accent-color:#9dafff;flex:1;min-width:180px}
+#year-label{font-size:1.6rem;font-variant-numeric:tabular-nums}
+.total{font-size:clamp(1.6rem,3vw,2.3rem);font-weight:700;margin:10px 0 2px}
+.caption{font-size:.88rem;color:#c7d2e4}
+.controls label{font-weight:650}
+.mode label{cursor:pointer;margin-right:15px;white-space:nowrap}
+.mode input{accent-color:#b0beff}
+#breakdown{display:grid;gap:5px;margin-top:20px}
+.func{background:transparent;border:1px solid transparent;color:inherit;border-radius:11px;padding:9px 10px;display:grid;grid-template-columns:minmax(200px,1.7fr) minmax(120px,2fr) minmax(110px,.8fr);gap:15px;align-items:center;text-align:left;font:inherit;cursor:pointer}
+.func:hover,.func:focus-visible{background:#293952;outline:none}
+.func[aria-pressed=true]{background:#293952;border-color:#8499c3}
+.func-name{font-size:.94rem;font-weight:550}
+.track{height:15px;border-radius:6px;background:#101a2a;overflow:hidden}
+.fill{height:100%;border-radius:6px;display:block;min-width:1px}
+.value{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;font-size:.93rem}
+.value small{display:block;font-size:.8rem;color:#c1cbdd}
+svg{width:100%;height:auto;display:block}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+.source{border-top:1px solid #37445d;padding-top:15px;font-size:.87rem}
+@media(max-width:620px){body{padding:20px 12px}.panel{padding:15px;margin:16px 0}.func{grid-template-columns:minmax(0,1.3fr) minmax(72px,1fr);gap:7px}.func-name{font-size:.83rem}.track{grid-column:1 / -1;grid-row:2;height:10px}.value{grid-column:2;grid-row:1;font-size:.83rem}}
+</style></head><body>
+<nav><a class="back" href="/">← Retour aux finances publiques 1960–2025</a></nav>
+<div class="eyebrow">Atlas · Dépenses publiques par fonction</div>
+<h1>À quoi servent les dépenses publiques ?</h1>
+<p>Explore les dix grandes fonctions COFOG des <strong>administrations publiques françaises consolidées</strong>, de 1995 à 2024. Les montants sont en <strong>milliards d’euros courants</strong> (non corrigés de l’inflation).</p>
+<section class="panel">
+<div class="controls"><label for="year">Année <span id="year-label">2024</span></label><input id="year" type="range" min="1995" max="2024" value="2024" aria-label="Choisir une année de 1995 à 2024"></div>
+<div class="total" id="total">Chargement…</div><div class="caption">Total publié, dix catégories exhaustives à l’arrondi près.</div>
+</section>
+<section class="panel"><div class="controls"><h2 style="margin:0;flex:1">Répartition</h2>
+<div class="mode" role="group" aria-label="Mesure affichée">
+<label><input type="radio" name="mode" value="share" checked> Part du total</label>
+<label><input type="radio" name="mode" value="amount"> Montant</label>
+</div></div>
+<p class="caption">Clique sur une fonction pour voir son évolution historique. Les pourcentages indiquent la part du total de l’année sélectionnée, pas du PIB.</p>
+<div id="breakdown" role="group" aria-label="Dépenses par fonction"></div>
+</section>
+<section class="panel"><h2 id="trend-title">Évolution dans le temps</h2>
+<p class="caption" id="trend-caption">Part dans les dépenses publiques totales, 1995–2024.</p>
+<svg id="trend" viewBox="0 0 880 330" role="img" aria-label="Évolution de la part de la fonction sélectionnée"></svg></section>
+<p class="source">Source : <a href="https://www.insee.fr/fr/statistiques/8574707">Insee, COFOG 3.301, publication du 27 mars 2026</a>, comptes nationaux base 2020, administrations publiques S13. Attention : classement fonctionnel, distinct des postes du budget de l’État. L’année 2024 est provisoire et certains changements de nomenclature peuvent affecter des catégories ; notamment le logement et les affaires économiques au niveau des collectivités. Ce millésime n’est pas directement additionnable aux agrégats révisés publiés en août 2026. <a href="/METHODOLOGY.md">Méthodologie détaillée</a>.</p>
+<script>
+(async()=>{
+const response=await fetch('/data/cofog_1995_2024_bn_eur.csv');
+if(!response.ok)throw Error('CSV COFOG non disponible');
+const text=await response.text(),[header,...lines]=text.trim().split(/\r?\n/),keys=header.split(',');
+const rows=lines.map(line=>Object.fromEntries(line.split(',').map((v,i)=>[keys[i],Number(v)])));
+if(rows.length!==30 || rows[0].year!==1995 || rows[29].year!==2024)throw Error('Période inattendue');
+const categories=[
+['gf01','Services généraux','#94a3b8'],['gf02','Défense','#d8a175'],
+['gf03','Ordre et sécurité','#f7ca8d'],['gf04','Affaires économiques','#9bb0e7'],
+['gf05','Environnement','#76cfb0'],['gf06','Logement et équipements','#b1a6e7'],
+['gf07','Santé','#e5a7b8'],['gf08','Culture et loisirs','#c9b5eb'],
+['gf09','Enseignement','#eacb8a'],['gf10','Protection sociale','#86c5e3']
+];
+const range=document.getElementById('year'), breakdown=document.getElementById('breakdown');
+let selected='gf10',mode='share';
+const money=n=>n.toLocaleString('fr-FR',{minimumFractionDigits:1,maximumFractionDigits:1})+' Md€';
+const percent=n=>n.toLocaleString('fr-FR',{minimumFractionDigits:1,maximumFractionDigits:1})+' %';
+const ns='http://www.w3.org/2000/svg';
+function svgEl(tag,attrs,content){
+ const el=document.createElementNS(ns,tag);
+ for(const [key,value] of Object.entries(attrs))el.setAttribute(key,String(value));
+ if(content!==undefined)el.textContent=content;
+ return el;
+}
+function chart(){
+ const info=categories.find(c=>c[0]===selected), svg=document.getElementById('trend');
+ const vals=rows.map(r=>100*r[selected]/r.total_bn_eur);
+ const upper=Math.ceil(Math.max(...vals)*1.1/5)*5 || 5;
+ const x=i=>58+i*784/29,y=v=>278-v/upper*230;
+ svg.replaceChildren();
+ for(let i=0;i<=4;i++){
+  const v=upper*i/4,yy=y(v);
+  svg.append(svgEl('line',{x1:58,x2:842,y1:yy,y2:yy,stroke:'#45536c'}));
+  svg.append(svgEl('text',{x:46,y:yy+4,'text-anchor':'end',fill:'#c4cede','font-size':12},percent(v)));
+ }
+ const coords=vals.map((v,i)=>(i?'L':'M')+x(i).toFixed(1)+','+y(v).toFixed(1)).join(' ');
+ svg.append(svgEl('path',{d:coords,stroke:info[2],'stroke-width':3.5,fill:'none','stroke-linecap':'round'}));
+ let i=Number(range.value)-1995;
+ svg.append(svgEl('circle',{cx:x(i),cy:y(vals[i]),r:6,fill:info[2],stroke:'#fff','stroke-width':1.5}));
+ svg.append(svgEl('text',{x:58,y:311,fill:'#c4cede','font-size':13},'1995'));
+ svg.append(svgEl('text',{x:842,y:311,fill:'#c4cede','font-size':13,'text-anchor':'end'},'2024'));
+ document.getElementById('trend-title').textContent='Évolution · '+info[1];
+ document.getElementById('trend-caption').textContent='Part des dépenses publiques consacrée à cette fonction (1995–2024), en % du total de la même source.';
+ svg.setAttribute('aria-label','Part des dépenses consacrée à '+info[1]+', de 1995 à 2024');
+}
+function refresh(){
+ const r=rows[Number(range.value)-1995];if(!r)return;
+ document.getElementById('year-label').textContent=r.year;
+ document.getElementById('total').textContent=money(r.total_bn_eur);
+ breakdown.replaceChildren();
+ const ordered=categories.slice().sort((a,b)=>r[b[0]]-r[a[0]]);
+ const max=Math.max(...ordered.map(c=>mode==='share'?100*r[c[0]]/r.total_bn_eur:r[c[0]]));
+ for(const [key,name,color] of ordered){
+  const amount=r[key],share=100*amount/r.total_bn_eur;
+  const button=document.createElement('button');
+  button.type='button';button.className='func';button.setAttribute('aria-pressed',String(selected===key));
+  button.setAttribute('aria-label',name+' : '+money(amount)+', '+percent(share));
+  const label=document.createElement('span');label.className='func-name';label.textContent=name;
+  const track=document.createElement('span');track.className='track';
+  const fill=document.createElement('span');fill.className='fill';fill.style.background=color;fill.style.width=(100*(mode==='share'?share:amount)/max)+'%';track.append(fill);
+  const value=document.createElement('span');value.className='value';value.textContent=mode==='share'?percent(share):money(amount);
+  const secondary=document.createElement('small');secondary.textContent=mode==='share'?money(amount):percent(share);value.append(secondary);
+  button.append(label,track,value);
+  button.addEventListener('click',()=>{selected=key;refresh();});
+  breakdown.append(button);
+ }
+ chart();
+}
+range.addEventListener('input',refresh);
+document.querySelectorAll('input[name=mode]').forEach(radio=>radio.addEventListener('change',()=>{if(radio.checked){mode=radio.value;refresh();}}));
+refresh();
+})().catch(err=>{
+ const div=document.getElementById('total');div.textContent='Impossible de charger les données : '+err.message;
+});
+</script></body></html>
