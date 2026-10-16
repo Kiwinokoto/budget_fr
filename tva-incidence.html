@@ -27,7 +27,7 @@ select{background:#111d30;color:#fff;border:1px solid #677c9b;border-radius:8px;
 <nav><a href="/tva-justice.html">← Revenir à la simulation TVA</a> · <a href="/recettes.html">Recettes publiques</a></nav>
 <div class="eyebrow">Atlas · Fiscalité indirecte · Comparaisons contextualisées</div>
 <h1>TVA : le choix du dénominateur change l’histoire</h1>
-<p>Trois éclairages officiels <strong>distincts</strong> : une simulation de hausse de la <strong>TVA seule</strong> publiée en 2025, une estimation de la TVA des ménages fondée sur leurs consommations en <strong>2001</strong>, et la répartition 2020–2023 des <strong>taxes sur les produits</strong> (catégorie plus large que la TVA).</p>
+<p>Quatre éclairages officiels <strong>distincts</strong> : une simulation de réforme publiée en <strong>2025</strong>, une répartition de la <strong>TVA seule estimée en 2014</strong>, des taux d’effort issus de l’enquête <strong>2001</strong>, et des montants de <strong>taxes sur les produits 2020–2023</strong> (catégorie plus large que la TVA).</p>
 
 <section class="panel" aria-labelledby="head-tresor">
 <h2 id="head-tresor">TVA : simulation de réforme publiée en septembre 2025</h2>
@@ -40,6 +40,20 @@ select{background:#111d30;color:#fff;border:1px solid #677c9b;border-radius:8px;
 <p>En montants de recettes <strong>supplémentaires</strong> générés par cette hausse hypothétique, <strong>12 %</strong> seraient supportés par Q1 et <strong>31 %</strong> par Q5. Ces parts ne représentent <strong>ni la répartition de toute la TVA existante</strong> ni la fraction du revenu consacrée à la TVA.</p>
 <p class="warning">Il s’agit d’un <strong>scénario de réforme</strong>, non d’une observation de la TVA payée en 2025. Il suppose que la hausse est intégralement répercutée dans les prix, sans adaptation des consommations. Les revalorisations ultérieures des prestations sociales et du Smic ne sont pas comptabilisées dans cet effet statique. Les résultats numériques des quintiles Q2 à Q4 ne sont pas retranscrits : le graphique officiel ne donne pas de tableau chiffré correspondant.</p>
 <p class="notes">Source : <a href="https://www.tresor.economie.gouv.fr/Articles/2025/09/25/analyse-de-la-composition-des-recettes-de-tva">DG Trésor, Trésor-Éco n°371, 25 septembre 2025</a>, <a href="https://www.tresor.economie.gouv.fr/Articles/c462ac7f-76db-4c33-9bb3-dcc6886ed898/files/f4d0d1ac-fc61-4cf3-ab3f-094385b218bd">graphique 4 et texte d’accompagnement, pages 5–6</a>. Les quintiles regroupent chacun 20 % des ménages.</p>
+</section>
+
+<section class="panel" aria-labelledby="head-ines">
+<h2 id="head-ines">Qui contribue au montant total de TVA estimé ? — Ines 2014</h2>
+<p>Un tableau détaillé de la Drees répartit la <strong>TVA seule</strong> entre dix déciles de niveau de vie. Il s’agit d’une <strong>microsimulation sur données 2014</strong>, réalisée avec le modèle Ines à partir de consommations issues de l’enquête Budget de famille 2011, et non de TVA individuelle déclarée.</p>
+<div class="rows" id="ines-chart" aria-label="Parts du montant de TVA simulé attribuées aux dix déciles"></div>
+<div class="highlight">
+<div><small>Décile sélectionné</small><strong id="ines-current">D1</strong></div>
+<div><small>Part du total de TVA simulée</small><strong id="ines-share">—</strong></div>
+<div><small>Somme des dix déciles</small><strong>100 %</strong></div>
+</div>
+<p class="notes">Chaque barre indique la <strong>part attribuée à un décile dans le montant de TVA estimé pour l’ensemble des ménages du champ</strong>. Elle n’indique pas la part du revenu consacrée à la TVA. Ainsi, une contribution plus élevée du décile supérieur n’implique pas un effort relatif supérieur.</p>
+<p class="warning">Données <strong>Ines 2014</strong>, France métropolitaine hors DOM, ménages ordinaires à revenu disponible strictement positif. Résultats issus d’une estimation de taxation indirecte, <strong>pas des encaissements observés en 2014 ni une mesure en 2025</strong>. Ces parts ne sont pas additionnables aux recettes nationales 1995–2025 du site.</p>
+<p class="notes">Source : <a href="https://drees.solidarites-sante.gouv.fr/sites/default/files/2020-10/dt60.pdf">Drees, document de travail n°60 (novembre 2016), tableau 16, page 38</a>. Valeurs des dix déciles retranscrites à l’identique ; somme vérifiée à 100,0 %.</p>
 </section>
 
 <section class="panel" aria-labelledby="head-vat">
@@ -92,17 +106,22 @@ select{background:#111d30;color:#fff;border:1px solid #677c9b;border-radius:8px;
 <p class="notes">Sources : <a href="https://www.insee.fr/fr/statistiques/fichier/1376872/es413b.pdf">Ruiz &amp; Trannoy (2008), Économie et Statistique n°413, tableaux 3, 4 et 6 (données 2001)</a> ; <a href="https://www.insee.fr/fr/statistiques/8574663">Insee, CND.101 (2020–2023), publication avril 2026</a>. <a href="/METHODOLOGY.md">Méthodologie</a> · <a href="/TVA_JUSTICE_SOURCES.md">Cadrage scientifique</a>.</p>
 <script>
 (async()=>{
- const [vatResponse,productResponse]=await Promise.all([
-  fetch('/data/tva_effort_bdf_2001.csv'),fetch('/data/taxes_produits_cnd_2020_2023.csv')
+ const [vatResponse,productResponse,inesResponse]=await Promise.all([
+  fetch('/data/tva_effort_bdf_2001.csv'),fetch('/data/taxes_produits_cnd_2020_2023.csv'),
+  fetch('/data/tva_part_deciles_ines_2014.csv')
  ]);
- if(!vatResponse.ok||!productResponse.ok)throw Error('Sources chiffrées indisponibles');
+ if(!vatResponse.ok||!productResponse.ok||!inesResponse.ok)throw Error('Sources chiffrées indisponibles');
  function readCsv(csv){
   const [head,...lines]=csv.trim().split(/\r?\n/),keys=head.split(',');
   return lines.map(line=>Object.fromEntries(line.split(',').map((value,i)=>[keys[i],Number(value)])));
  }
  const vat=readCsv(await vatResponse.text()),product=readCsv(await productResponse.text());
- if(vat.length!==10||vat.some((r,i)=>r.decile!==i+1)||product.length!==80)throw Error('Couverture des données incohérente');
- let metric='vat_pct_gross_disposable_income',decile=1,year=2023,vingtile=1;
+ const ines=readCsv(await inesResponse.text());
+ if(vat.length!==10||vat.some((r,i)=>r.decile!==i+1)||product.length!==80
+    ||ines.length!==10||ines.some((r,i)=>r.decile!==i+1||!Number.isFinite(r.vat_share_pct)||r.vat_share_pct<=0)
+    ||Math.abs(ines.reduce((sum,r)=>sum+r.vat_share_pct,0)-100)>0.001)
+     throw Error('Couverture des données incohérente');
+ let metric='vat_pct_gross_disposable_income',decile=1,year=2023,vingtile=1,inesDecile=1;
  const pct=n=>n.toLocaleString('fr-FR',{minimumFractionDigits:1,maximumFractionDigits:2})+' %';
  const money=n=>n.toLocaleString('fr-FR',{minimumFractionDigits:0,maximumFractionDigits:0})+' €';
  const bn=n=>n.toLocaleString('fr-FR',{minimumFractionDigits:1,maximumFractionDigits:1})+' Md€';
@@ -117,6 +136,18 @@ select{background:#111d30;color:#fff;border:1px solid #677c9b;border-radius:8px;
   const result=document.createElement('span');result.className='bar-val';result.textContent=value.label;
   button.append(name,track,result);button.addEventListener('click',activate);
   container.append(button);
+ }
+ function drawInes(){
+  const chart=document.getElementById('ines-chart');chart.replaceChildren();
+  const max=Math.max(...ines.map(r=>r.vat_share_pct));
+  for(const record of ines){
+   row(chart,'D'+record.decile,
+    {raw:record.vat_share_pct,label:pct(record.vat_share_pct)},max,
+    '#e1b77d',inesDecile===record.decile,
+    ()=>{inesDecile=record.decile;drawInes();});
+  }
+  document.getElementById('ines-current').textContent='D'+inesDecile;
+  document.getElementById('ines-share').textContent=pct(ines[inesDecile-1].vat_share_pct);
  }
  function drawVat(){
   const element=document.getElementById('vat-chart');element.replaceChildren();
@@ -155,8 +186,9 @@ select{background:#111d30;color:#fff;border:1px solid #677c9b;border-radius:8px;
  document.getElementById('product-year').addEventListener('change',event=>{
   year=Number(event.target.value);vingtile=1;drawProducts();
  });
- drawVat();drawProducts();
+ drawInes();drawVat();drawProducts();
 })().catch(error=>{
+ document.getElementById('ines-chart').textContent='Données Ines 2014 indisponibles : '+error.message;
  document.getElementById('vat-chart').textContent='Impossible de charger les données : '+error.message;
  document.getElementById('product-chart').textContent='Données indisponibles';
 });

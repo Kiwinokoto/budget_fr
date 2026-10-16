@@ -79,6 +79,23 @@ Insee, [Comptes par catégories de ménage](https://www.insee.fr/fr/statistiques
 - Résultat distinct de la **TVA existante** : ni somme d'impôt effectivement payée en 2025, ni part du revenu qu'elle représente.
 - Le montant 11,4 Md€ pour un point de TVA net en 2025 est un **rendement théorique statique**, issu d'une modélisation fondée notamment sur 2022 et extrapolée en 2025 ; ne pas le présenter comme une exécution.
 
+
+## Huitième source — TVA seule par décile : Ines 2014 (Drees, novembre 2016)
+
+- [Drees, « Module de taxation indirecte du modèle Ines : hypothèses, principes et aspects pratiques », document de travail n°60, novembre 2016](https://drees.solidarites-sante.gouv.fr/sites/default/files/2020-10/dt60.pdf), **tableau 16, page 38** (page 38 imprimée, index PDF 37).
+- Champ : ménages ordinaires de France métropolitaine **hors DOM**, revenu disponible **strictement positif** ; simulation Ines **2014**, dépenses de consommation imputées à partir de **Budget de famille 2011**.
+- Variable reprise : **TVA seule, en pourcentage du montant de TVA simulée acquittée par l'ensemble des ménages du champ, réparti par décile de niveau de vie**. Ce n'est **ni le taux d'effort TVA/revenu**, ni le montant national de TVA encaissé en 2014.
+- Données CSV `data/tva_part_deciles_ines_2014.csv` : D1 4,3 %, D2 6,3 %, D3 7,2 %, D4 8,0 %, D5 8,9 %, D6 9,8 %, D7 11,0 %, D8 12,0 %, D9 14,0 %, D10 18,5 %. Somme exactement **100,0 %**. Reprise manuelle **directe du tableau numériquement publié**, sans extraction de valeurs approximatives depuis une courbe.
+- Le même rapport, figures 1 et 2 et pages 39–40, donne seulement dans le texte les taux apparents aux extrêmes : **9,3 % vs 11,5 % de la consommation**, et **11,3 % vs 6,8 % du revenu disponible** (D1 vs D10). **Ne pas inventer** de taux intermédiaires à partir des graphes.
+- Les tableaux 2014 ne constituent pas une distribution contemporaine : la méthode repose sur une enquête plus ancienne et des comportements de consommation modélisés. Les parts 2014 ne doivent pas être comparées quantitativement aux chiffres de **2001** ou aux recettes de TVA **2025** sans harmonisation explicite.
+
+### Accès à une estimation récente 2023–2025 : documentation et obstacle
+
+- [Documentation publique du modèle Ines : module de taxation indirecte](https://ines-public-e766af.gitlab.io/modules_annexes.html) : le module distingue TVA, TICPE, taxes sur assurances et accises ; il pseudo-apparie **Budget de famille 2017** aux ménages ERFS. Code et instructions de mise à jour documentés ; cela **n'autorise pas** à considérer les données de sortie comme librement téléchargeables.
+- [Insee, tableaux publics Budget de famille 2017](https://www.insee.fr/fr/statistiques/4648335) : dépenses moyennes et structure par niveau de vie, **pas** les taxes TVA simulées par ménage et décile. Nomenclatures et taux de TVA spécifiques aux achats sont nécessaires pour une microsimulation.
+- [CASD, enquête BDF 2017](https://www.casd.eu/source/enquete-budget-de-famille/) : accès à un jeu détaillé **sur autorisation** ; version moins détaillée via **Quételet-Progedo**, à vérifier avant toute utilisation. La base ERFS qui alimente Ines fait également l'objet de dispositifs de diffusion adaptés à la confidentialité.
+- Conséquence : pas de résultat chiffré « TVA payée en 2025 par décile » sans disposer soit d'un **tableau agrégé officiellement produit** soit de **microdonnées accessibles légalement**, d'un modèle de taxation validé et de ressources pour analyser ses hypothèses.
+
 ## Sources identifiées, non intégrées
 
 - [Insee, comptes APU détaillés](https://www.insee.fr/fr/statistiques/8988845), tableaux 3.201 et suivants ; vérifier périmètres, catégories et durées des séries.
