@@ -37,6 +37,13 @@
 - Validation : 14 tests Python, 3 tests Node de graduations, syntaxe des 3 scripts JavaScript ; **17/17 réussis**. Les trois HTML publics sont identiques octet par octet au commit versionné via HTTPS, les CSV inchangés.
 - Sauvegarde réversible : `/opt/budget-fr/backup/20261016T134059-axes-before-607dbd8b4fd60c92b47832c701ce9c122f949891/`. Aucun redémarrage Docker ou Traefik. Les captures fournies décrivent l'ancien rendu desktop ; **revue visuelle des nouvelles graduations en navigateur mobile encore à faire**.
 
+## Passe « unités et TVA » — 16 octobre 2026
+
+- Correctif ciblé `index.html` : les deux axes verticaux affichent désormais `%`, et les légendes précisent **% du PIB**. Les valeurs et autres pages ne changent pas.
+- Nouveau test de non-régression dans `tests/year_axes.test.cjs`.
+- Cadrage documenté dans `TVA_JUSTICE_SOURCES.md` : études Insee sur les effets de la TVA, distinction revenu/consommation et simulations, sources distributives à contrôler **avant** de publier des chiffres par décile.
+- À compléter à la fin de cette passe : SHA du déploiement et résultats des contrôles HTTPS ; la véritable revue responsive reste ouverte.
+
 ## Suite prioritaire
 
 1. Valider le rendu dans un navigateur, ergonomie mobile et accessibilité (pas encore revue en détail).

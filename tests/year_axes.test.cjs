@@ -28,3 +28,13 @@ for(const item of axes) {
   assert.match(html,/compactQuery\.addEventListener\('change'/);
  });
 }
+
+test('index.html : both vertical axes label tick values in percent of GDP', () => {
+ const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
+ assert.match(html, /const grid=ticks\.map\(v=>[\s\S]*?\+v\+' %<\/text>'/);
+ assert.match(html, /Recettes et dépenses exprimées en % du PIB\./);
+ assert.match(html, /Dette au sens de Maastricht, exprimée en % du PIB/);
+ // The same draw() function renders both the spending and public-debt charts.
+ assert.match(html, /draw\('chart',[\s\S]*?\[30,40,50,60\]\)/);
+ assert.match(html, /draw\('debt-chart',[\s\S]*?\[0,30,60,90,120\]\)/);
+});

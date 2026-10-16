@@ -28,10 +28,11 @@ input{accent-color:#9db0ff;flex:1;min-width:200px}svg{width:100%;height:auto;dis
 <div class="metric"><small>Dette nette / PIB</small><strong id="net-debt">—</strong></div>
 </div><p class="foot">Dette brute disponible depuis 1978 ; dette nette depuis 1995. « — » indique une donnée indisponible.</p></section>
 <section class="panel"><h2>Recettes et dépenses</h2><div class="legend"><span><i class="dot" style="background:#6fddbc"></i>Recettes</span><span><i class="dot" style="background:#eab879"></i>Dépenses</span></div>
-<svg id="chart" viewBox="0 0 900 370" role="img" aria-label="Évolution des recettes et dépenses publiques de 1960 à 2025"></svg></section>
+<svg id="chart" viewBox="0 0 900 370" role="img" aria-label="Évolution des recettes et dépenses publiques de 1960 à 2025, en pourcentage du PIB"></svg>
+<p class="foot">Recettes et dépenses exprimées en % du PIB.</p></section>
 <section class="panel"><h2>Dette publique</h2><div class="legend"><span><i class="dot" style="background:#a7b5ff"></i>Dette brute</span><span><i class="dot" style="background:#d8a7e7"></i>Dette nette</span></div>
 <svg id="debt-chart" viewBox="0 0 900 370" role="img" aria-label="Dette publique brute depuis 1978 et dette nette depuis 1995"></svg>
-<p class="foot">Dette au sens de Maastricht ; la dette nette soustrait certains actifs financiers exigibles, pas tout le patrimoine public.</p></section>
+<p class="foot">Dette au sens de Maastricht, exprimée en % du PIB ; la dette nette soustrait certains actifs financiers exigibles, pas tout le patrimoine public.</p></section>
 <p class="foot">Source : <a href="https://www.insee.fr/fr/statistiques/2381414">Insee, Dépenses et recettes publiques, 28 août 2026</a> (base 2020). Import vérifié depuis le XLSX d'origine. Année 2024 semi-définitive et 2025 provisoire ; révisions possibles. <a href="METHODOLOGY.md">Méthode</a> · <a href="DATA_SOURCES.md">Sources</a>.</p>
 <script>
 (async()=>{
@@ -63,7 +64,7 @@ const compactQuery=window.matchMedia('(max-width: 700px)');
 function draw(id,series,low,high,ticks){
  const svg=document.getElementById(id);
  const Y=v=>315-(v-low)*250/(high-low);
- const grid=ticks.map(v=>'<line x1="60" x2="860" y1="'+Y(v)+'" y2="'+Y(v)+'" stroke="#455167"/><text x="45" y="'+(Y(v)+5)+'" font-size="13" fill="#c5d2e5" text-anchor="end">'+v+'</text>').join('');
+ const grid=ticks.map(v=>'<line x1="60" x2="860" y1="'+Y(v)+'" y2="'+Y(v)+'" stroke="#455167"/><text x="45" y="'+(Y(v)+5)+'" font-size="13" fill="#c5d2e5" text-anchor="end">'+v+' %</text>').join('');
  const paths=series.map(s=>{
   let started=false;
   const path=rows.map((r,i)=>{
