@@ -105,6 +105,13 @@
 - **Contrôles HTTPS** : `index.html`, `interets.html`, CSV des intérêts et deux documents de source/méthode identiques octet par octet au commit ; autres pages et CSV historiques préservés.
 - **Retour arrière** : sauvegarde `/opt/budget-fr/backup/20261016T162334-interest-before-4679431cab4179292690c577573f5c56b64ac520/`. Aucun redémarrage Docker/Traefik. AgentCtl `deploy:vps-personal/budget-fr` libéré automatiquement, et verrou repo relâché après fusion. Revue graphique mobile toujours ouverte.
 
+## Recette navigateur Work et contrôle responsive — 16 octobre 2026
+
+- **Work (Chrome distant 1 363 px, cinq pages)** : aucun défaut bloquant ou important confirmé, un défaut mineur d’affichage transitoire de « — » sur `recettes.html` et `tva-incidence.html` ; les états mobiles ne sont pas couverts dans le rapport `recette-budget-fr-2026-10-16.md` communiqué dans le chat. Navigation clavier, graphiques et unités cohérents ; aucune erreur JavaScript imputable au site.
+- **Audit complémentaire Chromium headless** sur la production à **390 et 768 px** : les **six pages**, y compris `interets.html`, répondent en HTTPS 200, aucun défilement horizontal détecté (`scrollWidth == innerWidth`), aucune erreur JavaScript ; vérification technique, pas revue esthétique manuelle.
+- **Correctif proposé** : masquer les cartes encore non remplies pendant le téléchargement CSV, annoncer « Chargement des données… », puis afficher les données seulement après validation ; en cas d’échec, message explicite et bouton « Réessayer ».
+- Après tests et revue : décider de la fusion et de la livraison statique, consigner commit, sauvegarde, preuves et verrous AgentCtl.
+
 ## Suite prioritaire
 
 1. Valider le rendu sur un vrai navigateur mobile et l'accessibilité ; les captures desktop sont encourageantes mais ne valident pas le mobile.

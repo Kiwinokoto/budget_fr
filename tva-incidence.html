@@ -23,11 +23,16 @@ select{background:#111d30;color:#fff;border:1px solid #677c9b;border-radius:8px;
 .highlight strong{display:block;margin-top:6px;font-size:1.25rem;font-variant-numeric:tabular-nums}
 .year-heading{font-size:1.1rem;font-weight:680;margin:6px 0 0}
 @media(max-width:690px){body{padding:20px 12px}.panel{padding:15px}.bar-row{grid-template-columns:68px minmax(80px,1fr) 89px;gap:8px;padding:8px 5px}.bar-name,.bar-val{font-size:.78rem}.bar-track{height:12px}.highlight{grid-template-columns:1fr}}
-</style></head><body>
+body.loading-data .rows,body.loading-data section[aria-labelledby="head-ines"] .highlight,body.loading-data section[aria-labelledby="head-vat"] .highlight,body.loading-data section[aria-labelledby="head-products"] .highlight,body.loading-data #vat-euros,body.loading-data #product-title{display:none}
+[hidden]{display:none !important}
+#load-status{font-size:.95rem;color:#dce7fa}
+#load-status button{background:#344968;border:1px solid #8aa4d4;border-radius:8px;padding:7px 12px;color:#fff;cursor:pointer;font:inherit}
+</style></head><body class="loading-data">
 <nav><a href="/tva-justice.html">← Revenir à la simulation TVA</a> · <a href="/recettes.html">Recettes publiques</a></nav>
 <div class="eyebrow">Atlas · Fiscalité indirecte · Comparaisons contextualisées</div>
 <h1>TVA : le choix du dénominateur change l’histoire</h1>
 <p>Quatre éclairages officiels <strong>distincts</strong> : une simulation de réforme publiée en <strong>2025</strong>, une répartition de la <strong>TVA seule estimée en 2014</strong>, des taux d’effort issus de l’enquête <strong>2001</strong>, et des montants de <strong>taxes sur les produits 2020–2023</strong> (catégorie plus large que la TVA).</p>
+<p id="load-status" role="status" aria-live="polite">Chargement des données…</p>
 
 <section class="panel" aria-labelledby="head-tresor">
 <h2 id="head-tresor">TVA : simulation de réforme publiée en septembre 2025</h2>
@@ -187,9 +192,12 @@ select{background:#111d30;color:#fff;border:1px solid #677c9b;border-radius:8px;
   year=Number(event.target.value);vingtile=1;drawProducts();
  });
  drawInes();drawVat();drawProducts();
+ document.body.classList.remove('loading-data');
+ document.getElementById('load-status').hidden=true;
 })().catch(error=>{
- document.getElementById('ines-chart').textContent='Données Ines 2014 indisponibles : '+error.message;
- document.getElementById('vat-chart').textContent='Impossible de charger les données : '+error.message;
- document.getElementById('product-chart').textContent='Données indisponibles';
+ const status=document.getElementById('load-status');
+ status.textContent='Impossible de charger les données : '+error.message+' ';
+ const retry=document.createElement('button');retry.type='button';retry.textContent='Réessayer';
+ retry.addEventListener('click',()=>window.location.reload());status.append(retry);
 });
 </script></body></html>
