@@ -50,3 +50,7 @@ test('main landmark encompasses the explorer and has separately labeled navigati
  assert.match(html,/<\/main>\s*<script>/);
  assert.equal((html.match(/<main\b/g)||[]).length,1);
 });
+
+test('instrument legend has explicit group role for its accessible name',()=>{
+ assert.match(html,/<div class="legend" role="group" aria-label="Légende des instruments">/);
+});
