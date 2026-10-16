@@ -118,7 +118,7 @@ Sur les vues **Recettes** et **TVA / niveau de vie**, « Chargement des données
 
 Documentation : [sources](DATA_SOURCES.md), [méthodologie](METHODOLOGY.md), [passation et roadmap](ROADMAP.md).
 
-**Site public : https://budget-fr.kiwinokoto.fr** (première publication vérifiée le 16 octobre 2026). Déploiement statique isolé sur le VPS personnel, derrière Traefik et Let's Encrypt. Version applicative effectivement servie après le correctif de chargement des données : `062f91201a52518665398311938c1a775b99e50c` (incluant https://budget-fr.kiwinokoto.fr/recettes.html et https://budget-fr.kiwinokoto.fr/fonctions.html). Les changements de documentation ultérieurs sur `main` ne sont pas déployés automatiquement ; voir [la procédure d'exploitation](deploy/README.md).
+**Site public : https://budget-fr.kiwinokoto.fr** (première publication vérifiée le 16 octobre 2026). Déploiement statique isolé sur le VPS personnel, derrière Traefik et Let's Encrypt. Version applicative effectivement servie après la vue solde primaire : `6655e063f1572085adace4f5d9252b5df77b3fc3` (incluant https://budget-fr.kiwinokoto.fr/recettes.html et https://budget-fr.kiwinokoto.fr/fonctions.html). Les changements de documentation ultérieurs sur `main` ne sont pas déployés automatiquement ; voir [la procédure d'exploitation](deploy/README.md).
 
 Ce dépôt public ne contient aucune donnée personnelle ni confidentielle. Les données originales de l'Insee restent sous leurs propres conditions de réutilisation. Les séries peuvent être révisées.
 

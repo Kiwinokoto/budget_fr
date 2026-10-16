@@ -2,16 +2,16 @@
 
 ## Situation au 16 octobre 2026
 
-- Dépôt public : Kiwinokoto/budget_fr. PR #1–#21 fusionnées sur `main` le 16 octobre 2026 ; dernier commit applicatif (UX chargement données) **`062f91201a52518665398311938c1a775b99e50c`**. La documentation de passation ultérieure peut faire avancer `main` sans redéploiement.
+- Dépôt public : Kiwinokoto/budget_fr. PR #1–#23 fusionnées sur `main` le 16 octobre 2026 ; dernier commit applicatif (solde primaire S13) **`6655e063f1572085adace4f5d9252b5df77b3fc3`**. La documentation de passation ultérieure peut faire avancer `main` sans redéploiement.
 - Coordination AgentCtl : projet budget-fr, ressource repo:Kiwinokoto/budget_fr ; verrou à prendre avant toute mutation et libérer en fin de passe.
 - Base Insee initiale 1995–2025 recopiée à la main **remplacée** par les chiffres du classeur officiel d'août 2026.
 - Données 1960–2025 : recettes, dépenses, solde, variantes hors éléments imputés ; dette brute depuis 1978 et nette depuis 1995. Fichier original conservé à la source, pas dans Git.
 - Importateur en Python standard, empreinte SHA-256 de la source, validation des libellés, années et solde ; tests couvrant les absences de valeurs.
 - Application statique avec curseur temporel et graphiques de recettes/dépenses et dette.
-- Site public en ligne : **https://budget-fr.kiwinokoto.fr** sur le VPS personnel, via `/opt/budget-fr`, conteneur `budget-fr-web`, réseau Docker `traefik_network`, routeur Traefik dédié et certificat Let's Encrypt. Déploiement figé sur `062f91201a52518665398311938c1a775b99e50c` (`/opt/budget-fr/.deployed_commit`). Aucune base de données, aucune automatisation ou modification des services voisins.
-- Vérifications en production : HTTPS HTTP 200 sans `-k`, documents et CSV HTTP 200, trois CSV servis identiques octet par octet à GitHub (66, 30 et 31 années), **27 tests Python et 19 tests Node OK pour la version actuelle**, certificat valide, conteneur démarré, volume statique monté en lecture seule. Recette navigateur **desktop Work (1 363 px)** effectuée ; vérification **responsive automatisée à 390 et 768 px** effectuée pour six pages. Revue esthétique manuelle mobile encore à faire.
+- Site public en ligne : **https://budget-fr.kiwinokoto.fr** sur le VPS personnel, via `/opt/budget-fr`, conteneur `budget-fr-web`, réseau Docker `traefik_network`, routeur Traefik dédié et certificat Let's Encrypt. Déploiement figé sur `6655e063f1572085adace4f5d9252b5df77b3fc3` (`/opt/budget-fr/.deployed_commit`). Aucune base de données, aucune automatisation ou modification des services voisins.
+- Vérifications en production : HTTPS HTTP 200 sans `-k`, documents et CSV HTTP 200, trois CSV servis identiques octet par octet à GitHub (66, 30 et 31 années), **32 tests Python et 22 tests Node OK pour la version actuelle**, certificat valide, conteneur démarré, volume statique monté en lecture seule. Recette navigateur **desktop Work (1 363 px)** effectuée ; vérification **responsive automatisée à 390 et 768 px** effectuée pour six pages. Revue esthétique manuelle mobile encore à faire.
 
-- **Historique des axes** : `607dbd8b4fd60c92b47832c701ce9c122f949891` (PR #7), inclus dans les versions applicatives suivantes. L'application servie est désormais `062f912` ; les commits de documentation ultérieurs ne déclenchent pas de déploiement.
+- **Historique des axes** : `607dbd8b4fd60c92b47832c701ce9c122f949891` (PR #7), inclus dans les versions applicatives suivantes. L'application servie est désormais `6655e06` ; les commits de documentation ultérieurs ne déclenchent pas de déploiement.
 
 ## Lot COFOG livré sur `main` et sur le site public
 
@@ -114,14 +114,17 @@
 - **Vérification post-déploiement** : deux HTML servis octet par octet identiques à GitHub ; pages et CSV historiques inchangés. Chromium **cache désactivé** : les six pages HTTP 200 aux deux largeurs (390, 768 px), aucun défilement horizontal ni erreur JS, états de données tous résolus (12/12). Ne pas confondre test responsive automatisé et revue graphique humaine.
 - **Sauvegarde rollback** : `/opt/budget-fr/backup/20261016T164013-loading-before-062f91201a52518665398311938c1a775b99e50c/`. Aucun conteneur ni service voisin redémarré, coordination AgentCtl respectée.
 
-## Solde primaire public 1959–2025 — lot en cours
+## Solde primaire public 1959–2025 — livré et vérifié en production
 
 - **Objectif** : distinguer le solde public total B9NF du **solde primaire dérivé** par réintégration des intérêts versés ; lecture historique à périmètre S13 constant, pas le seul budget de l'État.
 - **Source auditée** : Insee 3.201 (août 2026, SHA-256 épinglée déjà contrôlée), années **1959–2025**, lignes recettes 58, dépenses 27, B9NF 66, D41 12 et D41G 13. Les valeurs ne sont pas recopiées depuis l'article antérieur de mai 2026 ; **−151,5920 Md€** de solde total en 2025 dans cette version.
 - **Dérivation** : `B9NF + D41` (méthode de référence) et `B9NF + D41G` (variante de correction SIFIM), intérêts **payés** uniquement, non net des intérêts reçus, non solde structurel. Pas de ratio de PIB sans source explicite et homogène.
 - **Livrables** : script Python standard `scripts/import_primary_balance.py`, `data/solde_primaire_apu_1959_2025_bn_eur.csv` (67 années), graphique `solde-primaire.html` avec année choisie, variantes comptables et Md€ courants ou % des dépenses totales S13 ; lien depuis accueil et la documentation.
 - **Garde-fous** : solde primaire **calculé** et non publié tel quel ; statut provisoire 2025, source et révision indiquées ; pas de causalité inférée entre solde primaire et variation du stock de dette.
-- **À consigner après les tests** : PR, SHA applicatif, contrôle graphique responsive et navigateur, état du déploiement public, sauvegarde, verrous AgentCtl.
+- **Livraison** : PR #23 fusionnée, commit applicatif exact `6655e063f1572085adace4f5d9252b5df77b3fc3` servi sur https://budget-fr.kiwinokoto.fr/solde-primaire.html.
+- **Tests documentés** : **32 Python + 22 Node = 54 tests réussis**, sept scripts JavaScript `node --check` valides ; CSV de solde primaire **identique octet par octet** au calcul depuis l'Excel Insee 3.201 épinglé, ancien CSV intérêts également reproductible.
+- **Recette Chromium réel locale et sur le site publié** à **390 et 768 px** : affichage −85,9 Md€ de primaire D41 en 2025, −86,9 Md€ en D41G, solde total −151,6 Md€, exercice 1980 (+3,8 Md€ variante D41G), bascule % dépenses, courbes et ligne zéro ; HTTP 200, aucun débordement horizontal ni erreur JS.
+- **Déploiement réversible** : `/opt/budget-fr/backup/20261016T165732-primary-before-6655e063f1572085adace4f5d9252b5df77b3fc3/` (site complet et commit antérieur), cinq fichiers publiés `index.html`, `solde-primaire.html`, CSV, sources et méthodologie identiques aux sources GitHub par HTTPS ; autres pages et CSV inchangés. Aucun conteneur ou proxy redémarré. Verrou AgentCtl de déploiement automatiquement libéré et verrou Git de la PR libéré après fusion.
 
 ## Suite prioritaire
 
