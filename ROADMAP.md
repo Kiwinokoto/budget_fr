@@ -11,11 +11,18 @@
 - Site public en ligne : **https://budget-fr.kiwinokoto.fr** sur le VPS personnel, via `/opt/budget-fr`, conteneur `budget-fr-web`, réseau Docker `traefik_network`, routeur Traefik dédié et certificat Let's Encrypt. Déploiement figé sur `0504e5c70314939cb2d0f0537a953a6fc81b1c71` (`/opt/budget-fr/.deployed_commit`). Aucune base de données, aucune automatisation ou modification des services voisins.
 - Vérifications en production : HTTPS HTTP 200 sans `-k`, documents et CSV HTTP 200, CSV servi identique octet par octet à GitHub (66 années), six tests Python OK, certificat valide, conteneur démarré, volume statique monté en lecture seule. Revue visuelle navigateur desktop/mobile **encore à faire**.
 
+## Lot COFOG préparé sur `dev/cofog-1995-2024`
+
+- Fichier Insee 3.301 inspecté, dix rubriques (GF01–GF10), 1995–2024 ; somme réconciliée avec le total à l'arrondi près.
+- Importateur reproductible `scripts/import_cofog.py`, tests de couverture, cohérence comptable, année et empreinte source.
+- Page `fonctions.html` et lien depuis `index.html` : répartition, année, parts et tendance. Deux séries statistiques distinctes ; pas d'amalgame entre euros et % PIB.
+- À la fin de cette passe : vérifier sur GitHub le commit exact, le déploiement réel et les tests avant de considérer ce chantier clos.
+
 ## Suite prioritaire
 
 1. Valider le rendu dans un navigateur, ergonomie mobile et accessibilité (pas encore revue en détail).
 2. Documenter et mesurer les écarts entre les publications Insee de mai et août 2026.
-3. Rechercher des séries détaillées COFOG 1995–2024 ; contrôler la classification avant ingestion.
+3. ~~Rechercher des séries détaillées COFOG 1995–2024~~ : **premier niveau COFOG S13 intégré** (mars 2026, dix catégories, euros courants). Prochaine étape : explorer sous-fonctions, harmoniser les millésimes et déceler les reclassements.
 4. Étudier les séries de recettes par impôt, dette, intérêts, solde primaire et patrimoine.
 5. Formaliser l'échelle de transparence/traçabilité par poste et sa méthodologie ; tester l'incidence fiscale.
 6. Faire une vraie revue visuelle et une vérification responsive, puis envisager un déploiement automatisé uniquement si cela devient utile (actuellement manuel et volontaire).
