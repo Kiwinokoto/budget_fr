@@ -44,6 +44,19 @@ python3 scripts/import_cofog.py
 
 **Attention :** les montants COFOG ne sont pas des pourcentages du PIB ; ils ne sont pas corrigés de l'inflation et ne doivent pas être additionnés aux agrégats d'un autre millésime statistique. 2025 non disponible dans cette source.
 
+## Origine des prélèvements obligatoires (1995–2025)
+
+**[Explorer les recettes et prélèvements](recettes.html)** : neuf catégories fiscales et de cotisations effectives mutuellement exclusives, plus les ajustements négatifs nécessaires pour retrouver le **total net** des prélèvements obligatoires. Sont également affichés, **sans les additionner une seconde fois**, l'IRPP et l'IS avant crédits d'impôt, la CSG et la CRDS.
+
+Source Insee **3.217**, 1995–2025, milliards d'euros courants ; taux de prélèvements obligatoires en % du PIB issu de **la même source**. Import reproductible :
+
+~~~bash
+python3 scripts/import_recettes.py
+# ou hors ligne : python3 scripts/import_recettes.py --xlsx /chemin/t_3217_fr.xlsx
+~~~
+
+Attention : les prélèvements obligatoires ne constituent pas toutes les recettes publiques ; l'incidence distributive de chaque impôt n'est pas directement déductible de ses montants agrégés. L'année 2025 reste provisoire.
+
 Documentation : [sources](DATA_SOURCES.md), [méthodologie](METHODOLOGY.md), [passation et roadmap](ROADMAP.md).
 
 **Site public : https://budget-fr.kiwinokoto.fr** (première publication vérifiée le 16 octobre 2026). Déploiement statique isolé sur le VPS personnel, derrière Traefik et Let's Encrypt. Version applicative effectivement servie après le lot COFOG : `2057b7e3eb0e2424cb37f95ce85fadbf54bd30fe` (page dédiée https://budget-fr.kiwinokoto.fr/fonctions.html). Les changements de documentation ultérieurs sur `main` ne sont pas déployés automatiquement ; voir [la procédure d'exploitation](deploy/README.md).

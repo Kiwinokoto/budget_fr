@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Recettes et prélèvements obligatoires 1995–2025 · budget_fr</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#f1f5fc;background:#101827}
+*{box-sizing:border-box}body{max-width:1060px;margin:auto;padding:28px 20px 50px}
+a{color:#bdccff}a:hover{color:white}.eyebrow{font-size:.8rem;text-transform:uppercase;letter-spacing:.13em;color:#a9b9ff;margin:25px 0 8px}
+h1{font-size:clamp(2rem,4vw,3.1rem);margin:0 0 12px}h2{font-size:1.45rem;margin:0 0 12px}
+p{line-height:1.55;color:#c8d1e1}.panel{background:#1d293c;border:1px solid #37445d;border-radius:17px;padding:22px;margin:24px 0}
+.controls{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+input[type=range]{accent-color:#9dafff;flex:1;min-width:210px}input[type=radio]{accent-color:#b0c5ff}
+#year-label{font-size:1.5rem;font-weight:700;font-variant-numeric:tabular-nums}
+.metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:18px}
+.metric{padding:15px;background:#131d2c;border-radius:12px}.metric small{display:block;color:#bac9dc}
+.metric strong{display:block;font-size:clamp(1.25rem,3vw,1.75rem);margin-top:7px;font-variant-numeric:tabular-nums}
+.caption{font-size:.86rem;color:#c5d0e0}.mode label{margin-right:16px;white-space:nowrap;cursor:pointer;font-size:.89rem}
+.rows{display:grid;gap:5px;margin:20px 0 6px}
+.item{background:transparent;border:1px solid transparent;border-radius:10px;color:inherit;font:inherit;display:grid;grid-template-columns:minmax(180px,1.5fr) minmax(100px,2fr) minmax(110px,.85fr);gap:14px;align-items:center;text-align:left;padding:9px 10px;width:100%;cursor:pointer}
+.item:hover,.item:focus-visible,.item[aria-pressed=true]{background:#293952;outline:none}
+.item[aria-pressed=true]{border-color:#91a4c8}
+.item-name{font-size:.94rem;font-weight:550}.track{height:14px;background:#111b2b;border-radius:6px;overflow:hidden}
+.fill{height:100%;display:block;border-radius:6px;min-width:1px}
+.value{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;font-size:.93rem}
+.value small{display:block;color:#b8c6dc;font-size:.8rem}
+.adjustments{border-top:1px solid #37445d;margin-top:10px;padding-top:12px}
+.adjustments .line{display:flex;justify-content:space-between;gap:12px;font-variant-numeric:tabular-nums;padding:5px 0}
+.adjustments .line span:first-child{color:#c4d0e0}
+.nested{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.nested article{padding:14px;border-radius:11px;background:#121f30}
+.nested article small{color:#c0cde0;display:block}.nested article strong{font-size:1.5rem;display:block;margin-top:5px}
+svg{display:block;width:100%;height:auto}.source{border-top:1px solid #3b485f;padding-top:15px;font-size:.89rem}
+.warning{border-left:3px solid #b49ce8;padding:10px 14px;background:#26324a;font-size:.9rem;color:#dbe4f4}
+@media(max-width:680px){body{padding:20px 12px}.panel{padding:15px;margin:16px 0}.metrics{grid-template-columns:1fr 1fr}.nested{grid-template-columns:1fr 1fr}.item{grid-template-columns:minmax(0,1fr) minmax(75px,.7fr);gap:8px}.item-name{font-size:.82rem}.track{grid-column:1/-1;grid-row:2;height:10px}.value{grid-column:2;grid-row:1;font-size:.82rem}}
+@media(max-width:450px){.metrics{grid-template-columns:1fr}.nested{grid-template-columns:1fr}}
+</style></head><body>
+<nav><a href="/">← Retour aux finances publiques</a></nav>
+<div class="eyebrow">Atlas · Origine des prélèvements</div>
+<h1>D’où viennent les recettes publiques ?</h1>
+<p>Explore les <strong>prélèvements obligatoires</strong> en France de 1995 à 2025, répartis entre impôts et cotisations sociales effectives. Les chiffres sont en <strong>milliards d’euros courants</strong>.</p>
+<section class="panel">
+<div class="controls"><label for="year">Année <span id="year-label">2025</span></label><input id="year" type="range" min="1995" max="2025" value="2025" aria-label="Choisir une année entre 1995 et 2025"></div>
+<div class="metrics">
+<div class="metric"><small>Prélèvements obligatoires</small><strong id="total">—</strong></div>
+<div class="metric"><small>En % du PIB</small><strong id="ratio">—</strong></div>
+<div class="metric"><small>TVA</small><strong id="vat">—</strong></div>
+</div>
+<p class="caption">Le total est net des prélèvements non recouvrables et des crédits d’impôt ; il exclut les cotisations imputées.</p>
+</section>
+<section class="panel">
+<div class="controls"><h2 style="flex:1">Décomposition sans double compte</h2>
+<div class="mode" role="group" aria-label="Mode d'affichage"><label><input type="radio" name="mode" value="share" checked> Part du total</label><label><input type="radio" name="mode" value="amount"> Montant</label></div>
+</div>
+<p class="caption">Neuf catégories distinctes. Leur somme avant corrections dépasse légèrement le total net : les ajustements sont présentés en dessous.</p>
+<div class="rows" id="breakdown"></div>
+<div class="adjustments" id="adjustments"></div>
+</section>
+<section class="panel"><h2>Au sein des impôts sur le revenu (D51)</h2>
+<p class="caption">Quelques sous-postes connus, affichés pour information : ils sont déjà compris dans la catégorie D51 ci-dessus. IRPP et IS sont indiqués <strong>avant crédits d’impôt</strong>.</p>
+<div class="nested"><article><small>Impôt sur le revenu des personnes physiques (IRPP)</small><strong id="irpp">—</strong></article>
+<article><small>Impôt sur les sociétés (IS)</small><strong id="is">—</strong></article>
+<article><small>Contribution sociale généralisée (CSG)</small><strong id="csg">—</strong></article>
+<article><small>Contribution au remboursement de la dette sociale (CRDS)</small><strong id="crds">—</strong></article></div>
+</section>
+<section class="panel">
+<h2 id="trend-title">Évolution · TVA</h2>
+<p class="caption">Sélectionne une catégorie ci-dessus pour suivre son poids dans les prélèvements obligatoires au fil des années.</p>
+<svg id="trend" viewBox="0 0 880 340" role="img" aria-label="Évolution du poids de la catégorie sélectionnée entre 1995 et 2025"></svg>
+</section>
+<p class="warning"><strong>Important pour l’analyse de justice fiscale :</strong> le poids d’un impôt dans les recettes publiques ne mesure pas sa régressivité. Celle-ci nécessite des données de revenus, de consommation, de ménages et de redistribution, encore à intégrer.</p>
+<p class="source">Source : <a href="https://www.insee.fr/fr/statistiques/8988845">Insee, tableau 3.217 « Principaux impôts par catégorie »</a>, comptes nationaux en base 2020. Série 1995–2025, année 2025 provisoire, données susceptibles de révision. En euros courants ; les proportions sont calculées sur le total des prélèvements obligatoires du même classeur. Ne pas additionner ces prélèvements à l’ensemble des recettes publiques : ils en font partie. <a href="/METHODOLOGY.md">Méthodologie</a> · <a href="/fonctions.html">Dépenses par fonction</a>.</p>
+<script>
+(async()=>{
+const response=await fetch('/data/recettes_1995_2025_bn_eur.csv');
+if(!response.ok)throw Error('Fichier de recettes inaccessible');
+const [header,...lines]=(await response.text()).trim().split(/\r?\n/),fields=header.split(',');
+const rows=lines.map(line=>Object.fromEntries(line.split(',').map((v,i)=>[fields[i],Number(v)])));
+if(rows.length!==31||rows[0].year!==1995||rows.at(-1).year!==2025)throw Error('Années manquantes ou inattendues');
+const categories=[
+['social_effective_bn_eur','Cotisations sociales effectives','#87c7de'],
+['income_bn_eur','Impôts courants sur le revenu (D51)','#b8a7ee'],
+['vat_bn_eur','TVA','#85d8ba'],
+['product_bn_eur','Autres impôts sur les produits','#ebc18a'],
+['production_bn_eur','Autres impôts sur la production','#e8a8b9'],
+['payroll_bn_eur','Impôts sur salaires et main-d’œuvre','#b6c58e'],
+['capital_bn_eur','Impôts en capital','#c69fc5'],
+['other_current_bn_eur','Autres impôts courants','#99a4c7'],
+['import_bn_eur','Impôts sur les importations','#debfa1']
+];
+const slider=document.getElementById('year'),list=document.getElementById('breakdown'),adjust=document.getElementById('adjustments');
+let selected='vat_bn_eur',mode='share';
+const money=n=>n.toLocaleString('fr-FR',{minimumFractionDigits:1,maximumFractionDigits:1})+' Md€';
+const pct=n=>n.toLocaleString('fr-FR',{minimumFractionDigits:1,maximumFractionDigits:1})+' %';
+function draw(){
+ const svg=document.getElementById('trend'),cat=categories.find(c=>c[0]===selected);
+ const values=rows.map(r=>100*r[selected]/r.levies_bn_eur);
+ const upper=Math.ceil(Math.max(...values)*1.12/5)*5 || 5,x=i=>58+i*784/30,y=v=>285-235*v/upper;
+ const ns='http://www.w3.org/2000/svg';
+ function el(tag,attrs,txt){const node=document.createElementNS(ns,tag);for(const [k,v] of Object.entries(attrs))node.setAttribute(k,String(v));if(txt!==undefined)node.textContent=txt;return node;}
+ svg.replaceChildren();
+ for(let i=0;i<=4;i++){const v=upper*i/4,yy=y(v);svg.append(el('line',{x1:58,y1:yy,x2:842,y2:yy,stroke:'#47556d'}));svg.append(el('text',{x:46,y:yy+4,fill:'#c5d0e0','text-anchor':'end','font-size':13},pct(v)));}
+ const d=values.map((v,i)=>(i?'L':'M')+x(i).toFixed(1)+','+y(v).toFixed(1)).join(' ');
+ svg.append(el('path',{d,stroke:cat[2],'stroke-width':3.5,fill:'none','stroke-linecap':'round'}));
+ const i=Number(slider.value)-1995;svg.append(el('circle',{cx:x(i),cy:y(values[i]),r:6,fill:cat[2],stroke:'#fff','stroke-width':1.5}));
+ svg.append(el('text',{x:58,y:317,fill:'#c5d0e0','font-size':13},'1995'));
+ svg.append(el('text',{x:842,y:317,fill:'#c5d0e0','font-size':13,'text-anchor':'end'},'2025'));
+ document.getElementById('trend-title').textContent='Évolution · '+cat[1];
+ svg.setAttribute('aria-label','Part de '+cat[1]+' dans les prélèvements obligatoires, 1995–2025');
+}
+function refresh(){
+ const r=rows[Number(slider.value)-1995];if(!r)return;
+ document.getElementById('year-label').textContent=r.year;
+ for(const [id,value] of [['total',money(r.levies_bn_eur)],['ratio',pct(r.levies_pct_gdp)],['vat',money(r.vat_bn_eur)],['irpp',money(r.irpp_before_credits_bn_eur)],['is',money(r.is_before_credits_bn_eur)],['csg',money(r.csg_bn_eur)],['crds',money(r.crds_bn_eur)]])document.getElementById(id).textContent=value;
+ list.replaceChildren();
+ const sorted=categories.slice().sort((a,b)=>r[b[0]]-r[a[0]]);
+ const max=Math.max(...sorted.map(c=>mode==='share'?100*r[c[0]]/r.levies_bn_eur:r[c[0]]));
+ for(const [key,label,color] of sorted){
+  const amount=r[key],part=amount/r.levies_bn_eur*100;
+  const btn=document.createElement('button');btn.type='button';btn.className='item';btn.setAttribute('aria-pressed',String(selected===key));
+  btn.setAttribute('aria-label',label+' : '+money(amount)+', '+pct(part));
+  const name=document.createElement('span');name.className='item-name';name.textContent=label;
+  const track=document.createElement('span');track.className='track';
+  const fill=document.createElement('span');fill.className='fill';fill.style.background=color;fill.style.width=(100*(mode==='share'?part:amount)/max)+'%';track.append(fill);
+  const value=document.createElement('span');value.className='value';value.textContent=mode==='share'?pct(part):money(amount);
+  const sub=document.createElement('small');sub.textContent=mode==='share'?money(amount):pct(part);value.append(sub);
+  btn.append(name,track,value);btn.addEventListener('click',()=>{selected=key;refresh();});list.append(btn);
+ }
+ adjust.replaceChildren();
+ for(const [label,val] of [['Prélèvements non recouvrables (correction)',r.uncollectable_bn_eur],["Crédits d’impôt (correction)",r.tax_credits_bn_eur]]){
+  const line=document.createElement('div');line.className='line';
+  const text=document.createElement('span');text.textContent=label;
+  const number=document.createElement('strong');number.textContent=money(val);
+  line.append(text,number);adjust.append(line);
+ }
+ draw();
+}
+slider.addEventListener('input',refresh);
+document.querySelectorAll('input[name=mode]').forEach(input=>input.addEventListener('change',()=>{if(input.checked){mode=input.value;refresh();}}));
+refresh();
+})().catch(error=>{document.getElementById('total').textContent='Erreur de chargement : '+error.message;});
+</script></body></html>
