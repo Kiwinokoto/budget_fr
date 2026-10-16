@@ -50,6 +50,19 @@ th{color:#e2ecf7;font-size:.86rem}
 td{color:#e1e9f4}
 .total-row{font-weight:700}
 .scroll{overflow-x:auto}
+.chart-scroll{overflow-x:auto;overflow-y:hidden;max-width:100%;border-radius:8px;scroll-behavior:auto}
+.chart-scroll svg{min-width:900px;width:100%}
+.chart-scroll:focus-visible,.scroll:focus-visible{outline:3px solid #ffe0a5;outline-offset:2px}
+.scroll-hint{font-size:.87rem;color:#d7e3f4}
+.annual-details{margin:19px 0;padding:14px;border:1px solid #7086a3;border-radius:9px}
+.annual-details summary{cursor:pointer;color:#d6e3ff;font-weight:700;line-height:1.5}
+.annual-table{min-width:1040px}
+.annual-table th,.annual-table td{white-space:nowrap;font-size:.86rem}
+.annual-table th:not(:first-child),.annual-table td:not(:first-child){text-align:right}
+.annual-table tbody tr:nth-child(even){background:#253349}
+.annual-table tbody tr.selected-annual{background:#354b66}
+.annual-table caption{text-align:left;padding:13px 7px;color:#f1f5ff;font-weight:650}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 #status button{border:1px solid #a8bce6;border-radius:8px;background:#30496e;color:#fff;font:inherit;padding:8px 13px;margin-left:7px;cursor:pointer}
 #status{min-height:24px}
 [hidden]{display:none !important}
@@ -62,7 +75,8 @@ body.loading-data #data-area{display:none}
 </style>
 </head>
 <body class="loading-data">
-<nav><a href="/">← Retour à l’atlas</a> · <a href="/solde-primaire.html">Solde primaire</a> · <a href="/interets.html">Intérêts</a></nav>
+<nav aria-label="Navigation du site"><a href="/">← Retour à l’atlas</a> · <a href="/solde-primaire.html">Solde primaire</a> · <a href="/interets.html">Intérêts</a></nav>
+<main id="main-content">
 <div class="eyebrow">Atlas · Structure des engagements publics</div>
 <h1>De quoi est faite la dette publique française&nbsp;?</h1>
 <p class="intro">Explorer les <strong>encours de dette de Maastricht</strong>, de 1995 à 2025, par administration et par instrument. Les chiffres concernent les administrations publiques (APU), pas seulement les emprunts négociables de l’État. L’outil distingue les montants de dette des flux annuels et des autres passifs financiers.</p>
@@ -70,6 +84,7 @@ body.loading-data #data-area{display:none}
 <section class="panel" aria-labelledby="explorer-title">
 <h2 id="explorer-title">Explorer une année et une administration</h2>
 <p id="status" role="status" aria-live="polite">Chargement des données…</p>
+<p id="selection-status" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
 <div id="data-area" hidden>
 <div class="controls">
 <label for="sector">Administration
@@ -96,15 +111,29 @@ body.loading-data #data-area{display:none}
 <div class="panel">
 <h2>Composition de la dette</h2>
 <p>Décomposition sans double compte : titres courts + titres longs, crédits courts + crédits longs et dépôts. Les deux catégories de titres sont des sous-postes des titres négociables.</p>
-<div class="legend" aria-label="Légende des instruments">
+<div class="legend" role="group" aria-label="Légende des instruments">
 <span><i class="dot c-deposit"></i>Dépôts</span><span><i class="dot c-shortsec"></i>Titres courts</span><span><i class="dot c-longsec"></i>Titres longs</span><span><i class="dot c-shortloan"></i>Crédits courts</span><span><i class="dot c-longloan"></i>Crédits longs</span><span><i class="dot c-unclassified"></i>Reste non attribué, calcul</span>
 </div>
 <fieldset><legend>Échelle de l’évolution</legend>
 <label><input type="radio" name="history-unit" value="share" checked> Parts du total (%)</label>
 <label><input type="radio" name="history-unit" value="amount"> Milliards d’euros courants</label>
 </fieldset>
-<svg id="history" viewBox="0 0 940 370" role="img" aria-label="Composition annuelle de la dette par instrument, entre 1995 et 2025"></svg>
+<p id="history-description" class="fine">Les chiffres des 31 années sont également consultables dans le tableau annuel ci-dessous.</p>
+<p class="scroll-hint">Sur petit écran : faire défiler le graphique horizontalement. Au clavier : atteindre le graphique avec Tab puis utiliser les flèches gauche et droite.</p>
+<div class="chart-scroll" role="region" aria-label="Graphique défilable de composition de la dette" tabindex="0">
+<svg id="history" viewBox="0 0 940 370" role="img" aria-label="Composition annuelle de la dette par instrument, entre 1995 et 2025" aria-describedby="history-description history-note"></svg>
+</div>
 <p class="fine" id="history-note">Les titres courts et longs sont classés selon leur durée initiale à l’émission, et non leur durée résiduelle.</p>
+<details id="annual-details" class="annual-details">
+<summary>Consulter toutes les valeurs annuelles de 1995 à 2025 (tableau accessible)</summary>
+<p class="fine">Alternative aux deux graphiques : cinq instruments, reste non attribué calculé, dette brute et dette nette. Les cellules absentes restent « Non renseigné » ; un reste non calculable n'est pas un zéro. Tableau défilable horizontalement, accessible au clavier.</p>
+<div class="scroll" role="region" aria-label="Tableau annuel défilable horizontalement" tabindex="0">
+<table class="annual-table" id="annual-table">
+<caption id="annual-caption">Données annuelles de la dette, en milliards d’euros courants</caption>
+<thead><tr><th scope="col">Année</th><th scope="col">Dépôts (Md€)</th><th scope="col">Titres courts (Md€)</th><th scope="col">Titres longs (Md€)</th><th scope="col">Crédits courts (Md€)</th><th scope="col">Crédits longs (Md€)</th><th scope="col">Reste non attribué (Md€, calcul)</th><th scope="col">Dette brute (Md€)</th><th scope="col">Dette nette (Md€)</th></tr></thead>
+<tbody id="annual-body"></tbody>
+</table></div>
+</details>
 <h3 id="table-year-title">Répartition en 2025</h3>
 <div class="scroll"><table>
 <thead><tr><th scope="col">Instrument</th><th scope="col">Md€</th></tr></thead>
@@ -116,7 +145,11 @@ body.loading-data #data-area{display:none}
 <h2>Dette brute et dette nette : deux courbes, des définitions différentes</h2>
 <p>La dette nette Insee est la dette Maastricht diminuée de certains actifs exigibles. Elle <strong>n’inclut pas une déduction supplémentaire</strong> des actions cotées et parts de fonds, renseignées séparément par l’Insee. Ce graphique n’est pas un bilan patrimonial de l’État.</p>
 <div class="legend"><span><i class="dot c-shortsec"></i>Dette brute Maastricht</span><span><i class="dot c-longsec"></i>Dette nette</span></div>
-<svg id="stock-history" viewBox="0 0 940 330" role="img" aria-label="Dette brute et dette nette annuelles en milliards d’euros courants"></svg>
+<p id="stock-description" class="fine">Les deux évolutions et leurs valeurs exactes sont également consultables année par année dans le tableau accessible de la section précédente.</p>
+<p class="scroll-hint">Sur petit écran : faire défiler horizontalement le graphique. Au clavier : atteindre le graphique avec Tab puis utiliser les flèches.</p>
+<div class="chart-scroll" role="region" aria-label="Graphique défilable de dette brute et nette" tabindex="0">
+<svg id="stock-history" viewBox="0 0 940 330" role="img" aria-label="Dette brute et dette nette annuelles en milliards d’euros courants" aria-describedby="stock-description"></svg>
+</div>
 <p class="fine">Milliards d’euros courants : la progression des montants ne corrige pas l’inflation ni la croissance économique.</p>
 </div>
 <div class="panel">
@@ -150,6 +183,7 @@ body.loading-data #data-area{display:none}
 <p>Les statistiques ne renseignent ici ni la nationalité ni le bénéficiaire économique final des détenteurs, ni l’échéance résiduelle. L’<a href="/DATA_SOURCES.md">audit des sources</a> et la <a href="/METHODOLOGY.md">méthodologie</a> détaillent les définitions, empreintes et limites.</p>
 </section>
 </section>
+</main>
 <script>
 'use strict';
 const FILES = Object.freeze({
@@ -212,7 +246,7 @@ function indexRows(rows,kind){
   }
   return map;
 }
-async function load(){
+async function load(returnFocus=false){
   status.textContent='Chargement des données…';
   document.body.classList.add('loading-data');
   document.getElementById('data-area').hidden=true;
@@ -237,11 +271,15 @@ async function load(){
     document.getElementById('data-area').hidden=false;
     document.getElementById('charts').hidden=false;
     render();
+    if(returnFocus){
+      sectorInput.focus();
+      announceSelection();
+    }
   }catch(error){
     document.body.classList.remove('loading-data');
     status.textContent='Impossible de charger ou de valider les données officielles. ';
     const retry=document.createElement('button');
-    retry.type='button';retry.textContent='Réessayer';retry.addEventListener('click',load);status.appendChild(retry);
+    retry.type='button';retry.textContent='Réessayer';retry.addEventListener('click',()=>load(true));status.appendChild(retry);
   }
 }
 function rowOf(kind,year,sector){return datasets[kind].get(kind==='flow'?String(year):year+':'+sector)}
@@ -274,6 +312,7 @@ function drawHistory(sector,year){
   const rows=Array.from({length:31},(_,i)=>rowOf('instruments',YEAR_START+i,sector));
   const max=mode==='share'?100:Math.ceil(Math.max(...rows.map(r=>numeric(r,'maastricht_bn_eur')))/500)*500;
   grid(svg,[0,.25,.5,.75,1].map(x=>x*max),0,max,w,h,l,t);
+  add(svg,'text',{x:l,y:11},mode==='share'?'% de l’encours':'Md€');
   const bw=w/31;
   rows.forEach((row,i)=>{
     const data=parts(row), values=[...data.values.map(v=>v===null?0:v),data.remainder];
@@ -284,12 +323,18 @@ function drawHistory(sector,year){
     values.forEach((value,k)=>{
       const amount=mode==='share'?value/data.total*100:value;
       const height=amount/max*h;
-      if(height>0)add(group,'rect',{x:l+i*bw+2,y:bottom-height,width:Math.max(3,bw-4),height,fill:COLORS[k]});
+      if(height>0)add(group,'rect',{x:l+i*bw+2,y:bottom-height,width:Math.max(3,bw-4),height,fill:COLORS[k],stroke:'#152033','stroke-width':0.8});
       bottom-=height;
     });
     if(yearActual===year)add(svg,'rect',{x:l+i*bw+1,y:t,width:bw-2,height:h,class:'selected'});
   });
-  yearMarks(svg,l,w,t+h+27,compactQuery.matches);
+  yearMarks(svg,l,w,t+h+27,false);
+  const first=rows[0], last=rows[rows.length-1];
+  const firstShare=100*numeric(first,'securities_bn_eur')/numeric(first,'maastricht_bn_eur');
+  const lastShare=100*numeric(last,'securities_bn_eur')/numeric(last,'maastricht_bn_eur');
+  text('history-description',sectorInput.selectedOptions[0].textContent+
+    ' : part des titres '+fmt.format(firstShare)+' % en 1995 contre '+fmt.format(lastShare)+
+    ' % en 2025. Les cinq instruments et les encours annuels sont détaillés dans le tableau accessible.');
   text('history-note',mode==='share'
     ?'Parts en % de l’encours de dette du même secteur et de la même année. Les petits écarts d’arrondi ou postes non renseignés restent non attribués.'
     :'Montants en milliards d’euros courants (non corrigés de l’inflation). Les postes non renseignés restent distincts.');
@@ -317,14 +362,48 @@ function drawStock(sector,year){
       fill:'none',stroke:color,'stroke-width':3,'stroke-linecap':'round','stroke-linejoin':'round'});
     add(svg,'circle',{cx:X(year-YEAR_START),cy:yPos(data[year-YEAR_START]),r:6,fill:color,stroke:'#1d293b','stroke-width':2});
   }
-  yearMarks(svg,l-12,w+24,t+h+29,compactQuery.matches);
+  yearMarks(svg,l-12,w+24,t+h+29,false);
   add(svg,'text',{x:l,y:12},'Md€');
+  text('stock-description',sectorInput.selectedOptions[0].textContent+
+    ' : dette Maastricht '+euro(gross[0])+' en 1995 et '+euro(gross[gross.length-1])+
+    ' en 2025 ; dette nette '+euro(net[0])+' en 1995 et '+euro(net[net.length-1])+
+    ' en 2025. Toutes les valeurs annuelles sont disponibles dans le tableau accessible de la section précédente.');
 }
 function fillCell(row,name,value,strong){
   const tr=document.createElement('tr');if(strong)tr.className='total-row';
   const th=document.createElement('th');th.scope='row';th.textContent=name;
   const td=document.createElement('td');td.textContent=value;
   tr.append(th,td);row.appendChild(tr);
+}
+function renderAnnual(year,sector){
+  const body=document.getElementById('annual-body');clear(body);
+  text('annual-caption','Données annuelles '+sectorInput.selectedOptions[0].textContent+
+    ', de 1995 à 2025, milliards d’euros courants. Année sélectionnée : '+year+'.');
+  for(let y=YEAR_START;y<=YEAR_END;y++){
+    const source=rowOf('instruments',y,sector);
+    const debtNet=rowOf('net',y,sector);
+    const values=parts(source);
+    const tr=document.createElement('tr');
+    if(y===year)tr.className='selected-annual';
+    const head=document.createElement('th');head.scope='row';head.textContent=String(y);tr.appendChild(head);
+    const numbers=[
+      ...values.values.map(value=>value===null?'Non renseigné':euro(value)),
+      values.values.includes(null)?'Non calculable':euro(values.remainder),
+      euro(values.total),euro(numeric(debtNet,'net_debt_bn_eur'))
+    ];
+    for(const number of numbers){
+      const td=document.createElement('td');td.textContent=number;tr.appendChild(td);
+    }
+    body.appendChild(tr);
+  }
+}
+function announceSelection(){
+  const row=rowOf('instruments',Number(yearInput.value),sectorInput.value);
+  const net=rowOf('net',Number(yearInput.value),sectorInput.value);
+  if(!row||!net)return;
+  text('selection-status',sectorInput.selectedOptions[0].textContent+', '+yearInput.value+
+    ' : dette brute '+euro(numeric(row,'maastricht_bn_eur'))+
+    ', dette nette '+euro(numeric(net,'net_debt_bn_eur'))+'.');
 }
 function renderComponents(row,year,sector){
   const body=document.getElementById('components-body');clear(body);
@@ -391,13 +470,15 @@ function render(){
     ?'Les montants S13 sont consolidés : les créances entre administrations publiques ne sont pas comptées deux fois.'
     :'Ces montants sont des contributions à la dette consolidée de l’ensemble des APU. Le sous-total « Administrations centrales » inclut l’État et les ODAC ; il ne s’ajoute pas à eux.');
   renderComponents(row,year,sector);
+  renderAnnual(year,sector);
   drawHistory(sector,year);
   drawStock(sector,year);
   renderFlow(year,sector);
   renderBridge(year,sector);
 }
 yearInput.addEventListener('input',render);
-sectorInput.addEventListener('change',render);
+yearInput.addEventListener('change',announceSelection);
+sectorInput.addEventListener('change',()=>{render();announceSelection();});
 document.querySelectorAll('input[name="history-unit"]').forEach(input=>input.addEventListener('change',render));
 if(compactQuery.addEventListener)compactQuery.addEventListener('change',render);
 load();
