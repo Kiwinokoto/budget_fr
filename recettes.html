@@ -87,6 +87,18 @@ const categories=[
 ['import_bn_eur','Impôts sur les importations','#debfa1']
 ];
 const slider=document.getElementById('year'),list=document.getElementById('breakdown'),adjust=document.getElementById('adjustments');
+function yearTicks(start,end,compact){
+ const step=compact?10:5;
+ const years=[];
+ for(let year=start;year<=end;year+=step)years.push(year);
+ if(years[years.length-1]!==end){
+  // Leave enough space between the last mobile ticks and the final year.
+  if(compact && end-years[years.length-1]<7)years.pop();
+  years.push(end);
+ }
+ return years;
+}
+const compactQuery=window.matchMedia('(max-width: 700px)');
 let selected='vat_bn_eur',mode='share';
 const money=n=>n.toLocaleString('fr-FR',{minimumFractionDigits:1,maximumFractionDigits:1})+' Md€';
 const pct=n=>n.toLocaleString('fr-FR',{minimumFractionDigits:1,maximumFractionDigits:1})+' %';
@@ -100,9 +112,16 @@ function draw(){
  for(let i=0;i<=4;i++){const v=upper*i/4,yy=y(v);svg.append(el('line',{x1:58,y1:yy,x2:842,y2:yy,stroke:'#47556d'}));svg.append(el('text',{x:46,y:yy+4,fill:'#c5d0e0','text-anchor':'end','font-size':13},pct(v)));}
  const d=values.map((v,i)=>(i?'L':'M')+x(i).toFixed(1)+','+y(v).toFixed(1)).join(' ');
  svg.append(el('path',{d,stroke:cat[2],'stroke-width':3.5,fill:'none','stroke-linecap':'round'}));
- const i=Number(slider.value)-1995;svg.append(el('circle',{cx:x(i),cy:y(values[i]),r:6,fill:cat[2],stroke:'#fff','stroke-width':1.5}));
- svg.append(el('text',{x:58,y:317,fill:'#c5d0e0','font-size':13},'1995'));
- svg.append(el('text',{x:842,y:317,fill:'#c5d0e0','font-size':13,'text-anchor':'end'},'2025'));
+ const years=yearTicks(1995,2025,compactQuery.matches);
+ for(const [i,year] of years.entries()){
+  const xpos=x(year-1995);
+  svg.append(el('line',{x1:xpos,y1:285,x2:xpos,y2:291,stroke:'#65758d'}));
+  svg.append(el('text',{x:xpos,y:317,fill:'#c5d0e0','font-size':12,
+   'text-anchor':i===0?'start':i===years.length-1?'end':'middle'},String(year)));
+ }
+ const i=Number(slider.value)-1995;
+ svg.append(el('line',{x1:x(i),x2:x(i),y1:50,y2:285,stroke:'#dbe4ff','stroke-width':1,'stroke-dasharray':'3 7',opacity:.5}));
+ svg.append(el('circle',{cx:x(i),cy:y(values[i]),r:6,fill:cat[2],stroke:'#fff','stroke-width':1.5}));
  document.getElementById('trend-title').textContent='Évolution · '+cat[1];
  svg.setAttribute('aria-label','Part de '+cat[1]+' dans les prélèvements obligatoires, 1995–2025');
 }
@@ -134,6 +153,7 @@ function refresh(){
  draw();
 }
 slider.addEventListener('input',refresh);
+compactQuery.addEventListener('change',draw);
 document.querySelectorAll('input[name=mode]').forEach(input=>input.addEventListener('change',()=>{if(input.checked){mode=input.value;refresh();}}));
 refresh();
 })().catch(error=>{document.getElementById('total').textContent='Erreur de chargement : '+error.message;});
