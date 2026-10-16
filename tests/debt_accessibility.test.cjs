@@ -43,3 +43,10 @@ test('selection status and retry focus are recoverable',()=>{
  assert.match(html,/retry\.addEventListener\('click',\(\)=>load\(true\)\)/);
  assert.doesNotMatch(html,/\.innerHTML\s*=/);
 });
+
+test('main landmark encompasses the explorer and has separately labeled navigation',()=>{
+ assert.match(html,/<nav aria-label="Navigation du site">/);
+ assert.match(html,/<main id="main-content">/);
+ assert.match(html,/<\/main>\s*<script>/);
+ assert.equal((html.match(/<main\b/g)||[]).length,1);
+});
