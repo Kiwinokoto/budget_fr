@@ -37,6 +37,16 @@
 - Le tableau fournit une ventilation **des prélèvements**, pas de toutes les recettes de l'État ou des APU. Les comparaisons en euros courants ne sont pas corrigées de l'inflation.
 - [Tableau 3.216](https://www.insee.fr/fr/statistiques/8988845) : source historique complémentaire des prélèvements par bénéficiaire, depuis 1959, **non intégrée** dans ce lot ; droits et classement à étudier.
 
+## Quatrième source — simulation de hausse de TVA selon le niveau de vie
+
+**[Insee Analyses n°43, 11 février 2019, figure 2](https://www.insee.fr/fr/statistiques/3713290)**, Mathias André et Anne-Lise Biotteau : *À moyen terme, une hausse de la TVA augmente légèrement les inégalités de niveau de vie et la pauvreté*.
+- **Nature des données :** tableau officiellement publié de résultats de **microsimulation contrefactuelle**, et non relevé de TVA effectivement payée par les ménages, ni évolution annuelle.
+- **Scénario :** relèvement du taux normal de TVA de **20 à 23 %** ; modèle Ines, législation 2016, enquête ERFS 2014 actualisée 2016 et module de taxation indirecte basé sur Budget de famille 2011 ; impacts estimés à trois ans.
+- **Champ :** France métropolitaine, personnes en ménage ordinaire, revenus positifs ou nuls, personne de référence non étudiante. **Dix déciles de personnes** classées selon le niveau de vie usuel, pas dix niveaux de TVA payée.
+- **Unités et variables :** contributions des composantes en **points de pourcentage** de variation du niveau de vie corrigé ; effet total du niveau de vie corrigé **en %**. Six colonnes reprises directement de la figure 2.
+- **Provenance :** transcription manuelle limitée aux dix colonnes de décile de la figure 2, sans valeurs fabriquées et sans extrapolation à 2025 ; CSV dérivé `data/tva_choc_deciles_insee_2019.csv`, tests `tests/test_tva_scenario.py`.
+- **Limites :** valeurs publiées arrondies au dixième ; elles peuvent ne pas s'additionner exactement. La série n'est pas fusionnée avec la série de recettes TVA 1995–2025 de la comptabilité nationale. Aucun « taux d'injustice » n'est calculé.
+
 ## Sources identifiées, non intégrées
 
 - [Insee, comptes APU détaillés](https://www.insee.fr/fr/statistiques/8988845), tableaux 3.201 et suivants ; vérifier périmètres, catégories et durées des séries.

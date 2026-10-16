@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TVA et justice fiscale · Simulation Insee · budget_fr</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#111827;color:#edf1fb}
+*{box-sizing:border-box}body{max-width:1060px;margin:0 auto;padding:30px 20px 60px}
+a{color:#becbff}a:hover{color:#fff}p{line-height:1.6;color:#c9d3e3}h1{font-size:clamp(2rem,4vw,3.2rem);margin:8px 0 12px}
+h2{font-size:1.38rem;margin:0 0 8px}.eyebrow{font-size:.8rem;letter-spacing:.13em;text-transform:uppercase;color:#a9b9ff;margin-top:26px}
+.panel{border:1px solid #37445d;border-radius:17px;background:#1d293c;padding:22px;margin:22px 0}
+.status{display:inline-block;background:#26374b;border:1px solid #597087;border-radius:7px;padding:5px 10px;font-size:.85rem;color:#e0e7f5}
+.controls{display:flex;gap:15px;flex-wrap:wrap;align-items:center;margin-top:15px}
+.controls label{cursor:pointer;font-size:.92rem}input{accent-color:#b6c4ff}
+.metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:20px}
+.metric{background:#121e2e;padding:18px;border-radius:12px}.metric strong{font-size:clamp(1.65rem,3vw,2.2rem);display:block;font-variant-numeric:tabular-nums;margin-top:4px}
+.metric span,.fine{color:#c1ccdc;font-size:.87rem}
+.rows{display:grid;gap:5px;margin:18px 0 7px}.decile{border:1px solid transparent;border-radius:10px;padding:10px;background:transparent;display:grid;grid-template-columns:125px minmax(120px,1fr) 93px;align-items:center;gap:12px;color:inherit;font:inherit;width:100%;text-align:left;cursor:pointer}
+.decile:hover,.decile:focus-visible,.decile[aria-pressed=true]{background:#2a3b53;outline:none}.decile[aria-pressed=true]{border-color:#8ea7c4}
+.track{height:17px;background:#121b2b;border-radius:5px;overflow:hidden}.bar{height:100%;display:block;background:#9ac9d8;border-radius:5px}
+.numeric{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+.detail{border-top:1px solid #40506a;margin-top:17px;padding-top:15px}
+.detailGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:11px}
+.detailGrid div{border-radius:10px;background:#142136;padding:12px}.detailGrid small{color:#c2cbdd;display:block}
+.detailGrid strong{font-variant-numeric:tabular-nums;display:block;margin-top:3px}
+.warning{border-left:3px solid #cfb68a;padding:12px 15px;background:#283247;color:#e9edf7}
+.footer{font-size:.88rem;border-top:1px solid #39475d;padding-top:13px}
+@media(max-width:660px){body{padding:22px 12px}.panel{padding:15px}.decile{grid-template-columns:73px minmax(80px,1fr) 76px;gap:8px;padding:9px 6px;font-size:.86rem}.track{height:13px}.detailGrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:410px){.metrics{grid-template-columns:1fr}.detailGrid{grid-template-columns:1fr}}
+</style></head>
+<body>
+<nav><a href="/recettes.html">← Retour aux recettes fiscales</a></nav>
+<div class="eyebrow">Atlas · Analyse distributive · Simulation historique</div>
+<h1>TVA : qui supporte le choc ?</h1>
+<p>Que se passerait-il si le <strong>taux normal de TVA augmentait de trois points (20 % → 23 %)</strong> ? Cette étude Insee simule les effets sur le niveau de vie des personnes, décile par décile, en tenant compte de certains ajustements de revenus et prestations pendant trois ans.</p>
+<div class="status">Simulation publiée en 2019 · Référence 2016 · Ce ne sont pas les taxes payées en 2025</div>
+<section class="panel">
+<h2>Un même choc, dix niveaux de vie</h2>
+<p>Les déciles classent les <strong>personnes</strong> du niveau de vie le plus modeste (D1) au plus élevé (D10), parmi les ménages ordinaires de France métropolitaine inclus dans le modèle.</p>
+<div class="controls" role="group" aria-label="Choix de l'indicateur">
+<label><input type="radio" name="metric" value="indirect_tax_pp" checked> Prélèvements indirects</label>
+<label><input type="radio" name="metric" value="net_living_standard_pct"> Effet total après trois ans</label>
+</div>
+<p id="metric-note" class="fine">Contribution des prélèvements indirects à la variation du niveau de vie corrigé, en points de pourcentage. Ce n’est pas un taux de TVA acquitté.</p>
+<div id="chart" class="rows" role="group" aria-label="Effets par décile"></div>
+<p class="fine">Clique sur un décile pour consulter les composantes publiées. Les barres montrent l'ampleur d'un effet négatif, pas une dépense de TVA en euros.</p>
+<div class="detail">
+<h2 id="detail-title">Décile D1 — 10 % les plus modestes</h2>
+<div class="detailGrid">
+<div><small>Prélèvements indirects</small><strong id="indirect">—</strong></div>
+<div><small>Prestations</small><strong id="benefits">—</strong></div>
+<div><small>Revenu avant redistribution</small><strong id="income">—</strong></div>
+<div><small>Prélèvements directs</small><strong id="direct">—</strong></div>
+<div><small>Dépenses de loyer</small><strong id="rent">—</strong></div>
+<div><small>Variation totale du niveau de vie corrigé</small><strong id="net">—</strong></div>
+</div>
+</div>
+</section>
+<section class="panel">
+<h2>Ce qu'on peut conclure — et ce qu'on ne peut pas</h2>
+<p>Dans ce <strong>scénario</strong>, le premier décile subit une contribution négative des prélèvements indirects de <strong>−2,8 points</strong>, contre <strong>−1,0 point</strong> pour le dernier. Après prise en compte des autres composantes simulées sur trois ans, le niveau de vie corrigé diminue respectivement de <strong>1,4 %</strong> et <strong>0,5 %</strong>.</p>
+<p class="warning">Ce graphique ne mesure <strong>ni la TVA effectivement payée par décile</strong>, ni le taux d'effort fiscal réel en 2025. C'est le résultat d'un scénario contrefactuel construit sur les données et la législation de référence de 2016. Les composantes sont arrondies au dixième : leur somme peut différer légèrement de l'effet total publié.</p>
+<p>La question « la TVA est-elle injuste ? » ne se résume pas à ce scénario : il faut comparer l'effort rapporté au revenu, à la consommation, les mécanismes d'indexation, la redistribution des prestations et les effets des taux réduits.</p>
+</section>
+<p class="footer">Source : <a href="https://www.insee.fr/fr/statistiques/3713290">Insee Analyses n°43, 11 février 2019, figure 2</a>, étude de Mathias André et Anne-Lise Biotteau. Champ : France métropolitaine, personnes en ménage ordinaire (revenus positifs ou nuls, personne de référence non étudiante). Modèle Ines et module de taxation indirecte, enquête ERFS 2014 actualisée en 2016, Budget de famille 2011. <a href="/TVA_JUSTICE_SOURCES.md">Notes de méthode</a> · <a href="/METHODOLOGY.md">Méthodologie de l’atlas</a>.</p>
+<script>
+(async()=>{
+ const response=await fetch('/data/tva_choc_deciles_insee_2019.csv');
+ if(!response.ok)throw Error('Données du scénario indisponibles');
+ const [header,...records]=(await response.text()).trim().split(/\r?\n/),columns=header.split(',');
+ const rows=records.map(line=>Object.fromEntries(line.split(',').map((v,i)=>[columns[i],Number(v)])));
+ if(rows.length!==10 || rows.some((r,i)=>r.decile!==i+1))throw Error('Déciles incomplets');
+ const chart=document.getElementById('chart'),notes=document.getElementById('metric-note');
+ let metric='indirect_tax_pp',selected=1;
+ const decimal=n=>n.toLocaleString('fr-FR',{minimumFractionDigits:1,maximumFractionDigits:1});
+ const signed=n=>(n>0?'+':'')+decimal(n);
+ const units={indirect_tax_pp:' pt',income_before_pp:' pt',direct_tax_pp:' pt',benefits_pp:' pt',rent_pp:' pt',net_living_standard_pct:' %'};
+ function render(){
+  chart.replaceChildren();
+  const max=Math.max(...rows.map(r=>Math.abs(r[metric])));
+  for(const row of rows){
+   const button=document.createElement('button');button.type='button';button.className='decile';
+   button.setAttribute('aria-pressed',String(row.decile===selected));
+   button.setAttribute('aria-label','Décile '+row.decile+' : '+signed(row[metric])+units[metric]);
+   const name=document.createElement('span');name.textContent='D'+row.decile+(row.decile===1?' · bas':row.decile===10?' · haut':'');
+   const track=document.createElement('span');track.className='track';
+   const fill=document.createElement('span');fill.className='bar';
+   fill.style.width=100*Math.abs(row[metric])/max+'%';fill.style.background=metric==='indirect_tax_pp'?'#96c9d7':'#d1b0e3';
+   track.append(fill);
+   const value=document.createElement('span');value.className='numeric';value.textContent=signed(row[metric])+units[metric];
+   button.append(name,track,value);
+   button.addEventListener('click',()=>{selected=row.decile;render();});
+   chart.append(button);
+  }
+  const r=rows[selected-1];
+  document.getElementById('detail-title').textContent='Décile D'+selected+(selected===1?' — 10 % les plus modestes':selected===10?' — 10 % les plus aisés':'');
+  for(const [id,key] of [['indirect','indirect_tax_pp'],['income','income_before_pp'],['direct','direct_tax_pp'],['benefits','benefits_pp'],['rent','rent_pp'],['net','net_living_standard_pct']]){
+   document.getElementById(id).textContent=signed(r[key])+units[key];
+  }
+  notes.textContent=metric==='indirect_tax_pp'
+   ?'Contribution des prélèvements indirects à la variation du niveau de vie corrigé, en points de pourcentage. Ce n’est pas un taux de TVA acquitté.'
+   :'Variation totale du niveau de vie corrigé après trois ans de simulation, en %. Ce n’est pas la variation du revenu disponible usuel.';
+ }
+ document.querySelectorAll('input[name=metric]').forEach(x=>x.addEventListener('change',()=>{
+  if(x.checked){metric=x.value;render();}
+ }));
+ render();
+})().catch(error=>{document.getElementById('chart').textContent='Erreur de chargement : '+error.message;});
+</script></body></html>

@@ -57,6 +57,12 @@ python3 scripts/import_recettes.py
 
 Attention : les prélèvements obligatoires ne constituent pas toutes les recettes publiques ; l'incidence distributive de chaque impôt n'est pas directement déductible de ses montants agrégés. L'année 2025 reste provisoire.
 
+## TVA et niveau de vie : une première simulation distributive
+
+**[Explorer les effets simulés par décile](tva-justice.html)** : dix déciles de personnes, scénario d'une hausse de trois points du taux normal de TVA, d'après la figure 2 d'Insee Analyses 43 (2019), population et législation de référence 2016. Graphiques comparant l'effet des prélèvements indirects et l'effet total simulé après trois ans ; détail des composantes.
+
+**Important :** ni TVA acquittée par décile, ni données distributives observées en 2025, ni indice composite de justice fiscale. Source originale : [Insee Analyses 43](https://www.insee.fr/fr/statistiques/3713290) ; valeurs officiellement publiées retranscrites à une décimale et testées. Voir [méthode](METHODOLOGY.md) et [traçabilité](DATA_SOURCES.md).
+
 **Graduations temporelles :** tous les 5 ans sur ordinateur et tous les 10 ans en affichage compact, année finale toujours affichée ; curseur signalé par un repère vertical discret. [Tests des axes](tests/year_axes.test.cjs) : `node --test tests/year_axes.test.cjs`.
 
 **Justice fiscale (cadrage en cours) :** [TVA, incidence et limites des données](TVA_JUSTICE_SOURCES.md). Aucune série de TVA par décile n'est encore présentée comme une observation récente.
