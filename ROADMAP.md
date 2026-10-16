@@ -2,16 +2,16 @@
 
 ## Situation au 16 octobre 2026
 
-- Dépôt public : Kiwinokoto/budget_fr. PR #1–#17 fusionnées sur `main` le 16 octobre 2026 ; dernier commit applicatif (TVA seule estimée Ines 2014) **`e97999e3168b808938c385f22a60d886394981b0`**. La documentation de passation ultérieure peut faire avancer `main` sans redéploiement.
+- Dépôt public : Kiwinokoto/budget_fr. PR #1–#19 fusionnées sur `main` le 16 octobre 2026 ; dernier commit applicatif (intérêts annuels S13) **`4679431cab4179292690c577573f5c56b64ac520`**. La documentation de passation ultérieure peut faire avancer `main` sans redéploiement.
 - Coordination AgentCtl : projet budget-fr, ressource repo:Kiwinokoto/budget_fr ; verrou à prendre avant toute mutation et libérer en fin de passe.
 - Base Insee initiale 1995–2025 recopiée à la main **remplacée** par les chiffres du classeur officiel d'août 2026.
 - Données 1960–2025 : recettes, dépenses, solde, variantes hors éléments imputés ; dette brute depuis 1978 et nette depuis 1995. Fichier original conservé à la source, pas dans Git.
 - Importateur en Python standard, empreinte SHA-256 de la source, validation des libellés, années et solde ; tests couvrant les absences de valeurs.
 - Application statique avec curseur temporel et graphiques de recettes/dépenses et dette.
-- Site public en ligne : **https://budget-fr.kiwinokoto.fr** sur le VPS personnel, via `/opt/budget-fr`, conteneur `budget-fr-web`, réseau Docker `traefik_network`, routeur Traefik dédié et certificat Let's Encrypt. Déploiement figé sur `e97999e3168b808938c385f22a60d886394981b0` (`/opt/budget-fr/.deployed_commit`). Aucune base de données, aucune automatisation ou modification des services voisins.
-- Vérifications en production : HTTPS HTTP 200 sans `-k`, documents et CSV HTTP 200, trois CSV servis identiques octet par octet à GitHub (66, 30 et 31 années), **23 tests Python et 14 tests Node OK pour la version actuelle**, certificat valide, conteneur démarré, volume statique monté en lecture seule. Revue visuelle navigateur desktop/mobile **encore à faire**.
+- Site public en ligne : **https://budget-fr.kiwinokoto.fr** sur le VPS personnel, via `/opt/budget-fr`, conteneur `budget-fr-web`, réseau Docker `traefik_network`, routeur Traefik dédié et certificat Let's Encrypt. Déploiement figé sur `4679431cab4179292690c577573f5c56b64ac520` (`/opt/budget-fr/.deployed_commit`). Aucune base de données, aucune automatisation ou modification des services voisins.
+- Vérifications en production : HTTPS HTTP 200 sans `-k`, documents et CSV HTTP 200, trois CSV servis identiques octet par octet à GitHub (66, 30 et 31 années), **27 tests Python et 17 tests Node OK pour la version actuelle**, certificat valide, conteneur démarré, volume statique monté en lecture seule. Revue visuelle navigateur desktop/mobile **encore à faire**.
 
-- **Historique des axes** : `607dbd8b4fd60c92b47832c701ce9c122f949891` (PR #7), inclus dans les versions applicatives suivantes. L'application servie est désormais `e97999e` ; les commits de documentation ultérieurs ne déclenchent pas de déploiement.
+- **Historique des axes** : `607dbd8b4fd60c92b47832c701ce9c122f949891` (PR #7), inclus dans les versions applicatives suivantes. L'application servie est désormais `4679431` ; les commits de documentation ultérieurs ne déclenchent pas de déploiement.
 
 ## Lot COFOG livré sur `main` et sur le site public
 
@@ -99,15 +99,18 @@
 - `interets.html` : sélection de l'année, courbes des deux conventions, bascule montants / parts de la dépense publique, explications du décalage 2025 65,7/64,7 et distinction **charge d'intérêts (flux)** / **dette Maastricht (stock)**.
 - Nav ajoutée sur l'accueil ; méthodologie, sources et tests étendus ; ne pas inférer un taux apparent d'intérêt à partir de séries non homogènes.
 - **Drees / modèle Ines** : une demande de tableaux récents agrégés de TVA par décile a été envoyée le **16 octobre 2026** par e-mail privé. Réponse en attente ; **ne pas publier l'adresse de l'expéditeur ni le contenu de l'échange sans accord**. Le travail sur les comptes publics continue en parallèle.
-- **Audit visuel navigateur** : prompt préparé pour un contrôle black-box des cinq pages existantes par Work. Aucun résultat de cet audit n'est encore disponible ; **pas de mutation Git par l'auditeur**.
-- À finaliser après tests : PR et SHA applicatif fusionné, preuve du déploiement réel, sauvegarde/restauration et statut des verrous.
+- **Audit visuel navigateur** : prompt préparé pour un contrôle black-box des cinq pages existantes par Work ; **ajouter maintenant la sixième page `interets.html` à la recette**. Aucun résultat de cet audit n'est encore disponible ; **pas de mutation Git par l'auditeur**.
+- **PR #19 livrée** : commit `4679431cab4179292690c577573f5c56b64ac520`, page publique https://budget-fr.kiwinokoto.fr/interets.html et CSV 1959–2025 en production.
+- **Vérifications** : 27 tests Python et 17 tests Node réussis, scripts JS des six pages validés, import XLSX 3.201 reproduit **octet par octet**, et ancienne source CND.101 reproductible. Clone Git propre.
+- **Contrôles HTTPS** : `index.html`, `interets.html`, CSV des intérêts et deux documents de source/méthode identiques octet par octet au commit ; autres pages et CSV historiques préservés.
+- **Retour arrière** : sauvegarde `/opt/budget-fr/backup/20261016T162334-interest-before-4679431cab4179292690c577573f5c56b64ac520/`. Aucun redémarrage Docker/Traefik. AgentCtl `deploy:vps-personal/budget-fr` libéré automatiquement, et verrou repo relâché après fusion. Revue graphique mobile toujours ouverte.
 
 ## Suite prioritaire
 
 1. Valider le rendu sur un vrai navigateur mobile et l'accessibilité ; les captures desktop sont encourageantes mais ne valident pas le mobile.
 2. Documenter et mesurer les écarts entre les publications Insee de mai et août 2026.
 3. ~~Rechercher des séries détaillées COFOG 1995–2024~~ : **premier niveau COFOG S13 intégré** (mars 2026, dix catégories, euros courants). Prochaine étape : explorer sous-fonctions, harmoniser les millésimes et déceler les reclassements.
-4. ~~Identifier les principales recettes par impôt~~ : premier lot de prélèvements obligatoires 1995–2025 intégré avec contrôle des doubles comptes, TVA, IRPP, IS, CSG/CRDS et cotisations. Poursuivre : revenus non fiscaux, dette (dont intérêts annuels en cours d'intégration), solde primaire et patrimoine.
+4. ~~Identifier les principales recettes par impôt~~ : premier lot de prélèvements obligatoires 1995–2025 intégré avec contrôle des doubles comptes, TVA, IRPP, IS, CSG/CRDS et cotisations. **Intérêts annuels 1959–2025 intégrés** ; poursuivre : revenus non fiscaux, dette par instrument, solde primaire et patrimoine.
 5. **TVA et justice fiscale :** enquêter sur la disponibilité de la TVA seule réellement estimée et rapportée au revenu/consommation dans une enquête récente, puis étendre aux taux réduits et à la redistribution élargie. Maintenir strictement les distinctions 2001 estimée / Ines 2014 TVA seule / 2016 choc simulé / 2020–2023 taxes sur produits / simulation 2025. Ensuite formaliser la traçabilité budgétaire.
 6. Faire une vraie revue visuelle et une vérification responsive, puis envisager un déploiement automatisé uniquement si cela devient utile (actuellement manuel et volontaire).
 
