@@ -69,6 +69,16 @@ Insee, [Comptes par catégories de ménage](https://www.insee.fr/fr/statistiques
 - Ne pas construire un ratio de taxes sur produits / revenu disponible S14 sans expliciter les différences d'univers comptable, ni rapprocher directement ces valeurs du CSV de TVA nationale d'un autre millésime.
 - Les comptes publiés 2020–2023 sont des **statistiques expérimentales** soumises à révisions et hypothèses de répartition, et **ne constituent pas une mesure de fiscalité individuelle constatée en 2025**.
 
+## Septième source — DG Trésor, simulation distributive de TVA (publication 2025)
+
+[Trésor-Éco n°371, 25 septembre 2025](https://www.tresor.economie.gouv.fr/Articles/2025/09/25/analyse-de-la-composition-des-recettes-de-tva), [document complet PDF](https://www.tresor.economie.gouv.fr/Articles/c462ac7f-76db-4c33-9bb3-dcc6886ed898/files/f4d0d1ac-fc61-4cf3-ab3f-094385b218bd), chapitre 4 et graphique 4, pages 5–6.
+- La source analyse une **hausse hypothétique uniforme de 1 point de tous les taux de TVA**, sous répercussion intégrale et consommation constante.
+- Simulation par **quintile de niveau de vie des ménages**, BDF 2017, ERFS 2022, comptes nationaux 2021–2022.
+- Chiffres textuels vérifiés : perte moyenne de pouvoir d'achat Q1 −0,7 %, Q5 −0,4 %, ensemble −0,5 % ; parts Q1 12 %, Q5 31 % des **recettes marginales supplémentaires** d'une telle hausse.
+- Seuls les **résultats numériques publiés dans le texte** sont repris dans \`tva-incidence.html\`. Pas de CSV pseudo-exact des quintiles intermédiaires obtenu par lecture graphique.
+- Résultat distinct de la **TVA existante** : ni somme d'impôt effectivement payée en 2025, ni part du revenu qu'elle représente.
+- Le montant 11,4 Md€ pour un point de TVA net en 2025 est un **rendement théorique statique**, issu d'une modélisation fondée notamment sur 2022 et extrapolée en 2025 ; ne pas le présenter comme une exécution.
+
 ## Sources identifiées, non intégrées
 
 - [Insee, comptes APU détaillés](https://www.insee.fr/fr/statistiques/8988845), tableaux 3.201 et suivants ; vérifier périmètres, catégories et durées des séries.

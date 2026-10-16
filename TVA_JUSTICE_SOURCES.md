@@ -43,3 +43,19 @@ La page [`tva-incidence.html`](tva-incidence.html) documente deux sources chiffr
 - [Insee CND.101 (2026)](https://www.insee.fr/fr/statistiques/8574663) : statistiques expérimentales pour **2020–2023**, taxes sur les produits par **vingtième de niveau de vie**. Catégorie plus large que la TVA. Aucun taux d'effort de TVA récente n'est calculé.
 
 **Inconnue restante :** une ventilation récente et vérifiée de la seule TVA, rapportée au revenu et à la consommation selon les mêmes groupes, n'a pas encore été trouvée. Éviter la reconstruction par prorata de taxes sur les produits ou de recettes nationales.
+
+## DG Trésor, septembre 2025 : incidence simulée d'une hausse uniforme des taux de TVA
+
+[Trésor-Éco n°371 — « Analyse de la composition des recettes de TVA »](https://www.tresor.economie.gouv.fr/Articles/2025/09/25/analyse-de-la-composition-des-recettes-de-tva), Maxime Gesta, septembre 2025, [PDF complet](https://www.tresor.economie.gouv.fr/Articles/c462ac7f-76db-4c33-9bb3-dcc6886ed898/files/f4d0d1ac-fc61-4cf3-ab3f-094385b218bd), chapitre 4 et graphique 4 (pages 5–6).
+
+- Objet : **TVA seule**, choc contrefactuel **+1 point de pourcentage sur tous les taux**, avec hypothèse de répercussion intégrale aux prix et comportements inchangés. **Ce n'est pas le taux d'effort de la TVA existante**.
+- Groupes : **quintiles de ménages** selon le niveau de vie (Q1–Q5), et non déciles ou vingtiles.
+- Sources détaillées : Budget de famille **2017**, enquête Revenus fiscaux et sociaux **2022**, comptabilité nationale **2021–2022**, calculs DG Trésor.
+- Résultats textuels, **effet moyen de pouvoir d'achat** : Q1 **−0,7 %**, Q5 **−0,4 %**, ensemble **−0,5 %**.
+- Part des **recettes supplémentaires issues de la hausse** : Q1 **12 %**, Q5 **31 %**. Ce n'est pas la ventilation du stock de TVA existante.
+- La hausse simulée serait en partie compensée, à moyen terme, par les indexations des minima sociaux et du Smic. Ces compensations et les comportements de consommation ne sont pas intégrés au choc statique.
+- Le **graphique 4** montre les cinq quintiles ventilés entre taux de TVA, mais **aucune table exacte Q2/Q3/Q4 n'est publiée dans le document**. Le site n'invente donc pas leurs chiffres.
+- Le point de TVA **net** de **11,4 Md€ en 2025** est une estimation de rendement statique fondée sur un modèle assis sur le compte semi-définitif **2022**, vieilli. Ce n'est pas une recette effectivement constatée ni une distribution 2025 du prélèvement.
+- Les limites des enquêtes déclaratives et des semaines de référence ainsi que les écarts entre incidence économique et taxe collectée sont discutés par l'étude.
+
+**Conclusion sur la recherche :** nous disposons maintenant d'une **simulation distributive publiée en 2025** de la TVA seule. Nous n'avons **toujours pas** trouvé de distribution annuelle 2023–2025 publiée de la **TVA effectivement estimée comme payée**, par revenu *et* consommation, à champs et dénominateurs cohérents. L'enquête BDF 2017 n'est pas une table TVA payée par décile prête à être utilisée sans microsimulation.

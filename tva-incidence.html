@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>TVA estimée et taxes sur les produits · budget_fr</title>
+<title>TVA : incidence et estimations distributives · budget_fr</title>
 <style>
 :root{color-scheme:dark;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#101827;color:#f1f5fc}
 *{box-sizing:border-box}body{max-width:1060px;margin:auto;padding:28px 20px 58px}
@@ -27,7 +27,20 @@ select{background:#111d30;color:#fff;border:1px solid #677c9b;border-radius:8px;
 <nav><a href="/tva-justice.html">← Revenir à la simulation TVA</a> · <a href="/recettes.html">Recettes publiques</a></nav>
 <div class="eyebrow">Atlas · Fiscalité indirecte · Comparaisons contextualisées</div>
 <h1>TVA : le choix du dénominateur change l’histoire</h1>
-<p>Deux jeux de données officiels, présentés <strong>séparément</strong> : une estimation de la TVA des ménages basée sur leurs consommations en <strong>2001</strong>, et une répartition plus récente (2020–2023) de l’ensemble des <strong>taxes sur les produits</strong>. Ces dernières incluent la TVA, mais pas uniquement.</p>
+<p>Trois éclairages officiels <strong>distincts</strong> : une simulation de hausse de la <strong>TVA seule</strong> publiée en 2025, une estimation de la TVA des ménages fondée sur leurs consommations en <strong>2001</strong>, et la répartition 2020–2023 des <strong>taxes sur les produits</strong> (catégorie plus large que la TVA).</p>
+
+<section class="panel" aria-labelledby="head-tresor">
+<h2 id="head-tresor">TVA : simulation de réforme publiée en septembre 2025</h2>
+<p>La Direction générale du Trésor estime l’effet <strong>statique</strong> d’une hausse uniforme de <strong>1 point de pourcentage de tous les taux de TVA</strong> sur le pouvoir d’achat des ménages, selon leur quintile de niveau de vie. L’étude exploite notamment l’enquête Budget de famille <strong>2017</strong>, l’ERFS <strong>2022</strong> et les comptes nationaux 2021–2022.</p>
+<div class="highlight" aria-label="Résultats publiés pour les quintiles extrêmes">
+<div><small>20 % les plus modestes (Q1)</small><strong>−0,7 %</strong><span class="notes">Perte de pouvoir d’achat simulée</span></div>
+<div><small>20 % les plus aisés (Q5)</small><strong>−0,4 %</strong><span class="notes">Perte de pouvoir d’achat simulée</span></div>
+<div><small>Ensemble des ménages</small><strong>−0,5 %</strong><span class="notes">Perte moyenne simulée</span></div>
+</div>
+<p>En montants de recettes <strong>supplémentaires</strong> générés par cette hausse hypothétique, <strong>12 %</strong> seraient supportés par Q1 et <strong>31 %</strong> par Q5. Ces parts ne représentent <strong>ni la répartition de toute la TVA existante</strong> ni la fraction du revenu consacrée à la TVA.</p>
+<p class="warning">Il s’agit d’un <strong>scénario de réforme</strong>, non d’une observation de la TVA payée en 2025. Il suppose que la hausse est intégralement répercutée dans les prix, sans adaptation des consommations. Les revalorisations ultérieures des prestations sociales et du Smic ne sont pas comptabilisées dans cet effet statique. Les résultats numériques des quintiles Q2 à Q4 ne sont pas retranscrits : le graphique officiel ne donne pas de tableau chiffré correspondant.</p>
+<p class="notes">Source : <a href="https://www.tresor.economie.gouv.fr/Articles/2025/09/25/analyse-de-la-composition-des-recettes-de-tva">DG Trésor, Trésor-Éco n°371, 25 septembre 2025</a>, <a href="https://www.tresor.economie.gouv.fr/Articles/c462ac7f-76db-4c33-9bb3-dcc6886ed898/files/f4d0d1ac-fc61-4cf3-ab3f-094385b218bd">graphique 4 et texte d’accompagnement, pages 5–6</a>. Les quintiles regroupent chacun 20 % des ménages.</p>
+</section>
 
 <section class="panel" aria-labelledby="head-vat">
 <h2 id="head-vat">TVA estimée par décile — enquête 2001</h2>
