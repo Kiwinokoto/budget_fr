@@ -63,6 +63,12 @@ Attention : les prélèvements obligatoires ne constituent pas toutes les recett
 
 **Important :** ni TVA acquittée par décile, ni données distributives observées en 2025, ni indice composite de justice fiscale. Source originale : [Insee Analyses 43](https://www.insee.fr/fr/statistiques/3713290) ; valeurs officiellement publiées retranscrites à une décimale et testées. Voir [méthode](METHODOLOGY.md) et [traçabilité](DATA_SOURCES.md).
 
+## TVA seule estimée : répartition entre déciles Ines 2014
+
+[La vue « TVA et fiscalité indirecte »](tva-incidence.html) inclut la répartition en **dix déciles** du montant de TVA estimé par le modèle officiel **Ines 2014**, issu de [Drees, document de travail n°60 (2016), tableau 16](https://drees.solidarites-sante.gouv.fr/sites/default/files/2020-10/dt60.pdf). D1 : **4,3 %** du total simulé ; D10 : **18,5 %**. CSV `data/tva_part_deciles_ines_2014.csv`, somme contrôlée à 100 %. Il s'agit de **parts des montants** et non de TVA rapportée au revenu. Ni observation directe, ni données actuelles.
+
+**Poursuite de l'enquête** : [documentation Ines](https://ines-public-e766af.gitlab.io/modules_annexes.html) et [accès CASD à BDF 2017](https://www.casd.eu/source/enquete-budget-de-famille/) identifiés. Les tableaux publics ne fournissent pas la TVA payée par ménage/décile en 2023–2025 ; demande de données agrégées / accès microdonnées à étudier.
+
 ## TVA seule : étude distributive récente, publiée en 2025
 
 [L'étude DG Trésor, Trésor-Éco n°371 (septembre 2025)](https://www.tresor.economie.gouv.fr/Articles/2025/09/25/analyse-de-la-composition-des-recettes-de-tva) a été intégrée à [l'explorateur de TVA](tva-incidence.html). Son graphique 4 décrit les conséquences **statiques hypothétiques** d'une hausse d'un point de pourcentage **de tous les taux** : Q1 −0,7 % de pouvoir d'achat, Q5 −0,4 %, ensemble −0,5 %. Q1 représente 12 % et Q5 31 % des **recettes supplémentaires** d'une telle hausse. Les Q2–Q4 ne sont pas extrapolés numériquement.

@@ -81,6 +81,15 @@
 - **Sauvegarde** : `/opt/budget-fr/backup/20261016T154732-tresor-before-2dd13d08762e8b658264a174f9de24a0199b9a65/` ; déploiement statique isolé sous verrou, sans modification des autres services.
 - **Inconnue persistante** : aucune série annuelle récente de la TVA seule effectivement estimée par niveau de vie et consommation ; revue responsive graphique mobile non effectuée.
 
+## TVA seule Drees Ines 2014 : distribution des montants par décile
+
+- Source nouvelle : Drees, document de travail n°60 (2016), tableau 16 p. 38 : TVA isolée entre dix déciles, **répartition du montant estimé**, pas taux d'effort. D1 4,3 %, D10 18,5 %, total 100 %.
+- Données `data/tva_part_deciles_ines_2014.csv` : transcription exacte de dix valeurs tabulées publiées, contrôle de somme et des déciles. Ajout du panneau interactif dans `tva-incidence.html` ; sources, méthodologie et tests actualisés.
+- **Source de modèle récent identifiée :** Ines module de taxation indirecte (BDF 2017 pseudo-appariée) ; microdonnées BDF 2017 plus détaillées soumises à accès CASD/Quételet, et ERFS nécessaires au modèle. Les tableaux publics de dépense 2017 ne permettent pas de publier de TVA seule par décile à eux seuls.
+- **Blocage scientifique explicite :** pas encore de tableau distributif contemporain 2023–2025 de la TVA seule, rapportée aux revenus et à la consommation, sur le même champ.
+- Pour une estimation récente : demander les statistiques agrégées Drees/Insee ou étudier un accès encadré aux microdonnées et au module Ines ; ne pas publier une approximation comme donnée observée.
+- Validation GitHub / tests / déploiement / rollback à consigner après opération.
+
 ## Suite prioritaire
 
 1. Valider le rendu sur un vrai navigateur mobile et l'accessibilité ; les captures desktop sont encourageantes mais ne valident pas le mobile.

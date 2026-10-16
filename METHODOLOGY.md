@@ -112,3 +112,13 @@ Le [Trésor-Éco 371](https://www.tresor.economie.gouv.fr/Articles/2025/09/25/an
 Seules sont visibles sur le site les valeurs explicitement données dans le texte : **Q1 −0,7 %, Q5 −0,4 %, tous ménages −0,5 %**, puis **Q1 12 % et Q5 31 % des recettes supplémentaires** de la hausse simulée. Les Q2 à Q4 sont visibles graphiquement dans la publication, mais sans valeurs tabulées exactes ; ils ne sont donc **pas reconstruits numériquement**. Le texte explique que l'indexation future du Smic et des prestations amortirait l'effet statique ; elle n'est pas comprise dans l'estimation affichée. L'étude chiffre également le rendement net théorique du point de TVA 2025, qui est **un autre objet statistique**.
 
 Ne pas comparer directement les effets en % sur le **pouvoir d'achat simulé** de l'étude 2025 aux taux agrégés TVA/revenu des ménages du jeu BDF 2001, ni aux montants distribués CND 2020–2023. Les groupes sont des **quintiles**, non des déciles ; les périodes, hypothèses et dénominateurs diffèrent.
+
+## TVA seule répartie entre déciles : Drees / Ines 2014
+
+Le [tableau 16 du document Drees n°60](https://drees.solidarites-sante.gouv.fr/sites/default/files/2020-10/dt60.pdf) (novembre 2016, p. 38) publie la **part de la TVA simulée attribuée à chaque décile**. Le CSV `data/tva_part_deciles_ines_2014.csv` reprend ses dix valeurs à une décimale, avec somme contrôlée à **100 %**. C'est une partition des **montants de TVA estimés pour les ménages inclus dans le champ**, non un taux d'effort, ni une répartition des recettes fiscales nationales constatées.
+
+Champ : ménages ordinaires en France métropolitaine hors DOM, revenu disponible strictement positif. Méthode : module de taxation indirecte du modèle Ines 2014, avec pseudo-appariement de consommations issues de BDF 2011. Publication en 2016, aucune observation fiscale individuelle directe. D1 = 4,3 % et D10 = 18,5 % du total **dans cette estimation**. La somme de 100 % ne démontre pas la représentativité de toutes les recettes de TVA acquittées par l'ensemble des secteurs.
+
+Les taux d'effort TVA/revenu et TVA/consommation ont des dénominateurs **différents** et ne sont pas déductibles des parts de montants sans les bases de revenus et de consommation des mêmes ménages. Le rapport Drees donne les valeurs extrêmes dans le texte, mais pas le tableau exact des dix taux d'effort ; nous n'interpolons donc pas les déciles intermédiaires.
+
+Pour actualiser au-delà de 2014, un nouveau jeu de données doit être obtenu puis traité par une microsimulation documentée. Les tableaux publics BDF 2017 ne contiennent pas directement le montant de TVA par décile ; les versions microdonnées BDF / ERFS détaillées impliquent des conditions d'accès propres. Aucune extrapolation 2014 → 2025 n'est réalisée.

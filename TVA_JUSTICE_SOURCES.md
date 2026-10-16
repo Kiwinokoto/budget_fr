@@ -59,3 +59,11 @@ La page [`tva-incidence.html`](tva-incidence.html) documente deux sources chiffr
 - Les limites des enquêtes déclaratives et des semaines de référence ainsi que les écarts entre incidence économique et taxe collectée sont discutés par l'étude.
 
 **Conclusion sur la recherche :** nous disposons maintenant d'une **simulation distributive publiée en 2025** de la TVA seule. Nous n'avons **toujours pas** trouvé de distribution annuelle 2023–2025 publiée de la **TVA effectivement estimée comme payée**, par revenu *et* consommation, à champs et dénominateurs cohérents. L'enquête BDF 2017 n'est pas une table TVA payée par décile prête à être utilisée sans microsimulation.
+
+## Drees : distribution publiée de la TVA seule dans Ines 2014
+
+[Document de travail Drees n°60 (2016), tableau 16, page 38](https://drees.solidarites-sante.gouv.fr/sites/default/files/2020-10/dt60.pdf) : TVA **isolée**, répartie entre dix déciles de ménages par niveau de vie, chiffres exacts (parts du total TVA **estimé sur le champ**), conservés dans `data/tva_part_deciles_ines_2014.csv` : 4,3 % (D1) à 18,5 % (D10). L'indicateur répond à **« qui contribue à quel montant de TVA ? »**, pas à **« quelle part du revenu supporte la TVA ? »**. Champ métropolitain hors DOM, revenus disponibles positifs ; Ines 2014, consommation BDF 2011 imputée.
+
+Le même travail estime, pour les déciles extrêmes, **11,3 % contre 6,8 % du revenu disponible** et **9,3 % contre 11,5 % de la consommation**. Ces taux ne doivent pas être recalculés depuis le tableau des contributions. Les données ne sont pas actuelles, mais constituent une vérification de méthode intermédiaire entre BDF 2001 et les simulations 2025.
+
+**Accès à une distribution récente TVA seule :** documentation du [module Ines et pseudo-appariement BDF 2017](https://ines-public-e766af.gitlab.io/modules_annexes.html) ; fichiers statistiques BDF 2017 détaillés [CASD](https://www.casd.eu/source/enquete-budget-de-famille/) ou version réduite Quételet-Progedo ; [tableaux publics BDF 2017](https://www.insee.fr/fr/statistiques/4648335) sans TVA par décile publiée. Un accès autorisé aux microdonnées et une microsimulation validée, ou une demande de tableaux agrégés à la Drees, est nécessaire pour une estimation plus récente. Ne pas utiliser un simple coefficient TVA uniforme sur les dépenses COICOP comme valeur observée.
