@@ -2,16 +2,16 @@
 
 ## Situation au 16 octobre 2026
 
-- Dépôt public : Kiwinokoto/budget_fr. PR #1–#19 fusionnées sur `main` le 16 octobre 2026 ; dernier commit applicatif (intérêts annuels S13) **`4679431cab4179292690c577573f5c56b64ac520`**. La documentation de passation ultérieure peut faire avancer `main` sans redéploiement.
+- Dépôt public : Kiwinokoto/budget_fr. PR #1–#21 fusionnées sur `main` le 16 octobre 2026 ; dernier commit applicatif (UX chargement données) **`062f91201a52518665398311938c1a775b99e50c`**. La documentation de passation ultérieure peut faire avancer `main` sans redéploiement.
 - Coordination AgentCtl : projet budget-fr, ressource repo:Kiwinokoto/budget_fr ; verrou à prendre avant toute mutation et libérer en fin de passe.
 - Base Insee initiale 1995–2025 recopiée à la main **remplacée** par les chiffres du classeur officiel d'août 2026.
 - Données 1960–2025 : recettes, dépenses, solde, variantes hors éléments imputés ; dette brute depuis 1978 et nette depuis 1995. Fichier original conservé à la source, pas dans Git.
 - Importateur en Python standard, empreinte SHA-256 de la source, validation des libellés, années et solde ; tests couvrant les absences de valeurs.
 - Application statique avec curseur temporel et graphiques de recettes/dépenses et dette.
-- Site public en ligne : **https://budget-fr.kiwinokoto.fr** sur le VPS personnel, via `/opt/budget-fr`, conteneur `budget-fr-web`, réseau Docker `traefik_network`, routeur Traefik dédié et certificat Let's Encrypt. Déploiement figé sur `4679431cab4179292690c577573f5c56b64ac520` (`/opt/budget-fr/.deployed_commit`). Aucune base de données, aucune automatisation ou modification des services voisins.
-- Vérifications en production : HTTPS HTTP 200 sans `-k`, documents et CSV HTTP 200, trois CSV servis identiques octet par octet à GitHub (66, 30 et 31 années), **27 tests Python et 17 tests Node OK pour la version actuelle**, certificat valide, conteneur démarré, volume statique monté en lecture seule. Revue visuelle navigateur desktop/mobile **encore à faire**.
+- Site public en ligne : **https://budget-fr.kiwinokoto.fr** sur le VPS personnel, via `/opt/budget-fr`, conteneur `budget-fr-web`, réseau Docker `traefik_network`, routeur Traefik dédié et certificat Let's Encrypt. Déploiement figé sur `062f91201a52518665398311938c1a775b99e50c` (`/opt/budget-fr/.deployed_commit`). Aucune base de données, aucune automatisation ou modification des services voisins.
+- Vérifications en production : HTTPS HTTP 200 sans `-k`, documents et CSV HTTP 200, trois CSV servis identiques octet par octet à GitHub (66, 30 et 31 années), **27 tests Python et 19 tests Node OK pour la version actuelle**, certificat valide, conteneur démarré, volume statique monté en lecture seule. Recette navigateur **desktop Work (1 363 px)** effectuée ; vérification **responsive automatisée à 390 et 768 px** effectuée pour six pages. Revue esthétique manuelle mobile encore à faire.
 
-- **Historique des axes** : `607dbd8b4fd60c92b47832c701ce9c122f949891` (PR #7), inclus dans les versions applicatives suivantes. L'application servie est désormais `4679431` ; les commits de documentation ultérieurs ne déclenchent pas de déploiement.
+- **Historique des axes** : `607dbd8b4fd60c92b47832c701ce9c122f949891` (PR #7), inclus dans les versions applicatives suivantes. L'application servie est désormais `062f912` ; les commits de documentation ultérieurs ne déclenchent pas de déploiement.
 
 ## Lot COFOG livré sur `main` et sur le site public
 
@@ -109,8 +109,10 @@
 
 - **Work (Chrome distant 1 363 px, cinq pages)** : aucun défaut bloquant ou important confirmé, un défaut mineur d’affichage transitoire de « — » sur `recettes.html` et `tva-incidence.html` ; les états mobiles ne sont pas couverts dans le rapport `recette-budget-fr-2026-10-16.md` communiqué dans le chat. Navigation clavier, graphiques et unités cohérents ; aucune erreur JavaScript imputable au site.
 - **Audit complémentaire Chromium headless** sur la production à **390 et 768 px** : les **six pages**, y compris `interets.html`, répondent en HTTPS 200, aucun défilement horizontal détecté (`scrollWidth == innerWidth`), aucune erreur JavaScript ; vérification technique, pas revue esthétique manuelle.
-- **Correctif proposé** : masquer les cartes encore non remplies pendant le téléchargement CSV, annoncer « Chargement des données… », puis afficher les données seulement après validation ; en cas d’échec, message explicite et bouton « Réessayer ».
-- Après tests et revue : décider de la fusion et de la livraison statique, consigner commit, sauvegarde, preuves et verrous AgentCtl.
+- **Correctif livré** : PR #21 fusionnée, SHA applicatif `062f91201a52518665398311938c1a775b99e50c` en production. Sur `recettes.html` et `tva-incidence.html`, contenu dépendant des CSV masqué avant disponibilité, statut accessible « Chargement des données… », message d'erreur avec « Réessayer » en cas d’échec.
+- **Tests** : 27 Python + 19 Node = **46 réussis** ; JavaScript des six pages valide ; quatre scénarios Chromium en environnement isolé à 390 px avec chargement CSV ralenti ou volontairement interrompu, étapes attente/résolution/erreur + relance vérifiées. Clone Git propre.
+- **Vérification post-déploiement** : deux HTML servis octet par octet identiques à GitHub ; pages et CSV historiques inchangés. Chromium **cache désactivé** : les six pages HTTP 200 aux deux largeurs (390, 768 px), aucun défilement horizontal ni erreur JS, états de données tous résolus (12/12). Ne pas confondre test responsive automatisé et revue graphique humaine.
+- **Sauvegarde rollback** : `/opt/budget-fr/backup/20261016T164013-loading-before-062f91201a52518665398311938c1a775b99e50c/`. Aucun conteneur ni service voisin redémarré, coordination AgentCtl respectée.
 
 ## Suite prioritaire
 
