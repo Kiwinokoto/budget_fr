@@ -122,3 +122,16 @@ Champ : ménages ordinaires en France métropolitaine hors DOM, revenu disponibl
 Les taux d'effort TVA/revenu et TVA/consommation ont des dénominateurs **différents** et ne sont pas déductibles des parts de montants sans les bases de revenus et de consommation des mêmes ménages. Le rapport Drees donne les valeurs extrêmes dans le texte, mais pas le tableau exact des dix taux d'effort ; nous n'interpolons donc pas les déciles intermédiaires.
 
 Pour actualiser au-delà de 2014, un nouveau jeu de données doit être obtenu puis traité par une microsimulation documentée. Les tableaux publics BDF 2017 ne contiennent pas directement le montant de TVA par décile ; les versions microdonnées BDF / ERFS détaillées impliquent des conditions d'accès propres. Aucune extrapolation 2014 → 2025 n'est réalisée.
+
+## Intérêts annuels de la dette publique : flux D41 / D41G, 1959–2025
+
+La source est le [tableau Insee 3.201 S13](https://www.insee.fr/fr/statistiques/8988845), version du 28 août 2026, comptes nationaux base 2020. Le fichier `data/interets_apu_1959_2025_bn_eur.csv` contient pour chaque année deux conventions alternatives :
+- `interest_d41_bn_eur` : intérêts **D41**, en milliards d'euros courants.
+- `interest_ex_fisim_bn_eur` : intérêts **D41G**, hors correction au titre des **services d'intermédiation financière indirectement mesurés (SIFIM)**, en milliards d'euros courants.
+- `total_expenditure_bn_eur` : dépenses totales S13 de la même source et du même millésime, pour calculer des **parts de dépense**, sans rapprochement de données non homogènes.
+
+Le secteur S13 comprend toutes les administrations publiques, pas uniquement le budget de l'État. Les deux montants D41/D41G ne doivent **jamais être additionnés** ; une correction SIFIM n'est pas une dépense d'intérêts supplémentaire. Le chiffre synthétique Insee « intérêts » de 64,7 Md€ en 2025 correspond à la ligne D41G (`64.6519`), tandis que D41 vaut `65.7209` Md€.
+
+La page `interets.html` affiche soit des **Md€ courants**, soit un rapport `intérêts de la catégorie / dépenses totales S13 de la même année × 100`. Cette dernière unité est **% des dépenses totales**, **pas % du PIB**, ni le taux d'intérêt apparent. Les montants historiques avant 1999 proviennent de la conversion en euros de séries anciennement exprimées en francs ; ils ne sont **pas corrigés des prix**. Comparer des montants courants de 1959 et 2025 ne mesure pas une variation en volume.
+
+L'encours de dette de Maastricht est un **stock à fin d'année** ; la charge d'intérêts est un **flux annuel** qui dépend des caractéristiques et calendriers des emprunts. Calculer automatiquement `intérêts / dette brute` à partir de ces deux jeux de données ne serait pas une mesure fiable du coût moyen de la dette sans harmoniser les concepts et le dénominateur. L'absence de valeurs égales à zéro dans la source est vérifiée par l'importateur ; l'année 2025 est provisoire.

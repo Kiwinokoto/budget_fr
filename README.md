@@ -31,6 +31,19 @@ git diff -- data/apu_1960_2025_pct_pib.csv
 
 L'importateur vérifie la **SHA-256** du XLSX et refuse une mise à jour silencieuse. En cas de révision de la source, auditer les changements avant d'utiliser explicitement l'option --allow-source-change.
 
+## Intérêts de la dette publique et dépenses S13 (1959–2025)
+
+**[Explorer la charge annuelle d'intérêts](interets.html)** : deux mesures officielles de charges d'intérêts des administrations publiques consolidées, en milliards d'euros courants et en part de la dépense publique totale : D41 et D41G (hors correction au titre des services d'intermédiation financière indirectement mesurés, SIFIM). **Ce sont des conventions alternatives, jamais deux dépenses à sommer**, ni le stock de dette de Maastricht.
+
+Source [Insee tableau 3.201](https://www.insee.fr/fr/statistiques/8988845), version du 28 août 2026, années 1959–2025, base des comptes nationaux 2020. Import Python standard avec SHA-256 épinglée :
+
+~~~bash
+python3 scripts/import_interest.py
+# hors ligne : python3 scripts/import_interest.py --xlsx /chemin/t_3201_fr.xlsx
+~~~
+
+En 2025, D41 = 65,7 Md€ et D41G = 64,7 Md€ (arrondis à une décimale) ; la deuxième valeur est celle de la synthèse Insee. Tous les montants sont **courants, non déflatés**. Le ratio affiché est un **pourcentage des dépenses**, pas un taux d'intérêt ni un pourcentage du PIB.
+
 ## Dépenses par fonction (COFOG)
 
 **[Explorer les dépenses par fonction](fonctions.html)** : dix grandes catégories de dépenses consolidées (protection sociale, santé, enseignement, défense, etc.), séries Insee 3.301 **1995–2024**, en **milliards d’euros courants**. Sélection de l’année, part des dépenses totales, montants et évolution relative des catégories.
