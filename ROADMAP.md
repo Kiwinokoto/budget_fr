@@ -2,13 +2,13 @@
 
 ## Situation au 16 octobre 2026
 
-- Dépôt public : Kiwinokoto/budget_fr. PR #1–#9 fusionnées sur `main` le 16 octobre 2026 ; dernier commit applicatif (unités) **`2501217d2bba01c729d65d4724ff69d39d44d5f7`**. La documentation de passation ultérieure peut faire avancer `main` sans redéploiement.
+- Dépôt public : Kiwinokoto/budget_fr. PR #1–#11 fusionnées sur `main` le 16 octobre 2026 ; dernier commit applicatif (simulation TVA) **`51e51f228aa96ec74c678f70d7a8ac98b79d6e73`**. La documentation de passation ultérieure peut faire avancer `main` sans redéploiement.
 - Coordination AgentCtl : projet budget-fr, ressource repo:Kiwinokoto/budget_fr ; verrou à prendre avant toute mutation et libérer en fin de passe.
 - Base Insee initiale 1995–2025 recopiée à la main **remplacée** par les chiffres du classeur officiel d'août 2026.
 - Données 1960–2025 : recettes, dépenses, solde, variantes hors éléments imputés ; dette brute depuis 1978 et nette depuis 1995. Fichier original conservé à la source, pas dans Git.
 - Importateur en Python standard, empreinte SHA-256 de la source, validation des libellés, années et solde ; tests couvrant les absences de valeurs.
 - Application statique avec curseur temporel et graphiques de recettes/dépenses et dette.
-- Site public en ligne : **https://budget-fr.kiwinokoto.fr** sur le VPS personnel, via `/opt/budget-fr`, conteneur `budget-fr-web`, réseau Docker `traefik_network`, routeur Traefik dédié et certificat Let's Encrypt. Déploiement figé sur `2501217d2bba01c729d65d4724ff69d39d44d5f7` (`/opt/budget-fr/.deployed_commit`). Aucune base de données, aucune automatisation ou modification des services voisins.
+- Site public en ligne : **https://budget-fr.kiwinokoto.fr** sur le VPS personnel, via `/opt/budget-fr`, conteneur `budget-fr-web`, réseau Docker `traefik_network`, routeur Traefik dédié et certificat Let's Encrypt. Déploiement figé sur `51e51f228aa96ec74c678f70d7a8ac98b79d6e73` (`/opt/budget-fr/.deployed_commit`). Aucune base de données, aucune automatisation ou modification des services voisins.
 - Vérifications en production : HTTPS HTTP 200 sans `-k`, documents et CSV HTTP 200, trois CSV servis identiques octet par octet à GitHub (66, 30 et 31 années), **14 tests Python OK**, certificat valide, conteneur démarré, volume statique monté en lecture seule. Revue visuelle navigateur desktop/mobile **encore à faire**.
 
 - **Version applicative publique actuelle (axes 5 ans)** : `607dbd8b4fd60c92b47832c701ce9c122f949891`, après PR #7, distincte des versions précédentes conservées dans l'historique. `main` peut évoluer ensuite par commits documentaires non déployés.
@@ -52,7 +52,10 @@
 - Nouveaux fichiers : `tva-justice.html`, `data/tva_choc_deciles_insee_2019.csv`, `tests/test_tva_scenario.py`. Liens dans l'accueil et la page recettes ; sources, méthodologie et cadrage scientifique actualisés.
 - **Invariant :** simulation historique / effet marginal ≠ TVA observée / effort relatif réel ; pas de conversion en valeurs 2025 ni fusion des jeux de données.
 - Revue visuelle navigateur mobile encore à réaliser ; intégration d'une distribution réellement observée reste une étape de recherche.
-- État du Git et du VPS, tests exacts, sauvegarde et verrou à compléter après validation et déploiement.
+- **Livré PR #11**, commit `51e51f228aa96ec74c678f70d7a8ac98b79d6e73`, déployé sur https://budget-fr.kiwinokoto.fr/tva-justice.html.
+- **Tests :** 18 Python + 7 Node, tous réussis ; JavaScript des quatre pages valide ; clone Git propre. La page, son CSV et les documents correspondants servent exactement les fichiers du commit GitHub en HTTPS (HTTP 200).
+- **Déploiement statique réversible**, copie antérieure sauvegardée : `/opt/budget-fr/backup/20261016T151614-tva-before-51e51f228aa96ec74c678f70d7a8ac98b79d6e73/`. Aucun redémarrage de service ni modification des jeux de données historiques.
+- **Prochaines étapes :** revue mobile/navigateur réel, puis identification d'une source observée et récente de TVA par groupes de revenu et de consommation (non assimilable à notre simulation de 2016).
 
 ## Suite prioritaire
 
