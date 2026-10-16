@@ -116,6 +116,10 @@ Sur les vues **Recettes** et **TVA / niveau de vie**, « Chargement des données
 - Contrôle responsive complémentaire en Chromium headless : **six pages**, à **390 et 768 px**, sans débordement horizontal ni erreur JavaScript ; 12 chargements publics réussis après correctif, plus 4 scénarios simulant un réseau lent ou indisponible.
 - **Limite** : une revue esthétique manuelle sur un vrai appareil mobile n'a pas encore été effectuée.
 
+## Explorer la dette publique (1995–2025)
+
+La page [dette.html](dette.html) distingue les encours par administration et instrument (Insee 3.102), la dette nette (3.103), le passage des passifs financiers vers Maastricht (3.104) et le pont déficit→variation annuelle de dette (3.105, S13 et 2009–2025 seulement). Tous les écarts statistiquement non résolus restent explicités.
+
 Documentation : [sources](DATA_SOURCES.md), [méthodologie](METHODOLOGY.md), [passation et roadmap](ROADMAP.md).
 
 **Site public : https://budget-fr.kiwinokoto.fr** (première publication vérifiée le 16 octobre 2026). Déploiement statique isolé sur le VPS personnel, derrière Traefik et Let's Encrypt. Version applicative effectivement servie après la vue solde primaire : `6655e063f1572085adace4f5d9252b5df77b3fc3` (incluant https://budget-fr.kiwinokoto.fr/recettes.html et https://budget-fr.kiwinokoto.fr/fonctions.html). Les changements de documentation ultérieurs sur `main` ne sont pas déployés automatiquement ; voir [la procédure d'exploitation](deploy/README.md).

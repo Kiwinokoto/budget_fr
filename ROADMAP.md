@@ -142,6 +142,20 @@ Sources candidates à auditer une fois l'atlas contemporain stabilisé :
 
 **Critères avant une extension pré-1960 :** vérifier périmètres (État/APU), frontières, finances de guerre, dette perpétuelle ou négociable, définitions du PIB et du patrimoine, devises, inflation, ruptures, trous, révisions et quantification de l'incertitude. Prévoir un module historique autonome et des courbes non reliées artificiellement aux séries Maastricht contemporaines. Priorité immédiate inchangée : finaliser les données actuelles, puis construire l'explorateur de dette.
 
+## Explorateur de composition de dette — 16 octobre 2026
+
+- PR #25 et #26 fusionnées sur main (SHA 6eb4c61b1e7458b21ad44d210bd0901537024a3e), sans déploiement. Nouvelle branche dev/debt-explorer-1995-2025.
+- Page interactive dette.html, navigation d'accueil, graphiques de composition en parts de dette ou Md€ courants, sélection année 1995–2025 et sous-secteur, dette brute/nette et tableau déficit/variation depuis 2009 (total APU seulement). Scripts et CSV Insee déjà épinglés par les PR précédentes.
+- Divergences source toujours présentes : 3.102 vs 3.104 pour S1314 en 2025 (292,6 vs 293,1 Md€), résidus des sous-lignes de valorisation du 3.104 en 2014–2021, écart de 0,6 Md€ sur la variation 2014. Une discordance de millésime/actualisation partielle est une hypothèse non confirmée ; notes Insee 3.104/3.105 consultées.
+- Suite : contrôler EDP/Eurostat, recette visuelle et accessibilité, puis déploiement manuel sur validation ; longue histoire avant 1960 toujours différée.
+
+## Recette scientifique Eurostat et navigateur (16 octobre 2026)
+
+- **Eurostat EDP** (API France, dernière mise à jour 22 avril 2026) : dette Maastricht S13 de fin 2025 = 3 460,4651 Md€ ; S1314 selon la définition EDP = 293,0774 Md€. **Eurostat GGD** de juin 2026 confirme 3 460,4651 Md€ pour S13. La notification Insee de mars 2026 donne 3 460,5 Md€ et 293,1 Md€ ; le fichier Insee 3.102 du 28 août donne 3 460,1 Md€ et 292,6 Md€ ; le 3.104 d'août conserve 293,1 Md€ dans S1314 malgré le nouveau total S13. Cela soutient une **discordance de millésime**, mais pas une cause démontrée. Ne pas additionner automatiquement les sous-secteurs EDP aux contributions Insee : périmètre/consolidation distincts. **Audit daté :** [DEBT_RECONCILIATION.md](DEBT_RECONCILIATION.md).
+- Les écarts 2014 (variation de stock −0,6 Md€) et 2014–2021 (décomposition de valorisation jusqu'à 2,9 Md€) restent **non élucidés**, sans correction.
+- **Recette réelle** du dernier commit de PR #27 avant fusion : navigateur Chromium via Puppeteer, viewport 390/768/1365 px, sélections 1995/2014/2020/2021/2025 et secteurs S13/S1311/S1314, chiffres, graphiques, changement d'unités, clavier, erreurs de chargement suivies de réessai ; **23 vérifications fonctionnelles réussies**. Aucun débordement horizontal ni exception JavaScript observé. Labels et rôles de contrôles et graphiques vérifiés ; lecteur d'écran et audit de contraste instrumenté non effectués.
+- **Validation hors production :** 44 tests Python et 27 tests Node réussis avant ce complément documentaire ; pas de CI GitHub signalée. Prochaine étape après fusion : recette manuelle finale de publication et déploiement uniquement sur demande explicite.
+
 ## Suite prioritaire
 
 1. Valider le rendu sur un vrai navigateur mobile et l'accessibilité ; les captures desktop sont encourageantes mais ne valident pas le mobile.

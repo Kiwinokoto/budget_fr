@@ -14,7 +14,7 @@ Le site est entièrement statique, sans backend, base de données, compte utilis
 ## Organisation sur le VPS
 
 - `/opt/budget-fr/compose.yml` : copie versionnée de ce fichier.
-- `/opt/budget-fr/site/` : uniquement `index.html`, `interets.html`, `solde-primaire.html`, `fonctions.html`, `recettes.html`, `tva-justice.html`, `tva-incidence.html`, `data/*.csv` (dont intérêts S13 et solde primaire 1959–2025, ainsi que TVA Ines 2014), `DATA_SOURCES.md`, `METHODOLOGY.md`, `TVA_JUSTICE_SOURCES.md`. Pas de scripts, fichiers .env, clés ou répertoires .git dans le document root.
+- `/opt/budget-fr/site/` : uniquement `index.html`, `interets.html`, `solde-primaire.html, dette.html`, `fonctions.html`, `recettes.html`, `tva-justice.html`, `tva-incidence.html`, `data/*.csv` (dont intérêts S13 et solde primaire 1959–2025, ainsi que TVA Ines 2014), `DATA_SOURCES.md`, `METHODOLOGY.md`, `TVA_JUSTICE_SOURCES.md`. Pas de scripts, fichiers .env, clés ou répertoires .git dans le document root.
 - `/opt/budget-fr/.deployed_commit` : SHA exact publié après validation.
 - `/opt/budget-fr/backup/` : copie locale du site et du Compose précédents lors d'une mise à jour (si présents).
 

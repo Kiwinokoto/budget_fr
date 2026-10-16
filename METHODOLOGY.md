@@ -155,3 +155,9 @@ Pour 2025, le classeur Insee 3.201 du 28 août 2026 donne B9NF = `−151,5920` M
 3.105 est un **rapprochement de flux** : déficit public compté positif dans ce tableau, opérations financières et réévaluations, variation annuelle de la dette. Ce n'est ni l'encours ni la charge d'intérêts. La comparaison avec la variation des stocks annuels du 3.104 révèle un écart de −0,6 Md€ en 2014, préservé et testé.
 
 Ne jamais mélanger dette brute, dette nette, passifs financiers en valeur de marché, patrimoine net, échéances initiales/résiduelles, stocks et flux. Les séries sont celles des comptes nationaux base 2020 publiés le 28 août 2026, données 2025 provisoires.
+
+## Lecture des graphiques de dette
+
+La page dette.html affiche les parts des instruments dans le total nominal consolidé Maastricht (3.102), et non les parts du PIB ; les valeurs en Md€ sont courantes. F31/F32 sont inclus dans F31_32, non additionnés une seconde fois. Maturité initiale et non résiduelle. S1311 inclut S13111 et S13112. S1314/F2N reste non renseigné, et le reste graphique éventuel n'est qu'un résidu calculé.
+
+Dette nette 3.103, passifs non consolidés 3.104 et flux annuels 3.105 ont des définitions différentes. 3.105 porte uniquement sur S13 (2009–2025) quel que soit le secteur sélectionné. Les anomalies 3.104/S1314 de 2025, sous-lignes de valorisation 2014–2021, variation annuelle de 2014 restent signalées ; elles ne sont pas corrigées arbitrairement.
