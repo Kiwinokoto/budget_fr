@@ -166,3 +166,7 @@ Le suivi détaillé des révisions 2025, des divergences 3.102/3.104, de la diff
 ## Nouveau chapitre : aides aux entreprises, estimations 2023
 
 Le fichier data/aides_entreprises_senat_2023_estimations.csv contient deux estimations ponctuelles de la commission d'enquête Sénat, rapport n° 808 (2025) : 108 Md€ au sens strict et 211 Md€ au sens large pour 2023. Ce sont des ordres de grandeur, pas des flux budgétaires consolidés observés. Détail : AIDES_ENTREPRISES_SOURCES.md. Source : https://www.senat.fr/rap/r24-808-1/r24-808-1_mono.html
+
+## APPRENTISSAGE — Dares et France compétences (2024–2025)
+
+Deux CSV ponctuels décrivent séparément les contrats commencés et en cours en fin d'année (Dares 2024–2025, estimation 2025 provisoire), et les engagements/coûts 2024 (France compétences, secteur privé). Ne pas rapprocher comme série unique. Détails et URLs dans APPRENTISSAGE_SOURCES.md.

@@ -3,7 +3,7 @@ const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const path=require('node:path');
 const root=path.resolve(__dirname,'..');
-const pages=['index.html','fonctions.html','recettes.html','solde-primaire.html','interets.html','dette.html','tva-justice.html','tva-incidence.html','aides-entreprises.html'];
+const pages=['index.html','fonctions.html','recettes.html','solde-primaire.html','interets.html','dette.html','tva-justice.html','tva-incidence.html','aides-entreprises.html','apprentissage.html'];
 test('shared navigation has a unique active page across all chapters',()=>{
  for(const file of pages){
   const html=fs.readFileSync(path.join(root,file),'utf8');
@@ -37,5 +37,5 @@ test('home displays charts before the exploratory cards',()=>{
  const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
  assert.ok(html.indexOf('id="chart"')<html.indexOf('class="explore-atlas"'));
  assert.ok(html.indexOf('id="debt-chart"')<html.indexOf('class="explore-atlas"'));
- assert.equal((html.match(/class="atlas-card"/g)||[]).length,8);
+ assert.equal((html.match(/class="atlas-card"/g)||[]).length,9);
 });
