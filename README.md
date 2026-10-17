@@ -152,7 +152,7 @@ La page [dette.html](dette.html) distingue les encours par administration et ins
 
 Documentation : [sources](DATA_SOURCES.md), [méthodologie](METHODOLOGY.md), [passation et roadmap](ROADMAP.md).
 
-**Site public : https://budget-fr.kiwinokoto.fr** (première publication vérifiée le 16 octobre 2026). Déploiement statique isolé sur le VPS personnel, derrière Traefik et Let's Encrypt. Version applicative vérifiée en production le 17 octobre 2026 : `d8d4e7665fe5bf89b3bf4d80453e9cf57959e202` (trajectoires historiques scolarisation et cumul études-emploi incluses). Les changements de documentation ultérieurs sur `main` ne sont pas déployés automatiquement ; voir [la procédure d'exploitation](deploy/README.md).
+**Site public : https://budget-fr.kiwinokoto.fr** (première publication vérifiée le 16 octobre 2026). Déploiement statique isolé sur le VPS personnel, derrière Traefik et Let's Encrypt. Version applicative vérifiée en production le 17 octobre 2026 : `8aead975b776f3d5ed2f6e2215e749ef03edca3b` (résultats, trajectoires historiques et autres chapitres inclus). Les changements de documentation ultérieurs sur `main` ne sont pas déployés automatiquement ; voir [la procédure d'exploitation](deploy/README.md).
 
 Ce dépôt public ne contient aucune donnée personnelle ni confidentielle. Les données originales de l'Insee restent sous leurs propres conditions de réutilisation. Les séries peuvent être révisées.
 
