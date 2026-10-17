@@ -65,3 +65,7 @@ Une fois la PR fusionnée et la publication autorisée, ajouter apprentissage-co
 Inclure la version mise à jour de apprentissage-contexte.html et les trois ressources **jeunes-histoire.js**, **data/jeunes_scolarisation_1986_2023_insee.csv**, **data/jeunes_cumul_emploi_etudes_2003_2023_insee.csv** ensemble. Vérifier les originaux XLSX (SHA-256 dans JEUNES_CONTEXTE_SOURCES.md), tests, HTML/CSS/JS/CSV en HTTPS octet par octet, sélecteurs d'âge en Chromium desktop/mobile, tableaux accessibles, débordement horizontal et absence d'erreurs JS. Publier avec sauvegarde atomique et rollback ; ne pas modifier les autres services.
 
 Release vérifiée : d8d4e7665fe5bf89b3bf4d80453e9cf57959e202 ; sauvegarde : /opt/budget-fr/backup/20261017T101809Z-before-209c5e7d0394-to-d8d4e7665fe5. Tests : 55 Python, 54 Node, 139 contrôles Chromium ; 21 CSV et ressources identiques à GitHub. Rollback conservé et déploiement manuel uniquement.
+
+## Nouveau chapitre apprentissage : résultats (publication future sur autorisation)
+
+Inclure ensemble apprentissage-resultats.html, APPRENTISSAGE_RESULTATS_SOURCES.md et data/apprentissage_parcours_2024_inserjeunes.csv, ainsi que les deux liens entrants des pages apprentissage.html et apprentissage-contexte.html. Vérifier quatre taux, tableaux, sources, navigation, affichages 390/768/1365 px, HTTPS et identité des fichiers au commit main autorisé. Le déploiement n'est pas automatique ; sauvegarde, rollback, verrou deploy:vps-personal/budget-fr et host:vps-personal/docker obligatoires.

@@ -1,0 +1,5 @@
+school_year,indicator,pathway,percent,denominator,observation,source_id
+2023-2024,continue_studies,apprenticeship,39,final_year_enrolled,next_school_year,dares_depp_2025_apprentices_2024
+2023-2024,continue_studies,school_pathway,54,final_year_enrolled,next_school_year,depp_2025_school_pathway_2024
+2023-2024,salaried_employment_6m,apprenticeship,62,non_continuing_leavers,2025-01,dares_depp_2025_apprentices_2024
+2023-2024,salaried_employment_6m,school_pathway,41,non_continuing_leavers,2025-01,depp_2025_school_pathway_2024

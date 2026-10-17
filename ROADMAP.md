@@ -1,5 +1,14 @@
 # Roadmap et passation
 
+## APPRENTISSAGE — résultats des formations et effets évalués (17 octobre 2026)
+
+- Nouvelle page apprentissage-resultats.html et quatre observations InserJeunes 2023–2024 : 39 % vs 54 % de poursuite parmi les inscrits de dernière année (apprentissage/voie scolaire) et 62 % vs 41 % d'emploi salarié parmi les seuls sortants six mois après. Deux populations, pas un camembert ni un effet causal ; champ CAP à BTS, couvertures différentes selon la voie.
+- Ruptures Dares sur contrats de 2021 : 32 % brutes sur durée initialement prévue, 18 % nettes sans reprise sous six mois. Conditions de travail : Dares, entrants 2018 du CAP à bac+2 encore en contrat en 2019–2020 ; 67 % déclarent des heures supplémentaires, 28 % régulièrement, sans conclure automatiquement à une infraction.
+- IPP 2024 : 80 500 embauches supplémentaires estimées en 2020 grâce à l'aide exceptionnelle, hypothèse de représentativité, et baisse relative du risque d'interruption en BTS estimée dans un cadre précis ; IGF–Igas : hausse des entrées majoritairement portée par le supérieur, question des effets d'aubaine. Le million SIFA ne signifie pas un million de salariés déjà employés puis reclassés.
+- Suite prioritaire : diplomation, insertion et salaire à 12/24 mois comparables par diplôme et spécialité, ruptures/reprises, protection des apprentis vulnérables, évaluation marginale du financement et éventuelle substitution avec la voie scolaire. Documenter méthode d'appariement/évaluation avant attribution causale. Refonte de l'accueil différée.
+- État de déploiement : ce développement doit être intégré par PR, sans publication VPS sans demande explicite, nouveau SHA vérifié, sauvegarde et rollback.
+
+
 ## APPRENTISSAGE — deux trajectoires longitudinales publiées (17 octobre 2026)
 
 - GitHub : PR #35 fusionnée, commit applicatif d8d4e7665fe5bf89b3bf4d80453e9cf57959e202 ; déployé et vérifié sur https://budget-fr.kiwinokoto.fr/apprentissage-contexte.html. Fichier /opt/budget-fr/.deployed_commit contrôlé sur le VPS. Documentation postérieure sur main non déployée automatiquement.
