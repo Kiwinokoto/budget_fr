@@ -1,0 +1,16 @@
+/* Navigation de l'atlas : seul fichier partagé, aucune dépendance JS */
+.atlas-nav{display:flex;align-items:center;gap:14px;margin:0 0 14px;padding:9px 12px;background:#18253a;border:1px solid #43536e;border-radius:12px;position:sticky;top:7px;z-index:20;min-width:0;font-size:.88rem}
+.atlas-nav__brand{white-space:nowrap;color:#edf2ff!important;text-decoration:none;font-size:.95rem;font-weight:800;letter-spacing:.015em}
+.atlas-nav__links{display:flex;gap:3px;align-items:center;overflow-x:auto;min-width:0;max-width:100%;scrollbar-width:thin;white-space:nowrap;padding:2px 0}
+.atlas-nav__links a{color:#cad5e8;text-decoration:none;border-radius:7px;display:inline-flex;align-items:center;min-height:34px;padding:6px 10px;white-space:nowrap}
+.atlas-nav__links a:hover,.atlas-nav__links a:focus-visible{background:#34445f;color:#fff;outline-offset:-2px}
+.atlas-nav__links a[aria-current=page]{background:#405782;color:#fff;font-weight:700}
+.atlas-nav__brand:focus-visible{outline:2px solid #ffdda7;outline-offset:2px}
+.explore-atlas{margin:20px 0 26px}
+.explore-atlas h2{margin:0 0 13px;font-size:1.3rem}
+.atlas-card-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.atlas-card{display:block;border:1px solid #405371;border-radius:12px;background:#1b2a40;padding:12px 14px;text-decoration:none;color:#e7eeff!important;min-height:70px}
+.atlas-card:hover,.atlas-card:focus-visible{border-color:#a7bafa;background:#273956;outline:2px solid #adc0ef;outline-offset:2px}
+.atlas-card strong{display:block;font-size:.94rem}.atlas-card small{display:block;margin-top:3px;color:#c4d0e5;font-size:.79rem;line-height:1.35}
+@media(max-width:850px){.atlas-nav{gap:8px;padding:7px 8px}.atlas-nav__brand{font-size:.85rem}.atlas-nav__links a{padding:6px 8px}.atlas-card-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.atlas-nav{margin-bottom:10px;top:0}.atlas-card-grid{grid-template-columns:1fr}}

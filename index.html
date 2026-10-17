@@ -13,17 +13,13 @@ input{accent-color:#9db0ff;flex:1;min-width:200px}svg{width:100%;height:auto;dis
 .dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:7px}.foot{font-size:.88rem}a{color:#b4c4ff}
 @media(max-width:760px){.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:520px){body{padding:22px 14px}.metrics{grid-template-columns:1fr}}
-</style></head><body>
+</style><link rel="stylesheet" href="/atlas-nav.css">
+</head><body>
+<nav class="atlas-nav" aria-label="Sections de l’atlas"><a class="atlas-nav__brand" href="/">budget_fr</a><div class="atlas-nav__links"><a href="/" aria-current="page">Accueil</a><a href="/fonctions.html">Dépenses</a><a href="/recettes.html">Recettes</a><a href="/solde-primaire.html">Solde primaire</a><a href="/interets.html">Intérêts</a><a href="/dette.html">Dette</a><a href="/tva-justice.html">TVA : simulation</a><a href="/tva-incidence.html">TVA : incidence</a></div></nav>
 <div class="eyebrow">Atlas des finances publiques · Prototype documenté</div>
 <h1>Où va l'argent public&nbsp;?</h1>
 <p>Recettes, dépenses, solde et dette des <strong>administrations publiques consolidées</strong>, de 1960 à 2025, en % du PIB. La période 1980–2025 est entièrement couverte pour les grands agrégats.</p>
-<p><a href="/dette.html"><strong>Explorer la composition de la dette publique (1995–2025) →</strong></a> · administrations, instruments, dette brute/nette et variations annuelles.</p>
-<p><a href="/solde-primaire.html"><strong>Solde primaire : quelle part du déficit hors intérêts ? (1959–2025) →</strong></a> · solde public, charge d'intérêts et solde primaire calculé.</p>
-<p><a href="/interets.html"><strong>Combien coûtent les intérêts de la dette publique (1959–2025) ? →</strong></a> · deux conventions Insee et part des dépenses totales.</p>
-<p><a href="/fonctions.html"><strong>Explorer la répartition des dépenses par fonction (1995–2024) →</strong></a> · santé, éducation, défense, protection sociale et six autres catégories.</p>
-<p><a href="/recettes.html"><strong>Explorer les prélèvements obligatoires (1995–2025) →</strong></a> · TVA, cotisations sociales, IR, IS, CSG et autres impôts.</p>
-<p><a href="/tva-justice.html"><strong>Comprendre l’effet distributif d’une hausse de TVA →</strong></a> · simulation Insee 2019, dix déciles, référence 2016.</p>
-<p><a href="/tva-incidence.html"><strong>TVA estimée selon le niveau de vie →</strong></a> · enquête 2001, plus taxes sur les produits distribuées en 2020–2023.</p>
+
 <section class="panel"><div class="controls"><label for="year">Année : <strong id="year-label">2025</strong></label><input id="year" aria-label="Sélectionner une année" type="range" min="1960" max="2025" value="2025"></div>
 <div class="metrics">
 <div class="metric"><small>Recettes / PIB</small><strong id="revenue">—</strong></div>
@@ -38,6 +34,15 @@ input{accent-color:#9db0ff;flex:1;min-width:200px}svg{width:100%;height:auto;dis
 <section class="panel"><h2>Dette publique</h2><div class="legend"><span><i class="dot" style="background:#a7b5ff"></i>Dette brute</span><span><i class="dot" style="background:#d8a7e7"></i>Dette nette</span></div>
 <svg id="debt-chart" viewBox="0 0 900 370" role="img" aria-label="Dette publique brute depuis 1978 et dette nette depuis 1995"></svg>
 <p class="foot">Dette au sens de Maastricht, exprimée en % du PIB ; la dette nette soustrait certains actifs financiers exigibles, pas tout le patrimoine public.</p></section>
+<section class="explore-atlas" aria-labelledby="explore-heading"><h2 id="explore-heading">Explorer les autres analyses</h2><div class="atlas-card-grid">
+<a class="atlas-card" href="/fonctions.html"><strong>Dépenses par fonction</strong><small>Santé, enseignement, défense, protection sociale</small></a>
+<a class="atlas-card" href="/recettes.html"><strong>Recettes publiques</strong><small>Impôts, cotisations et prélèvements</small></a>
+<a class="atlas-card" href="/solde-primaire.html"><strong>Solde primaire</strong><small>Déficit public avant intérêts</small></a>
+<a class="atlas-card" href="/interets.html"><strong>Intérêts de la dette</strong><small>Charge annuelle et conventions Insee</small></a>
+<a class="atlas-card" href="/dette.html"><strong>Composition de la dette</strong><small>Instruments et administrations</small></a>
+<a class="atlas-card" href="/tva-justice.html"><strong>TVA : simulation</strong><small>Effet d’un choc de TVA par décile</small></a>
+<a class="atlas-card" href="/tva-incidence.html"><strong>TVA : incidence</strong><small>Revenu, consommation et taxes sur les produits</small></a>
+</div></section>
 <p class="foot">Source : <a href="https://www.insee.fr/fr/statistiques/2381414">Insee, Dépenses et recettes publiques, 28 août 2026</a> (base 2020). Import vérifié depuis le XLSX d'origine. Année 2024 semi-définitive et 2025 provisoire ; révisions possibles. <a href="METHODOLOGY.md">Méthode</a> · <a href="DATA_SOURCES.md">Sources</a>.</p>
 <script>
 (async()=>{

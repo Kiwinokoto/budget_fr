@@ -4,12 +4,12 @@
 <style>
 :root{color-scheme:dark;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#111827;color:#f1f5fc}
 *{box-sizing:border-box}
-body{max-width:1050px;margin:auto;padding:28px 20px 50px}
+body{max-width:1350px;margin:auto;padding:17px 20px 44px}
 a{color:#bdccff}a:hover{color:#fff}
-.back{font-size:.93rem}.eyebrow{font-size:.8rem;letter-spacing:.13em;text-transform:uppercase;color:#a6b5f9;margin:26px 0 6px}
-h1{font-size:clamp(2rem,4vw,3.2rem);margin:5px 0 12px}
+.back{font-size:.93rem}.eyebrow{font-size:.8rem;letter-spacing:.13em;text-transform:uppercase;color:#a6b5f9;margin:10px 0 4px}
+h1{font-size:clamp(1.75rem,3.5vw,2.65rem);margin:3px 0 8px}
 p{line-height:1.6;color:#c4cedf}
-.panel{background:#1d293c;border:1px solid #37445d;border-radius:18px;padding:22px;margin:24px 0}
+.panel{background:#1d293c;border:1px solid #37445d;border-radius:18px;padding:22px;margin:14px 0}
 .controls{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 input[type=range]{accent-color:#9dafff;flex:1;min-width:180px}
 #year-label{font-size:1.6rem;font-variant-numeric:tabular-nums}
@@ -18,7 +18,7 @@ input[type=range]{accent-color:#9dafff;flex:1;min-width:180px}
 .controls label{font-weight:650}
 .mode label{cursor:pointer;margin-right:15px;white-space:nowrap}
 .mode input{accent-color:#b0beff}
-#breakdown{display:grid;gap:5px;margin-top:20px}
+#breakdown{display:grid;gap:4px;margin-top:11px}
 .func{background:transparent;border:1px solid transparent;color:inherit;border-radius:11px;padding:9px 10px;display:grid;grid-template-columns:minmax(200px,1.7fr) minmax(120px,2fr) minmax(110px,.8fr);gap:15px;align-items:center;text-align:left;font:inherit;cursor:pointer}
 .func:hover,.func:focus-visible{background:#293952;outline:none}
 .func[aria-pressed=true]{background:#293952;border-color:#8499c3}
@@ -30,9 +30,24 @@ input[type=range]{accent-color:#9dafff;flex:1;min-width:180px}
 svg{width:100%;height:auto;display:block}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
 .source{border-top:1px solid #37445d;padding-top:15px;font-size:.87rem}
+
+/* L'exploration est une comparaison continue : liste et graphe côte à côte, sans aller-retour vertical. */
+.explorer{display:block}
+.trend-panel{min-width:0}
+.chart-summary{margin:8px 0;color:#d9e6fa;font-size:.9rem;line-height:1.5}
+@media(min-width:1050px){
+ .explorer{display:grid;grid-template-columns:minmax(385px,0.94fr) minmax(0,1.16fr);gap:16px;align-items:start}
+ .explorer>.panel{margin:0}
+ .trend-panel{position:sticky;top:68px}
+ .func{grid-template-columns:minmax(0,1.25fr) minmax(50px,1fr) minmax(95px,.8fr);gap:8px;padding:8px 9px}
+ .func-name{font-size:.9rem}
+ .trend-panel svg text{font-size:17px}
+}
+@media(max-width:1049px){.trend-panel{position:static}}
 @media(max-width:620px){body{padding:20px 12px}.panel{padding:15px;margin:16px 0}.func{grid-template-columns:minmax(0,1.3fr) minmax(72px,1fr);gap:7px}.func-name{font-size:.83rem}.track{grid-column:1 / -1;grid-row:2;height:10px}.value{grid-column:2;grid-row:1;font-size:.83rem}}
-</style></head><body>
-<nav><a class="back" href="/">← Retour aux finances publiques 1960–2025</a></nav>
+</style><link rel="stylesheet" href="/atlas-nav.css">
+</head><body>
+<nav class="atlas-nav" aria-label="Sections de l’atlas"><a class="atlas-nav__brand" href="/">budget_fr</a><div class="atlas-nav__links"><a href="/">Accueil</a><a href="/fonctions.html" aria-current="page">Dépenses</a><a href="/recettes.html">Recettes</a><a href="/solde-primaire.html">Solde primaire</a><a href="/interets.html">Intérêts</a><a href="/dette.html">Dette</a><a href="/tva-justice.html">TVA : simulation</a><a href="/tva-incidence.html">TVA : incidence</a></div></nav>
 <div class="eyebrow">Atlas · Dépenses publiques par fonction</div>
 <h1>À quoi servent les dépenses publiques ?</h1>
 <p>Explore les dix grandes fonctions COFOG des <strong>administrations publiques françaises consolidées</strong>, de 1995 à 2024. Les montants sont en <strong>milliards d’euros courants</strong> (non corrigés de l’inflation).</p>
@@ -40,7 +55,8 @@ svg{width:100%;height:auto;display:block}
 <div class="controls"><label for="year">Année <span id="year-label">2024</span></label><input id="year" type="range" min="1995" max="2024" value="2024" aria-label="Choisir une année de 1995 à 2024"></div>
 <div class="total" id="total">Chargement…</div><div class="caption">Total publié, dix catégories exhaustives à l’arrondi près.</div>
 </section>
-<section class="panel"><div class="controls"><h2 style="margin:0;flex:1">Répartition</h2>
+<div class="explorer" aria-label="Explorer la répartition et son évolution">
+<section class="panel"><div class="controls"><h2 style="margin:0;flex:1">Choisir un poste de dépense</h2>
 <div class="mode" role="group" aria-label="Mesure affichée">
 <label><input type="radio" name="mode" value="share" checked> Part du total</label>
 <label><input type="radio" name="mode" value="amount"> Montant</label>
@@ -48,9 +64,12 @@ svg{width:100%;height:auto;display:block}
 <p class="caption">Clique sur une fonction pour voir son évolution historique. Les pourcentages indiquent la part du total de l’année sélectionnée, pas du PIB.</p>
 <div id="breakdown" role="group" aria-label="Dépenses par fonction"></div>
 </section>
-<section class="panel"><h2 id="trend-title">Évolution dans le temps</h2>
+<section class="panel trend-panel"><h2 id="trend-title">Évolution dans le temps</h2>
 <p class="caption" id="trend-caption">Part dans les dépenses publiques totales, 1995–2024.</p>
-<svg id="trend" viewBox="0 0 880 330" role="img" aria-label="Évolution de la part de la fonction sélectionnée"></svg></section>
+<svg id="trend" viewBox="0 0 880 330" role="img" aria-label="Évolution de la part de la fonction sélectionnée" aria-describedby="chart-summary"></svg>
+<p id="chart-summary" class="chart-summary" role="status" aria-live="polite"></p>
+</section>
+</div>
 <p class="source">Source : <a href="https://www.insee.fr/fr/statistiques/8574707">Insee, COFOG 3.301, publication du 27 mars 2026</a>, comptes nationaux base 2020, administrations publiques S13. Attention : classement fonctionnel, distinct des postes du budget de l’État. L’année 2024 est provisoire et certains changements de nomenclature peuvent affecter des catégories ; notamment le logement et les affaires économiques au niveau des collectivités. Ce millésime n’est pas directement additionnable aux agrégats révisés publiés en août 2026. <a href="/METHODOLOGY.md">Méthodologie détaillée</a>.</p>
 <script>
 (async()=>{
@@ -93,12 +112,12 @@ function chart(){
  const info=categories.find(c=>c[0]===selected), svg=document.getElementById('trend');
  const vals=rows.map(r=>100*r[selected]/r.total_bn_eur);
  const upper=Math.ceil(Math.max(...vals)*1.1/5)*5 || 5;
- const x=i=>58+i*784/29,y=v=>278-v/upper*230;
+ const x=i=>83+i*740/29,y=v=>278-v/upper*230;
  svg.replaceChildren();
  for(let i=0;i<=4;i++){
   const v=upper*i/4,yy=y(v);
-  svg.append(svgEl('line',{x1:58,x2:842,y1:yy,y2:yy,stroke:'#45536c'}));
-  svg.append(svgEl('text',{x:46,y:yy+4,'text-anchor':'end',fill:'#c4cede','font-size':12},percent(v)));
+  svg.append(svgEl('line',{x1:83,x2:823,y1:yy,y2:yy,stroke:'#45536c'}));
+  svg.append(svgEl('text',{x:72,y:yy+4,'text-anchor':'end',fill:'#c4cede','font-size':12},percent(v)));
  }
  const coords=vals.map((v,i)=>(i?'L':'M')+x(i).toFixed(1)+','+y(v).toFixed(1)).join(' ');
  svg.append(svgEl('path',{d:coords,stroke:info[2],'stroke-width':3.5,fill:'none','stroke-linecap':'round'}));
@@ -115,6 +134,10 @@ function chart(){
  document.getElementById('trend-title').textContent='Évolution · '+info[1];
  document.getElementById('trend-caption').textContent='Part des dépenses publiques consacrée à cette fonction (1995–2024), en % du total de la même source.';
  svg.setAttribute('aria-label','Part des dépenses consacrée à '+info[1]+', de 1995 à 2024');
+ const current=rows[Number(range.value)-1995];
+ document.getElementById('chart-summary').textContent=
+   info[1]+' · '+current.year+' : '+percent(100*current[selected]/current.total_bn_eur)+
+   ' des dépenses ('+money(current[selected])+'). Cliquez sur un autre poste pour comparer son évolution.';
 }
 function refresh(){
  const r=rows[Number(range.value)-1995];if(!r)return;
@@ -126,7 +149,7 @@ function refresh(){
  for(const [key,name,color] of ordered){
   const amount=r[key],share=100*amount/r.total_bn_eur;
   const button=document.createElement('button');
-  button.type='button';button.className='func';button.setAttribute('aria-pressed',String(selected===key));
+  button.type='button';button.className='func';button.dataset.category=key;button.setAttribute('aria-pressed',String(selected===key));
   button.setAttribute('aria-label',name+' : '+money(amount)+', '+percent(share));
   const label=document.createElement('span');label.className='func-name';label.textContent=name;
   const track=document.createElement('span');track.className='track';
@@ -134,7 +157,13 @@ function refresh(){
   const value=document.createElement('span');value.className='value';value.textContent=mode==='share'?percent(share):money(amount);
   const secondary=document.createElement('small');secondary.textContent=mode==='share'?money(amount):percent(share);value.append(secondary);
   button.append(label,track,value);
-  button.addEventListener('click',()=>{selected=key;refresh();});
+  button.addEventListener('click',()=>{
+    selected=key;
+    breakdown.querySelectorAll('.func').forEach(item=>{
+      item.setAttribute('aria-pressed',String(item.dataset.category===key));
+    });
+    chart();
+  });
   breakdown.append(button);
  }
  chart();
