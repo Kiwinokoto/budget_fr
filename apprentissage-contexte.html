@@ -58,13 +58,13 @@ th{color:#36506a}td:not(:nth-child(-n+2)){font-variant-numeric:tabular-nums}
 .history-panel h3{font-size:1.18rem}
 .history-panel select{font:inherit;padding:9px 12px;border:1px solid #b6c6d4;border-radius:7px;background:white;max-width:100%}
 .history-panel label{font-weight:650;font-size:.9rem;display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}
-.history-chart{width:100%;height:auto;display:block;overflow:visible}
+.history-chart-wrap{max-width:100%;overflow-x:auto;overscroll-behavior-inline:contain}.history-chart text{font-size:15px}.history-chart{width:100%;height:auto;display:block;overflow:visible}
 .history-panel .history-note{font-size:.82rem;color:#54657b;line-height:1.6;margin:12px 0}
 .history-panel table{min-width:0}
 .history-panel th,.history-panel td{padding:6px 10px}
 .history-table{max-height:180px;overflow:auto;border:1px solid var(--line);border-radius:7px}
 .history-table table{width:100%}
-@media(max-width:880px){.history-grid{grid-template-columns:1fr}}
+@media(max-width:800px){.history-chart{min-width:700px}}@media(max-width:880px){.history-grid{grid-template-columns:1fr}}
 
 footer{font-size:.84rem;color:#586a7e;border-top:1px solid var(--line);padding-top:20px;margin-top:35px}
 @media(max-width:800px){body{padding:12px 16px 42px}.pie-layout{grid-template-columns:1fr;gap:19px}.pie-box{max-width:540px}.overview{gap:9px}.two-cols{grid-template-columns:1fr}}
@@ -131,7 +131,7 @@ footer{font-size:.84rem;color:#586a7e;border-top:1px solid var(--line);padding-t
 <article class="history-panel" aria-labelledby="school-heading">
 <h3 id="school-heading">1. Part de chaque âge en études · 1986–2023</h3>
 <label for="school-age">Âge observé <select id="school-age"><option value="age_18_pct">18 ans</option><option value="age_21_pct" selected>21 ans</option><option value="age_25_pct">25 ans</option><option value="age_29_pct">29 ans</option></select></label>
-<svg class="history-chart" id="school-chart" viewBox="0 0 760 282" role="img" aria-label="Chargement des taux de scolarisation"></svg>
+<div class="history-chart-wrap" role="region" tabindex="0" aria-label="Graphique historique défilable horizontalement"><svg class="history-chart" id="school-chart" viewBox="0 0 760 282" role="img" aria-label="Chargement des taux de scolarisation"></svg></div>
 <p id="school-summary" role="status" aria-live="polite">Chargement de la série officielle…</p>
 <p class="history-note"><strong>Dénominateur :</strong> population du même âge, scolarisée ou non. France métropolitaine avant 1999, France hors Mayotte de 1999 à 2017, France entière depuis 2018 ; 2023 provisoire. Traits pointillés : changements de champ, pas estimation de leurs effets.</p>
 <details><summary>Consulter les valeurs annuelles</summary><div class="history-table" tabindex="0" role="region" aria-label="Taux de scolarisation annuels"><table><thead><tr><th scope="col">Année</th><th scope="col">Part scolarisée</th></tr></thead><tbody id="school-data"></tbody></table></div></details>
@@ -140,7 +140,7 @@ footer{font-size:.84rem;color:#586a7e;border-top:1px solid var(--line);padding-t
 <article class="history-panel" aria-labelledby="workstudy-heading">
 <h3 id="workstudy-heading">2. Parmi les jeunes en études, part en emploi · 2003–2023</h3>
 <label for="workstudy-age">Âges observés <select id="workstudy-age"><option value="age_15_29_pct" selected>15–29 ans</option><option value="age_15_19_pct">15–19 ans</option><option value="age_20_24_pct">20–24 ans</option></select></label>
-<svg class="history-chart" id="workstudy-chart" viewBox="0 0 760 282" role="img" aria-label="Chargement du cumul études-emploi"></svg>
+<div class="history-chart-wrap" role="region" tabindex="0" aria-label="Graphique historique défilable horizontalement"><svg class="history-chart" id="workstudy-chart" viewBox="0 0 760 282" role="img" aria-label="Chargement du cumul études-emploi"></svg></div>
 <p id="workstudy-summary" role="status" aria-live="polite">Chargement de la série officielle…</p>
 <p class="history-note"><strong>Dénominateur :</strong> personnes de la tranche d’âge <em>en études initiales</em>, et non tous les jeunes. Enquête Emploi : France métropolitaine jusqu’en 2013, France hors Mayotte ensuite ; questionnaires modifiés en 2013 puis 2021, séries rétropolées par la source avec comparabilité limitée entre 2003–2013 et 2014–2023.</p>
 <details><summary>Consulter les valeurs annuelles</summary><div class="history-table" tabindex="0" role="region" aria-label="Cumul études-emploi annuel"><table><thead><tr><th scope="col">Année</th><th scope="col">Part en emploi</th></tr></thead><tbody id="workstudy-data"></tbody></table></div></details>
