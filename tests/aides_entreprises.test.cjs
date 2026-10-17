@@ -39,7 +39,7 @@ test('radio scope control has real live state and a textual alternative',()=>{
  assert.match(doc,/<main>/);
 });
 test('project website links new chapter in all nine nav bars',()=>{
- for(const page of ['index.html','fonctions.html','recettes.html','solde-primaire.html','interets.html','dette.html','tva-justice.html','tva-incidence.html','aides-entreprises.html']){
+ for(const page of ['index.html','fonctions.html','recettes.html','solde-primaire.html','interets.html','dette.html','tva-justice.html','tva-incidence.html','aides-entreprises.html','apprentissage.html']){
   const html=fs.readFileSync(path.join(root,page),'utf8');
   assert.ok(html.includes('href="/aides-entreprises.html"'),page);
   assert.equal((html.match(/aria-current="page"/g)||[]).length,1,page);

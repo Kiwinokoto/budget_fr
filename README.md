@@ -8,6 +8,10 @@ Le site possède huit pages HTML accessibles depuis un bandeau de navigation ide
 
 L'interface est expérimentale : ne pas assimiler répartition des APU S13 et budget de l'État, ni graphiques de composition et séries causales.
 
+## APPRENTISSAGE — chapitre autonome
+
+La page apprentissage.html propose une première exploration historique, les contrats Dares commencés et en cours fin 2024/2025 et le financement France compétences en 2024. La provenance, les définitions et l'import ultérieur de la série longue 1993–2025 figurent dans APPRENTISSAGE_SOURCES.md.
+
 ## Aides publiques aux entreprises : chapitre méthodologique
 
 La page aides-entreprises.html présente les deux estimations sénatoriales pour 2023, 108 et 211 Md€ selon le périmètre, sans les additionner ni en faire une série historique. Pour les définitions, les réserves et le programme scientifique, lire AIDES_ENTREPRISES_SOURCES.md.

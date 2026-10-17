@@ -47,3 +47,7 @@ Inclure atlas-nav.css à la racine de /opt/budget-fr/site lors du prochain dépl
 ## Futur chapitre aides aux entreprises
 
 Pour un déploiement ultérieur validé, ajouter aides-entreprises.html, AIDES_ENTREPRISES_SOURCES.md et data/aides_entreprises_senat_2023_estimations.csv au site statique, ainsi que la navigation commune inchangée atlas-nav.css. Vérifier HTTPS, les huit pages précédentes et leurs CSV. Aucun déploiement automatique depuis cette PR.
+
+## Nouveau chapitre APPRENTISSAGE (PR dépendante du chapitre aides)
+
+Un prochain déploiement explicitement autorisé doit inclure apprentissage.html, APPRENTISSAGE_SOURCES.md, les deux CSV data/apprentissage_*.csv, la navigation à dix pages et les fichiers déjà publiés. Vérifier le site, les CSV et une sauvegarde rollback. La PR apprentissage dépend de la PR aides #30 : fusionner dans cet ordre.

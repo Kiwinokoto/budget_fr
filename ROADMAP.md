@@ -181,6 +181,27 @@ Sources candidates à auditer une fois l'atlas contemporain stabilisé :
 5. Réfléchir à une **vue comparative** entre dépense/PIB, recettes/PIB, solde primaire, dette/PIB et charge d'intérêts pour permettre de tester les hypothèses de stabilité et de financiarisation ; définir millésimes, indicateurs et interprétations avant tout graphique causal.
 6. Ne pas attribuer les évolutions 2007–2008 ou 2012–2017 à une politique unique sans contrôler conjoncture, refinancement, nomenclatures et comparaison internationale. Les événements économiques et marqueurs gouvernementaux éventuels seront présentés comme contexte, non comme causalité statistique observée.
 
+## APPRENTISSAGE — PRIORITÉ HAUTE, CHAPITRE AUTONOME (17 octobre 2026)
+
+**Demande explicite** : faire de l'apprentissage un onglet séparé et un véritable thème d'enquête, pas une simple ligne d'« aides aux entreprises ». Sujets : histoire, sommes mobilisées, flux de nouveaux contrats, effectifs en formation, financeurs, bénéficiaires, diplômes et devenir.
+
+**Premier lot** : branche dev/apprentissage-autonome-20261017, fondée sur la PR #30 dev/aides-entreprises-perimetres-20261017. Dépendance volontaire pour la navigation à dix chapitres ; ne pas fusionner avant la PR #30.
+- apprentissage.html : onglet spécifique, lecture introductive, comparateur Dares contrats commencés/en cours 2024–2025 (sélection clavier), financement 2024 séparé selon France compétences, frise de jalons juridiques 1919/1925/1928/1971/1987/2018/2020, liens avec les aides aux entreprises.
+- Données ponctuelles : data/apprentissage_dares_2024_2025_indicateurs.csv (2 années, 4 valeurs, millésimes Dares distincts), data/apprentissage_financement_2024_france_competences.csv (15,6 Md€ engagements 2024, coût unitaire 17 404€, aide aux entreprises 5 983€ par contrat, parts arrondies).
+- Source et définitions APPRENTISSAGE_SOURCES.md. Contrats commencés ≠ apprentis uniques ≠ contrats en cours au 31/12 ; 2025 estimation préliminaire. Champ Dares privé/public différent des engagements France compétences secteur privé. Les 15,6 Md€ ne sont pas une nouvelle subvention automatiquement additionnable aux 211 Md€ Sénat.
+
+**Backlog scientifique APPRENTISSAGE** :
+1. Importer les séries Dares 1993–2025 depuis XLSX officiel avec hash, champs, millésimes et ruptures ; graphiques distincts entrées/effectifs. Ventiler secondaire/supérieur et diplômes CAP, bac, BTS, licence/master.
+2. Construire une série financière harmonisée à partir des rapports France compétences (engagements/dépenses, aides employeurs, coûts pédagogiques, État/OPCO/France compétences/Régions, en conservant les fonds et conventions).
+3. Explorer âge, sexe, handicap, ruptures, diplômes obtenus, insertion, rémunération et mobilité ; distinguer effets causaux et corrélations observées.
+4. Enquêter sur les CFA, écarts de financement selon diplôme, maître d'apprentissage et conditions des aides 2020–2026.
+5. Histoire du système : 1919/1925/1928/1971/1987/2018 et dispositifs exceptionnels 2020, avec sources légales ; apprentissage médiéval = antécédent et non statistique moderne.
+6. Accueil hybride ultérieur : ajouter une question pédagogique « Comment fonctionne l'apprentissage ? » sans refaire l'accueil avant une maquette.
+
+**Recette initiale** : 44 tests Python, 45 tests JavaScript et 18 contrôles Chromium (390/768/1365 px, deux indicateurs, clavier, 10 pages, zéro débordement global). Capture desktop examinée. Toujours besoin d'un test réel de lecteur d'écran et d'une vérification approfondie du détail scientifique avant publication.
+
+**UI** : page autonome plus claire, éditoriale, expérimentale ; ne pas appliquer cette DA à l'ensemble de l'atlas sans recette visuelle. **Aucun déploiement automatique.**
+
 ## Priorités actualisées — 17 octobre 2026
 
 **Horizon temporel utile** : privilégier une observation rigoureuse et traçable depuis 1995 lorsqu'elle existe, et assumer une période plus courte, par exemple 2019–2023 ou une seule année, lorsque la source n'offre pas mieux. Une histoire de 1830 reste une possibilité, jamais une obligation. Séparer les séries de nature, champs et millésimes différents.
