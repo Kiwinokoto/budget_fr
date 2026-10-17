@@ -181,6 +181,28 @@ Sources candidates à auditer une fois l'atlas contemporain stabilisé :
 5. Réfléchir à une **vue comparative** entre dépense/PIB, recettes/PIB, solde primaire, dette/PIB et charge d'intérêts pour permettre de tester les hypothèses de stabilité et de financiarisation ; définir millésimes, indicateurs et interprétations avant tout graphique causal.
 6. Ne pas attribuer les évolutions 2007–2008 ou 2012–2017 à une politique unique sans contrôler conjoncture, refinancement, nomenclatures et comparaison internationale. Les événements économiques et marqueurs gouvernementaux éventuels seront présentés comme contexte, non comme causalité statistique observée.
 
+## Priorités actualisées — 17 octobre 2026
+
+**Horizon temporel utile** : privilégier une observation rigoureuse et traçable depuis 1995 lorsqu'elle existe, et assumer une période plus courte, par exemple 2019–2023 ou une seule année, lorsque la source n'offre pas mieux. Une histoire de 1830 reste une possibilité, jamais une obligation. Séparer les séries de nature, champs et millésimes différents.
+
+**Hypothèse née de l'atlas** : la stabilité des grandes parts des dépenses et recettes ne signifie pas absence de changements dans les sous-postes, prélèvements, niches fiscales, bénéficiaires ou règles de classement. Ne pas inférer une causalité politique à partir d'une courbe descriptive.
+
+### Aides publiques aux entreprises — premier chapitre et programme de recherche
+
+- **Question** : pourquoi les « 200 milliards » ne sont-ils pas visibles dans COFOG, qui bénéficie des aides, quelles contreparties et quels contrôles sont documentés ?
+- **Source de départ** : rapport Sénat n° 808, adopté le 1er juillet 2025, estimations de 2023 : 108 Md€ (sens strict) et 211 Md€ (sens large). Ce sont des **ordres de grandeur/planchers**, pas un compte exact des aides aux seules grandes entreprises ni des sommes dépourvues de contrepartie. Périmètre large incluant prêts, garanties et dépenses fiscales déclassées ; périmètre strict les écartant, ainsi que les avantages fiscaux TVA. Source complète et réserves dans AIDES_ENTREPRISES_SOURCES.md.
+- **Interdiction de fausse série** : IGF 2022 (64 Md€ pour budget + fiscalité de l'État, excluant notamment social et local), France Stratégie 2019 (139–223 Md€ selon périmètre) et Sénat 2023 (108–211 Md€) ne sont **pas comparables en l'état**. Aucun graphique historique ne les relie.
+- **Première livraison de lecture des périmètres** : page aides-entreprises.html (choix des définitions, mécanismes, correspondance conceptuelle COFOG, sources), CSV de deux estimations ponctuelles, tests de cohérence et navigation commune. Brancher au site uniquement après vérification et accord de publication.
+- **Recette de cette passe** : 44 tests Python, 40 tests JavaScript, 17 contrôles Chromium (390, 768 et 1 365 px, sélection strict/large à la souris et au clavier, neuf navigations, liens sources et absence de débordement). Capture desktop inspectée. Pas de lecteur d’écran réel ni d’audit RGAA exhaustif. Aucune donnée issue des rapports IGF/France Stratégie ajoutée comme série comparable au Sénat.
+- **Prochain travail scientifique** : dictionnaire d'aides (code, année, organisme, financement, nature, destinataire, montant/assiette, source, contrôle, risque doublon) ; approfondir séparément les allègements de cotisations, le CIR et l'aide à l'apprentissage ; identifier et dater des séries annuelles par dispositif ; documenter existence de critères, contrôles et évaluations plutôt que présumer leur absence ; rechercher des informations ouvertes sur bénéficiaires.
+- **Périmètres techniques** : ne pas assimiler données de dépenses COFOG, moins-values fiscales, subventions comptables, engagements/encours Bpifrance et prestations de services publics. Les comparaisons de montants doivent préserver champs et années.
+
+### UI et pédagogie, lots ultérieurs
+
+- **Maquette d'abord** : la zone précédant les graphiques est encore trop dense ; développer une direction éditoriale plus légère et minimaliste, sans imposer une refonte globale ni commencer par un switch jour/nuit. La page aides expérimente une mise en page claire distincte, à faire évaluer avant adoption.
+- **Accueil hybride** : quelques graphiques synthétiques + choix guidés par questions (« à quoi servent les dépenses ? », « qui finance ? », « pourquoi la dette augmente ? », « où sont les aides ? »). Préserver la libre exploration.
+- **Priorités** : guider l'usager non spécialiste, conserver provenance et unités à portée de vue, simplifier les contrôles ; reporter les améliorations purement esthétiques si elles bloquent l'enquête.
+
 ## Suite prioritaire
 
 1. Valider le rendu sur un vrai navigateur mobile et l'accessibilité ; les captures desktop sont encourageantes mais ne valident pas le mobile.

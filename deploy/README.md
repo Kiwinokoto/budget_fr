@@ -43,3 +43,7 @@ Le contenu est publié par une opération maîtrisée ; aucune GitHub Action ni 
 ## Lot interface UX 2026-10-17
 
 Inclure atlas-nav.css à la racine de /opt/budget-fr/site lors du prochain déploiement : le bandeau partagé des huit pages HTML requiert cette feuille locale (sans CDN). Conserver la sauvegarde précédente et vérifier HTTP 200 et identité octet pour le CSS, en plus des données. Cette branche UI ne se déploie pas automatiquement.
+
+## Futur chapitre aides aux entreprises
+
+Pour un déploiement ultérieur validé, ajouter aides-entreprises.html, AIDES_ENTREPRISES_SOURCES.md et data/aides_entreprises_senat_2023_estimations.csv au site statique, ainsi que la navigation commune inchangée atlas-nav.css. Vérifier HTTPS, les huit pages précédentes et leurs CSV. Aucun déploiement automatique depuis cette PR.
