@@ -8,6 +8,10 @@ Le site possède huit pages HTML accessibles depuis un bandeau de navigation ide
 
 L'interface est expérimentale : ne pas assimiler répartition des APU S13 et budget de l'État, ni graphiques de composition et séries causales.
 
+## Un million d'apprentis : est-ce beaucoup ?
+
+La sous-page apprentissage-contexte.html met les effectifs de 2024 en perspective (population âgée de 18 à 25 ans, étudiants du supérieur), sans additionner des populations qui se recoupent ; un diagramme en cinq situations exclusives est issu du tableau de l'Insee enquête Emploi 2024, avec choix sexe et âge. Source, périmètres, script de démographie et réserves : JEUNES_CONTEXTE_SOURCES.md. Accessible depuis la page APPRENTISSAGE, sans ajouter un onzième onglet.
+
 ## APPRENTISSAGE : effectifs historiques en formation (Depp-SIFA)
 
 La page apprentissage.html propose une série officielle de 43 années, **1982–2024**, par niveau de diplôme (tableau T04/T1 Insee/Depp-SIFA). Ce sont des effectifs au 31 décembre, et non les flux de contrats Dares ni des dépenses. Import reproductible : scripts/import_apprentissage_sifa.py ; provenance, SHA-256 et rupture territoriale dans APPRENTISSAGE_SOURCES.md. Graphique interactif et tableau accessible, source CSV versionnée.
