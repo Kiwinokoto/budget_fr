@@ -8,6 +8,10 @@ Le site possède huit pages HTML accessibles depuis un bandeau de navigation ide
 
 L'interface est expérimentale : ne pas assimiler répartition des APU S13 et budget de l'État, ni graphiques de composition et séries causales.
 
+## APPRENTISSAGE : effectifs historiques en formation (Depp-SIFA)
+
+La page apprentissage.html propose une série officielle de 43 années, **1982–2024**, par niveau de diplôme (tableau T04/T1 Insee/Depp-SIFA). Ce sont des effectifs au 31 décembre, et non les flux de contrats Dares ni des dépenses. Import reproductible : scripts/import_apprentissage_sifa.py ; provenance, SHA-256 et rupture territoriale dans APPRENTISSAGE_SOURCES.md. Graphique interactif et tableau accessible, source CSV versionnée.
+
 ## APPRENTISSAGE — chapitre autonome
 
 La page apprentissage.html propose une première exploration historique, les contrats Dares commencés et en cours fin 2024/2025 et le financement France compétences en 2024. La provenance, les définitions et l'import ultérieur de la série longue 1993–2025 figurent dans APPRENTISSAGE_SOURCES.md.

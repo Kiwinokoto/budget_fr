@@ -170,3 +170,7 @@ Le fichier data/aides_entreprises_senat_2023_estimations.csv contient deux estim
 ## APPRENTISSAGE — Dares et France compétences (2024–2025)
 
 Deux CSV ponctuels décrivent séparément les contrats commencés et en cours en fin d'année (Dares 2024–2025, estimation 2025 provisoire), et les engagements/coûts 2024 (France compétences, secteur privé). Ne pas rapprocher comme série unique. Détails et URLs dans APPRENTISSAGE_SOURCES.md.
+
+## APPRENTISSAGE : effectifs Depp-SIFA 1982–2024 (Insee T04/T1)
+
+Effectifs de personnes en formation **au 31 décembre**, cinq groupes de niveaux de diplôme plus total annuel. Source https://www.insee.fr/fr/statistiques/8666372 ; XLSX : https://www.insee.fr/fr/statistiques/fichier/8666372/T04%20-%201.4.xlsx ; SHA-256 93432bd9c0f7e950502544df2de2604b9ec2730e873693b8387b53b2b6800a0d. Import standard Python : scripts/import_apprentissage_sifa.py ; 43 observations : data/apprentissage_sifa_effectifs_1982_2024.csv. France hors Mayotte jusqu'en 2010, Mayotte incluse depuis 2011. Ne pas sommer avec contrats Dares ou financement France compétences. Voir APPRENTISSAGE_SOURCES.md.
