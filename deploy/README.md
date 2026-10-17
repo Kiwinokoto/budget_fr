@@ -39,3 +39,7 @@ Ne marquer le déploiement réussi qu'après ces contrôles. Si ACME/HTTPS n'est
 Lors d'une mise à jour, conserver l'ancienne version avant remplacement. Si les vérifications échouent, restaurer le dossier de site et l'ancien Compose, puis recréer **uniquement** `budget-fr-web`. Pour une première installation non fonctionnelle, arrêter uniquement ce conteneur, en conservant les fichiers pour analyse. Ne pas lancer `docker compose down` sur un autre projet ; ne pas modifier Traefik, ses volumes ou ses certificats globaux.
 
 Le contenu est publié par une opération maîtrisée ; aucune GitHub Action ni redéploiement automatique n'est installé dans cette version.
+
+## Lot interface UX 2026-10-17
+
+Inclure atlas-nav.css à la racine de /opt/budget-fr/site lors du prochain déploiement : le bandeau partagé des huit pages HTML requiert cette feuille locale (sans CDN). Conserver la sauvegarde précédente et vérifier HTTP 200 et identité octet pour le CSS, en plus des données. Cette branche UI ne se déploie pas automatiquement.

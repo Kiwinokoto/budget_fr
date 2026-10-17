@@ -2,6 +2,12 @@
 
 Atlas historique et critique des finances publiques françaises — prototype expérimental.
 
+## Navigation et exploration (octobre 2026)
+
+Le site possède huit pages HTML accessibles depuis un bandeau de navigation identique, stylisé par atlas-nav.css (fichier statique local, sans CDN ni JavaScript de navigation). L'accueil présente d'abord la synthèse statistique, puis les cartes vers les autres analyses. La page **dépenses COFOG** affiche la liste des postes et leur courbe simultanément sur grand écran ; la sélection ne relance pas le défilement vertical.
+
+L'interface est expérimentale : ne pas assimiler répartition des APU S13 et budget de l'État, ni graphiques de composition et séries causales.
+
 ## Démonstrateur (sans dépendance)
 
 Recettes, dépenses et solde des administrations publiques consolidées de **1960 à 2025** ; dette brute de **1978 à 2025**, dette nette de **1995 à 2025**, le tout en **% du PIB**. La période demandée 1980–2025 est couverte, avec les limites propres à chaque série.
