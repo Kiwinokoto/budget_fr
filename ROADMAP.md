@@ -1,5 +1,15 @@
 # Roadmap et passation
 
+## APPRENTISSAGE — deux trajectoires longitudinales publiées (17 octobre 2026)
+
+- GitHub : PR #35 fusionnée, commit applicatif d8d4e7665fe5bf89b3bf4d80453e9cf57959e202 ; déployé et vérifié sur https://budget-fr.kiwinokoto.fr/apprentissage-contexte.html. Fichier /opt/budget-fr/.deployed_commit contrôlé sur le VPS. Documentation postérieure sur main non déployée automatiquement.
+- Sauvegarde de la version précédente (209c5e7d0394324dc96cc74c2f7590c77b6ee4d0) : /opt/budget-fr/backup/20261017T101809Z-before-209c5e7d0394-to-d8d4e7665fe5. Retour arrière conservé ; seul budget-fr-web et son contenu statique ont été concernés.
+- Publication testée sur clone GitHub épinglé : 55 tests Python, 54 tests Node, 21 CSV et ressources HTML/JS/CSS/documents identiques à GitHub par HTTPS ; 139 contrôles Chromium en production, y compris les deux nouveaux SVG à 390, 768 et 1365 px, les changements d'âge et les tableaux, sans débordement horizontal. Verrous AgentCtl deploy et host acquis puis libérés.
+- Reprise de l'incident Wi-Fi Mint : session précédente reconnue abandonnée après contrôle des processus ; abandon via le broker officiel, sans casser de verrou actif et sans désactiver la protection Git. Développement et PR via agentctl run et branche dev.
+- Suite scientifique : évaluer séparément accès aux études, changement de statut études/emploi, obtention de diplôme, insertion à 6/12/24 mois, ruptures, conditions de travail, rémunérations et coûts publics par financeur/OPCO. Les évolutions agrégées sont descriptives, pas des effets causaux ; comparer des cohortes et profils compatibles et privilégier des études évaluatives. Les plaintes liées à l'exploitation ou aux papiers nécessitent des données spécifiques avant chiffrage.
+- Limites : formation initiale versus reprise ; changements territoriaux et méthodologiques Insee détaillés dans JEUNES_CONTEXTE_SOURCES.md. Contrôle humain sur mobile réel et lecteur d'écran encore à effectuer. Refonte de l'accueil toujours différée.
+
+
 ## APPRENTISSAGE : scolarisation et emploi dans le temps — 17 octobre 2026
 
 - **Deux séries attestées** depuis l'Insee : scolarisation 1986–2023 (18/21/25/29 ans, dénominateur chaque population d'âge), et cumul études-emploi 2003–2023 (15–29/15–19/20–24 ans, dénominateur uniquement les jeunes en études initiales). Deux XLSX sources inspectés, empreintes SHA-256 épinglées ; scripts/import_jeunes_longitudinal.py, deux nouveaux CSV, deux SVG interactifs et tableaux accessibles sous apprentissage-contexte.html.
