@@ -53,6 +53,19 @@ caption{text-align:left;padding-bottom:12px;color:#58687b;font-size:.86rem;line-
 th,td{text-align:left;padding:10px 9px;border-bottom:1px solid var(--line);vertical-align:top;font-size:.87rem}
 th{color:#36506a}td:not(:nth-child(-n+2)){font-variant-numeric:tabular-nums}
 .sources li{line-height:1.6;margin:11px 0}
+.history-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.history-panel{min-width:0;border:1px solid #dce4ec;border-radius:12px;background:#fff;padding:19px 18px}
+.history-panel h3{font-size:1.18rem}
+.history-panel select{font:inherit;padding:9px 12px;border:1px solid #b6c6d4;border-radius:7px;background:white;max-width:100%}
+.history-panel label{font-weight:650;font-size:.9rem;display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.history-chart{width:100%;height:auto;display:block;overflow:visible}
+.history-panel .history-note{font-size:.82rem;color:#54657b;line-height:1.6;margin:12px 0}
+.history-panel table{min-width:0}
+.history-panel th,.history-panel td{padding:6px 10px}
+.history-table{max-height:180px;overflow:auto;border:1px solid var(--line);border-radius:7px}
+.history-table table{width:100%}
+@media(max-width:880px){.history-grid{grid-template-columns:1fr}}
+
 footer{font-size:.84rem;color:#586a7e;border-top:1px solid var(--line);padding-top:20px;margin-top:35px}
 @media(max-width:800px){body{padding:12px 16px 42px}.pie-layout{grid-template-columns:1fr;gap:19px}.pie-box{max-width:540px}.overview{gap:9px}.two-cols{grid-template-columns:1fr}}
 @media(max-width:540px){.overview{grid-template-columns:1fr}.overview>div{padding:12px 0}.overview>div>strong{font-size:2.1rem}.pie-box{padding:16px 15px}.options label{padding:9px 11px}.donut{width:min(100%,230px)}}
@@ -93,7 +106,7 @@ footer{font-size:.84rem;color:#586a7e;border-top:1px solid var(--line);padding-t
 <p class="muted" style="margin-top:19px">Pourquoi pas exactement les 18–25 ans ? Le tableau publié par l’Insee s’arrête à 24 ans avant de passer aux 25–29 ans. Les recombiner sans effectifs pondérés par tranche et sexe produirait un faux total.</p>
 <div class="interpretation">
 <h3>La chose à remarquer</h3>
-<p>Les apprentis entrent dans <strong>« études et emploi »</strong> : leur formation et leur contrat de travail se cumulent. Ce diagramme ne prétend pas que tous les jeunes de cette catégorie sont apprentis : d’autres étudiants occupent aussi un emploi.</p>
+<p>Un apprenti qui poursuit ses <strong>études initiales</strong> et est considéré en emploi au sens du BIT entre dans <strong>« études et emploi »</strong>. L'apprentissage en reprise d'études peut ne pas relever de ce groupe. Tous les jeunes de la catégorie ne sont pas apprentis : elle inclut notamment les étudiants salariés et des stagiaires.</p>
 <p>Inversement, « inactifs hors études » ne signifie pas « chômeurs » : le chômage est une catégorie distincte au sens du BIT.</p>
 </div>
 </div>
@@ -110,6 +123,31 @@ footer{font-size:.84rem;color:#586a7e;border-top:1px solid var(--line);padding-t
 </ul>
 <p class="pie-caption" id="donut-note" role="status" aria-live="polite">Parts arrondies : elles totalisent parfois 99,9 % ou 100,1 %.</p>
 </div></div>
+</section>
+<section class="section" aria-labelledby="trajectoires">
+<h2 id="trajectoires">Plus d’études, ou davantage d’études avec un emploi ?</h2>
+<p class="lede">Deux séries historiques de l’Insee permettent de poser la question sans confondre les populations. <strong>Le taux de scolarisation</strong> se rapporte à tous les jeunes d’un âge donné ; <strong>le cumul études-emploi</strong> se rapporte aux jeunes encore en formation initiale. Ce ne sont ni les mêmes dénominateurs ni une démonstration d’impact de la réforme de 2018.</p>
+<div class="history-grid">
+<article class="history-panel" aria-labelledby="school-heading">
+<h3 id="school-heading">1. Part de chaque âge en études · 1986–2023</h3>
+<label for="school-age">Âge observé <select id="school-age"><option value="age_18_pct">18 ans</option><option value="age_21_pct" selected>21 ans</option><option value="age_25_pct">25 ans</option><option value="age_29_pct">29 ans</option></select></label>
+<svg class="history-chart" id="school-chart" viewBox="0 0 760 282" role="img" aria-label="Chargement des taux de scolarisation"></svg>
+<p id="school-summary" role="status" aria-live="polite">Chargement de la série officielle…</p>
+<p class="history-note"><strong>Dénominateur :</strong> population du même âge, scolarisée ou non. France métropolitaine avant 1999, France hors Mayotte de 1999 à 2017, France entière depuis 2018 ; 2023 provisoire. Traits pointillés : changements de champ, pas estimation de leurs effets.</p>
+<details><summary>Consulter les valeurs annuelles</summary><div class="history-table" tabindex="0" role="region" aria-label="Taux de scolarisation annuels"><table><thead><tr><th scope="col">Année</th><th scope="col">Part scolarisée</th></tr></thead><tbody id="school-data"></tbody></table></div></details>
+<p class="history-note"><a href="https://www.insee.fr/fr/statistiques/8612518">Insee, France portrait social 2025, figure 1</a> · <a href="/data/jeunes_scolarisation_1986_2023_insee.csv">CSV sourcé</a></p>
+</article>
+<article class="history-panel" aria-labelledby="workstudy-heading">
+<h3 id="workstudy-heading">2. Parmi les jeunes en études, part en emploi · 2003–2023</h3>
+<label for="workstudy-age">Âges observés <select id="workstudy-age"><option value="age_15_29_pct" selected>15–29 ans</option><option value="age_15_19_pct">15–19 ans</option><option value="age_20_24_pct">20–24 ans</option></select></label>
+<svg class="history-chart" id="workstudy-chart" viewBox="0 0 760 282" role="img" aria-label="Chargement du cumul études-emploi"></svg>
+<p id="workstudy-summary" role="status" aria-live="polite">Chargement de la série officielle…</p>
+<p class="history-note"><strong>Dénominateur :</strong> personnes de la tranche d’âge <em>en études initiales</em>, et non tous les jeunes. Enquête Emploi : France métropolitaine jusqu’en 2013, France hors Mayotte ensuite ; questionnaires modifiés en 2013 puis 2021, séries rétropolées par la source avec comparabilité limitée entre 2003–2013 et 2014–2023.</p>
+<details><summary>Consulter les valeurs annuelles</summary><div class="history-table" tabindex="0" role="region" aria-label="Cumul études-emploi annuel"><table><thead><tr><th scope="col">Année</th><th scope="col">Part en emploi</th></tr></thead><tbody id="workstudy-data"></tbody></table></div></details>
+<p class="history-note"><a href="https://www.insee.fr/fr/statistiques/8305508">Insee, Formations et emploi 2025, figure 1</a> · <a href="/data/jeunes_cumul_emploi_etudes_2003_2023_insee.csv">CSV sourcé</a></p>
+</article>
+</div>
+<p class="muted" style="margin-top:16px">Attention : l’échelle verticale est recalculée selon l’âge sélectionné, et chaque graphique dispose de son propre dénominateur. Une hausse de la proportion d’étudiants occupant un emploi peut traduire davantage d’apprentissage <em>sans</em> démontrer une hausse de l’accès aux études. Pour évaluer l’effet propre de l’apprentissage, il faudra comparer des parcours comparables, les diplômes obtenus, l’insertion, les ruptures, les rémunérations et les dépenses publiques.</p>
 </section>
 <section class="section" aria-labelledby="read">
 <h2 id="read">Un ordre de grandeur n’est pas une part de marché</h2>
@@ -133,6 +171,7 @@ footer{font-size:.84rem;color:#586a7e;border-top:1px solid var(--line);padding-t
 <ol>
 <li><a href="https://www.insee.fr/fr/statistiques/8313981">Insee, Bilan démographique 2024, population détaillée par âge</a>, fichier « Pop1janv_age.xlsx », feuille 2024, estimations provisoires arrêtées fin 2024 ; population France au 1er janvier 2024, huit cohortes d’âge 18 à 25 ans.</li>
 <li><a href="https://www.insee.fr/fr/statistiques/8612518">Insee, France portrait social, édition 2025, « Scolarisation des jeunes de 18 à 29 ans »</a>, figure 2 ; enquête Emploi 2024, France hors Mayotte, logements ordinaires, ventilation selon sexe et âge.</li>
+<li><a href="https://www.insee.fr/fr/statistiques/8305508">Insee, Formations et emploi 2025, « Cumul emploi-études »</a>, figure 1, 2003–2023 et figure 2 pour distinguer apprentissage, stage et autres emplois (2023).</li>
 <li><a href="https://www.insee.fr/fr/statistiques/8666372">Insee, Bilan Formation-Emploi 2025, tableau T04/T1</a>, Depp-SIFA, effectifs d’apprentis en formation au 31 décembre 2024.</li>
 <li><a href="https://www.enseignementsup-recherche.gouv.fr/fr/les-effectifs-etudiants-dans-l-enseignement-superieur-en-2024-2025-100596">Ministère de l’enseignement supérieur, SIES, effectifs 2024–2025</a>, inscriptions dans le supérieur, apprentissage inclus.</li>
 </ol>
@@ -141,5 +180,6 @@ footer{font-size:.84rem;color:#586a7e;border-top:1px solid var(--line);padding-t
 </main>
 <footer>budget_fr · Contextualiser, c’est aussi conserver les frontières statistiques des données.</footer>
 <script src="/jeunes-contexte.js" defer></script>
+<script src="/jeunes-histoire.js" defer></script>
 </body>
 </html>

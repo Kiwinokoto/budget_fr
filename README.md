@@ -12,6 +12,10 @@ L'interface est expérimentale : ne pas assimiler répartition des APU S13 et bu
 
 La sous-page apprentissage-contexte.html met les effectifs de 2024 en perspective (population âgée de 18 à 25 ans, étudiants du supérieur), sans additionner des populations qui se recoupent ; un diagramme en cinq situations exclusives est issu du tableau de l'Insee enquête Emploi 2024, avec choix sexe et âge. Source, périmètres, script de démographie et réserves : JEUNES_CONTEXTE_SOURCES.md. Accessible depuis la page APPRENTISSAGE, sans ajouter un onzième onglet.
 
+## Jeunes : deux évolutions historiques à ne pas confondre
+
+La sous-page apprentissage-contexte.html montre désormais **1986–2023** pour les taux de scolarisation à 18/21/25/29 ans et **2003–2023** pour la part en emploi parmi les jeunes en études initiales (15–29, 15–19, 20–24 ans). Deux séries Insee distinctes, deux CSV avec import reproductible et contrôle SHA-256 depuis leurs XLSX, choix de tranche et tableaux accessibles ; ruptures territoriales et de questionnaire indiquées. **L'effet causal de l'apprentissage sur l'accès aux études n'est pas établi par ces seules séries.** Consulter JEUNES_CONTEXTE_SOURCES.md.
+
 ## APPRENTISSAGE : effectifs historiques en formation (Depp-SIFA)
 
 La page apprentissage.html propose une série officielle de 43 années, **1982–2024**, par niveau de diplôme (tableau T04/T1 Insee/Depp-SIFA). Ce sont des effectifs au 31 décembre, et non les flux de contrats Dares ni des dépenses. Import reproductible : scripts/import_apprentissage_sifa.py ; provenance, SHA-256 et rupture territoriale dans APPRENTISSAGE_SOURCES.md. Graphique interactif et tableau accessible, source CSV versionnée.

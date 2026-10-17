@@ -59,3 +59,7 @@ Si publication explicitement autorisée, inclure le nouveau script racine appren
 ## Sous-page APPRENTISSAGE CONTEXTE, 2026-10-17
 
 Une fois la PR fusionnée et la publication autorisée, ajouter apprentissage-contexte.html, jeunes-contexte.js, JEUNES_CONTEXTE_SOURCES.md et les deux CSV data/jeunes_*.csv à la livraison figée sur main. Vérifier les ressources HTTPS, interactivité du diagramme, ses six combinaisons âge/sexe, le tableau, l'absence de double compte et absence de débordement mobile ; sauvegarde puis rollback si échec. L'onglet principal APPRENTISSAGE reste le point d'entrée depuis la navigation générale.
+
+## Lot longitudinal jeunesse — publication ultérieure
+
+Inclure la version mise à jour de apprentissage-contexte.html et les trois ressources **jeunes-histoire.js**, **data/jeunes_scolarisation_1986_2023_insee.csv**, **data/jeunes_cumul_emploi_etudes_2003_2023_insee.csv** ensemble. Vérifier les originaux XLSX (SHA-256 dans JEUNES_CONTEXTE_SOURCES.md), tests, HTML/CSS/JS/CSV en HTTPS octet par octet, sélecteurs d'âge en Chromium desktop/mobile, tableaux accessibles, débordement horizontal et absence d'erreurs JS. Publier avec sauvegarde atomique et rollback ; ne pas modifier les autres services.

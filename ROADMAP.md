@@ -1,5 +1,14 @@
 # Roadmap et passation
 
+## APPRENTISSAGE : scolarisation et emploi dans le temps — 17 octobre 2026
+
+- **Deux séries attestées** depuis l'Insee : scolarisation 1986–2023 (18/21/25/29 ans, dénominateur chaque population d'âge), et cumul études-emploi 2003–2023 (15–29/15–19/20–24 ans, dénominateur uniquement les jeunes en études initiales). Deux XLSX sources inspectés, empreintes SHA-256 épinglées ; scripts/import_jeunes_longitudinal.py, deux nouveaux CSV, deux SVG interactifs et tableaux accessibles sous apprentissage-contexte.html.
+- **Le classement de l'apprenti** : normalement dans « études et emploi » dans l'enquête Emploi s'il est en formation initiale et en emploi BIT ; la catégorie recouvre aussi des stages et emplois étudiants non apprentis. Reprise d'études : ne pas généraliser le classement. Insee F5 : 10,9 % des 15–29 ans en études initiales sont apprentis en 2023.
+- **Ruptures** : scolarisation : 1999 et 2018 (champ territorial). Cumul études-emploi : France métropolitaine jusqu'en 2013, France hors Mayotte depuis 2014 ; questionnaires modifiés en 2013/2021, rétropolations avec comparabilité limitée. Année scolaire vs enquête Emploi annuelle. Taux et effectifs ne sont pas mélangés.
+- **Hypothèse à examiner, non verdict** : la croissance de l'apprentissage augmente-t-elle la part des jeunes ayant accès à la formation, ou surtout le poids des étudiants salariés ? Ces séries sont descriptives. Prochain chantier : diplômes obtenus, insertion comparative à 6/12/24 mois avec sélection observée, ruptures de contrat, salaire et coût de financement public ; chercher évaluations quasi-expérimentales avant attribution causale. Les situations d'exploitation, discrimination, vulnérabilité administrative nécessitent des indicateurs documentés.
+- **Publication** : inscrire le commit réellement déployé, sauvegarde, recette et verrous une fois la PR fusionnée et la version appliquée. Ne pas refondre l'accueil.
+
+
 ## Publication du contexte jeunesse et recherche APPRENTISSAGE — 17 octobre 2026
 
 - **GitHub main publié et vérifié** : `209c5e7d0394324dc96cc74c2f7590c77b6ee4d0` (PR #33), à partir de `72fb148dcf89549e0404f797e2a78d539c012e6b`. Site https://budget-fr.kiwinokoto.fr/apprentissage-contexte.html ; `/opt/budget-fr/.deployed_commit` vérifié sur le VPS personnel, conteneur `budget-fr-web` opérationnel.
