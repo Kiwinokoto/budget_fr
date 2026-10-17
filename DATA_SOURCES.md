@@ -162,3 +162,7 @@ Reproduction hors ligne : python3 scripts/import_debt_bridges.py --xlsx-dir /che
 ## Audit croisé Eurostat EDP / Insee, octobre 2026
 
 Le suivi détaillé des révisions 2025, des divergences 3.102/3.104, de la différence stock-flux 2014 et des sous-lignes de valorisation figure dans [DEBT_RECONCILIATION.md](DEBT_RECONCILIATION.md). Eurostat avril/juin 2026 est antérieur au millésime Insee août 2026 ; aucun rapprochement n'a été imposé entre définitions ou millésimes.
+
+## Nouveau chapitre : aides aux entreprises, estimations 2023
+
+Le fichier data/aides_entreprises_senat_2023_estimations.csv contient deux estimations ponctuelles de la commission d'enquête Sénat, rapport n° 808 (2025) : 108 Md€ au sens strict et 211 Md€ au sens large pour 2023. Ce sont des ordres de grandeur, pas des flux budgétaires consolidés observés. Détail : AIDES_ENTREPRISES_SOURCES.md. Source : https://www.senat.fr/rap/r24-808-1/r24-808-1_mono.html

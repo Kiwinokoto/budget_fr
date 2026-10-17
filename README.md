@@ -8,6 +8,10 @@ Le site possède huit pages HTML accessibles depuis un bandeau de navigation ide
 
 L'interface est expérimentale : ne pas assimiler répartition des APU S13 et budget de l'État, ni graphiques de composition et séries causales.
 
+## Aides publiques aux entreprises : chapitre méthodologique
+
+La page aides-entreprises.html présente les deux estimations sénatoriales pour 2023, 108 et 211 Md€ selon le périmètre, sans les additionner ni en faire une série historique. Pour les définitions, les réserves et le programme scientifique, lire AIDES_ENTREPRISES_SOURCES.md.
+
 ## Démonstrateur (sans dépendance)
 
 Recettes, dépenses et solde des administrations publiques consolidées de **1960 à 2025** ; dette brute de **1978 à 2025**, dette nette de **1995 à 2025**, le tout en **% du PIB**. La période demandée 1980–2025 est couverte, avec les limites propres à chaque série.
