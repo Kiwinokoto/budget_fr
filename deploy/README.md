@@ -55,3 +55,7 @@ Un prochain déploiement explicitement autorisé doit inclure apprentissage.html
 ## Release du graphique historique APPRENTISSAGE
 
 Si publication explicitement autorisée, inclure le nouveau script racine apprentissage-histoire.js et le CSV data/apprentissage_sifa_effectifs_1982_2024.csv (44 lignes CSV dont en-tête), en plus du HTML actuel. Vérifier HTTP 200, identité des fichiers, les deux modes et le tableau des 43 années dans Chromium, sur mobile et desktop. Préparer un rollback atomique ; ne jamais publier l'HTML historique seul.
+
+## Sous-page APPRENTISSAGE CONTEXTE, 2026-10-17
+
+Une fois la PR fusionnée et la publication autorisée, ajouter apprentissage-contexte.html, jeunes-contexte.js, JEUNES_CONTEXTE_SOURCES.md et les deux CSV data/jeunes_*.csv à la livraison figée sur main. Vérifier les ressources HTTPS, interactivité du diagramme, ses six combinaisons âge/sexe, le tableau, l'absence de double compte et absence de débordement mobile ; sauvegarde puis rollback si échec. L'onglet principal APPRENTISSAGE reste le point d'entrée depuis la navigation générale.

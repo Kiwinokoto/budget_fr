@@ -1,5 +1,16 @@
 # Roadmap et passation
 
+## APPRENTISSAGE — « Un million, par rapport à combien ? » — 17 octobre 2026
+
+- **Mission** : créer une sous-page pédagogique depuis APPRENTISSAGE (sans refondre l'accueil), visuels légers, et une seule ventilation circulaire fondée sur des catégories exclusives ; éviter d'additionner apprenti + étudiant + emploi + chômage.
+- **Source démographique** : Insee Bilan démographique 2024, XLSX population détaillée au 1er janvier 2024, empreinte SHA-256 documentée et import reproductible. **6 375 226** personnes de 18 à 25 ans inclus (France entière) ; population SIFA apprentis **1 049 965 tous âges** au 31/12, comparateur de grandeur uniquement, pas un taux d'apprentissage des 18–25 ans.
+- **Source situations** : Insee France portrait social édition 2025, figure 2, enquête Emploi **2024**, France **hors Mayotte**, 18–20 / 21–24 / 25–29 ans **par sexe**. Cinq catégories mutuellement exclusives : études initiales, cumul études-emploi, emploi sans études, chômage, autres inactifs hors études. Les valeurs arrondies peuvent totaliser 99,9 / 100,1 % ; normaliser seulement le dessin, pas les chiffres publiés.
+- **Autre repère** : 3 012 800 étudiants dans le supérieur (2024–2025, tous âges, apprentis inclus), source SIES. **Jamais un secteur du même camembert** que la population 18–25 ans ou que les apprentis.
+- **Fichiers** : apprentissage-contexte.html, jeunes-contexte.js, deux CSV sourcés, scripts/import_jeunes_population.py, JEUNES_CONTEXTE_SOURCES.md ; lien entrant depuis apprentissage.html. La navigation générale reste à dix onglets, l'accueil pédagogique hybride reste un futur chantier.
+- **Suite scientifique** : données harmonisées permettant de connaître les apprentis par âge exact, effectifs d'étudiants et de jeunes actifs selon mêmes âges, dates et territoires, puis financements et formation par niveau CAP/BTS/supérieur. Pas de taux bricolé.
+- **Passation** : une fois la PR et, le cas échéant, publication contrôlée terminées, mettre à jour ici le vrai commit main, état prod, tests, sauvegarde, branche et questions ouvertes ; fournir un prompt prêt à copier-coller pour le prochain chat. Ne pas conserver de branches mortes dont le merge est attesté sur GitHub ; ne pas toucher aux branches non fusionnées ou aux branches de travail d'agents actifs.
+
+
 ## Situation au 16 octobre 2026
 
 - Dépôt public : Kiwinokoto/budget_fr. PR #1–#23 fusionnées sur `main` le 16 octobre 2026 ; dernier commit applicatif (solde primaire S13) **`6655e063f1572085adace4f5d9252b5df77b3fc3`**. La documentation de passation ultérieure peut faire avancer `main` sans redéploiement.

@@ -174,3 +174,7 @@ Deux CSV ponctuels décrivent séparément les contrats commencés et en cours e
 ## APPRENTISSAGE : effectifs Depp-SIFA 1982–2024 (Insee T04/T1)
 
 Effectifs de personnes en formation **au 31 décembre**, cinq groupes de niveaux de diplôme plus total annuel. Source https://www.insee.fr/fr/statistiques/8666372 ; XLSX : https://www.insee.fr/fr/statistiques/fichier/8666372/T04%20-%201.4.xlsx ; SHA-256 93432bd9c0f7e950502544df2de2604b9ec2730e873693b8387b53b2b6800a0d. Import standard Python : scripts/import_apprentissage_sifa.py ; 43 observations : data/apprentissage_sifa_effectifs_1982_2024.csv. France hors Mayotte jusqu'en 2010, Mayotte incluse depuis 2011. Ne pas sommer avec contrats Dares ou financement France compétences. Voir APPRENTISSAGE_SOURCES.md.
+
+## Jeunes en 2024 : population détaillée et situations vis-à-vis des études et du travail
+
+Population au 1er janvier par âge, source Insee Bilan démographique 2024, classeur Pop1janv_age.xlsx, SHA-256 223e5d4699d1b99b20b1e81a7f75dec961031272d74c4cd429fb9466fc8f574d, import scripts/import_jeunes_population.py et CSV data/jeunes_population_2024_par_age.csv. Autre source : Insee France portrait social 2025, figure 2 enquête Emploi 2024, ventilations exclusives selon sexes et tranches 18–20/21–24/25–29, CSV data/jeunes_situations_2024_insee.csv. Détails et limites JEUNES_CONTEXTE_SOURCES.md ; ne pas transformer ces sources en fausse part des apprentis âgés de 18–25 ans.

@@ -1,0 +1,7 @@
+age_group,sex,study_only,study_and_work,work_only,unemployed,other_inactive,source_id
+18-20,women,58.0,17.4,11.0,5.2,8.3,insee_fps2025_figure2_eec2024
+21-24,women,21.3,17.2,41.4,7.9,12.1,insee_fps2025_figure2_eec2024
+25-29,women,1.7,4.0,72.0,7.9,14.3,insee_fps2025_figure2_eec2024
+18-20,men,48.2,18.2,15.8,8.1,9.7,insee_fps2025_figure2_eec2024
+21-24,men,14.7,14.2,49.7,11.1,10.4,insee_fps2025_figure2_eec2024
+25-29,men,2.1,3.8,77.6,8.6,7.9,insee_fps2025_figure2_eec2024
