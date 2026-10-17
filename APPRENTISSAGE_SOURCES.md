@@ -59,3 +59,24 @@ L'apprentissage des métiers et des corporations est beaucoup plus ancien : **19
 La Dares possède un classeur officiel « Caractéristiques des contrats d'apprentissage » couvrant 1993–2025, mais son téléchargement direct a été bloqué au cours de cette passe par sa protection de site. La Dares signale les systèmes de collecte suivants : organismes d'enregistrement 1993–2011, Ari@ne 2012–2019, Deca depuis 2020. **Aucune série de contrats Dares 1993–2025 n'a été fabriquée.** Reprendre l'import lorsqu'un fichier source vérifiable est récupéré.
 
 **Interface** : graphique 1995–2024 par défaut, bascule complète 1982–2024 ; vue du total ou répartition par cinq niveaux de diplôme ; tableau HTML des 43 années ; signalement de Mayotte et repère 2018 non causal. Les catégories historiques de diplômes évoluent elles-mêmes avec les diplômes et certifications disponibles.
+
+## Enquête âge, certification et circuits financiers — vérifications du 17 octobre 2026
+
+**Dares, « L'apprentissage en 2024 »**, 21 janvier 2026, SIA (extraction du 7 novembre 2025) :
+https://dares.travail-emploi.gouv.fr/publication/lapprentissage-en-2024
+PDF de l'étude : https://dares.travail-emploi.gouv.fr/sites/default/files/d724dea796477dfd0273350e9c9c0d64/DR_Apprentissage_2024.pdf
+
+- Sur **889 400 contrats commencés en 2024** dans les secteurs privé et public, **8 %** concernent des entrants âgés de 26 ans ou plus ; **177 400** concernent des jeunes de **15–17 ans** (graphique 4). Ces répartitions concernent **l'âge au début du contrat**, pas une photographie des 1 049 965 apprentis en formation SIFA à fin 2024.
+- **39 %** des contrats commencés concernent l'enseignement secondaire ; **34 %** préparent un titre à finalité professionnelle (qui n'est pas synonyme d'un niveau de diplôme). Le graphique 3 indique **142 200** nouveaux contrats pour une formation de **niveau 4 (bac)**. Aucun de ces flux ne peut devenir automatiquement une part du stock SIFA.
+- L'étude signale que **43 %** des contrats commencés concernent une personne ayant déjà été apprentie ; un même bénéficiaire peut commencer plusieurs contrats. L'Excel officiel associé et les séries longues Dares 1993–2025 restent à télécharger et à contrôler : **aucun fichier brut Dares nouveau n'a été importé dans cette passe**.
+
+**France compétences, RUF édition 2025 (activité 2024)**, fiche « L'apprentissage », rapport PDF pages imprimées 22–25 :
+https://www.francecompetences.fr/fiche-ruf/lapprentissage-3/
+https://www.francecompetences.fr/app/uploads/2026/02/RUF25_VF.pdf
+
+- Champ **secteur privé**, engagements financiers **nets des annulations**, hors rémunération des apprentis : **15 594 M€ engagés en 2024** pour **895 998 nouveaux contrats pris en charge** (date de décision OPCO). Ces 895 998 décisions de prise en charge ne sont **ni** les 889 400 contrats effectivement commencés Dares **ni** les 1 049 965 apprentis SIFA.
+- Sur des fonds issus de France compétences, les OPCO ont engagé **8 176 M€ de coûts pédagogiques** pour ces 895 998 contrats, soit **9 125 € par contrat** selon le tableau officiel (RUF p. 24, tableau 4). **8 176 M€ est une composante des engagements, pas un total à ajouter aux 15 594 M€**. La fiche donne par ailleurs 17 404 € de coût unitaire de contrat tous postes hors rémunération, autre indicateur.
+- **Origine des fonds engagés** pour 2024 (RUF p. 23, graphique 3) : France compétences **58,5 %**, État **36,7 %**, entreprises **2,5 %**, bénéficiaires **0,5 %**, Agefiph **0,1 %**, Régions **1,8 %**. Les pourcentages publiés totalisent 100,1 % par arrondi. Ce tableau classe **les origines ultimes de fonds dans le périmètre retenu**, pas les dépenses réalisées directement par chaque organisme ; ne pas additionner les transferts France compétences → OPCO → organismes de formation.
+- Les séries RUF 2021–2023 ont été révisées dans l'édition 2025 (annulations comptables, méthodes d'affectation et données régionales). Une tendance pluriannuelle exige un **même millésime RUF** ; données 2024 provisoires.
+
+**Décisions scientifiques** : distinguer quatre objets statistiques (personnes SIFA, contrats commencés Dares, nouveaux contrats pris en charge OPCO, engagements financiers), leurs dates, leurs champs public/privé et leurs éventuelles révisions. Avant de publier une ventilation par **OPCO**, retrouver une source identifiable et une unité commune ; une répartition par type de financement ne décrit pas automatiquement chaque OPCO. Ne pas fabriquer de pourcentages pour une tranche 18–25 ans à partir des flux tous âges.
