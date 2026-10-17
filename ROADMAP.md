@@ -1,5 +1,14 @@
 # Roadmap et passation
 
+## APPRENTISSAGE — résultats publiés et vérifiés (17 octobre 2026)
+
+- **Production** : main applicatif 8aead975b776f3d5ed2f6e2215e749ef03edca3b, confirmé dans /opt/budget-fr/.deployed_commit et sur https://budget-fr.kiwinokoto.fr/apprentissage-resultats.html ; budget-fr-web en fonctionnement. PR #37 et PR #38 incluses. Les deux pages apprentissage.html et apprentissage-contexte.html disposent du lien vers la nouvelle page.
+- **Sauvegarde** : /opt/budget-fr/backup/20261017T110640Z-before-d8d4e7665fe5-to-8aead975b776 ; copie vérifiée contenant le précédent SHA d8d4e7665fe5bf89b3bf4d80453e9cf57959e202, site statique et Compose. Rollback prévu mais non exécuté (release réussie). Aucun autre conteneur modifié.
+- **Recette** : clone GitHub au SHA exact, 58 tests Python et 56 Node, 22 CSV, comparaison HTTPS octet par octet des pages/JS/CSS/CSV/documents livrés ; 36 contrôles Chromium spécifiques à la nouvelle page (390, 768, 1365 px) et tests de régression de l'atlas et des trajectoires. HTTP 200 confirmé. Verrous AgentCtl deploy:vps-personal/budget-fr et host:vps-personal/docker acquis après libération du verrou viewer puis libérés en fin d'opération.
+- **Limites** : InserJeunes compare 39/54 % de poursuite parmi les inscrits de dernière année et 62/41 % d'emploi salarié parmi les seuls sortants ; leurs dénominateurs diffèrent, et les écarts ne sont pas des effets causaux. Source APPRENTISSAGE_RESULTATS_SOURCES.md. Suite scientifique : comparer diplôme/spécialité et cohorte, diplomation, salaire et emploi à 12/24 mois, ruptures, conditions de travail, financements marginaux et substitution à la voie scolaire.
+- **Suite technique** : ne pas déployer automatiquement les futurs commits documentaires ; pour toute modification, branche dev, PR, vérification des protections/tests, sauvegarde et rollback.
+
+
 ## APPRENTISSAGE — bilan des résultats : PR #37 fusionnée, non déployée (17 octobre 2026)
 
 - **GitHub main après la PR #37** : commit applicatif 0e0e3a118da1fc0a0f4d3598e09c42dad56d5c78. Branche de développement dev/apprentissage-resultats-20261017, commit df7bce57137c03cbfb7fdce999cf9b8a9863bed0, PR https://github.com/Kiwinokoto/budget_fr/pull/37 fusionnée. 10 fichiers ajoutés/modifiés (page, CSV, sources, tests, navigation et documentation).

@@ -66,6 +66,8 @@ Inclure la version mise à jour de apprentissage-contexte.html et les trois ress
 
 Release vérifiée : d8d4e7665fe5bf89b3bf4d80453e9cf57959e202 ; sauvegarde : /opt/budget-fr/backup/20261017T101809Z-before-209c5e7d0394-to-d8d4e7665fe5. Tests : 55 Python, 54 Node, 139 contrôles Chromium ; 21 CSV et ressources identiques à GitHub. Rollback conservé et déploiement manuel uniquement.
 
-## Nouveau chapitre apprentissage : résultats (publication future sur autorisation)
+## Nouveau chapitre apprentissage : résultats (publié le 17 octobre 2026)
 
 Inclure ensemble apprentissage-resultats.html, APPRENTISSAGE_RESULTATS_SOURCES.md et data/apprentissage_parcours_2024_inserjeunes.csv, ainsi que les deux liens entrants des pages apprentissage.html et apprentissage-contexte.html. Vérifier quatre taux, tableaux, sources, navigation, affichages 390/768/1365 px, HTTPS et identité des fichiers au commit main autorisé. Le déploiement n'est pas automatique ; sauvegarde, rollback, verrou deploy:vps-personal/budget-fr et host:vps-personal/docker obligatoires.
+
+Release contrôlée 8aead975b776f3d5ed2f6e2215e749ef03edca3b ; sauvegarde /opt/budget-fr/backup/20261017T110640Z-before-d8d4e7665fe5-to-8aead975b776 (ancienne version d8d4e7665fe5bf89b3bf4d80453e9cf57959e202). Tests 58 Python, 56 Node, 22 CSV, vérification HTTPS octet par octet et 36 contrôles Chromium spécifiques en mobile/tablette/desktop, plus régressions. Rollback conservé. Aucun autre service affecté. Déploiements suivants manuels uniquement.
