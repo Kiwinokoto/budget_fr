@@ -1,5 +1,14 @@
 # Roadmap et passation
 
+## APPRENTISSAGE — bilan des résultats : PR #37 fusionnée, non déployée (17 octobre 2026)
+
+- **GitHub main après la PR #37** : commit applicatif 0e0e3a118da1fc0a0f4d3598e09c42dad56d5c78. Branche de développement dev/apprentissage-resultats-20261017, commit df7bce57137c03cbfb7fdce999cf9b8a9863bed0, PR https://github.com/Kiwinokoto/budget_fr/pull/37 fusionnée. 10 fichiers ajoutés/modifiés (page, CSV, sources, tests, navigation et documentation).
+- **État effectif du VPS contrôlé après fusion** : /opt/budget-fr/.deployed_commit reste d8d4e7665fe5bf89b3bf4d80453e9cf57959e202 ; budget-fr-web fonctionne, et apprentissage-resultats.html est absent du site public. Ne pas présenter le nouveau chapitre comme en production. Publication à faire **sur demande explicite**, avec verrous, copie des nouvelles ressources statiques, sauvegarde et rollback. Sauvegarde précédente connue : /opt/budget-fr/backup/20261017T101809Z-before-209c5e7d0394-to-d8d4e7665fe5.
+- **Recette de la PR** : 58 tests Python (dont vérifications d'unités, taux, dates), 56 tests Node, 36 contrôles Chromium locaux sur 390/768/1365 px, navigation vers et depuis les sous-pages, CSS et absence de débordement. Un premier contrôle Chromium a dû accepter HTTP 304 en cache en complément du 200 ; aucune modification applicative liée à ce diagnostic.
+- **Sources et limites** : résultats InserJeunes CAP–BTS 2023–2024 (poursuite études 39 % apprentissage vs 54 % scolaire parmi inscrits ; emploi salarié des sortants 62 % vs 41 % à six mois). Ruptures Dares cohortes 2021 (brut 32 %, net 18 %), conditions de travail Dares (2018/2019–2020), IPP 2024 (évaluation causale de l'aide 2020, BTS), IGF–Igas 2024 (aubaine et croissance du supérieur). Ne pas conclure que le million SIFA est un million d'employés « reclassés ». Voir APPRENTISSAGE_RESULTATS_SOURCES.md.
+- **Priorité de recherche** : séries InserJeunes par CAP/bac pro/BTS et par spécialité, réussite aux diplômes et salaires à 12/24 mois ; coûts publics marginaux et études évaluatives de substitution scolaire, analyse des situations de vulnérabilité. Ne pas refondre l'accueil ; préserver les conventions de sources et méthodes.
+
+
 ## APPRENTISSAGE — résultats des formations et effets évalués (17 octobre 2026)
 
 - Nouvelle page apprentissage-resultats.html et quatre observations InserJeunes 2023–2024 : 39 % vs 54 % de poursuite parmi les inscrits de dernière année (apprentissage/voie scolaire) et 62 % vs 41 % d'emploi salarié parmi les seuls sortants six mois après. Deux populations, pas un camembert ni un effet causal ; champ CAP à BTS, couvertures différentes selon la voie.
