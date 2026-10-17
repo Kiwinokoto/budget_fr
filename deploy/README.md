@@ -51,3 +51,7 @@ Pour un déploiement ultérieur validé, ajouter aides-entreprises.html, AIDES_E
 ## Nouveau chapitre APPRENTISSAGE (PR dépendante du chapitre aides)
 
 Un prochain déploiement explicitement autorisé doit inclure apprentissage.html, APPRENTISSAGE_SOURCES.md, les deux CSV data/apprentissage_*.csv, la navigation à dix pages et les fichiers déjà publiés. Vérifier le site, les CSV et une sauvegarde rollback. La PR apprentissage dépend de la PR aides #30 : fusionner dans cet ordre.
+
+## Release du graphique historique APPRENTISSAGE
+
+Si publication explicitement autorisée, inclure le nouveau script racine apprentissage-histoire.js et le CSV data/apprentissage_sifa_effectifs_1982_2024.csv (44 lignes CSV dont en-tête), en plus du HTML actuel. Vérifier HTTP 200, identité des fichiers, les deux modes et le tableau des 43 années dans Chromium, sur mobile et desktop. Préparer un rollback atomique ; ne jamais publier l'HTML historique seul.

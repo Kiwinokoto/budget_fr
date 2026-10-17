@@ -181,6 +181,17 @@ Sources candidates à auditer une fois l'atlas contemporain stabilisé :
 5. Réfléchir à une **vue comparative** entre dépense/PIB, recettes/PIB, solde primaire, dette/PIB et charge d'intérêts pour permettre de tester les hypothèses de stabilité et de financiarisation ; définir millésimes, indicateurs et interprétations avant tout graphique causal.
 6. Ne pas attribuer les évolutions 2007–2008 ou 2012–2017 à une politique unique sans contrôler conjoncture, refinancement, nomenclatures et comparaison internationale. Les événements économiques et marqueurs gouvernementaux éventuels seront présentés comme contexte, non comme causalité statistique observée.
 
+## APPRENTISSAGE — série historique Insee/Depp-SIFA (17 octobre 2026)
+
+**Travail effectué dans dev/apprentissage-sifa-history-20261017** : source Insee T04/T1 de novembre 2025 téléchargée, 336409 octets et SHA-256 vérifié ; import reproductible sans dépendance depuis le XLSX non committé en 43 observations d'effectifs au 31/12, 1982–2024, cinq niveaux de diplôme et total validé par addition. CSV, script et provenance dans APPRENTISSAGE_SOURCES.md.
+
+- Graphique interactif en deux modes (évolution du total, composition par diplôme), sélection 1995–2024 (défaut) ou 1982–2024 ; tableau complet de 43 années, résumé textuel, source affichée. **Aucun mélange** avec contrats Dares 2024/2025 ou coût France compétences.
+- **Rupture de champ** : hors Mayotte jusqu'en 2010, France avec Mayotte depuis 2011. L'axe 2018 est un repère historique, non une inférence causale sur le financement.
+- **Observation scientifique** : CAP/mention stable en niveau absolu entre 1995 (194485) et 2024 (191029), tandis que bac+3 et plus croît de 4777 à 421000. Prendre garde aux évolutions des nomenclatures et des cursus.
+- **Blocage source** : le téléchargement direct Dares du XLSX « Caractéristiques des contrats d'apprentissage » 1993–2025 est bloqué par protection anti-robot. Les trois systèmes de collecte Dares (1993–2011 / 2012–2019 / depuis 2020) sont repérés mais **aucune série non vérifiée ne doit être inventée**.
+- **Recette de cette passe** : 48 tests Python, 49 tests JavaScript, 16 contrôles navigateur ciblés Chromium (390, 768, 1050, 1365 px, 2 modes de graphique, 2 périodes, tableau HTML complet, aucune overflow globale). Comparaison octet pour octet du CSV régénéré depuis l'original XLSX et revue visuelle desktop/mobile. L'évaluation de lecteur d'écran réel reste à faire.
+- **Étapes suivantes** : série détaillée Dares si XLSX vérifiable ; comparaisons SIFA secondaire/supérieur, niveaux CAP et financement ; série temporelle financière par financeur avec sources homogènes ; évaluation ruptures/retours/insertion. Accueil hybride et maquette globale toujours différés.
+
 ## APPRENTISSAGE — PRIORITÉ HAUTE, CHAPITRE AUTONOME (17 octobre 2026)
 
 **Demande explicite** : faire de l'apprentissage un onglet séparé et un véritable thème d'enquête, pas une simple ligne d'« aides aux entreprises ». Sujets : histoire, sommes mobilisées, flux de nouveaux contrats, effectifs en formation, financeurs, bénéficiaires, diplômes et devenir.

@@ -43,3 +43,19 @@ L'apprentissage des métiers et des corporations est beaucoup plus ancien : **19
 6. **Accueil** : envisager une porte d'entrée guidée « comprendre l'apprentissage », après validation de la future maquette hybride.
 
 **Publication** : ce chapitre est dépendant de la PR #30 du chapitre aides. Ne pas annoncer une URL publique opérationnelle tant que ces branches n'ont pas été fusionnées et déployées avec validation.
+
+## Nouvelle série : Insee/Depp-SIFA, effectifs au 31 décembre, 1982–2024
+
+**Source officielle** : Insee, *L'école et ses sortants – 2025* (20 novembre 2025), tableau T04 « 1.4 Apprentis en formation », feuille T1 « Évolution des effectifs d'apprentis selon le diplôme préparé ».
+- Page : https://www.insee.fr/fr/statistiques/8666372
+- XLSX : https://www.insee.fr/fr/statistiques/fichier/8666372/T04%20-%201.4.xlsx
+- SHA-256 du XLSX original de 336409 octets : 93432bd9c0f7e950502544df2de2604b9ec2730e873693b8387b53b2b6800a0d
+- Producteur : Depp, enquête SIFA, effectifs au **31 décembre**. Champ source : **France hors Mayotte jusqu'en 2010, France avec Mayotte depuis 2011**. Il s'agit donc d'un changement de champ territorial explicitement signalé.
+- Reproductibilité : script standard Python scripts/import_apprentissage_sifa.py, CSV data/apprentissage_sifa_effectifs_1982_2024.csv, original XLSX non committé. 43 années 1982–2024, cinq catégories officielles et total ; validation de la somme des catégories pour chaque année, aucune interpolation. Les zéros historiques sont ceux du fichier Insee, pas des valeurs imputées.
+- 1995 : **293 512** en tout, dont **194 485** en CAP/mention et **4 777** en bac+3 ou plus. 2018 : **448 127**, 2019 : **478 803**. 2024 : **1 049 965** en tout, dont **191 029** CAP/mention et **421 000** bac+3 ou plus.
+
+**Distinction essentielle** : ces apprentis **en formation Depp-SIFA** ne sont pas exactement le stock de **contrats en cours Dares** (2024 : 1 048 800 selon publication Dares du 21 janvier 2026, soit 1 165 de moins que SIFA). L'écart n'est pas corrigé ou comblé. Les sources mesurent des objets différents et les versions peuvent varier. Les entrées de contrats Dares en 2025 sont un flux distinct, les engagements de France compétences sont une grandeur financière distincte.
+
+La Dares possède un classeur officiel « Caractéristiques des contrats d'apprentissage » couvrant 1993–2025, mais son téléchargement direct a été bloqué au cours de cette passe par sa protection de site. La Dares signale les systèmes de collecte suivants : organismes d'enregistrement 1993–2011, Ari@ne 2012–2019, Deca depuis 2020. **Aucune série de contrats Dares 1993–2025 n'a été fabriquée.** Reprendre l'import lorsqu'un fichier source vérifiable est récupéré.
+
+**Interface** : graphique 1995–2024 par défaut, bascule complète 1982–2024 ; vue du total ou répartition par cinq niveaux de diplôme ; tableau HTML des 43 années ; signalement de Mayotte et repère 2018 non causal. Les catégories historiques de diplômes évoluent elles-mêmes avec les diplômes et certifications disponibles.
