@@ -1,5 +1,14 @@
 # Roadmap et passation
 
+## Publication du contexte jeunesse et recherche APPRENTISSAGE — 17 octobre 2026
+
+- **GitHub main publié et vérifié** : `209c5e7d0394324dc96cc74c2f7590c77b6ee4d0` (PR #33), à partir de `72fb148dcf89549e0404f797e2a78d539c012e6b`. Site https://budget-fr.kiwinokoto.fr/apprentissage-contexte.html ; `/opt/budget-fr/.deployed_commit` vérifié sur le VPS personnel, conteneur `budget-fr-web` opérationnel.
+- **Sauvegarde rollback** : `/opt/budget-fr/backup/20261017T091857Z-before-72fb148dcf89-to-209c5e7d0394`. Aucun changement des autres conteneurs, aucun déploiement automatique. AgentCtl : verrous `deploy:vps-personal/budget-fr` et `host:vps-personal/docker` acquis puis libérés, session terminée.
+- **Tests de publication** : 52 Python, 52 Node ; 19 CSV et ressources HTML/JS/CSS/documents comparés octet par octet sur HTTPS ; 94 vérifications Chromium des chapitres existants et de la nouvelle sous-page, de 390 à 1600 px selon la page. Aucune erreur bloquante constatée ; examen esthétique humain sur mobile physique restant ouvert.
+- **Recherche suivante (sans nouvelle donnée graphique publiée)** : Dares 2024 offre une décomposition des **contrats commencés** par âge et niveau de formation ; France compétences RUF édition 2025 propose les engagements OPCO **2021–2024** nets d'annulations ainsi que les financeurs. Détails, périmètres et limites dans `APPRENTISSAGE_SOURCES.md`. Ne pas confondre contrats Dares entrés dans l'année, apprentis SIFA au 31 décembre et décisions de prise en charge OPCO.
+- **À faire** : obtenir le XLSX Dares 1993–2025 malgré la protection du site, auditer provenance/empreinte et nomenclatures avant import ; identifier une ventilation publiquement contrôlable par OPCO et certification, puis préparer une représentation des flux sans double compte. Refonte de l'accueil différée. Toute nouvelle modification doit repartir du HEAD GitHub actualisé.
+
+
 ## APPRENTISSAGE — « Un million, par rapport à combien ? » — 17 octobre 2026
 
 - **Mission** : créer une sous-page pédagogique depuis APPRENTISSAGE (sans refondre l'accueil), visuels légers, et une seule ventilation circulaire fondée sur des catégories exclusives ; éviter d'additionner apprenti + étudiant + emploi + chômage.
