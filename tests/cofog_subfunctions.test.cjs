@@ -11,6 +11,8 @@ test('COFOG level 2 is navigable, year-sensitive and accessible',()=>{
  assert.match(html,/subRefresh\(\)/);
  assert.match(html,/sous-fonctions COFOG/);
  assert.match(html,/Détail indisponible/);
+ assert.match(html,/id="cofog-trace"/);
+ assert.match(html,/bénéficiaire final/);
  assert.match(html,/role="status" aria-live="polite"/);
  assert.doesNotMatch(html,/scrollIntoView|scrollTo\(/);
 });
