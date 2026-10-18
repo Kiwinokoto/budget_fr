@@ -1,5 +1,15 @@
 # Roadmap et passation
 
+## Priorité active — 18 octobre 2026 : budget général de l'État, exécution 2023–2025
+
+- **Priorité centrale confirmée** : expliquer chaque année d'où vient l'argent public et où il va, descendre de poste en sous-poste, distinguer les données observées des analyses, et mesurer la traçabilité **des chiffres**, sans score inventé. L'apprentissage est **clos pour le moment** (PR #42 fusionnée) ; pas de nouveaux travaux de recherche sur l'apprentissage tant qu'une nouvelle demande ne le justifie.
+- **PR #43 fusionnée** : sous-fonctions COFOG S13, 69 catégories de 1995–2024, commit `a08fb11d123a0723e8ba69755ab077199864fd2f`. Production non redéployée.
+- **Nouvelle tranche : budget général de l'État (≠ APU consolidées S13)**. Branche `dev/budget-etat-execution-2023-2025-20261018` depuis `a08fb11d...` : `etat.html`, trois années **2023–2025**, navigation **missions → programmes**, recettes recouvrées par catégorie → section, CP ouverts et consommés, fisc brut explicitement distingué du net. Sources originales PLRG (neuf CSV) vérifiées par SHA-256 et transformation reproductible `scripts/import_budget_etat_plrg.py`, JSON versionné ; provenance en `DATA_SOURCES.md`, conventions en `METHODOLOGY.md`.
+- **Contrôle de cohérence** : chaque année 33 missions et 129–131 programmes, chiffre d'exécution 2024 de 584,982 Md€ **y compris** remboursements/dégrèvements. **Écart source non justifié de 83 650,28 € en 2023** pour cette mission, visible et non comblé. Les recettes sont brutes, seul 2024 présente le net fiscal dans les trois annexes employées. Pas de déficit reconstruit à partir de montants incomparables.
+- **Suite bornée** : recette navigateur responsive et claviers, comparaison encaissements/CP officiels, accès aux données de 2023/2025 sans mélange de concepts, puis **niveau action** à partir des documents RAP/PLRG si compatibles ; préparer aussi un vrai solde officiel et la comparaison « voté (LFI) / exécuté (PLRG) » avec périmètre unifié. Pas de réforme générale de l'accueil, ni création d'indice politique non audité.
+- **État de production** : dernier SHA applicatif connu `8aead975b776f3d5ed2f6e2215e749ef03edca3b`. Aucun déploiement implicite des PR. Avant publication : vérifier branche approuvée, verrous déploiement, sauvegarde, fichiers JSON et nouveaux liens, rollback.
+
+
 ## Recentrage scientifique et fonctionnel — 18 octobre 2026 (priorité actuelle)
 
 - **Décision : fin de la dérive apprentissage.** Dernière comparaison CAP/bac pro/BTS (sortants 2023 à six et vingt-quatre mois) intégrée avec la PR **#42** fusionnée dans `main` au SHA `2b9ef521b0578c64932615aedeb2fb456ab066fd`. Le chapitre est **mis en pause** ; pas d'autres recherches, enrichissements par spécialité, salaires ou ruptures avant nouvelle décision explicite.
