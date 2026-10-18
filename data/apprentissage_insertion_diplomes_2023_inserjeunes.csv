@@ -1,0 +1,13 @@
+cohort,pathway,diploma,months_after_exit,salaried_employment_percent,denominator,source_id
+2023,apprenticeship,CAP,6,59,non_continuing_leavers,depp_2026_apprentices_2023_24m
+2023,apprenticeship,CAP,24,70,non_continuing_leavers,depp_2026_apprentices_2023_24m
+2023,apprenticeship,bac_pro,6,68,non_continuing_leavers,depp_2026_apprentices_2023_24m
+2023,apprenticeship,bac_pro,24,78,non_continuing_leavers,depp_2026_apprentices_2023_24m
+2023,apprenticeship,BTS,6,69,non_continuing_leavers,depp_2026_apprentices_2023_24m
+2023,apprenticeship,BTS,24,77,non_continuing_leavers,depp_2026_apprentices_2023_24m
+2023,school_pathway,CAP,6,24,non_continuing_leavers,depp_2026_school_2023_24m
+2023,school_pathway,CAP,24,31,non_continuing_leavers,depp_2026_school_2023_24m
+2023,school_pathway,bac_pro,6,39,non_continuing_leavers,depp_2026_school_2023_24m
+2023,school_pathway,bac_pro,24,49,non_continuing_leavers,depp_2026_school_2023_24m
+2023,school_pathway,BTS,6,55,non_continuing_leavers,depp_2026_school_2023_24m
+2023,school_pathway,BTS,24,63,non_continuing_leavers,depp_2026_school_2023_24m

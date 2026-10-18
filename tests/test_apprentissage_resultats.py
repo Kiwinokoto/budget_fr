@@ -18,6 +18,23 @@ class TestApprentissageResultats(unittest.TestCase):
         self.assertEqual(set(r["school_year"] for r in values),{"2023-2024"})
         self.assertEqual(set(r["observation"] for r in values),{"next_school_year","2025-01"})
         self.assertEqual(set(r["source_id"] for r in values),{"dares_depp_2025_apprentices_2024","depp_2025_school_pathway_2024"})
+    def test_diploma_cohort_2023_source_observations(self):
+        with (ROOT/"data/apprentissage_insertion_diplomes_2023_inserjeunes.csv").open(encoding="utf-8",newline="") as f:
+            observations=list(csv.DictReader(f))
+        self.assertEqual(len(observations),12)
+        self.assertEqual({(r["pathway"],r["diploma"],int(r["months_after_exit"])):int(r["salaried_employment_percent"]) for r in observations},{
+            ("apprenticeship","CAP",6):59,("apprenticeship","CAP",24):70,
+            ("apprenticeship","bac_pro",6):68,("apprenticeship","bac_pro",24):78,
+            ("apprenticeship","BTS",6):69,("apprenticeship","BTS",24):77,
+            ("school_pathway","CAP",6):24,("school_pathway","CAP",24):31,
+            ("school_pathway","bac_pro",6):39,("school_pathway","bac_pro",24):49,
+            ("school_pathway","BTS",6):55,("school_pathway","BTS",24):63,
+        })
+        self.assertEqual({r["cohort"] for r in observations},{"2023"})
+        self.assertEqual({r["denominator"] for r in observations},{"non_continuing_leavers"})
+        self.assertIn("certification préparée et la voie", (ROOT/"apprentissage-resultats.html").read_text(encoding="utf-8"))
+        self.assertIn("deux notes DEPP du 25 juin 2026", (ROOT/"APPRENTISSAGE_RESULTATS_SOURCES.md").read_text(encoding="utf-8"))
+
     def test_static_page_labels_and_limits(self):
         html=(ROOT/"apprentissage-resultats.html").read_text(encoding="utf-8")
         for value in ("39 %","54 %","62 %","41 %","32 %","18 %","67 %","28 %","80 500","15 594"):

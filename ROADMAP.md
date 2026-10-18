@@ -1,5 +1,12 @@
 # Roadmap et passation
 
+## Passation scientifique — 18 octobre 2026 : emploi selon diplôme (branche dev)
+
+- Branche : `dev/apprentissage-diplomes-insertion-20261018`, base `main` `ba34ba286f0f7a0c442d9567a19c2132a52779dc`. Ajout de douze taux InserJeunes de la cohorte sortie en 2023, à six et vingt-quatre mois, CAP/bac pro/BTS, apprentissage et voie scolaire ; CSV transcrit des deux notes DEPP du 25 juin 2026. Mise à jour de `apprentissage-resultats.html`, `APPRENTISSAGE_RESULTATS_SOURCES.md` et test Python ciblé. Recette effectuée sur clone frais au commit `9cfa157ac1ee2f2e65c876c0dcb51a1fdb3c3fa1` : 59 tests Python OK, 56 tests Node OK, compilation Python OK. Pas de recette navigateur automatisée sur cette passe ; pas de déploiement demandé ni effectué.
+- Prudence : diplôme **préparé**, pas forcément obtenu ; taux parmi les seuls sortants, échantillons des deux voies non identiques, pas de causalité. Éditions 2024 et 2026 non mélangées ; aucune agrégation de fichiers établissements. Source : `APPRENTISSAGE_RESULTATS_SOURCES.md`.
+- Suite : données par spécialité et effectifs publiés, seuils de confidentialité, salaires à 12 mois, diplômes obtenus et ruptures/reprises, avec import reproductible si XLSX audité. Accueil et patrimoine public toujours différés.
+
+
 ## Passation consolidée — 18 octobre 2026
 
 - **Source de vérité** : Kiwinokoto/budget_fr. GitHub main au début de cette passe : ad26b57bc74878c1bfd7144ce51a99fe62dfd3f2, PR #40 fusionnée. Lire AGENTS.md, README.md, DATA_SOURCES.md, METHODOLOGY.md et ROADMAP.md avant intervention. Cette passe documentaire n'ajoute aucun code ni donnée et ne déploie rien. Après fusion, le SHA GitHub sera différent de celui en production, uniquement en raison de la documentation.
