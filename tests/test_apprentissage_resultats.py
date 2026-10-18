@@ -32,7 +32,7 @@ class TestApprentissageResultats(unittest.TestCase):
         })
         self.assertEqual({r["cohort"] for r in observations},{"2023"})
         self.assertEqual({r["denominator"] for r in observations},{"non_continuing_leavers"})
-        self.assertIn("diplôme préparé et la voie", (ROOT/"apprentissage-resultats.html").read_text(encoding="utf-8"))
+        self.assertIn("certification préparée et la voie", (ROOT/"apprentissage-resultats.html").read_text(encoding="utf-8"))
         self.assertIn("deux notes DEPP du 25 juin 2026", (ROOT/"APPRENTISSAGE_RESULTATS_SOURCES.md").read_text(encoding="utf-8"))
 
     def test_static_page_labels_and_limits(self):
