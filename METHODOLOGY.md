@@ -1,3 +1,14 @@
+## Distinguer exécution du budget général de l'État et comptes S13
+
+La nouvelle page `etat.html` exploite trois exercices **PLRG 2023–2025**, en **comptabilité budgétaire de l'État**, distincte des fonctions COFOG S13. Les crédits de paiement `Depenses_constatees` par programme et titre sont additionnés par année/mission/programme, après contrôle contre `CP_Consommes` de l'annexe de synthèse. Les autres crédits (AE, LFI, CP ouverts) ne sont jamais mélangés aux consommations effectives. Toutes les sources et leurs empreintes figurent dans `DATA_SOURCES.md`.
+
+Le **total brut** des dépenses contient la mission « Remboursements et dégrèvements » ; un total dérivé « hors R&D » est proposé et marqué comme tel. La mise en parallèle avec les **recouvrements fiscaux bruts** sert à expliquer la structure des flux, pas à calculer le déficit. Les prélèvements sur recettes ont leur propre signe et ne sont pas additionnés aux dépenses en mission. Seule l'édition 2024 utilisée ici donne directement une valeur fiscale nette exploitable et labellisée comme telle.
+
+Les fichiers PLRG 2023/2025 sont des listes de recouvrements élémentaires ; 2024 est une hiérarchie avec niveaux 3/4. Les champs comparables sont harmonisés avec les règles explicites de l'importateur ; les sommes ne sont jamais calculées en additionnant simultanément les lignes fines et les sous-totaux. Un écart non résolu de **83 650,28 €** subsiste entre le total récapitulatif de la mission de remboursements/dégrèvements et ses lignes détaillées pour 2023 : visible dans l'interface ; pas inventé comme une ligne budgétaire. Chaque source officielle est épinglée par SHA-256 et la sortie du script est testée octet à octet.
+
+Le détail par **action** est une priorité future mais n'est pas couvert par ces fichiers d'exécution. La comptabilité budgétaire de l'État ne doit pas être additionnée aux recettes et dépenses S13 : les champs, transferts, nomenclatures et conventions diffèrent. On ne classe pas une politique comme opaque ou inefficace à partir d'un seul niveau comptable ; la transparence se documente par source, période, responsabilité, niveau disponible et écarts de rapprochement.
+
+
 # Méthodologie — Insee base 2020, publication août 2026
 
 ## Définition et périmètre
