@@ -35,6 +35,17 @@ svg{width:100%;height:auto;display:block}
 .explorer{display:block}
 .trend-panel{min-width:0}
 .chart-summary{margin:8px 0;color:#d9e6fa;font-size:.9rem;line-height:1.5}
+/* Niveau 2 : sous-fonctions officielles COFOG, toujours dans le même périmètre annuel. */
+.subfunctions{margin-top:16px}
+#sub-breakdown{display:grid;gap:7px;margin:14px 0}
+.sub-row{display:grid;grid-template-columns:minmax(165px,1.4fr) minmax(150px,1.65fr) minmax(110px,.8fr);gap:15px;align-items:center;padding:8px 10px;border-bottom:1px solid #34435b}
+.sub-name{font-size:.93rem}
+.sub-code{display:block;font-size:.77rem;color:#aabbd5;margin-top:3px}
+.sub-track{height:13px;background:#101a2a;border-radius:5px;overflow:hidden}
+.sub-fill{display:block;height:100%;background:#86c5e3;border-radius:5px}
+.sub-value{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.sub-value small{display:block;font-size:.78rem;color:#b9cbe3}
+@media(max-width:620px){.sub-row{grid-template-columns:minmax(0,1fr) minmax(88px,.5fr);gap:6px}.sub-track{grid-column:1 / -1;grid-row:2}.sub-value{grid-column:2;grid-row:1;font-size:.86rem}}
 @media(min-width:1050px){
  .explorer{display:grid;grid-template-columns:minmax(385px,0.94fr) minmax(0,1.16fr);gap:16px;align-items:start}
  .explorer>.panel{margin:0}
@@ -70,7 +81,14 @@ svg{width:100%;height:auto;display:block}
 <p id="chart-summary" class="chart-summary" role="status" aria-live="polite"></p>
 </section>
 </div>
-<p class="source">Source : <a href="https://www.insee.fr/fr/statistiques/8574707">Insee, COFOG 3.301, publication du 27 mars 2026</a>, comptes nationaux base 2020, administrations publiques S13. Attention : classement fonctionnel, distinct des postes du budget de l’État. L’année 2024 est provisoire et certains changements de nomenclature peuvent affecter des catégories ; notamment le logement et les affaires économiques au niveau des collectivités. Ce millésime n’est pas directement additionnable aux agrégats révisés publiés en août 2026. <a href="/METHODOLOGY.md">Méthodologie détaillée</a>.</p>
+<section class="panel subfunctions" aria-labelledby="sub-title">
+<h2 id="sub-title">Dans la protection sociale</h2>
+<p class="caption" id="sub-caption">Répartition officielle en sous-fonctions COFOG, année sélectionnée ; les pourcentages portent uniquement sur le poste parent, pas sur toutes les dépenses.</p>
+<div id="sub-breakdown" role="list" aria-label="Sous-fonctions de la dépense sélectionnée">Chargement du détail…</div>
+<p id="sub-summary" class="caption" role="status" aria-live="polite"></p>
+<p class="caption">Les barres représentent la part de chaque sous-poste dans sa fonction. Ex. « vieillesse » appartient à « protection sociale » ; les soins médicaux relèvent principalement de la fonction « santé ». Ce classement n’est pas celui du seul budget de l’État.</p>
+</section>
+<p class="source">Source : <a href="https://www.insee.fr/fr/statistiques/8574707">Insee, COFOG 3.301, publication du 27 mars 2026</a> ; <a href="/data/cofog_subfunctions_1995_2024.json">sous-fonctions JSON</a> et <a href="/data/cofog_1995_2024_bn_eur.csv">fonctions CSV</a>, comptes nationaux base 2020, administrations publiques S13. Attention : classement fonctionnel, distinct des postes du budget de l’État. L’année 2024 est provisoire et certains changements de nomenclature peuvent affecter des catégories ; notamment le logement et les affaires économiques au niveau des collectivités. Ce millésime n’est pas directement additionnable aux agrégats révisés publiés en août 2026. <a href="/METHODOLOGY.md">Méthodologie détaillée</a>.</p>
 <script>
 (async()=>{
 const response=await fetch('/data/cofog_1995_2024_bn_eur.csv');
@@ -86,7 +104,7 @@ const categories=[
 ['gf09','Enseignement','#eacb8a'],['gf10','Protection sociale','#86c5e3']
 ];
 const range=document.getElementById('year'), breakdown=document.getElementById('breakdown');
-let selected='gf10',mode='share';
+let selected='gf10',mode='share',subfunctions=null;
 const money=n=>n.toLocaleString('fr-FR',{minimumFractionDigits:1,maximumFractionDigits:1})+' Md€';
 const percent=n=>n.toLocaleString('fr-FR',{minimumFractionDigits:1,maximumFractionDigits:1})+' %';
 const ns='http://www.w3.org/2000/svg';
@@ -139,6 +157,34 @@ function chart(){
    info[1]+' · '+current.year+' : '+percent(100*current[selected]/current.total_bn_eur)+
    ' des dépenses ('+money(current[selected])+'). Cliquez sur un autre poste pour comparer son évolution.';
 }
+function subRefresh(){
+ const container=document.getElementById('sub-breakdown'),current=rows[Number(range.value)-1995];
+ if(!subfunctions){container.textContent='Chargement du détail…';return;}
+ const details=subfunctions.categories.find(item=>item.code===selected);
+ const parent=categories.find(item=>item[0]===selected);
+ const base=current[selected],index=Number(range.value)-1995;
+ if(!details || !parent || base<=0){container.textContent='Détail indisponible pour ce poste.';return;}
+ document.getElementById('sub-title').textContent='Dans « '+parent[1]+' » · '+current.year;
+ document.getElementById('sub-caption').textContent='Répartition par sous-fonction, en milliards d’euros courants et % des '+money(base)+' du poste « '+parent[1]+' » en '+current.year+'.';
+ container.replaceChildren();
+ let total=0;
+ const ordered=details.children.slice().sort((a,b)=>b.values[index]-a.values[index]);
+ for(const item of ordered){
+  const amount=item.values[index],share=100*amount/base;total+=amount;
+  const line=document.createElement('div');line.className='sub-row';line.setAttribute('role','listitem');
+  const label=document.createElement('span');label.className='sub-name';label.textContent=item.label;
+  const code=document.createElement('small');code.className='sub-code';code.textContent='COFOG '+item.code.slice(2,4)+'.'+Number(item.code.slice(4));
+  label.append(code);
+  const track=document.createElement('span');track.className='sub-track';
+  const fill=document.createElement('span');fill.className='sub-fill';
+  fill.style.background=parent[2];fill.style.width=Math.min(100,share)+'%';track.append(fill);
+  const value=document.createElement('span');value.className='sub-value';value.textContent=money(amount);
+  const pct=document.createElement('small');pct.textContent=percent(share)+' du poste';value.append(pct);
+  line.append(label,track,value);container.append(line);
+ }
+ const delta=Math.abs(total-base);
+ document.getElementById('sub-summary').textContent='Sous-postes : '+money(total)+' sur '+money(base)+' ; écart d’arrondi : '+money(delta)+'. Les valeurs nulles restent affichées.';
+}
 function refresh(){
  const r=rows[Number(range.value)-1995];if(!r)return;
  document.getElementById('year-label').textContent=r.year;
@@ -163,15 +209,31 @@ function refresh(){
       item.setAttribute('aria-pressed',String(item.dataset.category===key));
     });
     chart();
+    subRefresh();
   });
   breakdown.append(button);
  }
  chart();
+ subRefresh();
 }
 range.addEventListener('input',refresh);
 compactQuery.addEventListener('change',chart);
 document.querySelectorAll('input[name=mode]').forEach(radio=>radio.addEventListener('change',()=>{if(radio.checked){mode=radio.value;refresh();}}));
 refresh();
+try{
+ const response=await fetch('/data/cofog_subfunctions_1995_2024.json');
+ if(!response.ok)throw Error('fichier de sous-fonctions indisponible');
+ const detail=await response.json();
+ if(detail.schema_version!==1 || detail.years.length!==30 ||
+    detail.years[0]!==1995 || detail.years[29]!==2024 ||
+    detail.categories.length!==10 ||
+    detail.categories.some(item=>!categories.some(c=>c[0]===item.code) ||
+     item.children.some(child=>child.values.length!==30)))
+  throw Error('Structure des sous-fonctions inattendue');
+ subfunctions=detail;subRefresh();
+}catch(error){
+ document.getElementById('sub-breakdown').textContent='Détail indisponible : '+error.message;
+}
 })().catch(err=>{
  const div=document.getElementById('total');div.textContent='Impossible de charger les données : '+err.message;
 });
