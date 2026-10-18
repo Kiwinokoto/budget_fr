@@ -8,7 +8,10 @@ from pathlib import Path
 import re
 import urllib.request
 
-from import_cofog import _grid, CODES, SOURCE_URL, SOURCE_SHA256, TOTAL_LABEL
+if __package__:
+    from .import_cofog import _grid, CODES, SOURCE_URL, SOURCE_SHA256, TOTAL_LABEL
+else:
+    from import_cofog import _grid, CODES, SOURCE_URL, SOURCE_SHA256, TOTAL_LABEL
 
 OUTPUT = Path(__file__).resolve().parents[1] / "data/cofog_subfunctions_1995_2024.json"
 CODE = re.compile(r"GF[0-9]{2}(?:[0-9]{2})?\Z")
