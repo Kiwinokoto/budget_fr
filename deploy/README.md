@@ -71,3 +71,8 @@ Release vérifiée : d8d4e7665fe5bf89b3bf4d80453e9cf57959e202 ; sauvegarde : /op
 Inclure ensemble apprentissage-resultats.html, APPRENTISSAGE_RESULTATS_SOURCES.md et data/apprentissage_parcours_2024_inserjeunes.csv, ainsi que les deux liens entrants des pages apprentissage.html et apprentissage-contexte.html. Vérifier quatre taux, tableaux, sources, navigation, affichages 390/768/1365 px, HTTPS et identité des fichiers au commit main autorisé. Le déploiement n'est pas automatique ; sauvegarde, rollback, verrou deploy:vps-personal/budget-fr et host:vps-personal/docker obligatoires.
 
 Release contrôlée 8aead975b776f3d5ed2f6e2215e749ef03edca3b ; sauvegarde /opt/budget-fr/backup/20261017T110640Z-before-d8d4e7665fe5-to-8aead975b776 (ancienne version d8d4e7665fe5bf89b3bf4d80453e9cf57959e202). Tests 58 Python, 56 Node, 22 CSV, vérification HTTPS octet par octet et 36 contrôles Chromium spécifiques en mobile/tablette/desktop, plus régressions. Rollback conservé. Aucun autre service affecté. Déploiements suivants manuels uniquement.
+
+## Chapitres supplémentaires non encore déployés
+
+Après fusion des PR #43 et suivantes, toute livraison demandée doit inclure `data/cofog_subfunctions_1995_2024.json` pour `fonctions.html`, ainsi que `etat.html` et `data/etat_execution_2023_2025.json` pour la navigation budgétaire. Sur le serveur statique, vérifier HTTP 200 et chargement navigateur effectif des JSON ; ne pas publier seulement les HTML. Conserver les sources/méthodologies accessibles et contrôler le SHA du `main` applicatif avant déploiement.
+

@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Budget de l'État : exécution 2023–2025 · budget_fr</title>
+<meta name="description" content="Explorer les dépenses exécutées de l'État français par mission et programme, et l'origine de ses recettes, selon les annexes officielles PLRG 2023 à 2025.">
+<style>
+:root{color-scheme:dark;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#111827;color:#f0f4fc}
+*{box-sizing:border-box}body{max-width:1270px;margin:auto;padding:18px 20px 64px}
+a{color:#bdd0ff}a:hover{color:#fff}a:focus-visible,button:focus-visible,select:focus-visible{outline:3px solid #f1d09b;outline-offset:3px}
+h1{font-size:clamp(2rem,3.6vw,3.1rem);line-height:1.1;margin:6px 0 16px}h2{font-size:1.45rem;margin:0 0 12px}h3{font-size:1.15rem;margin:0 0 12px}
+p{line-height:1.6;color:#cbd7e6}.eyebrow{letter-spacing:.14em;color:#adc1ff;font-size:.8rem;text-transform:uppercase;margin:24px 0 6px}
+.panel{min-width:0;background:#1d293c;border:1px solid #3a4d67;border-radius:15px;padding:20px;margin:18px 0}
+.controls{display:flex;gap:14px;align-items:center;flex-wrap:wrap}select{padding:9px 12px;background:#172338;border:1px solid #7489a9;border-radius:8px;color:#fff;font:inherit}
+.metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:18px 0}
+.metric{min-width:0;background:#172337;padding:13px 16px;border-radius:10px}.metric strong{font-size:clamp(1.3rem,2.5vw,2rem);font-variant-numeric:tabular-nums;display:block;margin-top:5px}
+.metric small{color:#b9cadf;font-size:.81rem}.note{font-size:.88rem;color:#bfcee1}
+.notice{border-left:3px solid #c6a365;padding:13px 16px;background:#2a3040}
+.columns{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);gap:18px;align-items:start}
+.list{display:grid;gap:3px;margin:12px 0}
+.item{width:100%;border:1px solid transparent;background:transparent;border-radius:8px;color:inherit;cursor:pointer;text-align:left;padding:9px;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(64px,.7fr) minmax(100px,.65fr);align-items:center;gap:10px;font:inherit}
+.item:hover,.item[aria-pressed=true]{background:#30405a;border-color:#8498b5}.item-label{font-size:.88rem;overflow-wrap:anywhere}
+.track{height:13px;border-radius:4px;background:#101b2a;overflow:hidden}.fill{height:100%;display:block;background:#8fbcdb;border-radius:4px}
+.val{text-align:right;font-size:.91rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.small{font-size:.83rem;color:#b5c7dc}
+.details{border-top:1px solid #4b5b72;margin-top:20px;padding-top:17px}
+.subrow{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,.9fr) minmax(90px,.65fr);align-items:center;gap:10px;padding:9px 4px;border-bottom:1px solid #34455e}
+.subrow .item-label{font-size:.88rem}.subrow small{display:block;color:#b9c7df;font-size:.77rem;margin-top:3px}
+.data-table{width:100%;border-collapse:collapse}.data-table th,.data-table td{border-bottom:1px solid #42536b;padding:9px;text-align:left}
+.data-table td:last-child{text-align:right;font-variant-numeric:tabular-nums}
+footer{margin-top:24px;border-top:1px solid #43516a;padding:15px 0;font-size:.83rem;color:#bfcde0}
+@media(max-width:850px){.columns{grid-template-columns:1fr}}
+@media(max-width:580px){body{padding:14px 12px 50px}.panel{padding:14px}.metrics{grid-template-columns:1fr}.item,.subrow{grid-template-columns:minmax(0,1fr) minmax(94px,.48fr);gap:7px}.item .track,.subrow .track{grid-column:1/-1;grid-row:2}.item .val,.subrow .val{grid-column:2;grid-row:1}}
+</style><link rel="stylesheet" href="/atlas-nav.css">
+</head><body>
+<nav class="atlas-nav" aria-label="Sections de l’atlas"><a class="atlas-nav__brand" href="/">budget_fr</a><div class="atlas-nav__links"><a href="/">Accueil</a><a href="/etat.html" aria-current="page">Budget de l'État</a><a href="/fonctions.html">Dépenses publiques</a><a href="/recettes.html">Recettes publiques</a><a href="/solde-primaire.html">Solde primaire</a><a href="/interets.html">Intérêts</a><a href="/dette.html">Dette</a><a href="/tva-justice.html">TVA : simulation</a><a href="/tva-incidence.html">TVA : incidence</a><a href="/aides-entreprises.html">Aides aux entreprises</a><a href="/apprentissage.html">Apprentissage</a></div></nav>
+<main>
+<div class="eyebrow">Budget général de l'État · Exécution officielle</div>
+<h1>Où va l'argent du budget de l'État ?</h1>
+<p>Cette page traite des <strong>crédits de paiement effectivement dépensés</strong> et des <strong>recouvrements constatés</strong> dans le budget général, et non des comptes consolidés de l'ensemble des administrations publiques. Les missions se subdivisent en programmes ; les recettes sont regroupées par rubrique officielle.</p>
+<section class="panel" aria-label="Choix de l'exercice et grands chiffres">
+<div class="controls"><label for="year"><strong>Exercice budgétaire</strong></label><select id="year" aria-label="Choisir l'année d'exécution"><option>2023</option><option>2024</option><option selected>2025</option></select>
+<span class="note">PLRG (exécution constatée), en euros courants</span></div>
+<div class="metrics">
+<div class="metric"><small>Dépenses du budget général, y compris remboursements et dégrèvements</small><strong id="spending">—</strong></div>
+<div class="metric"><small>Hors mission « Remboursements et dégrèvements » (calcul dérivé)</small><strong id="without-refunds">—</strong></div>
+<div class="metric"><small>Recouvrements fiscaux bruts (avant remboursements/dégrèvements)</small><strong id="gross-taxes">—</strong></div>
+</div>
+<p class="notice"><strong>À ne pas soustraire directement :</strong> le montant des dépenses inclut la mission « Remboursements et dégrèvements ». Les recouvrements fiscaux ici affichés sont bruts. Le solde du budget de l'État nécessite une réconciliation des recettes nettes, prélèvements, comptes spéciaux et autres conventions ; ces trois nombres ne calculent <strong>pas</strong> le déficit.</p>
+</section>
+<div class="columns">
+<section class="panel" aria-labelledby="missions-title">
+<h2 id="missions-title">Dépenses · missions</h2>
+<p class="note">Crédits de paiement (CP) consommés, par mission. Cliquez sur une ligne pour afficher les programmes. Les parts sont calculées sur les dépenses du budget général <strong>avec</strong> remboursements et dégrèvements.</p>
+<div id="missions" class="list" role="group" aria-label="Missions du budget général">Chargement des missions…</div>
+<div class="details" aria-live="polite">
+<h3 id="program-title">Programmes</h3><p class="note" id="program-caption">Choisissez une mission.</p>
+<div id="programs" class="list" aria-label="Programmes de la mission sélectionnée"></div>
+</div>
+</section>
+<section class="panel" aria-labelledby="income-title">
+<h2 id="income-title">Recettes · d'où vient l'argent ?</h2>
+<p class="note">Sommes encaissées par l'État selon les annexes PLRG. Les prélèvements sur recettes au profit des collectivités et de l'Union européenne sont négatifs ; ils ne sont pas une dépense supplémentaire à additionner aux missions.</p>
+<div id="revenues" class="list" role="group" aria-label="Catégories de recettes">Chargement des recettes…</div>
+<div class="details" aria-live="polite"><h3 id="revenue-title">Rubriques</h3><p id="revenue-caption" class="note">Choisissez une catégorie.</p><div id="revenue-sections" class="list"></div></div>
+<div class="notice" id="net-warning">Les recettes brutes ne mesurent pas les recettes fiscales nettes.</div>
+</section>
+</div>
+<section class="panel" aria-labelledby="trace-title">
+<h2 id="trace-title">Quelle transparence, concrètement ?</h2>
+<p><strong>Traçable :</strong> exercice, source PLRG, mission, programme, montants CP ouverts et consommés, recettes encaissées par rubrique. L'export et l'empreinte SHA-256 des fichiers d'origine sont documentés. Les totaux de missions sont confrontés à l'annexe de synthèse officielle.</p>
+<p><strong>Non encore traçable ici :</strong> le détail par action, les bénéficiaires finaux, le rapprochement systématique avec les comptes spéciaux, les dépenses fiscales, les retraitements de recettes nettes pour chaque exercice et la comptabilité nationale S13. La présence d'un programme ne prouve pas l'efficacité de la dépense.</p>
+<p id="reconciliation" class="notice">Contrôles de rapprochement en cours de chargement.</p>
+<p class="note">Sources : <a href="https://www.data.gouv.fr/datasets/projet-de-loi-relatif-aux-resultats-de-la-gestion-et-portant-approbation-des-comptes-de-lannee-plrg-2023">PLRG 2023</a> · <a href="https://www.data.gouv.fr/datasets/projet-de-loi-relatif-aux-resultats-de-la-gestion-et-portant-approbation-des-comptes-de-lannee-plrg-2024">PLRG 2024</a> · <a href="https://www.data.gouv.fr/datasets/projet-de-loi-relatif-aux-resultats-de-la-gestion-et-portant-approbation-des-comptes-de-lannee-plrg-2025">PLRG 2025</a> · <a href="/data/etat_execution_2023_2025.json">Jeu de données dérivé</a> · <a href="/DATA_SOURCES.md">Provenance</a> · <a href="/METHODOLOGY.md">Méthode</a>.</p>
+</section>
+</main><footer>budget_fr — La comptabilité budgétaire de l'État et la comptabilité nationale des administrations publiques sont deux champs distincts.</footer>
+<script>
+(async()=>{
+const response=await fetch('/data/etat_execution_2023_2025.json');
+if(!response.ok)throw Error('Données budgétaires indisponibles');
+const data=await response.json();
+if(data.schema_version!==1 || data.years.length!==3 || data.years.some((r,i)=>r.year!==2023+i))throw Error('Schéma ou années inattendus');
+const year=document.getElementById('year');
+let selectedMission='',selectedRevenue='';
+const eur=n=>n.toLocaleString('fr-FR',{minimumFractionDigits:1,maximumFractionDigits:1})+' Md€';
+const money=e=>eur(e/1e9);
+const percentage=x=>(100*x).toLocaleString('fr-FR',{minimumFractionDigits:1,maximumFractionDigits:1})+' %';
+const current=()=>data.years.find(x=>x.year===Number(year.value));
+function makeRows(container,values,amount,total,selection,onSelect){
+ container.replaceChildren();
+ const sorted=values.slice().sort((a,b)=>amount(b)-amount(a));
+ for(const item of sorted){
+  const value=amount(item),part=total?value/total:0;
+  const button=document.createElement('button');button.type='button';
+  button.className='item';button.setAttribute('aria-pressed',String(selection===item.name));
+  const label=document.createElement('span');label.className='item-label';label.textContent=item.name;
+  const track=document.createElement('span');track.className='track';
+  const fill=document.createElement('span');fill.className='fill';fill.style.width=Math.max(0,Math.min(100,part*100))+'%';track.append(fill);
+  const stat=document.createElement('span');stat.className='val';stat.textContent=money(value);
+  button.append(label,track,stat);button.addEventListener('click',()=>onSelect(item.name));
+  container.append(button);
+ }
+}
+function renderPrograms(row){
+ const mission=row.missions.find(m=>m.name===selectedMission);
+ if(!mission)return;
+ document.getElementById('program-title').textContent='Programmes · '+mission.name;
+ document.getElementById('program-caption').textContent=money(mission.cp_eur)+' de CP consommés · '+money(mission.opened_eur)+' de CP ouverts. Les écarts ne suffisent pas à juger une politique.';
+ const list=document.getElementById('programs');list.replaceChildren();
+ for(const p of mission.programs.slice().sort((a,b)=>b.cp_eur-a.cp_eur)){
+  const line=document.createElement('div');line.className='subrow';
+  const label=document.createElement('span');label.className='item-label';label.textContent=p.name;
+  const small=document.createElement('small');small.textContent='Programme '+p.code;label.append(small);
+  const track=document.createElement('span');track.className='track';
+  const fill=document.createElement('span');fill.className='fill';fill.style.width=Math.min(100,100*p.cp_eur/Math.max(mission.cp_eur,1))+'%';track.append(fill);
+  const value=document.createElement('span');value.className='val';value.textContent=money(p.cp_eur);
+  line.append(label,track,value);list.append(line);
+ }
+ if(mission.source_reconciliation_gap_eur){
+  const p=document.createElement('p');p.className='notice';p.textContent='Attention : écart non ventilé dans les annexes PLRG pour cette mission : '+mission.source_reconciliation_gap_eur.toLocaleString('fr-FR')+' €. Aucun programme fictif ajouté.';list.append(p);
+ }
+}
+function renderRevenueSections(row){
+ const category=row.revenues.find(r=>r.name===selectedRevenue);if(!category)return;
+ document.getElementById('revenue-title').textContent='Rubriques · '+category.name;
+ document.getElementById('revenue-caption').textContent='Recouvrements bruts par rubrique comptable, sans retraitements supplémentaires.';
+ const container=document.getElementById('revenue-sections');container.replaceChildren();
+ for(const item of category.sections.slice().sort((a,b)=>Math.abs(b.gross_cash_eur)-Math.abs(a.gross_cash_eur))){
+  const line=document.createElement('div');line.className='subrow';
+  const label=document.createElement('span');label.className='item-label';label.textContent=item.name;
+  const small=document.createElement('small');small.textContent='Rubrique '+item.code;label.append(small);
+  const track=document.createElement('span');track.className='track';
+  const fill=document.createElement('span');fill.className='fill';
+  fill.style.width=Math.min(100,100*Math.abs(item.gross_cash_eur)/Math.max(Math.abs(category.gross_cash_eur),1))+'%';track.append(fill);
+  const value=document.createElement('span');value.className='val';value.textContent=money(item.gross_cash_eur);
+  line.append(label,track,value);container.append(line);
+ }
+}
+function refresh(){
+ const row=current();if(!row)return;
+ document.getElementById('spending').textContent=money(row.spending.spent_cp_eur);
+ document.getElementById('without-refunds').textContent=money(row.spending.spent_excluding_refunds_cp_eur);
+ document.getElementById('gross-taxes').textContent=money(row.revenues[0].gross_cash_eur);
+ if(!row.missions.some(m=>m.name===selectedMission))selectedMission=row.missions.find(m=>m.name!=='Remboursements et dégrèvements').name;
+ if(!row.revenues.some(r=>r.name===selectedRevenue))selectedRevenue='Recettes fiscales';
+ const missions=document.getElementById('missions');
+ makeRows(missions,row.missions,m=>m.cp_eur,row.spending.spent_cp_eur,selectedMission,name=>{selectedMission=name;refresh()});
+ renderPrograms(row);
+ makeRows(document.getElementById('revenues'),row.revenues,r=>r.gross_cash_eur,row.revenues[0].gross_cash_eur,selectedRevenue,name=>{selectedRevenue=name;refresh()});
+ renderRevenueSections(row);
+ document.getElementById('net-warning').textContent=row.fiscal_net_2024_eur===null?
+  'Les annexes de cet exercice ne présentent pas ici de série harmonisée de recettes fiscales nettes. Ne pas assimiler les recouvrements bruts à la recette fiscale disponible.':
+  'Pour 2024 seulement : les annexes publient '+money(row.fiscal_net_2024_eur)+' de recettes fiscales après remboursements et dégrèvements, contre '+money(row.revenues[0].gross_cash_eur)+' de recouvrements bruts. Ne pas mélanger les deux concepts.';
+ const mismatch=row.missions.find(m=>m.source_reconciliation_gap_eur);
+ document.getElementById('reconciliation').textContent=mismatch?
+   'Contrôle PLRG '+row.year+' : une différence de '+Math.abs(mismatch.source_reconciliation_gap_eur).toLocaleString('fr-FR')+' € entre l’annexe par programme et le total de la mission « '+mismatch.name+' ». Elle est signalée, non masquée.':
+   'Contrôle PLRG '+row.year+' : les sommes des crédits consommés par programme se réconcilient avec les totaux par mission de l’annexe officielle (à l’arrondi près).';
+}
+year.addEventListener('change',refresh);
+refresh();
+})().catch(error=>{
+ document.getElementById('missions').textContent='Impossible de charger les données : '+error.message;
+ document.getElementById('revenues').textContent='Recettes indisponibles.';
+});
+</script></body></html>
