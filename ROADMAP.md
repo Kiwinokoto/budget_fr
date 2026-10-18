@@ -1,5 +1,17 @@
 # Roadmap et passation
 
+## Checkpoint — 18 octobre 2026 : solde budgétaire et recettes nettes, 2013–2025
+
+- **Priorité** : consolider les recettes, les dépenses et le solde de l'État année par année, puis étendre l'historique des ventilations mission/programme après audit des sources. **L'apprentissage reste un chantier à approfondir ultérieurement**, utile et légitime ; il est simplement moins prioritaire, non abandonné ou « clos ». Les anciennes formulations du backlog parlant de « dérive » ou de clôture sont historiques et désormais dépassées.
+- **Livraison en cours** : `dev/etat-solde-net-2013-2025-20261018`, base `main` `56f53065386448b0b279372ccd36f87cb6079b49`. Sur `etat.html`, affichage d'un solde officiel DGFiP et de ses six composantes, 2013–2025, en euros courants. Import `scripts/import_etat_solde_net.py` de deux CSV officiels SHA-256 épinglés, données `data/etat_solde_net_2013_2025.json`. La somme exacte des flux réconcilie le solde publié sur les 13 exercices avec moins de 0,01 € d'écart **avant** arrondi à l'euro. Le détail mission/programme demeure limité à 2023–2025 (PLRG), sans données inventées pour 2013–2022.
+- **Deux périmètres à conserver** : comptabilité budgétaire de l'État (SMB/PLRG) ≠ dépenses et déficit consolidés S13 (Insee/COFOG). Le « hors mission Remboursements et dégrèvements » de PLRG est une transformation descriptive, **pas la dépense nette officielle SMB**. Les recettes brutes du PLRG ne sont pas les recettes fiscales nettes DGFiP.
+- **2025** : solde officiel −124,206 Md€, recettes fiscales nettes 356,398 Md€ ; situation de décembre définitive. L'annonce antérieure −124,7 Md€ de février 2026 était provisoire.
+- **Backlogs différés** : pouvoir d'achat et dépenses pré-engagées (contexte à explorer plus tard), apprentissage (à approfondir), patrimoine public. Rien de tout cela ne devient une nouvelle priorité dans cette passe.
+- **Livraison contrôlée** : PR [#46](https://github.com/Kiwinokoto/budget_fr/pull/46) consacrée à ce chantier, depuis `dev/etat-solde-net-2013-2025-20261018`. Code testé au commit `21edec3d7c3e677c655f7121055e0b30ec7a79af` : **67 tests Python, 63 tests JavaScript, compilation Python, reproduction octet pour octet des deux imports SMB, Chromium 390/768/1365 px**, changement de période et synchronisation année, sans erreur JS ni débordement. Aucune modification de l'infrastructure ou du VPS personnel.
+- **Production** : dernier SHA applicatif connu `8aead975b776f3d5ed2f6e2215e749ef03edca3b`; aucun déploiement demandé. Vérifier le SHA, les verrous AgentCtl et la sauvegarde avant toute publication. Passation documentaire à compléter avec numéro de PR, résultats des tests et HEAD final.
+
+
+
 ## Checkpoint — 18 octobre 2026 : budget de l'État d'abord, pouvoir d'achat en contexte
 
 - **État GitHub confirmé** : `main` au commit `8d62ca73408f3d1420d5e75c77c89ca7d926ad65` après fusion de la **PR #44** (exécution budgétaire de l'État, 2023–2025 ; 64 tests Python, 60 tests Node et recette Chromium vérifiés sur la branche source lors de la passe précédente). **PR #43** (69 sous-fonctions COFOG) et **PR #42** (clôture apprentissage) sont également fusionnées. Les mentions « PR ouverte » des checkpoints historiques ci-dessous ne sont plus actuelles. **Aucun déploiement effectué** : dernier SHA applicatif connu du site public `8aead975b776f3d5ed2f6e2215e749ef03edca3b` (à revérifier avant tout éventuel déploiement). Ne pas aligner production et GitHub sans demande explicite.

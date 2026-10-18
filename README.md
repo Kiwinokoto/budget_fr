@@ -2,6 +2,12 @@
 
 Atlas historique et critique des finances publiques françaises — prototype expérimental.
 
+## Solde et recettes nettes du budget de l'État (2013–2025)
+
+Le chapitre [Budget de l'État](etat.html) présente une série officielle de **2013 à 2025**, issue des situations mensuelles budgétaires DGFiP de décembre : solde de l'État, recettes fiscales nettes, recettes non fiscales, dépenses nettes du budget général, prélèvements sur recettes, soldes des comptes spéciaux et budgets annexes, fonds de concours. L'identité des flux est contrôlée pour chaque exercice. Le détail interactif des missions et programmes (PLRG) ne couvre que 2023–2025, séparément.
+
+Import reproductible sans dépendances supplémentaires : `python3 scripts/import_etat_solde_net.py` ; option `--source-dir` avec `smb_2013_2023.csv` et `smb_2024_2025.csv`. Les deux sources officielles UTF-16 sont épinglées par SHA-256. Voir `DATA_SOURCES.md` et `METHODOLOGY.md` pour le périmètre, l'arrondi et les limites. L'apprentissage reste une analyse à poursuivre plus tard, simplement moins urgente.
+
 ## Budget général de l'État — dépenses exécutées et recettes, 2023–2025
 
 La page [Budget de l'État](etat.html) présente un premier périmètre budgétaire distinct du COFOG des administrations publiques S13 : **budget général de l'État**, en comptabilité budgétaire, d'après les annexes PLRG 2023, 2024 et 2025. Chaque année peut être explorée par **mission → programme** pour les crédits de paiement réellement consommés, et par **catégorie de recette → rubrique** pour les recouvrements bruts. Les crédits de paiement ouverts et consommés sont distincts ; la mission « Remboursements et dégrèvements » est conservée, jamais additionnée de nouveau.

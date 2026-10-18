@@ -1,3 +1,16 @@
+## DGFiP — soldes budgétaires officiels et recettes nettes de l'État, 2013–2025 (18 octobre 2026)
+
+Source primaire : [situations mensuelles budgétaires de l'État, jeu de données officiel](https://data.economie.gouv.fr/explore/assets/situations-mensuelles-budgetaires-series-longues/), licence ouverte 2.0. On ne retient que la colonne **31 décembre** de chaque année, en **euros courants** ; 2026 incomplet est exclu. Les données 2025 de décembre sont annoncées définitives. Source et empreintes contrôlées le 18 octobre 2026 :
+- `Séries longues SMB_DGFiP_2013-2023.csv` (UTF-16, SHA-256 du contenu décompressé `91a2cba540c6b15c52bb96f3df55a081fa7ce8ba4a30ce4109489079744a1ad7`).
+- `Serie longue SMB_DGFiP_2024-xx.csv` (UTF-16, SHA-256 du contenu décompressé `cf1c3bb08afd11cb966bf6e0d6fcfc00cdc39cf68ddfaec69cef33c5227a773b`).
+
+Transformation : `scripts/import_etat_solde_net.py`, sortie `data/etat_solde_net_2013_2025.json`. Extraction des lignes officielles par **catégorie, sous-catégorie et libellé exacts** ; doublons/absences rejetés, SHA et années vérifiés ; aucun cumul de sous-total et de détail. L'import confirme en `Decimal` (écart inférieur à **0,01 €** pour les 13 années) :
+`recettes budget général nettes = recettes fiscales nettes + recettes non fiscales` ;
+`solde publié = recettes BG nettes − dépenses BG nettes − prélèvements sur recettes + solde comptes spéciaux + solde budgets annexes + fonds de concours`.
+Après rapprochement exact seulement, le JSON arrondit les composantes à l'euro. Recalculer depuis le JSON peut créer quelques euros d'écart à cause des arrondis indépendants.
+
+Repères : 2023 **−172,972 Md€**, fiscales nettes **322,903 Md€** ; 2024 **−155,930 Md€**, fiscales nettes **325,679 Md€** ; 2025 **−124,206 Md€**, fiscales nettes **356,398 Md€**. Ces chiffres sont le **solde budgétaire de l'État**, non le déficit public Maastricht (APU S13). Le solde définitif 2025 diffère de l'annonce provisoire de février 2026 (−124,7 Md€). Périmètres, affectations et nomenclatures budgétaires peuvent changer sur 2013–2025 ; la série n'est pas déflatée. Le niveau mission/programme 2023–2025 provient d'autres annexes PLRG et n'est pas rétroprojeté.
+
 ## Source PLRG — exécution du budget général de l'État, 2023–2025 (18 octobre 2026)
 
 - Trois éditions officielles des **projets de loi relatifs aux résultats de la gestion** (PLRG) et leurs annexes électroniques : [2023](https://www.data.gouv.fr/datasets/projet-de-loi-relatif-aux-resultats-de-la-gestion-et-portant-approbation-des-comptes-de-lannee-plrg-2023), [2024](https://www.data.gouv.fr/datasets/projet-de-loi-relatif-aux-resultats-de-la-gestion-et-portant-approbation-des-comptes-de-lannee-plrg-2024), [2025](https://www.data.gouv.fr/datasets/projet-de-loi-relatif-aux-resultats-de-la-gestion-et-portant-approbation-des-comptes-de-lannee-plrg-2025). Licence ouverte Etalab 2.0 ; diffuseur DGFiP/Ministères économiques et financiers.

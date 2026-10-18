@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Budget de l'État : exécution 2023–2025 · budget_fr</title>
-<meta name="description" content="Explorer les dépenses exécutées de l'État français par mission et programme, et l'origine de ses recettes, selon les annexes officielles PLRG 2023 à 2025.">
+<title>Budget de l'État : soldes 2013–2025 et exécution 2023–2025 · budget_fr</title>
+<meta name="description" content="Explorer le solde officiel, les recettes et dépenses nettes du budget de l'État 2013 à 2025, puis les missions et programmes exécutés 2023 à 2025.">
 <style>
 :root{color-scheme:dark;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#111827;color:#f0f4fc}
 *{box-sizing:border-box}body{max-width:1270px;margin:auto;padding:18px 20px 64px}
@@ -27,6 +27,22 @@ p{line-height:1.6;color:#cbd7e6}.eyebrow{letter-spacing:.14em;color:#adc1ff;font
 .data-table{width:100%;border-collapse:collapse}.data-table th,.data-table td{border-bottom:1px solid #42536b;padding:9px;text-align:left}
 .data-table td:last-child{text-align:right;font-variant-numeric:tabular-nums}
 footer{margin-top:24px;border-top:1px solid #43516a;padding:15px 0;font-size:.83rem;color:#bfcde0}
+
+/* Official annual SMB budget reconciliation, separate from PLRG programme explorer. */
+.balance-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:14px 0}
+.balance-grid .metric{padding:12px}
+.balance-grid .metric strong{font-size:clamp(1.2rem,2vw,1.7rem)}
+.balance-grid .metric .unit{color:#bfd0e5;font-size:.79rem;display:block}
+#balance-chart{width:100%;height:auto;display:block;overflow:visible}
+.balance-summary{font-size:.88rem;color:#d4e0f2;margin:10px 0 16px}
+.balance-table{width:100%;border-collapse:collapse}
+.balance-table caption{text-align:left;font-size:.84rem;color:#c0cfe2;padding-bottom:8px}
+.balance-table th,.balance-table td{border-bottom:1px solid #394c65;padding:8px 9px;text-align:left;font-size:.9rem}
+.balance-table th{font-weight:550}
+.balance-table td{font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+.balance-table tr:last-child{font-weight:760;background:#273957}
+@media(max-width:720px){.balance-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:420px){.balance-table th,.balance-table td{padding:7px 3px;font-size:.81rem}}
 @media(max-width:850px){.columns{grid-template-columns:1fr}}
 @media(max-width:580px){body{padding:14px 12px 50px}.panel{padding:14px}.metrics{grid-template-columns:1fr}.item,.subrow{grid-template-columns:minmax(0,1fr) minmax(94px,.48fr);gap:7px}.item .track,.subrow .track{grid-column:1/-1;grid-row:2}.item .val,.subrow .val{grid-column:2;grid-row:1}}
 </style><link rel="stylesheet" href="/atlas-nav.css">
@@ -36,7 +52,30 @@ footer{margin-top:24px;border-top:1px solid #43516a;padding:15px 0;font-size:.83
 <div class="eyebrow">Budget général de l'État · Exécution officielle</div>
 <h1>Où va l'argent du budget de l'État ?</h1>
 <p>Cette page traite des <strong>crédits de paiement effectivement dépensés</strong> et des <strong>recouvrements constatés</strong> dans le budget général, et non des comptes consolidés de l'ensemble des administrations publiques. Les missions se subdivisent en programmes ; les recettes sont regroupées par rubrique officielle.</p>
-<section class="panel" aria-label="Choix de l'exercice et grands chiffres">
+<section id="solde-historique" class="panel" aria-labelledby="balance-title">
+<h2 id="balance-title">Recettes nettes, dépenses nettes et solde de l'État (2013–2025)</h2>
+<p class="note">Exécution annuelle officielle (DGFiP, situations mensuelles budgétaires arrêtées en décembre). <strong>Budget de l'État, pas déficit public Maastricht.</strong> Une série budgétaire distincte des lignes par mission du PLRG ci-dessous.</p>
+<div class="controls"><label for="balance-year"><strong>Année de la réconciliation</strong></label>
+<select id="balance-year" aria-label="Choisir l'année du solde de l'État" disabled><option>Chargement…</option></select></div>
+<div class="balance-grid" aria-label="Montants sélectionnés, milliards d’euros courants">
+<div class="metric"><small>Solde budgétaire officiel</small><strong id="balance-official">—</strong><span class="unit">Md€ courants</span></div>
+<div class="metric"><small>Recettes fiscales nettes</small><strong id="balance-taxes">—</strong><span class="unit">Md€ courants</span></div>
+<div class="metric"><small>Recettes BG nettes</small><strong id="balance-revenue">—</strong><span class="unit">Md€ courants</span></div>
+<div class="metric"><small>Dépenses BG nettes</small><strong id="balance-expense">—</strong><span class="unit">Md€ courants</span></div>
+</div>
+<svg id="balance-chart" role="img" aria-label="Évolution du solde budgétaire officiel de l'État de 2013 à 2025, en milliards d'euros courants" aria-describedby="balance-summary" viewBox="0 0 900 355"></svg>
+<p id="balance-summary" class="balance-summary" role="status" aria-live="polite">Chargement de la série budgétaire…</p>
+<h3 id="balance-equation">Comment se réconcilie le solde ?</h3>
+<table class="balance-table"><caption>Identité de l'exécution budgétaire de l'État, sans double comptage</caption>
+<thead><tr><th scope="col">Composante</th><th scope="col">Contribution, Md€</th></tr></thead>
+<tbody id="balance-rows"><tr><th scope="row">Chargement…</th><td>—</td></tr></tbody>
+</table>
+<p class="note">Les recettes nettes du budget général regroupent les recettes fiscales <strong>nettes</strong> et les recettes non fiscales. Les prélèvements sur recettes sont déduits ; fonds de concours et soldes des comptes spéciaux/budgets annexes sont ajoutés avec leur signe. Le solde est repris de la source, <strong>et non inventé</strong> par différence entre les montants bruts du graphique inférieur.</p>
+<p class="note">Source : <a href="https://data.economie.gouv.fr/explore/assets/situations-mensuelles-budgetaires-series-longues/">DGFiP — situations mensuelles budgétaires 2013 à nos jours</a> ; <a href="/data/etat_solde_net_2013_2025.json">données annuelles dérivées</a>, import source et SHA-256 détaillés dans <a href="/DATA_SOURCES.md">DATA_SOURCES.md</a>.</p>
+</section>
+<h2 id="detail-title">Détail des missions et programmes (2023–2025)</h2>
+<p class="note">La décomposition fine ci-dessous provient d'autres annexes : les PLRG. Elle ne doit pas être confondue avec la série historique DGFiP ci-dessus. Le détail des années 2013–2022 n'a pas encore été audité.</p>
+<section id="detail-etat" class="panel" aria-label="Choix de l'exercice et grands chiffres">
 <div class="controls"><label for="year"><strong>Exercice budgétaire</strong></label><select id="year" aria-label="Choisir l'année d'exécution"><option>2023</option><option>2024</option><option selected>2025</option></select>
 <span class="note">PLRG (exécution constatée), en euros courants</span></div>
 <div class="metrics">
@@ -160,4 +199,94 @@ refresh();
  document.getElementById('missions').textContent='Impossible de charger les données : '+error.message;
  document.getElementById('revenues').textContent='Recettes indisponibles.';
 });
-</script></body></html>
+</script>
+<script>
+(async()=>{
+const res=await fetch('/data/etat_solde_net_2013_2025.json');
+if(!res.ok)throw Error('Série de soldes indisponible');
+const body=await res.json(),series=body.years;
+if(body.schema_version!==1 || series.length!==13 ||
+   series.some((x,i)=>x.year!==2013+i || !Number.isFinite(x.solde_eur)))
+  throw Error('Série annuelle inattendue');
+const dropdown=document.getElementById('balance-year');
+dropdown.replaceChildren();
+for(const r of series){
+ const option=document.createElement('option');
+ option.value=String(r.year);option.textContent=String(r.year);dropdown.append(option);
+}
+dropdown.value='2025';dropdown.disabled=false;
+const fmt=n=>(n/1e9).toLocaleString('fr-FR',{minimumFractionDigits:1,maximumFractionDigits:1})+' Md€';
+const signed=n=>(n>0?'+':'')+fmt(n);
+const lookup={recettes_bg_nettes_eur:'Recettes nettes du budget général',
+ depenses_bg_nettes_eur:'− Dépenses nettes du budget général',
+ prelevements_recettes_eur:'− Prélèvements sur recettes',
+ solde_comptes_speciaux_eur:'+ Solde des comptes spéciaux',
+ solde_budgets_annexes_eur:'+ Solde des budgets annexes',
+ fonds_concours_eur:'+ Fonds de concours et attributions de produits'};
+const ns='http://www.w3.org/2000/svg',svg=document.getElementById('balance-chart');
+function node(tag,attrs={},value){
+ const el=document.createElementNS(ns,tag);
+ for(const [key,val] of Object.entries(attrs))el.setAttribute(key,String(val));
+ if(value!==undefined)el.textContent=value;
+ return el;
+}
+function chart(index){
+ svg.replaceChildren();
+ const x=i=>90+i*728/12,y=n=>55+Math.abs(n/1e9)*225/200;
+ for(const v of [0,-50,-100,-150,-200]){
+  const yy=y(v*1e9);
+  svg.append(node('line',{x1:90,x2:820,y1:yy,y2:yy,stroke:'#44546d'}));
+  svg.append(node('text',{x:78,y:yy+5,fill:'#c9d7ea','text-anchor':'end','font-size':13},String(v)+' Md€'));
+ }
+ const d=series.map((r,i)=>(i?'L':'M')+x(i).toFixed(2)+','+y(r.solde_eur).toFixed(2)).join(' ');
+ svg.append(node('path',{d,fill:'none',stroke:'#9db7ff','stroke-width':4,'stroke-linejoin':'round'}));
+ for(let i=0;i<series.length;i++){
+  const r=series[i]; if(i%3===0 || i===series.length-1){
+   svg.append(node('text',{x:x(i),y:315,'text-anchor':i===0?'start':i===series.length-1?'end':'middle',fill:'#cbd9ed','font-size':13},r.year));
+  }
+ }
+ svg.append(node('circle',{cx:x(index),cy:y(series[index].solde_eur),r:7,fill:'#f5c38a',stroke:'#fff','stroke-width':2}));
+ svg.append(node('text',{x:455,y:343,'text-anchor':'middle',fill:'#bdcce1','font-size':13},'Exercice budgétaire · déficit en milliards d’euros courants'));
+}
+function render(){
+ const selected=series.find(r=>String(r.year)===dropdown.value);
+ if(!selected)return;
+ document.getElementById('balance-official').textContent=fmt(selected.solde_eur);
+ document.getElementById('balance-taxes').textContent=fmt(selected.recettes_fiscales_nettes_eur);
+ document.getElementById('balance-revenue').textContent=fmt(selected.recettes_bg_nettes_eur);
+ document.getElementById('balance-expense').textContent=fmt(selected.depenses_bg_nettes_eur);
+ const index=series.indexOf(selected);chart(index);
+ const c=selected.recettes_bg_nettes_eur-selected.depenses_bg_nettes_eur-
+   selected.prelevements_recettes_eur+selected.solde_comptes_speciaux_eur+
+   selected.solde_budgets_annexes_eur+selected.fonds_concours_eur;
+ document.getElementById('balance-summary').textContent=
+  'Solde budgétaire de l’État en '+selected.year+' : '+fmt(selected.solde_eur)+
+  '. Recettes fiscales nettes : '+fmt(selected.recettes_fiscales_nettes_eur)+
+  '. Écart de réconciliation après arrondis à l’euro : '+Math.abs(selected.solde_eur-c).toLocaleString('fr-FR')+' €.';
+ document.getElementById('balance-equation').textContent='Formation du solde budgétaire · '+selected.year;
+ const list=document.getElementById('balance-rows');list.replaceChildren();
+ for(const [field,label] of Object.entries(lookup)){
+  const sign=(field==='depenses_bg_nettes_eur'||field==='prelevements_recettes_eur')?-1:1;
+  const tr=document.createElement('tr'),th=document.createElement('th'),td=document.createElement('td');
+  th.scope='row';th.textContent=label;td.textContent=signed(sign*selected[field]);
+  tr.append(th,td);list.append(tr);
+ }
+ const tr=document.createElement('tr'),th=document.createElement('th'),td=document.createElement('td');
+ th.scope='row';th.textContent='= Solde budgétaire officiel';td.textContent=signed(selected.solde_eur);
+ tr.append(th,td);list.append(tr);
+ const detail=document.getElementById('year');
+ if(selected.year>=2023 && detail.value!==dropdown.value){
+  detail.value=dropdown.value;detail.dispatchEvent(new Event('change'));
+ }
+}
+dropdown.addEventListener('change',render);
+document.getElementById('year').addEventListener('change',()=>{
+ const newYear=document.getElementById('year').value;
+ if(dropdown.value!==newYear){dropdown.value=newYear;render();}
+});
+render();
+})().catch(err=>{
+ document.getElementById('balance-summary').textContent='Impossible de charger le solde budgétaire : '+err.message;
+});
+</script>
+</body></html>
