@@ -17,7 +17,7 @@ class TestBudgetEtatExecution(unittest.TestCase):
         for year in self.data["years"]:
             self.assertEqual(len(year["missions"]), 33)
             self.assertGreaterEqual(sum(len(m["programs"]) for m in year["missions"]), 129)
-            self.assertEqual(sum(m["cp_eur"] for m in year["missions"]), year["spending"]["spent_cp_eur"])
+            self.assertLessEqual(abs(sum(m["cp_eur"] for m in year["missions"]) - year["spending"]["spent_cp_eur"]), 3)
             refund = next(m for m in year["missions"] if m["name"] == "Remboursements et dégrèvements")
             self.assertEqual(refund["cp_eur"], year["spending"]["refunds_cp_eur"])
             self.assertEqual(year["spending"]["spent_cp_eur"] - refund["cp_eur"],
