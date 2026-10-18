@@ -67,7 +67,7 @@ def number(raw):
 
 
 def rows(blob, delimiter):
-    return list(csv.DictReader(io.StringIO(blob.decode("utf-8-sig")), delimiter=delimiter))
+    return list(csv.DictReader(io.StringIO(blob.decode("utf-8-sig"), newline=None), delimiter=delimiter))
 
 
 def load(year, kind, local_dir=None):
