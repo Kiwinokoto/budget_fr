@@ -279,7 +279,12 @@ function render(){
   detail.value=dropdown.value;detail.dispatchEvent(new Event('change'));
  }
 }
-dropdown.addEventListener('change',render);render();
+dropdown.addEventListener('change',render);
+document.getElementById('year').addEventListener('change',()=>{
+ const newYear=document.getElementById('year').value;
+ if(dropdown.value!==newYear){dropdown.value=newYear;render();}
+});
+render();
 })().catch(err=>{
  document.getElementById('balance-summary').textContent='Impossible de charger le solde budgétaire : '+err.message;
 });
