@@ -2,6 +2,14 @@
 
 Atlas historique et critique des finances publiques françaises — prototype expérimental.
 
+## Budget général de l'État — dépenses exécutées et recettes, 2023–2025
+
+La page [Budget de l'État](etat.html) présente un premier périmètre budgétaire distinct du COFOG des administrations publiques S13 : **budget général de l'État**, en comptabilité budgétaire, d'après les annexes PLRG 2023, 2024 et 2025. Chaque année peut être explorée par **mission → programme** pour les crédits de paiement réellement consommés, et par **catégorie de recette → rubrique** pour les recouvrements bruts. Les crédits de paiement ouverts et consommés sont distincts ; la mission « Remboursements et dégrèvements » est conservée, jamais additionnée de nouveau.
+
+Les fichiers officiels CSV sont épinglés par SHA-256 (neuf originaux, non commités). Import reproductible en Python standard : `python3 scripts/import_budget_etat_plrg.py`; pour reproduction hors ligne : `--source-dir /chemin/vers/csv-verifies` avec les noms `plrg_2023_cp.csv`, `plrg_2023_summary.csv`, `plrg_2023_revenue.csv` etc. Le JSON dérivé est dans `data/etat_execution_2023_2025.json`.
+
+**Limites essentielles :** les sommes encaissées à titre fiscal sont brutes et ne sont pas les recettes fiscales nettes ; le seul chiffre net affiché est celui que l'annexe 2024 publie explicitement. On ne peut en déduire un solde par simple soustraction. L'année 2023 présente un écart source de 83 650,28 € entre le détail par programme et le total des remboursements et dégrèvements : il est signalé, non comblé artificiellement. Détails : `DATA_SOURCES.md`, `METHODOLOGY.md`. Ne pas comparer directement cette comptabilité budgétaire avec les comptes nationaux S13.
+
 ## Navigation et exploration (octobre 2026)
 
 Le site possède huit pages HTML accessibles depuis un bandeau de navigation identique, stylisé par atlas-nav.css (fichier statique local, sans CDN ni JavaScript de navigation). L'accueil présente d'abord la synthèse statistique, puis les cartes vers les autres analyses. La page **dépenses COFOG** affiche la liste des postes et leur courbe simultanément sur grand écran ; la sélection ne relance pas le défilement vertical.
