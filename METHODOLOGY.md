@@ -1,3 +1,13 @@
+## Solde de l'État — vérification comptable DGFiP 2013–2025
+
+Contrairement au total des administrations publiques Insee S13, ce volet suit **l'exécution budgétaire de l'État**. Les deux fichiers DGFiP des situations mensuelles (31 décembre 2013–2025) sont vérifiés par SHA-256, puis lus en UTF-16. Les données sont en **euros courants**, sans déflation et non en % du PIB. La version 2025 de décembre est dite définitive par le diffuseur.
+
+Formule de rapprochement pour chaque année, avec les signes de la source :
+`solde officiel = recettes nettes du budget général − dépenses nettes du budget général − prélèvements sur recettes + solde des comptes spéciaux + solde des budgets annexes + fonds de concours`.
+Les recettes nettes du BG sont vérifiées contre recettes fiscales nettes + recettes non fiscales. Reproduction sur 13 ans en `Decimal` avant arrondi à l'euro : écarts inférieurs à 0,01 €. Le solde est **lu dans la source** puis vérifié, pas estimé par simple soustraction des dépenses et recettes brutes du PLRG. Le champ « dépenses hors mission Remboursements et dégrèvements » de la ventilation PLRG est différent du total **net officiel SMB** ; conserver les deux notions clairement séparées.
+
+La série 2013–2025 concerne les agrégats budgétaires, et le détail mission/programme 2023–2025 n'est pas étendu artificiellement. Révisions possibles et changements de périmètre peuvent limiter les comparaisons nominales dans le temps.
+
 ## Distinguer exécution du budget général de l'État et comptes S13
 
 La nouvelle page `etat.html` exploite trois exercices **PLRG 2023–2025**, en **comptabilité budgétaire de l'État**, distincte des fonctions COFOG S13. Les crédits de paiement `Depenses_constatees` par programme et titre sont additionnés par année/mission/programme, après contrôle contre `CP_Consommes` de l'annexe de synthèse. Les autres crédits (AE, LFI, CP ouverts) ne sont jamais mélangés aux consommations effectives. Toutes les sources et leurs empreintes figurent dans `DATA_SOURCES.md`.
