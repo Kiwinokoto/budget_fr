@@ -76,3 +76,5 @@ Release contrôlée 8aead975b776f3d5ed2f6e2215e749ef03edca3b ; sauvegarde /opt/b
 
 Après fusion des PR #43 et suivantes, toute livraison demandée doit inclure `data/cofog_subfunctions_1995_2024.json` pour `fonctions.html`, ainsi que `etat.html` et `data/etat_execution_2023_2025.json` pour la navigation budgétaire. Sur le serveur statique, vérifier HTTP 200 et chargement navigateur effectif des JSON ; ne pas publier seulement les HTML. Conserver les sources/méthodologies accessibles et contrôler le SHA du `main` applicatif avant déploiement.
 
+
+- Nouvelle série : déployer aussi `data/etat_solde_net_2013_2025.json` avec `etat.html`. Contrôler HTTP 200 et rendu des 13 années en navigateur. Les sources CSV officielles ne doivent pas être exposées par défaut dans la racine web.
