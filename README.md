@@ -16,6 +16,12 @@ La sous-page apprentissage-contexte.html met les effectifs de 2024 en perspectiv
 
 La sous-page apprentissage-contexte.html montre désormais **1986–2023** pour les taux de scolarisation à 18/21/25/29 ans et **2003–2023** pour la part en emploi parmi les jeunes en études initiales (15–29, 15–19, 20–24 ans). Deux séries Insee distinctes, deux CSV avec import reproductible et contrôle SHA-256 depuis leurs XLSX, choix de tranche et tableaux accessibles ; ruptures territoriales et de questionnaire indiquées. **L'effet causal de l'apprentissage sur l'accès aux études n'est pas établi par ces seules séries.** Consulter JEUNES_CONTEXTE_SOURCES.md.
 
+## Répartition détaillée des dépenses publiques — COFOG niveau 2
+
+La page [Dépenses](fonctions.html) conserve les dix grandes fonctions S13, 1995–2024. Chaque fonction peut maintenant être sélectionnée pour afficher **en dessous** ses sous-fonctions officielles (69 au total), leurs montants et leur part du poste parent pour l'année choisie. Exemple : « Protection sociale » permet de distinguer vieillesse, maladie-invalidité, famille-enfants, chômage et les autres sous-catégories. Le total des sous-fonctions est contrôlé à l'arrondi près. Source versionnée `data/cofog_subfunctions_1995_2024.json`, import reproductible `scripts/import_cofog_subfunctions.py`, même XLSX Insee 3.301 et même SHA-256 que le premier niveau.
+
+**Périmètre décisif :** il s'agit des dépenses de **toutes les administrations publiques consolidées (S13)**, pas du seul budget de l'État. « Santé » est une fonction distincte de « Protection sociale ». En 2024, la protection sociale représente 693,029 Md€ sur 1 671,794 Md€, soit **41,5 %** des dépenses S13 (41 % arrondis dans la publication Insee). Les catégories ne mesurent ni le coût d'une politique particulière ni son efficacité. Les nomenclatures par mission/programme/action propres au budget de l'État restent un chantier séparé.
+
 ## APPRENTISSAGE — résultats et évaluations
 
 La nouvelle page apprentissage-resultats.html sépare poursuite d'études des inscrits de dernière année et emploi salarié des seuls sortants (InserJeunes, CAP–BTS, cohorte 2023–2024). Elle documente ensuite les ruptures par cohorte, les conditions de travail, les résultats évaluatifs de l'IPP et l'analyse financière IGF–Igas/France compétences. Le CSV data/apprentissage_parcours_2024_inserjeunes.csv transcrit quatre taux officiels sans créer de fausse population commune. Sources et limites : APPRENTISSAGE_RESULTATS_SOURCES.md. Nouveau chapitre non déployé automatiquement.
