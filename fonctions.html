@@ -72,7 +72,7 @@ svg{width:100%;height:auto;display:block}
 <label><input type="radio" name="mode" value="share" checked> Part du total</label>
 <label><input type="radio" name="mode" value="amount"> Montant</label>
 </div></div>
-<p class="caption">Clique sur une fonction pour voir son évolution historique. Les pourcentages indiquent la part du total de l’année sélectionnée, pas du PIB.</p>
+<p class="caption">Clique sur une fonction pour voir son évolution historique et sa répartition en sous-postes plus bas. Les pourcentages indiquent la part du total de l’année sélectionnée, pas du PIB.</p>
 <div id="breakdown" role="group" aria-label="Dépenses par fonction"></div>
 </section>
 <section class="panel trend-panel"><h2 id="trend-title">Évolution dans le temps</h2>
@@ -88,6 +88,12 @@ svg{width:100%;height:auto;display:block}
 <p id="sub-summary" class="caption" role="status" aria-live="polite"></p>
 <p class="caption">Les barres représentent la part de chaque sous-poste dans sa fonction. Ex. « vieillesse » appartient à « protection sociale » ; les soins médicaux relèvent principalement de la fonction « santé ». Ce classement n’est pas celui du seul budget de l’État.</p>
 </section>
+<details class="panel" id="cofog-trace">
+<summary style="cursor:pointer;font-weight:700">Peut-on retracer ces chiffres ? Sources, contrôles et limites</summary>
+<p><strong>Oui, jusqu'au deuxième niveau de la classification COFOG.</strong> La source est un classeur Insee public identifié, daté du 27 mars 2026. Ses données sont reproduites à partir d'un fichier vérifié par empreinte SHA-256 ; les 69 sous-postes sont réconciliés, année par année, avec les dix fonctions et leurs totaux (écart maximal autorisé : 0,015 Md€, dû aux arrondis).</p>
+<p><strong>Non, pas jusqu'à chaque dépense individuelle.</strong> Les comptes COFOG ne décrivent ni chaque paiement, ni le bénéficiaire final, ni l'efficacité d'une politique, ni les dépenses par mission et programme propres au budget de l'État. Ce niveau de détail ne permet donc pas de noter la transparence globale des finances publiques.</p>
+<p class="caption"><a href="/DATA_SOURCES.md">Provenance et unité</a> · <a href="/METHODOLOGY.md">Méthodes et limites</a> · <a href="/data/cofog_subfunctions_1995_2024.json">Télécharger le détail annuel</a>.</p>
+</details>
 <p class="source">Source : <a href="https://www.insee.fr/fr/statistiques/8574707">Insee, COFOG 3.301, publication du 27 mars 2026</a> ; <a href="/data/cofog_subfunctions_1995_2024.json">sous-fonctions JSON</a> et <a href="/data/cofog_1995_2024_bn_eur.csv">fonctions CSV</a>, comptes nationaux base 2020, administrations publiques S13. Attention : classement fonctionnel, distinct des postes du budget de l’État. L’année 2024 est provisoire et certains changements de nomenclature peuvent affecter des catégories ; notamment le logement et les affaires économiques au niveau des collectivités. Ce millésime n’est pas directement additionnable aux agrégats révisés publiés en août 2026. <a href="/METHODOLOGY.md">Méthodologie détaillée</a>.</p>
 <script>
 (async()=>{
@@ -183,7 +189,7 @@ function subRefresh(){
   line.append(label,track,value);container.append(line);
  }
  const delta=Math.abs(total-base);
- document.getElementById('sub-summary').textContent='Sous-postes : '+money(total)+' sur '+money(base)+' ; écart d’arrondi : '+money(delta)+'. Les valeurs nulles restent affichées.';
+ document.getElementById('sub-summary').textContent='Sous-postes : '+money(total)+' sur '+money(base)+' ; écart d’arrondi : '+delta.toLocaleString('fr-FR',{minimumFractionDigits:3,maximumFractionDigits:3})+' Md€ (arrondis de source). Les valeurs nulles restent affichées.';
 }
 function refresh(){
  const r=rows[Number(range.value)-1995];if(!r)return;
