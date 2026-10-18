@@ -7,6 +7,7 @@
 - **Deux périmètres à conserver** : comptabilité budgétaire de l'État (SMB/PLRG) ≠ dépenses et déficit consolidés S13 (Insee/COFOG). Le « hors mission Remboursements et dégrèvements » de PLRG est une transformation descriptive, **pas la dépense nette officielle SMB**. Les recettes brutes du PLRG ne sont pas les recettes fiscales nettes DGFiP.
 - **2025** : solde officiel −124,206 Md€, recettes fiscales nettes 356,398 Md€ ; situation de décembre définitive. L'annonce antérieure −124,7 Md€ de février 2026 était provisoire.
 - **Backlogs différés** : pouvoir d'achat et dépenses pré-engagées (contexte à explorer plus tard), apprentissage (à approfondir), patrimoine public. Rien de tout cela ne devient une nouvelle priorité dans cette passe.
+- **Livraison contrôlée** : PR [#46](https://github.com/Kiwinokoto/budget_fr/pull/46) ouverte depuis `dev/etat-solde-net-2013-2025-20261018`. Code testé au commit `21edec3d7c3e677c655f7121055e0b30ec7a79af` : **67 tests Python, 63 tests JavaScript, compilation Python, reproduction octet pour octet des deux imports SMB, Chromium 390/768/1365 px**, changement de période et synchronisation année, sans erreur JS ni débordement. Aucune modification de l'infrastructure ou du VPS personnel.
 - **Production** : dernier SHA applicatif connu `8aead975b776f3d5ed2f6e2215e749ef03edca3b`; aucun déploiement demandé. Vérifier le SHA, les verrous AgentCtl et la sauvegarde avant toute publication. Passation documentaire à compléter avec numéro de PR, résultats des tests et HEAD final.
 
 
